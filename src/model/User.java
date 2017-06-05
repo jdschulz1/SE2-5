@@ -4,6 +4,13 @@ package model;
  */
 public class User {
 
+	public User(String name, String userName, String password, String role, String email){
+		this.name = name;
+		this.userName = userName;
+		this.password = password;
+		this.role = role;
+		this.email = email;
+	}
 	/**
 	 * The legal name of the user.
 	 */
@@ -26,6 +33,22 @@ public class User {
 	private String email;
 
 	/**
+	 * Gets the assigned role for the current User.
+	 * @return
+	 */
+	public String getRole(){
+		return this.role;
+	}
+	
+	/**
+	 * Sets the role for the current User.
+	 * @param role
+	 */
+	public void setRole(String role){
+		this.role = role;
+	}
+	
+	/**
 	 * Checks the password to the one stored for a user and if valid returns true.
 	 */
 	public boolean checkPassword() {
@@ -42,5 +65,4 @@ public class User {
 		// TODO - implement User.setPassword
 		throw new UnsupportedOperationException();
 	}
-
 }

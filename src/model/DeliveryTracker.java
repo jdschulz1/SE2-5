@@ -262,4 +262,26 @@ public class DeliveryTracker {
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * Adds a User to the known Users on the DeliveryTracker. (Requires Admin privileges from User u)
+	 * @param u
+	 * @param name
+	 * @param userName
+	 * @param password
+	 * @param role
+	 * @param email
+	 */
+	public boolean addUser(User u, String name, String userName, String password, String role, String email){
+		return u.getRole() == "Admin" && users.add(new User(name, userName, password, role, email));
+	}
+	
+	/**
+	 * Removed the deleted User from the known Users on the Delivery Tracker. (Requires Admin privileges from User u) 
+	 * @param u
+	 * @param deleted
+	 * @return
+	 */
+	public boolean deleteUser(User u, User deleted){
+		return u.getRole() == "Admin" && users.remove(deleted);
+	}
 }
