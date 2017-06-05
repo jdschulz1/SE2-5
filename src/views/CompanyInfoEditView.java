@@ -22,9 +22,7 @@ public class CompanyInfoEditView {
 		stage.setScene(scene);
 		
 	    Button saveButton = new Button("Save");
-//		saveButton.setOnAction(e -> { 
-//		
-//		});
+	    		
 		saveButton.setPrefWidth(scene.getWidth());
 		saveButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		root.setBottom(saveButton);
