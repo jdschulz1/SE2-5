@@ -4,6 +4,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,14 +19,44 @@ import javafx.stage.Stage;
 
 public class CompanyInfoEditView implements javafx.fxml.Initializable {
 
-	@FXML 
-	private Button btnSave;
-	@FXML 
-	private Button btnCancel;
-	@FXML 
-	private TextField textFieldCompanyName;
-	@FXML 
-	private TextField textFieldStreet;
+    @FXML
+    private Button btnSave;
+
+    @FXML
+    private Button btnCancel;
+
+    @FXML
+    private TextField textFieldPickupOverhead;
+
+    @FXML
+    private TextField textFieldCompanyName;
+
+    @FXML
+    private ChoiceBox<?> choiceBoxAvenue;
+
+    @FXML
+    private ChoiceBox<?> choiceBoxStreet;
+
+    @FXML
+    private TextField textFieldDeliveryOverhead;
+
+    @FXML
+    private TextField textFieldBillRateBase;
+
+    @FXML
+    private TextField textFieldBillRatePerBlock;
+
+    @FXML
+    private TextField textFieldBlocksPerMile;
+
+    @FXML
+    private TextField textFieldAvgCourierSpeed;
+
+    @FXML
+    private TextField textFieldOnTimeBonusAmount;
+
+    @FXML
+    private TextField textFieldOnTimeAllowableVariance;
 	
 	@Override	
 	public void initialize(URL location, ResourceBundle resources) {		
@@ -37,6 +68,7 @@ public class CompanyInfoEditView implements javafx.fxml.Initializable {
 					Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("views/ClientEdit.fxml"));
 					Scene parentScene = new Scene(parent);
 					Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+					Scene oldScene = stage.getScene();
 					stage.setScene(parentScene);
 					stage.show();
 				}
