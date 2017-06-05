@@ -1,6 +1,10 @@
 package model;
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.Period;
+
+import model.DeliveryTracker;
 
 /**
  * Delivery tickets are records containing all information related to a delivery request, including pickup and delivery details.
@@ -100,17 +104,21 @@ public class DeliveryTicket {
 	/**
 	 * Sets the courier bonus for the delivery.
 	 */
+	
+	private static DeliveryTracker deliveryTracker;
+	
 	public void calculateBonus() {
-		// TODO - implement DeliveryTicket.calculateBonus
-		throw new UnsupportedOperationException();
+		this.bonusAmount = new BigDecimal(0);
+		if(isOnTime())
+			this.bonusAmount = deliveryTracker.getBonusAmount();
 	}
 
 	/**
 	 * Determines whether the delivery was made within the time window to be considered "on time".
 	 */
 	public boolean isOnTime() {
-		// TODO - implement DeliveryTicket.isOnTime
-		throw new UnsupportedOperationException();
+		Duration between = Duration.between(this.estimatedDeliveryTime, this.actualDeliveryTime);
+		return (between.getSeconds() > (deliveryTracker.getBonusTimeVariance() * 60));
 	}
 
 	/**
