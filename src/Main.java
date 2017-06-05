@@ -10,6 +10,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import views.CompanyInfoEditView;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -25,8 +26,23 @@ import javafx.scene.layout.StackPane;
 
 public class Main extends Application {
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage stage) {
 		try {
+//			Parent root = FXMLLoader.load(getClass().getResource("HelloWorld.fxml"));
+//		    
+//	        Scene scene = new Scene(root, 300, 275);
+//	    
+//	        stage.setTitle("FXML Welcome");
+//	        stage.setScene(scene);
+//	        stage.show();
+//			
+			CompanyInfoEditView customControl = new CompanyInfoEditView();
+			stage.setScene(new Scene(customControl));
+			stage.setTitle("Custom Control");
+			stage.setWidth(300);
+			stage.setHeight(200);
+			stage.show();	        
+	        
 			//BorderPane root = new BorderPane();
 			//Scene scene = new Scene(root,400,400);
 //			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -34,7 +50,7 @@ public class Main extends Application {
 			//primaryStage.setTitle("ACME Couriers Delivery Tracker");
 			
 //			MenuBar menuBar = new MenuBar();
-//	        Menu menuMaintenance = new Menu("Maintainance");
+//	        Menu menuMaintenance = new Menu("Maintenance");
 //	        MenuItem menuEditCompanyInformation = new MenuItem("Edit Company Information");
 //	        menuEditCompanyInformation.setOnAction(
 //	        		new EventHandler<ActionEvent>() {
@@ -49,17 +65,17 @@ public class Main extends Application {
 //	        menuBar.getMenus().addAll(menuMaintenance, menuDeliveryTracker, menuReports, menuAccount);
 	        //root.setTop(menuBar);
 	        	 
-	        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("HelloWorld.fxml"));
-//	        fxmlLoader.setRoot(this);
-	        fxmlLoader.setController(this);
-
-	        try {
-	            fxmlLoader.load();
-	        } catch (IOException exception) {
-	            throw new RuntimeException(exception);
-	        }
-			
-			primaryStage.show();
+//	        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("HelloWorld.fxml"));
+////	        fxmlLoader.setRoot(this);
+//	        fxmlLoader.setController(this);
+//
+//	        try {
+//	            fxmlLoader.load();
+//	        } catch (IOException exception) {
+//	            throw new RuntimeException(exception);
+//	        }
+//			
+//			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
