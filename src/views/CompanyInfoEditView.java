@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -16,6 +17,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import model.DeliveryTracker;
 
 public class CompanyInfoEditView implements javafx.fxml.Initializable {
 
@@ -68,9 +71,11 @@ public class CompanyInfoEditView implements javafx.fxml.Initializable {
 					Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("views/ClientEdit.fxml"));
 					Scene parentScene = new Scene(parent);
 					Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-					Scene oldScene = stage.getScene();
+//					Scene oldScene = stage.getScene();
 					stage.setScene(parentScene);
 					stage.show();
+					
+					save();
 				}
 				catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -78,5 +83,27 @@ public class CompanyInfoEditView implements javafx.fxml.Initializable {
 				}
 			}
 		});		
+	}
+	
+	private boolean validate() {
+		try {
+			BigDecimal billRateBase = new BigDecimal(textFieldBillRateBase.getText());
+		}
+		catch(Exception e) {
+			return false;
+		}
+			
+		return true;
+	}
+	
+	private void save() {
+		if (validate()) {
+			DeliveryTracker companyInfo = new DeliveryTracker();
+			companyInfo.setBillRateBase(new BigDecimal(textFieldBillRateBase.getText()));
+			System.out.println(companyInfo.getBillRateBase());
+		}
+		else {
+			System.out.println("Validation Error");
+		}
 	}
 }
