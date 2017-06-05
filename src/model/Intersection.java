@@ -5,6 +5,13 @@ package model;
  */
 public class Intersection {
 
+	public Intersection(Street crossStreet1, Street crossStreet2){
+		this.availability = true;
+		this.crossStreet1 = crossStreet1;
+		this.crossStreet2 = crossStreet2;
+		this.name = crossStreet1.getName() + "&" + crossStreet2.getName();
+	}
+	
 	/**
 	 * The Street is available if true and unavailable if false.
 	 */

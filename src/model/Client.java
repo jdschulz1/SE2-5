@@ -4,6 +4,14 @@ package model;
  */
 public class Client {
 
+	public Client(String name, Street crossStreet1, Street crossStreet2, String email){
+		this.clientNumber = 12345; //DUMMY data.  We will generate this number to be unique
+		this.name = name;
+		this.location = new Intersection(crossStreet1, crossStreet2);
+		this.deliveryDetails = "Fill me in later";
+		this.email = email;
+	}
+	
 	/**
 	 * An identifying number for Clients.
 	 */

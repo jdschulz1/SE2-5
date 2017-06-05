@@ -51,7 +51,7 @@ public class DeliveryTracker {
 	/**
 	 * The Clients known to the DeliveryTracker.
 	 */
-	private Client[] clients;
+	private List<Client> clients;
 	/**
 	 * All TrafficImpediments known to the DeliveryTracker.
 	 */
@@ -139,14 +139,6 @@ public class DeliveryTracker {
 
 	public void setUsers(List<User> users) {
 		this.users = users;
-	}
-
-	public Client[] getClients() {
-		return this.clients;
-	}
-
-	public void setClients(Client[] clients) {
-		this.clients = clients;
 	}
 
 	public List<TrafficImpediment> getTrafficImpediments() {
@@ -283,5 +275,26 @@ public class DeliveryTracker {
 	 */
 	public boolean deleteUser(User u, User deleted){
 		return u.getRole() == "Admin" && users.remove(deleted);
+	}
+	
+	/**
+	 * Adds Client added to the known Clients on the DeliveryTracker.
+	 * @param name
+	 * @param crossStreet1
+	 * @param crossStreet2
+	 * @param email
+	 * @return
+	 */
+	public boolean addClient(String name, Street crossStreet1, Street crossStreet2, String email){
+		return clients.add(new Client(name, crossStreet1, crossStreet2, email));
+	}
+	
+	/**
+	 * Removes Client deleted from known Clients on the DeliveryTracker.
+	 * @param deleted
+	 * @return
+	 */
+	public boolean deleteClient(Client deleted){
+		return clients.remove(deleted);
 	}
 }

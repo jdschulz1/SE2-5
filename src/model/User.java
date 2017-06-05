@@ -5,11 +5,11 @@ package model;
 public class User {
 
 	public User(String name, String userName, String password, String role, String email){
-		this.setName(name);
-		this.setUserName(userName);
-		this.setPassword(password);
+		this.name = name;
+		this.userName = userName;
+		this.password = password;
 		this.role = role;
-		this.setEmail(email);
+		this.email = email;
 	}
 	/**
 	 * The legal name of the user.
