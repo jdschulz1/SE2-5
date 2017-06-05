@@ -27,7 +27,13 @@ import javafx.scene.layout.StackPane;
 public class Main extends Application {
 	@Override
 	public void start(Stage stage) {
+		Parent root = null;
 		try {
+			root = FXMLLoader.load(getClass().getClassLoader().getResource("views/CompanyInfoEditView.fxml"));
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.sizeToScene();
+			stage.show();
 //			Parent root = FXMLLoader.load(getClass().getResource("HelloWorld.fxml"));
 //		    
 //	        Scene scene = new Scene(root, 300, 275);
@@ -36,12 +42,12 @@ public class Main extends Application {
 //	        stage.setScene(scene);
 //	        stage.show();
 //			
-			CompanyInfoEditView customControl = new CompanyInfoEditView();
-			stage.setScene(new Scene(customControl));
-			stage.setTitle("Custom Control");
-			stage.setWidth(300);
-			stage.setHeight(200);
-			stage.show();	        
+			//CompanyInfoEditView customControl = new CompanyInfoEditView();
+			//stage.setScene(new Scene(customControl));
+			//stage.setTitle("Custom Control");
+			//stage.setWidth(300);
+			//stage.setHeight(200);
+			//stage.show();	        
 	        
 			//BorderPane root = new BorderPane();
 			//Scene scene = new Scene(root,400,400);
@@ -79,6 +85,7 @@ public class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	public static void main(String[] args) {

@@ -11,22 +11,39 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class CompanyInfoEditView extends AnchorPane {
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+public class CompanyInfoEditView implements javafx.fxml.Initializable {
 
-	public CompanyInfoEditView () {
+	//public CompanyInfoEditView () {
 		
-//	    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("HelloWorld.fxml"));
-//	    fxmlLoader.setRoot(this);
-//	    fxmlLoader.setController(this);
+	//    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CompanyInfoEditView.fxml"));
+	//    fxmlLoader.setRoot(this);
+	//    fxmlLoader.setController(this);
 	    
-	    try {
-			Parent root = FXMLLoader.load(getClass().getResource("HelloWorld.fxml"));
+	//    try {
+			//Parent root = FXMLLoader.load(getClass().getResource("HelloWorld.fxml"));
 
-//	        fxmlLoader.load();            
-	    } catch (IOException exception) {
-	        throw new RuntimeException(exception);
-	    }
+	//        fxmlLoader.load();            
+	//    } catch (IOException exception) {
+	//        throw new RuntimeException(exception);
+	//    }
+	//}
+	@FXML 
+	private Button btnHello;
+	@Override	
+	public void initialize(URL location, ResourceBundle resources) {		
+		//btnHello.setOnAction(new EventHandler() {
+		//    @Override public void handle(ActionEvent e) {
+		    	//txfHello.setText("Hello!");
+		//    }
+	//	});		
 	}
 }
 		
