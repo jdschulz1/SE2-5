@@ -21,5 +21,29 @@ public class Intersection {
 	 * The name of the intersection, with the name of the two cross-streets on either side of an ampersand (i.e. "A Street & 1st Ave").
 	 */
 	private String name;
+	public boolean isAvailable() {
+		return availability;
+	}
+	public void setAvailable(boolean availability) {
+		this.availability = availability;
+	}
+	public Street getCrossStreet1() {
+		return crossStreet1;
+	}
+	public void setCrossStreet1(Street crossStreet1) {
+		this.crossStreet1 = crossStreet1;
+	}
+	public Street getCrossStreet2() {
+		return crossStreet2;
+	}
+	public void setCrossStreet2(Street crossStreet2) {
+		this.crossStreet2 = crossStreet2;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 
 }

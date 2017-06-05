@@ -48,4 +48,12 @@ public class Route {
 		throw new UnsupportedOperationException();
 	}
 
+	public int getRouteDistance() {
+		return routeDistance;
+	}
+
+	public void setRouteDistance(int routeDistance) {
+		this.routeDistance = routeDistance;
+	}
+
 }

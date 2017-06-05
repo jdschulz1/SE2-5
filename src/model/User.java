@@ -5,11 +5,11 @@ package model;
 public class User {
 
 	public User(String name, String userName, String password, String role, String email){
-		this.name = name;
-		this.userName = userName;
-		this.password = password;
+		this.setName(name);
+		this.setUserName(userName);
+		this.setPassword(password);
 		this.role = role;
-		this.email = email;
+		this.setEmail(email);
 	}
 	/**
 	 * The legal name of the user.
@@ -64,5 +64,37 @@ public class User {
 	public boolean setPassword(String old_pass, String new_pass) {
 		// TODO - implement User.setPassword
 		throw new UnsupportedOperationException();
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

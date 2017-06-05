@@ -18,5 +18,23 @@ public class TrafficImpediment {
 	 * The date and time that the intersection will ?be available once again due to the TrafficImpediment going away.
 	 */
 	private LocalDateTime endDate;
+	public Intersection getIntersection() {
+		return intersection;
+	}
+	public void setIntersection(Intersection intersection) {
+		this.intersection = intersection;
+	}
+	public LocalDateTime getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(LocalDateTime startDate) {
+		this.startDate = startDate;
+	}
+	public LocalDateTime getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(LocalDateTime endDate) {
+		this.endDate = endDate;
+	}
 
 }

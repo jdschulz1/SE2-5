@@ -108,9 +108,9 @@ public class DeliveryTicket {
 	private static DeliveryTracker deliveryTracker;
 	
 	public void calculateBonus() {
-		this.bonusAmount = new BigDecimal(0);
+		this.setBonusAmount(new BigDecimal(0));
 		if(isOnTime())
-			this.bonusAmount = deliveryTracker.getBonusAmount();
+			this.setBonusAmount(deliveryTracker.getBonusAmount());
 	}
 
 	/**
@@ -154,6 +154,174 @@ public class DeliveryTicket {
 	public BigDecimal calculatePrice() {
 		// TODO - implement DeliveryTicket.calculatePrice
 		throw new UnsupportedOperationException();
+	}
+
+	public Courier getCourier() {
+		return courier;
+	}
+
+	public void setCourier(Courier courier) {
+		this.courier = courier;
+	}
+
+	public int getTicketId() {
+		return ticketId;
+	}
+
+	public void setTicketId(int ticketId) {
+		this.ticketId = ticketId;
+	}
+
+	public LocalDateTime getOrderDateTime() {
+		return orderDateTime;
+	}
+
+	public void setOrderDateTime(LocalDateTime orderDateTime) {
+		this.orderDateTime = orderDateTime;
+	}
+
+	public User getOrderTaker() {
+		return orderTaker;
+	}
+
+	public void setOrderTaker(User orderTaker) {
+		this.orderTaker = orderTaker;
+	}
+
+	public Client getPickupClient() {
+		return pickupClient;
+	}
+
+	public void setPickupClient(Client pickupClient) {
+		this.pickupClient = pickupClient;
+	}
+
+	public Client getDeliveryClient() {
+		return deliveryClient;
+	}
+
+	public void setDeliveryClient(Client deliveryClient) {
+		this.deliveryClient = deliveryClient;
+	}
+
+	public LocalDateTime getRequestedPickupTime() {
+		return requestedPickupTime;
+	}
+
+	public void setRequestedPickupTime(LocalDateTime requestedPickupTime) {
+		this.requestedPickupTime = requestedPickupTime;
+	}
+
+	public Client getPayingClient() {
+		return payingClient;
+	}
+
+	public void setPayingClient(Client payingClient) {
+		this.payingClient = payingClient;
+	}
+
+	public int getPackageID() {
+		return packageID;
+	}
+
+	public void setPackageID(int packageID) {
+		this.packageID = packageID;
+	}
+
+	public LocalDateTime getCalculatedDepartureTime() {
+		return calculatedDepartureTime;
+	}
+
+	public void setCalculatedDepartureTime(LocalDateTime calculatedDepartureTime) {
+		this.calculatedDepartureTime = calculatedDepartureTime;
+	}
+
+	public LocalDateTime getActualDepartureTime() {
+		return actualDepartureTime;
+	}
+
+	public void setActualDepartureTime(LocalDateTime actualDepartureTime) {
+		this.actualDepartureTime = actualDepartureTime;
+	}
+
+	public LocalDateTime getActualPickupTime() {
+		return actualPickupTime;
+	}
+
+	public void setActualPickupTime(LocalDateTime actualPickupTime) {
+		this.actualPickupTime = actualPickupTime;
+	}
+
+	public LocalDateTime getActualReturnTime() {
+		return actualReturnTime;
+	}
+
+	public void setActualReturnTime(LocalDateTime actualReturnTime) {
+		this.actualReturnTime = actualReturnTime;
+	}
+
+	public BigDecimal getBonusAmount() {
+		return bonusAmount;
+	}
+
+	public void setBonusAmount(BigDecimal bonusAmount) {
+		this.bonusAmount = bonusAmount;
+	}
+
+	public String getSpecialRemarks() {
+		return specialRemarks;
+	}
+
+	public void setSpecialRemarks(String specialRemarks) {
+		this.specialRemarks = specialRemarks;
+	}
+
+	public boolean isDeliveryConfirmed() {
+		return deliveryConfirmed;
+	}
+
+	public void setDeliveryConfirmed(boolean deliveryConfirmed) {
+		this.deliveryConfirmed = deliveryConfirmed;
+	}
+
+	public int getInvoiceNumber() {
+		return invoiceNumber;
+	}
+
+	public void setInvoiceNumber(int invoiceNumber) {
+		this.invoiceNumber = invoiceNumber;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public Route getDeliveryRoute() {
+		return deliveryRoute;
+	}
+
+	public void setDeliveryRoute(Route deliveryRoute) {
+		this.deliveryRoute = deliveryRoute;
+	}
+
+	public Route getPickupRoute() {
+		return pickupRoute;
+	}
+
+	public void setPickupRoute(Route pickupRoute) {
+		this.pickupRoute = pickupRoute;
+	}
+
+	public Route getReturnRoute() {
+		return returnRoute;
+	}
+
+	public void setReturnRoute(Route returnRoute) {
+		this.returnRoute = returnRoute;
 	}
 
 }

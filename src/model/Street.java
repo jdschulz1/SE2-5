@@ -24,5 +24,35 @@ public class Street {
 	 * The weight of the Street, which will be 1 block, unless the source or destination Intersections are unavailable, in which case the weight will be Integer.MAX_VALUE.
 	 */
 	private int weight;
+	public String getDirection() {
+		return direction;
+	}
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Intersection getSource() {
+		return source;
+	}
+	public void setSource(Intersection source) {
+		this.source = source;
+	}
+	public Intersection getDestination() {
+		return destination;
+	}
+	public void setDestination(Intersection destination) {
+		this.destination = destination;
+	}
+	public int getWeight() {
+		return weight;
+	}
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
 
 }

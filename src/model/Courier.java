@@ -35,4 +35,36 @@ public class Courier {
 		throw new UnsupportedOperationException();
 	}
 
+	public int getCourierNumber() {
+		return courierNumber;
+	}
+
+	public void setCourierNumber(int courierNumber) {
+		this.courierNumber = courierNumber;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public boolean getAvailable() {
+		return isAvailable;
+	}
+
+	public void setAvailable(boolean isAvailable) {
+		this.isAvailable = isAvailable;
+	}
+
 }

@@ -34,4 +34,44 @@ public class Instruction {
 		throw new UnsupportedOperationException();
 	}
 
+	public int getDistance() {
+		return distance;
+	}
+
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
+
+	public Street getCurrentStreet() {
+		return currentStreet;
+	}
+
+	public void setCurrentStreet(Street currentStreet) {
+		this.currentStreet = currentStreet;
+	}
+
+	public String getCurrentDirection() {
+		return currentDirection;
+	}
+
+	public void setCurrentDirection(String currentDirection) {
+		this.currentDirection = currentDirection;
+	}
+
+	public Street getNextStreet() {
+		return nextStreet;
+	}
+
+	public void setNextStreet(Street nextStreet) {
+		this.nextStreet = nextStreet;
+	}
+
+	public String getNextDirection() {
+		return nextDirection;
+	}
+
+	public void setNextDirection(String nextDirection) {
+		this.nextDirection = nextDirection;
+	}
+
 }

@@ -28,5 +28,41 @@ public class Client {
 	 * Phone number for the Client.
 	 */
 	private String phoneNumber;
+	public int getClientNumber() {
+		return clientNumber;
+	}
+	public void setClientNumber(int clientNumber) {
+		this.clientNumber = clientNumber;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Intersection getLocation() {
+		return location;
+	}
+	public void setLocation(Intersection location) {
+		this.location = location;
+	}
+	public String getDeliveryDetails() {
+		return deliveryDetails;
+	}
+	public void setDeliveryDetails(String deliveryDetails) {
+		this.deliveryDetails = deliveryDetails;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
 
 }
