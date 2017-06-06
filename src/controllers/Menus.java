@@ -54,25 +54,43 @@ public class Menus implements Initializable {
 
 	    @FXML
 	    void switchToAddSearch(ActionEvent event) {
-
+	    	try {
+	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/AddSearchDeliveryTickets.fxml"));
+	    		BorderPane border = Main.getRoot();
+	    		border.setCenter(currentPane);
+	    	} catch(IOException e){
+	    		e.printStackTrace();
+	    	}
 	    }
 
 	    @FXML
 	    void switchToClientDeliveries(ActionEvent event) {
-
+	    	try {
+	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/ClientDeliveryReport.fxml"));
+	    		BorderPane border = Main.getRoot();
+	    		border.setCenter(currentPane);
+	    	} catch(IOException e){
+	    		e.printStackTrace();
+	    	}
 	    }
 
 	    @FXML
 	    void switchToClientMaintenance(ActionEvent event) {
-
+	    	try {
+	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectClientView.fxml"));
+	    		BorderPane border = Main.getRoot();
+	    		border.setCenter(currentPane);
+	    	} catch(IOException e){
+	    		e.printStackTrace();
+	    	}
 	    }
 
 	    @FXML
 	    void switchToCompanyInfoMaintenance(ActionEvent event) {
 	    	try {
-	    		AnchorPane companyInfoMaintenance = FXMLLoader.load(getClass().getResource("/views/CompanyInfoEditView.fxml"));
+	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/CompanyInfoEditView.fxml"));
 	    		BorderPane border = Main.getRoot();
-	    		border.setCenter(companyInfoMaintenance);
+	    		border.setCenter(currentPane);
 	    	} catch(IOException e){
 	    		e.printStackTrace();
 	    	}
@@ -80,37 +98,79 @@ public class Menus implements Initializable {
 
 	    @FXML
 	    void switchToCourierMaintenance(ActionEvent event) {
-
+	    	try {
+	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectCourierView.fxml"));
+	    		BorderPane border = Main.getRoot();
+	    		border.setCenter(currentPane);
+	    	} catch(IOException e){
+	    		e.printStackTrace();
+	    	}
 	    }
 
 	    @FXML
 	    void switchToCourierPerformance(ActionEvent event) {
-
+	    	try {
+	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectCourierView.fxml"));
+	    		BorderPane border = Main.getRoot();
+	    		border.setCenter(currentPane);
+	    	} catch(IOException e){
+	    		e.printStackTrace();
+	    	}
 	    }
 
 	    @FXML
 	    void switchToInvoice(ActionEvent event) {
-
+	    	try {
+	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/InvoiceView.fxml"));
+	    		BorderPane border = Main.getRoot();
+	    		border.setCenter(currentPane);
+	    	} catch(IOException e){
+	    		e.printStackTrace();
+	    	}
 	    }
 
 	    @FXML
 	    void switchToLogout(ActionEvent event) {
-
+	    	try {
+	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/LoginView.fxml"));
+	    		BorderPane border = Main.getRoot();
+	    		border.setCenter(currentPane);
+	    	} catch(IOException e){
+	    		e.printStackTrace();
+	    	}
 	    }
 
 	    @FXML
 	    void switchToMain(ActionEvent event) {
-
+	    	try {
+	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/MainView.fxml"));
+	    		BorderPane border = Main.getRoot();
+	    		border.setCenter(currentPane);
+	    	} catch(IOException e){
+	    		e.printStackTrace();
+	    	}
 	    }
 
 	    @FXML
 	    void switchToTrafficImpedimentsMaintenance(ActionEvent event) {
-
+	    	try {
+	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectTrafficImpedimentsView.fxml"));
+	    		BorderPane border = Main.getRoot();
+	    		border.setCenter(currentPane);
+	    	} catch(IOException e){
+	    		e.printStackTrace();
+	    	}
 	    }
 
 	    @FXML
 	    void switchToUserMaintenance(ActionEvent event) {
-
+	    	try {
+	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectUserView.fxml"));
+	    		BorderPane border = Main.getRoot();
+	    		border.setCenter(currentPane);
+	    	} catch(IOException e){
+	    		e.printStackTrace();
+	    	}
 	    }
 	    
 
