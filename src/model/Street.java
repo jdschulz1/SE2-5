@@ -1,9 +1,32 @@
 package model;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * A Street object describes streets that can be cross-streets in an Intersection.  It has a direction that describes if it travels "North", "South", "East", "West", "East-West", or "North-South" and a name that identifies it.  As a result of its usage as an edge in shortest path calculations, a destination Intersection and weight are also stored.
  */
-public class Street {
+@Entity(name = "street")
+public class Street implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Represents the identification number of the street.
+	 */
+	@Id
+	@Column(name = "street_id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long streetId;
+	
 	/**
 	 * The direction of the Road object, which may be "North", "South", "East", "West", "East-West", or "North-South".
 	 */

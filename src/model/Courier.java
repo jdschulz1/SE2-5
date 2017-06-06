@@ -1,9 +1,41 @@
 package model;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 /**
  * Courier is an employee that delivers packages for ACME.
  */
-public class Courier {
+@Entity(name = "courier")
+public class Courier implements Serializable{
 
+	public Courier(int courierNumber, String name, String phoneNumber,boolean isActive){
+		this.courierNumber = courierNumber;
+		this.name = name;
+		this.phoneNumber = phoneNumber;
+		this.isActive = isActive;
+	}
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@Column(name = "courier_id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long courierId;
+	
 	/**
 	 * A number identifying the courier.
 	 */

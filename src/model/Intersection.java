@@ -1,16 +1,37 @@
 package model;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * The Intersection is described by two cross-streets and an availability that determines if a Courier can get to that Intersection.
  */
-public class Intersection {
+@Entity(name = "intersection")
+public class Intersection implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public Intersection(Street crossStreet1, Street crossStreet2){
 		this.availability = true;
 		this.crossStreet1 = crossStreet1;
 		this.crossStreet2 = crossStreet2;
 		this.name = crossStreet1.getName() + "&" + crossStreet2.getName();
 	}
+	
+	/**
+	 * Represents the identification number of the intersection.
+	 */
+	@Id
+	@Column(name = "intersection_id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long intersectionId;
 	
 	/**
 	 * The Street is available if true and unavailable if false.

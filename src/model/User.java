@@ -1,8 +1,23 @@
 package model;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * A general user of the software system for courier tracking at ACME.
  */
-public class User {
+@Entity(name = "user")
+public class User implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public User(String name, String userName, String password, String role, String email){
 		this.name = name;
@@ -11,6 +26,15 @@ public class User {
 		this.role = role;
 		this.email = email;
 	}
+	
+	/**
+	 * Represents the identification number of the user.
+	 */
+	@Id
+	@Column(name = "user_id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long userId;
+	
 	/**
 	 * The legal name of the user.
 	 */

@@ -1,16 +1,36 @@
 package model;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * Client is a class representing a client that requests ACME's courier services.
  */
-public class Client {
+@Entity(name = "client")
+public class Client implements Serializable{
 
-	public Client(String name, Street crossStreet1, Street crossStreet2, String email){
-		this.clientNumber = 12345; //DUMMY data.  We will generate this number to be unique
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public Client(int clientNumber, String name, Street crossStreet1, Street crossStreet2, String deliveryDetails, String email){
+		this.clientNumber = clientNumber; 
 		this.name = name;
 		this.location = new Intersection(crossStreet1, crossStreet2);
-		this.deliveryDetails = "Fill me in later";
+		this.deliveryDetails = deliveryDetails;
 		this.email = email;
 	}
+	
+	@Id
+	@Column(name = "client_id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long clientId;
 	
 	/**
 	 * An identifying number for Clients.

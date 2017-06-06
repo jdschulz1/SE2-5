@@ -1,24 +1,42 @@
 package model;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.Period;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import model.DeliveryTracker;
 
 /**
  * Delivery tickets are records containing all information related to a delivery request, including pickup and delivery details.
  */
-public class DeliveryTicket {
+@Entity(name = "delivery_ticket")
+public class DeliveryTicket implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Represents the identification number of the ticket.
+	 */
+	@Id
+	@Column(name = "ticket_id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long ticketId;
+	
 	/**
 	 * The Courier involved in the delivery represented by this DeliveryTicket.
 	 */
 	private Courier courier;
-	/**
-	 * Represents the identification number of the ticket.
-	 */
-	private int ticketId;
+
 	/**
 	 * Date and time that the order call is received by the Order Taker.
 	 */
@@ -164,7 +182,7 @@ public class DeliveryTicket {
 		this.courier = courier;
 	}
 
-	public int getTicketId() {
+	public long getTicketId() {
 		return ticketId;
 	}
 

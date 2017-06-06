@@ -1,11 +1,32 @@
 package model;
+import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * A TrafficImpediment is an object describing traffic congestion or a construction project that will make an intersection unavailable for a given date.
  */
-public class TrafficImpediment {
+@Entity(name = "traffic_impediment")
+public class TrafficImpediment implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Represents the identification number of the traffic impediment.
+	 */
+	@Id
+	@Column(name = "impediment_id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long impedimentId;
+	
 	/**
 	 * The intersection that is unavailable due to traffic or construction.
 	 */
