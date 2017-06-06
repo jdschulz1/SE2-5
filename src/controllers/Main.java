@@ -28,7 +28,7 @@ public class Main extends Application {
 		try {
 			
 			MenuBar bar = FXMLLoader.load(getClass().getResource("/views/Menus.fxml"));
-			AnchorPane paneMain = FXMLLoader.load(getClass().getResource("/views/MainView.fxml"));
+			AnchorPane paneMain = FXMLLoader.load(getClass().getResource("/views/Main.fxml"));
 			root.setTop(bar);
 			root.setCenter(paneMain);
 			

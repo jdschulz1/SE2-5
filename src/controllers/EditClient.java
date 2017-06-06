@@ -1,4 +1,4 @@
-package views;
+package controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
-public class ClientEdit implements javafx.fxml.Initializable {
+public class EditClient implements javafx.fxml.Initializable {
 
 	  @FXML	
 	    private TextField textFieldClientNumber;

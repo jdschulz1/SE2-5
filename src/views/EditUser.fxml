@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.CompanyInfoEditView">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="contollers.EditUser">
    <children>
       <VBox alignment="CENTER" prefHeight="300.0" prefWidth="600.0" spacing="10.0">
          <children>

@@ -77,7 +77,7 @@ public class Menus implements Initializable {
 	    @FXML
 	    void switchToClientMaintenance(ActionEvent event) {
 	    	try {
-	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectClientView.fxml"));
+	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectClient.fxml"));
 	    		BorderPane border = Main.getRoot();
 	    		border.setCenter(currentPane);
 	    	} catch(IOException e){
@@ -88,7 +88,7 @@ public class Menus implements Initializable {
 	    @FXML
 	    void switchToCompanyInfoMaintenance(ActionEvent event) {
 	    	try {
-	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/CompanyInfoEditView.fxml"));
+	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/EditCompanyInfo.fxml"));
 	    		BorderPane border = Main.getRoot();
 	    		border.setCenter(currentPane);
 	    	} catch(IOException e){
@@ -99,7 +99,7 @@ public class Menus implements Initializable {
 	    @FXML
 	    void switchToCourierMaintenance(ActionEvent event) {
 	    	try {
-	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectCourierView.fxml"));
+	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectCourier.fxml"));
 	    		BorderPane border = Main.getRoot();
 	    		border.setCenter(currentPane);
 	    	} catch(IOException e){
@@ -110,7 +110,7 @@ public class Menus implements Initializable {
 	    @FXML
 	    void switchToCourierPerformance(ActionEvent event) {
 	    	try {
-	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectCourierView.fxml"));
+	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/CourierPerformance.fxml"));
 	    		BorderPane border = Main.getRoot();
 	    		border.setCenter(currentPane);
 	    	} catch(IOException e){
@@ -121,7 +121,7 @@ public class Menus implements Initializable {
 	    @FXML
 	    void switchToInvoice(ActionEvent event) {
 	    	try {
-	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/InvoiceView.fxml"));
+	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/Invoice.fxml"));
 	    		BorderPane border = Main.getRoot();
 	    		border.setCenter(currentPane);
 	    	} catch(IOException e){
@@ -132,7 +132,7 @@ public class Menus implements Initializable {
 	    @FXML
 	    void switchToLogout(ActionEvent event) {
 	    	try {
-	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/LoginView.fxml"));
+	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
 	    		BorderPane border = Main.getRoot();
 	    		border.setCenter(currentPane);
 	    	} catch(IOException e){
@@ -143,7 +143,7 @@ public class Menus implements Initializable {
 	    @FXML
 	    void switchToMain(ActionEvent event) {
 	    	try {
-	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/MainView.fxml"));
+	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/Main.fxml"));
 	    		BorderPane border = Main.getRoot();
 	    		border.setCenter(currentPane);
 	    	} catch(IOException e){
@@ -154,7 +154,7 @@ public class Menus implements Initializable {
 	    @FXML
 	    void switchToTrafficImpedimentsMaintenance(ActionEvent event) {
 	    	try {
-	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectTrafficImpedimentsView.fxml"));
+	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectTrafficImpediment.fxml"));
 	    		BorderPane border = Main.getRoot();
 	    		border.setCenter(currentPane);
 	    	} catch(IOException e){
@@ -165,7 +165,7 @@ public class Menus implements Initializable {
 	    @FXML
 	    void switchToUserMaintenance(ActionEvent event) {
 	    	try {
-	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectUserView.fxml"));
+	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectUser.fxml"));
 	    		BorderPane border = Main.getRoot();
 	    		border.setCenter(currentPane);
 	    	} catch(IOException e){

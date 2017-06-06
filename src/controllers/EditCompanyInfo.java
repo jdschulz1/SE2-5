@@ -1,4 +1,4 @@
-package views;
+package controllers;
 
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 
 import model.DeliveryTracker;
 
-public class CompanyInfoEditView implements javafx.fxml.Initializable {
+public class EditCompanyInfo implements javafx.fxml.Initializable {
 
     @FXML
     private Button btnSave;
@@ -68,7 +68,7 @@ public class CompanyInfoEditView implements javafx.fxml.Initializable {
 			public void handle(Event event) {
 				textFieldCompanyName.setText("ACME");
 				try {
-					Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("views/ClientEdit.fxml"));
+					Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("/views/EditClient.fxml"));
 					Scene parentScene = new Scene(parent);
 					Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 //					Scene oldScene = stage.getScene();
