@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+
+<MenuBar xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Menus">
+  <menus>
+    <Menu mnemonicParsing="false" text="Delivery Tracker">
+      <items>
+        <MenuItem fx:id="displayMain" mnemonicParsing="false" onAction="#switchToMain" text="Main" />
+            <MenuItem fx:id="displayAddSearch" mnemonicParsing="false" onAction="#switchToAddSearch" text="Add/Search" />
+      </items>
+    </Menu>
+    <Menu mnemonicParsing="false" text="Reports">
+      <items>
+        <MenuItem fx:id="displayCourierPerformance" mnemonicParsing="false" onAction="#switchToCourierPerformance" text="Courier Performance" />
+            <MenuItem fx:id="displayInvoice" mnemonicParsing="false" onAction="#switchToInvoice" text="Invoices" />
+            <MenuItem fx:id="displayClientDeliveries" mnemonicParsing="false" onAction="#switchToClientDeliveries" text="Client Deliveries" />
+      </items>
+    </Menu>
+    <Menu mnemonicParsing="false" text="Maintenance">
+      <items>
+        <MenuItem fx:id="displayCompanyInfoMaintenance" mnemonicParsing="false" onAction="#switchToCompanyInfoMaintenance" text="Company Information" />
+            <MenuItem fx:id="displayClientMaintenance" mnemonicParsing="false" onAction="#switchToClientMaintenance" text="Client" />
+            <MenuItem fx:id="displayCourierMaintenance" mnemonicParsing="false" onAction="#switchToCourierMaintenance" text="Courier" />
+            <MenuItem fx:id="displayUserMaintenance" mnemonicParsing="false" onAction="#switchToUserMaintenance" text="User" />
+            <MenuItem fx:id="displayTrafficImpedimentsMaintenance" mnemonicParsing="false" onAction="#switchToTrafficImpedimentsMaintenance" text="Traffic Impediments" />
+      </items>
+    </Menu>
+      <Menu mnemonicParsing="false" text="Account">
+         <items>
+            <MenuItem fx:id="displayLogout" mnemonicParsing="false" onAction="#switchToLogout" text="Logout" />
+         </items>
+      </Menu>
+  </menus>
+</MenuBar>
