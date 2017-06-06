@@ -1,3 +1,4 @@
+package controllers;
 
 	
 import javafx.application.Application;
@@ -5,16 +6,35 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.control.MenuBar;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 
 public class Main extends Application {
+	
+	
+	//Static root passes to controller
+	private static BorderPane root = new BorderPane();
+	
+	//Getter for controller
+	public static BorderPane getRoot(){
+		return root;
+	}
+	
 	@Override
 	public void start(Stage primaryStage) {
-		Parent root = null;
+		//Parent root = null;
 		try {
-			root = FXMLLoader.load(getClass().getClassLoader().getResource("views/CompanyInfoEditView.fxml"));
+			
+			MenuBar bar = FXMLLoader.load(getClass().getResource("/views/Menus.fxml"));
+			AnchorPane paneMain = FXMLLoader.load(getClass().getResource("/views/MainView.fxml"));
+			root.setTop(bar);
+			root.setCenter(paneMain);
+			
+			//root = FXMLLoader.load(getClass().getClassLoader().getResource("views/CompanyInfoEditView.fxml"));
 //			root = FXMLLoader.load(getClass().getClassLoader().getResource("views/ClientEdit.fxml"));
-
+			
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.sizeToScene();
