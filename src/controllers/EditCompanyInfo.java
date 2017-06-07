@@ -98,7 +98,7 @@ public class EditCompanyInfo implements javafx.fxml.Initializable {
 	
 	private void save() {
 		if (validate()) {
-			DeliveryTracker companyInfo = new DeliveryTracker();
+			DeliveryTracker companyInfo = DeliveryTracker.getDeliveryTracker();
 			companyInfo.setBillRateBase(new BigDecimal(textFieldBillRateBase.getText()));
 			System.out.println(companyInfo.getBillRateBase());
 		}
