@@ -8,6 +8,14 @@ import java.util.List;
  */
 public class DeliveryTracker {
 
+	private DeliveryTracker(){
+		
+	}
+	
+	public static DeliveryTracker getDeliveryTracker(){
+		return new DeliveryTracker();
+	}
+	
 	/**
 	 * A list of couriers working for the company.
 	 */
