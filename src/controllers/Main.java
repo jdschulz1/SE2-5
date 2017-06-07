@@ -5,6 +5,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Client;
+import model.DeliveryTracker;
+import model.Street;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -32,6 +35,14 @@ public class Main extends Application {
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.sizeToScene();
+			
+			DeliveryTracker deliveryTracker = DeliveryTracker.getDeliveryTracker();
+			Street street1 = new Street();
+			Client client = new Client(1, "Bob", street1, street1, "asdf", "aadsf");
+			deliveryTracker.addClient(client);
+			System.out.println(deliveryTracker.getClients().size());
+			
+			
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

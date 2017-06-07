@@ -1,6 +1,7 @@
 package model;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -285,6 +286,28 @@ public class DeliveryTracker {
 		return u.getRole() == "Admin" && users.remove(deleted);
 	}
 	
+	public List<Courier> getCouriers() {
+		return couriers;
+	}
+
+	public void setCouriers(List<Courier> couriers) {
+		this.couriers = couriers;
+	}
+
+	public List<Client> getClients() {
+		return clients;
+	}
+
+	public void setClients(List<Client> clients) {
+		this.clients = clients;
+	}
+	
+	public void addClient(Client client) {
+		if(this.clients == null)
+			this.clients = new ArrayList<Client>();
+		this.clients.add(client);
+	}
+
 	/**
 	 * Adds Client added to the known Clients on the DeliveryTracker.
 	 * @param clientNumber
