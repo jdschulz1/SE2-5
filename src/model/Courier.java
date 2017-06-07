@@ -19,17 +19,22 @@ import javax.persistence.TemporalType;
 @Entity(name = "courier")
 public class Courier implements Serializable{
 
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public Courier(){
+		
+	}
+	
 	public Courier(int courierNumber, String name, String phoneNumber,boolean isActive){
 		this.courierNumber = courierNumber;
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 		this.isActive = isActive;
 	}
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@Column(name = "courier_id", nullable = false)

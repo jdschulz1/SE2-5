@@ -17,10 +17,15 @@ import model.Street;
 @Entity(name = "client")
 public class Client implements Serializable{
 
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	public Client(){
+			
+	}
 	
 	public Client(int clientNumber, String name, Street street, Street avenue, String deliveryDetails, String email){
 		this.clientNumber = clientNumber; 

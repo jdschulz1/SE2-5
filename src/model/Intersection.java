@@ -18,6 +18,11 @@ public class Intersection implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	public Intersection(){
+		
+	}
+	
 	public Intersection(Street street, Street avenue){
 		this.availability = true;
 		this.street = street;

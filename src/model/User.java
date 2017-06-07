@@ -19,6 +19,10 @@ public class User implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public User(){
+		
+	}
+	
 	public User(String name, String userName, String password, String role, String email){
 		this.name = name;
 		this.userName = userName;
