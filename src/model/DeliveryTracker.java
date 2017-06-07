@@ -9,12 +9,14 @@ import java.util.List;
  */
 public class DeliveryTracker {
 
+	private static final DeliveryTracker instance = new DeliveryTracker();
+	
 	private DeliveryTracker(){
 		
 	}
 	
 	public static DeliveryTracker getDeliveryTracker(){
-		return new DeliveryTracker();
+		return instance;
 	}
 	
 	/**
