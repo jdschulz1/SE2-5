@@ -18,11 +18,11 @@ public class Intersection implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public Intersection(Street crossStreet1, Street crossStreet2){
+	public Intersection(Street street, Street avenue){
 		this.availability = true;
-		this.crossStreet1 = crossStreet1;
-		this.crossStreet2 = crossStreet2;
-		this.name = crossStreet1.getName() + "&" + crossStreet2.getName();
+		this.street = street;
+		this.avenue = avenue;
+		this.name = street.getName() + "&" + avenue.getName();
 	}
 	
 	/**
@@ -40,11 +40,11 @@ public class Intersection implements Serializable{
 	/**
 	 * One of two cross-streets that composes an Intersection. ?crossStreet1 travels, North, South or North and South.
 	 */
-	private Street crossStreet1;
+	private Street street;
 	/**
 	 * The second of two cross-streets that compose an Intersection. ?crossStreet2 travels, East, West or East and West.
 	 */
-	private Street crossStreet2;
+	private Street avenue;
 	/**
 	 * The name of the intersection, with the name of the two cross-streets on either side of an ampersand (i.e. "A Street & 1st Ave").
 	 */
@@ -55,17 +55,17 @@ public class Intersection implements Serializable{
 	public void setAvailable(boolean availability) {
 		this.availability = availability;
 	}
-	public Street getCrossStreet1() {
-		return crossStreet1;
+	public Street getStreet() {
+		return street;
 	}
-	public void setCrossStreet1(Street crossStreet1) {
-		this.crossStreet1 = crossStreet1;
+	public void setStreet(Street street) {
+		this.street = street;
 	}
-	public Street getCrossStreet2() {
-		return crossStreet2;
+	public Street getAvenue() {
+		return avenue;
 	}
-	public void setCrossStreet2(Street crossStreet2) {
-		this.crossStreet2 = crossStreet2;
+	public void setAvenue(Street avenue) {
+		this.avenue = avenue;
 	}
 	public String getName() {
 		return name;

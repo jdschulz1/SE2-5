@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import model.Intersection;
+import model.Street;
+
 /**
  * Client is a class representing a client that requests ACME's courier services.
  */
@@ -19,10 +22,10 @@ public class Client implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public Client(int clientNumber, String name, Street crossStreet1, Street crossStreet2, String deliveryDetails, String email){
+	public Client(int clientNumber, String name, Street street, Street avenue, String deliveryDetails, String email){
 		this.clientNumber = clientNumber; 
 		this.name = name;
-		this.location = new Intersection(crossStreet1, crossStreet2);
+		this.location = new Intersection(street, avenue);
 		this.deliveryDetails = deliveryDetails;
 		this.email = email;
 	}

@@ -14,6 +14,18 @@ import javax.persistence.Id;
 @Entity(name = "street")
 public class Street implements Serializable{
 
+	public Street(){
+		
+	}
+	
+	public Street(String name, String direction, Intersection source, Intersection destination, int weight){
+		this.name = name;
+		this.direction = direction;
+		this.source = source;
+		this.destination = destination;
+		this.weight = weight;
+	}
+	
 	/**
 	 * 
 	 */

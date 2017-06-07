@@ -14,6 +14,12 @@ import javax.persistence.Id;
 @Entity(name = "traffic_impediment")
 public class TrafficImpediment implements Serializable{
 
+	public TrafficImpediment(Intersection intersection, LocalDateTime startDate, LocalDateTime endDate){
+		this.intersection = intersection;
+		this.startDate = startDate;
+		this.endDate = endDate;
+	}
+	
 	/**
 	 * 
 	 */
@@ -39,6 +45,7 @@ public class TrafficImpediment implements Serializable{
 	 * The date and time that the intersection will ?be available once again due to the TrafficImpediment going away.
 	 */
 	private LocalDateTime endDate;
+	
 	public Intersection getIntersection() {
 		return intersection;
 	}
