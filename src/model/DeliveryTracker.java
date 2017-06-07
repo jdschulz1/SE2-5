@@ -207,9 +207,9 @@ public class DeliveryTracker {
 
 	/**
 	 * Returns a client for a specified Id.
-	 * @param client
+	 * @param i
 	 */
-	public Client getClientById(Client client) {
+	public Client getClientById(int i) {
 		// TODO - implement DeliveryTracker.getClientById
 		throw new UnsupportedOperationException();
 	}
