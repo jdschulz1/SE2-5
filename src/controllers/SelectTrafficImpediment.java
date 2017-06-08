@@ -16,7 +16,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
-import model.Client;
 import model.DeliveryTracker;
 import model.TrafficImpediment;
 
@@ -65,9 +64,9 @@ public class SelectTrafficImpediment implements Initializable {
 	            public void handle(ActionEvent event) {
 	                System.out.println("Add");
 	                try {
-//	    	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/EditClient.fxml"));
+//	    	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/EditTrafficImpediment.fxml"));
 	    	    		
-	                	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/EditClient.fxml"));
+	                	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/EditTrafficImpediment.fxml"));
 	                	EditTrafficImpediment controller = new EditTrafficImpediment();
 	                	fxmlLoader.setController(controller);
 	                	AnchorPane currentPane = fxmlLoader.load();
@@ -86,7 +85,7 @@ public class SelectTrafficImpediment implements Initializable {
 	                System.out.println("Update " + ti.getIntersection().getName());
 	                
 	                try {
-	                	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/EditClient.fxml"));
+	                	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/EditTrafficImpediment.fxml"));
 	                	EditTrafficImpediment controller = new EditTrafficImpediment();
 	                	controller.setTrafficImpediment(ti);
 	                	fxmlLoader.setController(controller);

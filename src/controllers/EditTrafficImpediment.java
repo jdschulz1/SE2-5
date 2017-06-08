@@ -17,8 +17,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import model.CityMap;
-import model.Client;
-import model.DeliveryTracker;
 import model.Street;
 import model.TrafficImpediment;
 public class EditTrafficImpediment implements Initializable {
@@ -63,7 +61,7 @@ public class EditTrafficImpediment implements Initializable {
                 System.out.println("Cancel");
                 try {
                 	//TODO: Save Traffic Impediment data
-    	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectClient.fxml"));
+    	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectTrafficImpediment.fxml"));
     	    		BorderPane border = Main.getRoot();
     	    		border.setCenter(currentPane);
     	    	} catch(IOException e){
@@ -76,7 +74,7 @@ public class EditTrafficImpediment implements Initializable {
             public void handle(ActionEvent event) {
                 System.out.println("Cancel");
                 try {
-    	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectClient.fxml"));
+    	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectTrafficImpediment.fxml"));
     	    		BorderPane border = Main.getRoot();
     	    		border.setCenter(currentPane);
     	    	} catch(IOException e){
