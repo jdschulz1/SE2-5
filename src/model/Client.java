@@ -27,11 +27,12 @@ public class Client implements Serializable{
 			
 	}
 	
-	public Client(int clientNumber, String name, Street street, Street avenue, String deliveryDetails, String email){
+	public Client(int clientNumber, String name, Street street, Street avenue, String deliveryDetails, String phone, String email){
 		this.clientNumber = clientNumber; 
 		this.name = name;
 		this.location = new Intersection(street, avenue);
 		this.deliveryDetails = deliveryDetails;
+		this.phoneNumber = phone;
 		this.email = email;
 	}
 	

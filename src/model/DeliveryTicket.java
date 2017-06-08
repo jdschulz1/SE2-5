@@ -3,7 +3,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.Period;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

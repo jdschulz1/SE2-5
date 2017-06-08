@@ -1,6 +1,8 @@
 package controllers;
 
+
 import java.io.IOException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -18,6 +20,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
 import model.User;
 import model.DeliveryTracker;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 
 public class SelectUser implements Initializable {
 
@@ -46,6 +53,7 @@ public class SelectUser implements Initializable {
 	                    	//TODO: get client by name
 	                        return null;
 		                }
+
 
 						@Override
 						public String toString(User object) {
@@ -111,6 +119,7 @@ public class SelectUser implements Initializable {
 		ObservableList<User> users = FXCollections.observableArrayList();
 		users.addAll(deliveryTracker.getUsers());
 		comboBoxUser.setItems(users);
+
 	}
 
 }

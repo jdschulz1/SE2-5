@@ -316,7 +316,11 @@ public class DeliveryTracker {
 			this.clients = new ArrayList<Client>();
 		this.clients.add(client);
 	}
-
+	public void addCourier(Courier courier) {
+		if(this.couriers == null)
+			this.couriers = new ArrayList<Courier>();
+		this.couriers.add(courier);
+	}
 	/**
 	 * Adds Client added to the known Clients on the DeliveryTracker.
 	 * @param clientNumber
@@ -327,8 +331,8 @@ public class DeliveryTracker {
 	 * @param email
 	 * @return
 	 */
-	public boolean addClient(int clientNumber, String name, Street crossStreet1, Street crossStreet2, String deliveryDetails, String email){
-		return clients.add(new Client(clientNumber, name, crossStreet1, crossStreet2, deliveryDetails, email));
+	public boolean addClient(int clientNumber, String name, Street crossStreet1, Street crossStreet2, String deliveryDetails, String phone, String email){
+		return clients.add(new Client(clientNumber, name, crossStreet1, crossStreet2, deliveryDetails, phone, email));
 	}
 	
 	/**
@@ -338,5 +342,10 @@ public class DeliveryTracker {
 	 */
 	public boolean deleteClient(Client deleted){
 		return clients.remove(deleted);
+	}
+
+	public boolean deleteCourier(Courier c) {
+		// TODO Auto-generated method stub
+		return couriers.remove(c);
 	}
 }

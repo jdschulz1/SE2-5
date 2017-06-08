@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.Client;
+import model.Courier;
 import model.User;
 import model.DeliveryTracker;
 import model.Street;
@@ -39,9 +40,8 @@ public class Main extends Application {
 			
 			DeliveryTracker deliveryTracker = DeliveryTracker.getDeliveryTracker();
 			Street street1 = new Street();
-			Client client = new Client(1, "Bob", street1, street1, "asdf", "aadsf");
+			Client client = new Client(1, "Bickers & Bickers", street1, street1, "2nd Floor", "(505)445-9832", "office@bickersbickers.com");
 			deliveryTracker.addClient(client);
-			System.out.println(deliveryTracker.getClients().size());
 			
 			User user1 = new User("Barry", "The Flash", "password", "Admin", "Lightning@flashmail.com");
 			deliveryTracker.addUser(user1);
@@ -49,7 +49,10 @@ public class Main extends Application {
 			deliveryTracker.addUser(user2);
 			System.out.println(deliveryTracker.getUsers().size());
 			
-			
+			//setup dummy couriers
+			Courier courier = new Courier(1, "Sally Sassalot", "4055555353", true);
+			deliveryTracker.addCourier(courier);
+		
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
