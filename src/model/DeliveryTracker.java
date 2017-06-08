@@ -331,8 +331,8 @@ public class DeliveryTracker {
 	 * @param email
 	 * @return
 	 */
-	public boolean addClient(int clientNumber, String name, Street crossStreet1, Street crossStreet2, String deliveryDetails, String phone, String email){
-		return clients.add(new Client(clientNumber, name, crossStreet1, crossStreet2, deliveryDetails, phone, email));
+	public boolean addClient(int clientNumber, String name, Street street, Street avenue, String deliveryDetails, String phone, String email){
+		return clients.add(new Client(clientNumber, name, street, avenue, deliveryDetails, phone, email));
 	}
 	
 	/**
@@ -342,6 +342,21 @@ public class DeliveryTracker {
 	 */
 	public boolean deleteClient(Client deleted){
 		return clients.remove(deleted);
+	}
+	
+	public void addTrafficImpediment(TrafficImpediment ti){
+		if(this.trafficImpediments == null)
+			this.trafficImpediments = new ArrayList<TrafficImpediment>();
+		this.trafficImpediments.add(ti);
+	}
+	
+	/**
+	 * Removes TrafficImpediment deleted from known TrafficImpediments on the DeliveryTracker.
+	 * @param deleted
+	 * @return
+	 */
+	public boolean deleteTrafficImpediment(TrafficImpediment deleted){
+		return trafficImpediments.remove(deleted);
 	}
 
 	public boolean deleteCourier(Courier c) {
