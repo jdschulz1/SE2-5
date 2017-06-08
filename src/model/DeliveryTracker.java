@@ -324,8 +324,8 @@ public class DeliveryTracker {
 	 * @param email
 	 * @return
 	 */
-	public boolean addClient(int clientNumber, String name, Street crossStreet1, Street crossStreet2, String deliveryDetails, String email){
-		return clients.add(new Client(clientNumber, name, crossStreet1, crossStreet2, deliveryDetails, email));
+	public boolean addClient(int clientNumber, String name, Street crossStreet1, Street crossStreet2, String deliveryDetails, String phone, String email){
+		return clients.add(new Client(clientNumber, name, crossStreet1, crossStreet2, deliveryDetails, phone, email));
 	}
 	
 	/**
