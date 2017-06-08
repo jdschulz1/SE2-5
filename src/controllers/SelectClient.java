@@ -38,9 +38,7 @@ public class SelectClient implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		deliveryTracker = DeliveryTracker.getDeliveryTracker();
-		ObservableList<Client> clients = FXCollections.observableArrayList();
-		clients.addAll(deliveryTracker.getClients());
-		comboBoxClient.setItems(clients);
+		updateClientsList();
 		comboBoxClient.setConverter(
 		            new StringConverter<Client>() {
 		                @Override
@@ -64,8 +62,13 @@ public class SelectClient implements Initializable {
 	            public void handle(ActionEvent event) {
 	                System.out.println("Add");
 	                try {
-	    	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/EditClient.fxml"));
-	    	    		BorderPane border = Main.getRoot();
+//	    	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/EditClient.fxml"));
+	    	    		
+	                	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/EditClient.fxml"));
+	                	EditClient controller = new EditClient();
+	                	fxmlLoader.setController(controller);
+	                	AnchorPane currentPane = fxmlLoader.load();
+	                	BorderPane border = Main.getRoot();
 	    	    		border.setCenter(currentPane);
 	    	    	} catch(IOException e){
 	    	    		e.printStackTrace();
@@ -85,8 +88,6 @@ public class SelectClient implements Initializable {
 	                	controller.setClient(c);
 	                	fxmlLoader.setController(controller);
 	                	AnchorPane currentPane = fxmlLoader.load();
-//	    	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/EditClient.fxml"));
-//	    	    		controller.setClient(c);
 	    	    		BorderPane border = Main.getRoot();
 	    	    		border.setCenter(currentPane);
 	    	    	} catch(IOException e){
@@ -101,7 +102,14 @@ public class SelectClient implements Initializable {
 	            	Client c = comboBoxClient.getValue();
 	                System.out.println("Delete " + c.getName());
 	                deliveryTracker.deleteClient(c);
+	                updateClientsList();
 	            }
 	        });
+	}
+	
+	private void updateClientsList() {
+		ObservableList<Client> clients = FXCollections.observableArrayList();
+		clients.addAll(deliveryTracker.getClients());
+		comboBoxClient.setItems(clients);
 	}
 }
