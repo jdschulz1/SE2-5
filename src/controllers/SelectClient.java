@@ -11,8 +11,10 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
@@ -62,9 +64,7 @@ public class SelectClient implements Initializable {
 	            public void handle(ActionEvent event) {
 	                System.out.println("Add");
 	                try {
-//	    	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/EditClient.fxml"));
-	    	    		
-	                	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/EditClient.fxml"));
+	    	    	   	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/EditClient.fxml"));
 	                	EditClient controller = new EditClient();
 	                	fxmlLoader.setController(controller);
 	                	AnchorPane currentPane = fxmlLoader.load();
@@ -80,6 +80,13 @@ public class SelectClient implements Initializable {
 	            @Override
 	            public void handle(ActionEvent event) {
 	            	Client c = comboBoxClient.getValue();
+	            	if(c == null) {
+	            		Alert a = new Alert(AlertType.ERROR);
+	        	        a.setTitle("Error");
+	        	        a.setHeaderText("No Client Selected");
+	        	        a.setContentText("Please select a client and try again.");
+	        	        a.showAndWait();
+	            	}
 	                System.out.println("Update " + c.getName());
 	                
 	                try {
@@ -101,6 +108,7 @@ public class SelectClient implements Initializable {
 	            public void handle(ActionEvent event) {
 	            	Client c = comboBoxClient.getValue();
 	                System.out.println("Delete " + c.getName());
+	                //TODO: check deletion criteria
 	                deliveryTracker.deleteClient(c);
 	                updateClientsList();
 	            }
