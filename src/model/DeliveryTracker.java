@@ -332,4 +332,19 @@ public class DeliveryTracker {
 	public boolean deleteClient(Client deleted){
 		return clients.remove(deleted);
 	}
+	
+	public void addTrafficImpediment(TrafficImpediment ti){
+		if(this.trafficImpediments == null)
+			this.trafficImpediments = new ArrayList<TrafficImpediment>();
+		this.trafficImpediments.add(ti);
+	}
+	
+	/**
+	 * Removes TrafficImpediment deleted from known TrafficImpediments on the DeliveryTracker.
+	 * @param deleted
+	 * @return
+	 */
+	public boolean deleteTrafficImpediment(TrafficImpediment deleted){
+		return trafficImpediments.remove(deleted);
+	}
 }
