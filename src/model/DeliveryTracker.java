@@ -274,8 +274,15 @@ public class DeliveryTracker {
 	 * @param role
 	 * @param email
 	 */
-	public boolean addUser(User u, String name, String userName, String password, String role, String email){
-		return u.getRole() == "Admin" && users.add(new User(name, userName, password, role, email));
+	public boolean addUser(String name, String userName, String password, String role, String email){
+		return /* u.getRole() == "Admin" && */ users.add(new User(name, userName, password, role, email));
+		//FIX LATER NERDS
+	}
+	
+	public void addUser(User user){
+		if(this.users == null)
+			this.users = new ArrayList<User>();
+		this.users.add(user);
 	}
 	
 	/**
@@ -284,8 +291,8 @@ public class DeliveryTracker {
 	 * @param deleted
 	 * @return
 	 */
-	public boolean deleteUser(User u, User deleted){
-		return u.getRole() == "Admin" && users.remove(deleted);
+	public boolean deleteUser(User deleted){
+		return /* u.getRole() == "Admin" && */ users.remove(deleted);    //FIX LATER FOR ADMIN FUNTION
 	}
 	
 	public List<Courier> getCouriers() {

@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.Client;
+import model.User;
 import model.DeliveryTracker;
 import model.Street;
 import javafx.scene.control.MenuBar;
@@ -41,6 +42,12 @@ public class Main extends Application {
 			Client client = new Client(1, "Bob", street1, street1, "asdf", "aadsf");
 			deliveryTracker.addClient(client);
 			System.out.println(deliveryTracker.getClients().size());
+			
+			User user1 = new User("Barry", "The Flash", "password", "Admin", "Lightning@flashmail.com");
+			deliveryTracker.addUser(user1);
+			User user2 = new User("Burt", "Zoom", "password", "User", "Zoomies@flashmail.com");
+			deliveryTracker.addUser(user2);
+			System.out.println(deliveryTracker.getUsers().size());
 			
 			
 			primaryStage.show();
