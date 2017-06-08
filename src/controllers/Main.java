@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.Client;
+import model.Courier;
 import model.DeliveryTracker;
 import model.Street;
 import javafx.scene.control.MenuBar;
@@ -40,9 +41,11 @@ public class Main extends Application {
 			Street street1 = new Street();
 			Client client = new Client(1, "Bob", street1, street1, "asdf", "aadsf");
 			deliveryTracker.addClient(client);
-			System.out.println(deliveryTracker.getClients().size());
 			
-			
+			//setup dummy couriers
+			Courier courier = new Courier(1, "Sally Sassalot", "4055555353", true);
+			deliveryTracker.addCourier(courier);
+		
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

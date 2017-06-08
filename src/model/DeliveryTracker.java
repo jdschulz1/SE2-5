@@ -309,7 +309,11 @@ public class DeliveryTracker {
 			this.clients = new ArrayList<Client>();
 		this.clients.add(client);
 	}
-
+	public void addCourier(Courier courier) {
+		if(this.couriers == null)
+			this.couriers = new ArrayList<Courier>();
+		this.couriers.add(courier);
+	}
 	/**
 	 * Adds Client added to the known Clients on the DeliveryTracker.
 	 * @param clientNumber
@@ -331,5 +335,10 @@ public class DeliveryTracker {
 	 */
 	public boolean deleteClient(Client deleted){
 		return clients.remove(deleted);
+	}
+
+	public boolean deleteCourier(Courier c) {
+		// TODO Auto-generated method stub
+		return couriers.remove(c);
 	}
 }
