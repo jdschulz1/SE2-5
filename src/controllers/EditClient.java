@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import model.Client;
+import model.DeliveryTracker;
 
 public class EditClient implements javafx.fxml.Initializable {
 
@@ -64,8 +65,6 @@ public class EditClient implements javafx.fxml.Initializable {
             public void handle(ActionEvent event) {
                 System.out.println("Cancel");
                 try {
-                	if(client == null)
-                		client = new Client();
                 	if(save()) {
 	    	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectClient.fxml"));
 	    	    		BorderPane border = Main.getRoot();
@@ -104,6 +103,11 @@ public class EditClient implements javafx.fxml.Initializable {
 	        a.setContentText("Please complete all required fields and try again.");
 	        a.showAndWait();
 			return false;
+		}
+		if(client == null) {
+    		client = new Client();
+    		DeliveryTracker deliveryTracker = DeliveryTracker.getDeliveryTracker();
+    		deliveryTracker.addClient(client);
 		}
 		client.setClientNumber(Integer.parseInt(textFieldClientNumber.getText().trim()));
 		client.setName(textFieldClientName.getText().trim());
