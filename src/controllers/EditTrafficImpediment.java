@@ -11,13 +11,18 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
 import model.CityMap;
+import model.Client;
+import model.DeliveryTracker;
+import model.Intersection;
 import model.Street;
 import model.TrafficImpediment;
 public class EditTrafficImpediment implements Initializable {
@@ -66,10 +71,12 @@ public class EditTrafficImpediment implements Initializable {
             public void handle(ActionEvent event) {
                 System.out.println("Cancel");
                 try {
+                	if(save()){
                 	//TODO: Save Traffic Impediment data
     	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectTrafficImpediment.fxml"));
     	    		BorderPane border = Main.getRoot();
     	    		border.setCenter(currentPane);
+    	    		}
     	    	} catch(IOException e){
     	    		e.printStackTrace();
     	    	}
@@ -144,4 +151,37 @@ public class EditTrafficImpediment implements Initializable {
 		System.out.println("Setting traffic impediment to " + ti.getIntersection().getName());
 	}
 
+	private boolean save() {
+		if(!validate()) {
+			Alert a = new Alert(AlertType.ERROR);
+	        a.setTitle("Error");
+	        a.setHeaderText("Missing Information");
+	        a.setContentText("Please complete all required fields and try again.");
+	        a.showAndWait();
+			return false;
+		}
+		if(trafficImpediment == null) {
+			trafficImpediment = new TrafficImpediment(null, null, null);
+    		DeliveryTracker deliveryTracker = DeliveryTracker.getDeliveryTracker();
+    		deliveryTracker.addTrafficImpediment(trafficImpediment);
+		}
+		
+		Intersection newIntersection = new Intersection(comboBoxTrafficImpedimentStreet.getValue(), comboBoxTrafficImpedimentAvenue.getValue());
+		
+		trafficImpediment.setIntersection(newIntersection);
+		trafficImpediment.setStartDate(datePickerTrafficImpedimentStart.getValue().atStartOfDay());
+		trafficImpediment.setEndDate(datePickerTrafficImpedimentStart.getValue().atStartOfDay());
+		return true;
+	}
+	
+	private boolean validate() {
+		
+		if(comboBoxTrafficImpedimentStreet.getValue().toString().isEmpty()) 
+			return false;
+		if(comboBoxTrafficImpedimentAvenue.getValue().toString().isEmpty())
+			return false;
+		if(datePickerTrafficImpedimentStart.getValue().toString().isEmpty())
+			return false;
+		return true;
+	}
 }
