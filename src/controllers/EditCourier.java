@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import model.Courier;
 
 public class EditCourier implements Initializable {
 	@FXML
@@ -27,10 +28,23 @@ public class EditCourier implements Initializable {
 
     @FXML
     private Button btnCancel;
+    
+    private Courier courier;
+	public Courier getCourier() {
+		return courier;
+	}
+	public void setCourier(Courier courier) {
+		this.courier = courier;
+	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-
+		if(courier != null){
+			textFieldCourierName.setText(courier.getName());
+			textFieldCourierNumber.setText(Integer.toString(courier.getCourierNumber()));
+			textFieldCourierPhoneNumber.setText(courier.getPhoneNumber());
+			checkBoxCourierIsActive.setSelected(courier.getIsActive());
+		}
 	}
 
 }
