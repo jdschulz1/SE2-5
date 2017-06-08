@@ -16,6 +16,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.util.StringConverter;
 import model.CityMap;
 import model.Street;
 import model.TrafficImpediment;
@@ -52,9 +53,14 @@ public class EditTrafficImpediment implements Initializable {
 		if(trafficImpediment != null) {
 			datePickerTrafficImpedimentStart.setValue(trafficImpediment.getStartDate().toLocalDate());
 			datePickerTrafficImpedimentEnd.setValue(trafficImpediment.getEndDate().toLocalDate());
-			updateImpedimentStreetsList();
-			updateImpedimentAvenuesList();
+			
+			
 		}
+		
+		updateImpedimentStreetsList();
+		
+		updateImpedimentAvenuesList();
+		
 		btnSave.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -69,6 +75,43 @@ public class EditTrafficImpediment implements Initializable {
     	    	}
             }
         });
+		
+		comboBoxTrafficImpedimentAvenue.setConverter(
+	            new StringConverter<Street>() {
+	                @Override
+	                public Street fromString(String s) {
+                    	//TODO: get client by name
+                        return null;
+	                }
+
+					@Override
+					public String toString(Street object) {
+						if (object == null) {
+	                        return "";
+	                    } else {
+	                        return object.getName();
+	                    }
+					}
+	            });
+		
+		comboBoxTrafficImpedimentStreet.setConverter(
+	            new StringConverter<Street>() {
+	                @Override
+	                public Street fromString(String s) {
+                    	//TODO: get client by name
+                        return null;
+	                }
+
+					@Override
+					public String toString(Street object) {
+						if (object == null) {
+	                        return "";
+	                    } else {
+	                        return object.getName();
+	                    }
+					}
+	            });
+		
 		btnCancel.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
