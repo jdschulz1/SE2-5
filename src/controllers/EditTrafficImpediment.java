@@ -51,19 +51,15 @@ public class EditTrafficImpediment implements Initializable {
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		System.out.println("Traffic Impediment Edit");
 		citymap = CityMap.getCityMap();
 		
 		if(trafficImpediment != null) {
 			datePickerTrafficImpedimentStart.setValue(trafficImpediment.getStartDate().toLocalDate());
 			datePickerTrafficImpedimentEnd.setValue(trafficImpediment.getEndDate().toLocalDate());
-			
-			
 		}
 		
 		updateImpedimentStreetsList();
-		
 		updateImpedimentAvenuesList();
 		
 		btnSave.setOnAction(new EventHandler<ActionEvent>() {
@@ -87,7 +83,6 @@ public class EditTrafficImpediment implements Initializable {
 	            new StringConverter<Street>() {
 	                @Override
 	                public Street fromString(String s) {
-                    	//TODO: get client by name
                         return null;
 	                }
 
