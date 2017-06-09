@@ -189,12 +189,8 @@ public class EditClient implements javafx.fxml.Initializable {
 			return false;
 		if(comboBoxStreet.getValue() == null)
 			return false;
-		else 
-			System.out.println(comboBoxStreet.getValue().getName());
 		if(comboBoxAvenue.getValue() == null)
 			return false;
-		else
-			System.out.println(comboBoxAvenue.getValue().getName());
 		return true;
 	}
 }
