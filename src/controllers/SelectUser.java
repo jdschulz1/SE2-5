@@ -13,8 +13,11 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
@@ -108,8 +111,12 @@ public class SelectUser implements Initializable {
 	            @Override
 	            public void handle(ActionEvent event) {
 	            	User u = comboBoxUser.getValue();
-	                System.out.println("Delete " + u.getName());
-	                deliveryTracker.deleteUser(u);
+	                Alert a = new Alert(AlertType.CONFIRMATION);
+        	        a.setTitle("Confirm Deletion");
+        	        a.setContentText("Are you sure you want to delete " + u.getName() + "?");
+	                a.showAndWait()
+	                	.filter(response -> response == ButtonType.OK)
+	                	.ifPresent(response -> deliveryTracker.deleteUser(u));
 	                updateUsersList();
 	            }
 	        });

@@ -11,8 +11,11 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
@@ -103,7 +106,12 @@ public class SelectTrafficImpediment implements Initializable {
 	            public void handle(ActionEvent event) {
 	            	TrafficImpediment ti = comboBoxTrafficImpediment.getValue();
 	                System.out.println("Delete " + ti.getIntersection().getName());
-	                deliveryTracker.deleteTrafficImpediment(ti);
+	                Alert a = new Alert(AlertType.CONFIRMATION);
+        	        a.setTitle("Confirm Deletion");
+        	        a.setContentText("Are you sure you want to delete " + ti.getIntersection().getName() + "?");
+	                a.showAndWait()
+	                	.filter(response -> response == ButtonType.OK)
+	                	.ifPresent(response -> deliveryTracker.deleteTrafficImpediment(ti));
 	                updateTrafficImpedimentsList();
 	            }
 	        });
