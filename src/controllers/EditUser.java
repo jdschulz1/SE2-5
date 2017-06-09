@@ -140,7 +140,7 @@ public class EditUser implements Initializable {
 			return false;
 		if(textFieldUserEmail.getText().trim().isEmpty())
 			return false;
-		if(comboBoxUserRole.getValue().toString().isEmpty() )
+		if(comboBoxUserRole.getValue() == null )
 			return false;
 		return true;
 	}

@@ -55,6 +55,8 @@ public class EditTrafficImpediment implements Initializable {
 		citymap = CityMap.getCityMap();
 		
 		if(trafficImpediment != null) {
+			comboBoxTrafficImpedimentStreet.setValue(trafficImpediment.getIntersection().getStreet());
+			comboBoxTrafficImpedimentAvenue.setValue(trafficImpediment.getIntersection().getAvenue());
 			datePickerTrafficImpedimentStart.setValue(trafficImpediment.getStartDate().toLocalDate());
 			datePickerTrafficImpedimentEnd.setValue(trafficImpediment.getEndDate().toLocalDate());
 		}
@@ -65,7 +67,6 @@ public class EditTrafficImpediment implements Initializable {
 		btnSave.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Cancel");
                 try {
                 	if(save()){
                 	//TODO: Save Traffic Impediment data
@@ -155,6 +156,14 @@ public class EditTrafficImpediment implements Initializable {
 	        a.showAndWait();
 			return false;
 		}
+		if(datePickerTrafficImpedimentStart.getValue().isAfter(datePickerTrafficImpedimentEnd.getValue())){
+			Alert a = new Alert(AlertType.ERROR);
+	        a.setTitle("Error");
+	        a.setHeaderText("Incorrect Date Range");
+	        a.setContentText("The Start Date is after the selected End Date");
+	        a.showAndWait();
+			return false;
+		}
 		if(trafficImpediment == null) {
 			trafficImpediment = new TrafficImpediment(null, null, null);
     		DeliveryTracker deliveryTracker = DeliveryTracker.getDeliveryTracker();
@@ -165,17 +174,19 @@ public class EditTrafficImpediment implements Initializable {
 		
 		trafficImpediment.setIntersection(newIntersection);
 		trafficImpediment.setStartDate(datePickerTrafficImpedimentStart.getValue().atStartOfDay());
-		trafficImpediment.setEndDate(datePickerTrafficImpedimentStart.getValue().atStartOfDay());
+		trafficImpediment.setEndDate(datePickerTrafficImpedimentEnd.getValue().atStartOfDay());
 		return true;
 	}
 	
 	private boolean validate() {
 		
-		if(comboBoxTrafficImpedimentStreet.getValue().toString().isEmpty()) 
+		if(comboBoxTrafficImpedimentStreet.getValue() == null) 
 			return false;
-		if(comboBoxTrafficImpedimentAvenue.getValue().toString().isEmpty())
+		if(comboBoxTrafficImpedimentAvenue.getValue() == null)
 			return false;
-		if(datePickerTrafficImpedimentStart.getValue().toString().isEmpty())
+		if(datePickerTrafficImpedimentStart.getValue() == null)
+			return false;
+		if(datePickerTrafficImpedimentEnd.getValue() == null)
 			return false;
 		return true;
 	}
