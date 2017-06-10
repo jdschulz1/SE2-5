@@ -13,6 +13,11 @@ public class CityMap {
 	private static final CityMap instance = new CityMap();
 	
 	private CityMap(){
+
+	}
+	
+	public static CityMap getCityMap(){
+		
 		List<Street> allStreets = StreetDAO.listStreet();
 		List<Intersection> allIntersections = IntersectionDAO.listIntersection();
 		intersections = new ArrayList<Intersection>();
@@ -40,7 +45,7 @@ public class CityMap {
 			add("6th Ave");
 			add("7th Ave"); 
 		}};	
-			
+		
 		if(allStreets.isEmpty() && allIntersections.isEmpty()){
 			initializeMapDBData();
 		}
@@ -56,9 +61,6 @@ public class CityMap {
 			}
 			System.out.println("Intersections: " + intersections.size() + " Streets: " + streets.size() + " Avenues: " + avenues.size());
 		}
-	}
-	
-	public static CityMap getCityMap(){
 		return instance;
 	}
 	
@@ -118,7 +120,7 @@ public class CityMap {
 	}
 	
 	
-	private void initializeMapDBData(){
+	private static void initializeMapDBData(){
 		ArrayList<Street> tempstreets = new ArrayList<Street>(), tempavenues = new ArrayList<Street>();
 		Street A = new Street(), B = new Street(), C = new Street(), D = new Street(), 
 				E = new Street(), F = new Street(), G = new Street();

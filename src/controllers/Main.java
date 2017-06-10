@@ -2,6 +2,8 @@ package controllers;
 
 	
 import java.time.LocalDateTime;
+
+import dtDAO.IntersectionDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -60,6 +62,7 @@ public class Main extends Application {
 			System.out.println(CityMap.getIntersections().size());
 			System.out.println(deliveryTracker.getMap().getIntersections().size());
 			System.out.println(deliveryTracker.getMap().getCityMap().getIntersections().size());
+			System.out.println(IntersectionDAO.listIntersection().size());
 			//dummy streets and impediments
 			//deliveryTracker.addTrafficImpediment(new TrafficImpediment(CityMap.getIntersections().get(1),LocalDateTime.now(),LocalDateTime.now().plusDays(1)));
 			
