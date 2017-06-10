@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
@@ -109,7 +110,12 @@ public class SelectClient implements Initializable {
 	            	Client c = comboBoxClient.getValue();
 	                System.out.println("Delete " + c.getName());
 	                //TODO: check deletion criteria
-	                deliveryTracker.deleteClient(c);
+	                Alert a = new Alert(AlertType.CONFIRMATION);
+        	        a.setTitle("Confirm Deletion");
+        	        a.setContentText("Are you sure you want to delete " + c.getName() + "?");
+	                a.showAndWait()
+	                	.filter(response -> response == ButtonType.OK)
+	                	.ifPresent(response -> deliveryTracker.deleteClient(c));
 	                updateClientsList();
 	            }
 	        });

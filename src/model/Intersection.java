@@ -2,11 +2,14 @@ package model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 /**
  * The Intersection is described by two cross-streets and an availability that determines if a Courier can get to that Intersection.
@@ -41,19 +44,29 @@ public class Intersection implements Serializable{
 	/**
 	 * The Street is available if true and unavailable if false.
 	 */
+	@Column(name = "availability")
 	private boolean availability;
+	
 	/**
 	 * One of two cross-streets that composes an Intersection. ?crossStreet1 travels, North, South or North and South.
 	 */
+	@JoinColumn(name = "street_id")
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Street street;
+	
 	/**
 	 * The second of two cross-streets that compose an Intersection. ?crossStreet2 travels, East, West or East and West.
 	 */
+	@JoinColumn(name = "avenue_id")
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Street avenue;
+	
 	/**
 	 * The name of the intersection, with the name of the two cross-streets on either side of an ampersand (i.e. "A Street & 1st Ave").
 	 */
+	@Column(name = "name")
 	private String name;
+	
 	public boolean isAvailable() {
 		return availability;
 	}

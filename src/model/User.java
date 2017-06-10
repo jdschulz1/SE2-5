@@ -42,22 +42,31 @@ public class User implements Serializable{
 	/**
 	 * The legal name of the user.
 	 */
+	@Column(name = "name")
 	private String name;
+	
 	/**
 	 * User name for authentication to the Delivery Tracker.
 	 */
+	@Column(name = "user_name")
 	private String userName;
+	
 	/**
 	 * Password for authentication to the Delivery Tracker.
 	 */
+	@Column(name = "password")
 	private String password;
+	
 	/**
 	 * Role for the user of the Delivery Tracking sytem that determines permissions on the system. ?
 	 */
+	@Column(name = "role")
 	private String role;
+	
 	/**
 	 * Email address for the User.
 	 */
+	@Column(name = "email")
 	private String email;
 
 	/**

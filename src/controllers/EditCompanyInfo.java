@@ -1,28 +1,29 @@
 package controllers;
 
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-
+import javafx.scene.control.Alert.AlertType;
+import javafx.util.StringConverter;
+import model.CityMap;
 import model.DeliveryTracker;
+import model.Intersection;
+import model.Street;
 
 public class EditCompanyInfo implements javafx.fxml.Initializable {
 
-    @FXML
+	@FXML
     private Button btnSave;
 
     @FXML
@@ -33,12 +34,6 @@ public class EditCompanyInfo implements javafx.fxml.Initializable {
 
     @FXML
     private TextField textFieldCompanyName;
-
-    @FXML
-    private ChoiceBox<?> choiceBoxAvenue;
-
-    @FXML
-    private ChoiceBox<?> choiceBoxStreet;
 
     @FXML
     private TextField textFieldDeliveryOverhead;
@@ -60,50 +55,162 @@ public class EditCompanyInfo implements javafx.fxml.Initializable {
 
     @FXML
     private TextField textFieldOnTimeAllowableVariance;
+
+    @FXML
+    private ComboBox<Street> comboBoxStreet;
+
+    @FXML
+    private ComboBox<Street> comboBoxAvenue;
+    
+    DeliveryTracker deliveryTracker;
 	
 	@Override	
 	public void initialize(URL location, ResourceBundle resources) {		
+		deliveryTracker = DeliveryTracker.getDeliveryTracker();
+		comboBoxStreet.setConverter(
+	            new StringConverter<Street>() {
+	                @Override
+	                public Street fromString(String s) {
+                        return null;
+	                }
+
+					@Override
+					public String toString(Street object) {
+						if (object == null) {
+	                        return "";
+	                    } else {
+	                        return object.getName();
+	                    }
+					}
+	            });
+		
+		comboBoxAvenue.setConverter(
+	            new StringConverter<Street>() {
+	                @Override
+	                public Street fromString(String s) {
+                        return null;
+	                }
+
+					@Override
+					public String toString(Street object) {
+						if (object == null) {
+	                        return "";
+	                    } else {
+	                        return object.getName();
+	                    }
+					}
+	            });
+		updateImpedimentStreetsList();
+		updateImpedimentAvenuesList();
+		
+		textFieldCompanyName.setText(deliveryTracker.getCompanyName());
+		if(deliveryTracker.getCompanyLocation() != null) {
+			comboBoxStreet.setValue(deliveryTracker.getCompanyLocation().getStreet());
+			comboBoxAvenue.setValue(deliveryTracker.getCompanyLocation().getAvenue());
+		}
+		textFieldPickupOverhead.setText(Integer.toString(deliveryTracker.getPickupOverheadTime()));
+		textFieldDeliveryOverhead.setText(Integer.toString(deliveryTracker.getDeliveryOverheadTime()));
+		//TODO: handle money
+//		textFieldBillRateBase.setText(BigDecimal.toString(deliveryTracker.getBillRateBase()));
+//		textFieldBillRatePerBlock.setText(Integer.toString(deliveryTracker.getBillRatePerBlock()));
+		textFieldBlocksPerMile.setText(Integer.toString(deliveryTracker.getBlocksToMile()));
+		textFieldAvgCourierSpeed.setText(Double.toString(deliveryTracker.getCourierSpeed()));
+		//TODO: handle money
+//		textFieldOnTimeBonusAmount.setText(Integer.toString(deliveryTracker.getBonusAmount()));
+		textFieldOnTimeAllowableVariance.setText(Integer.toString(deliveryTracker.getBonusTimeVariance()));
+
 		btnSave.setOnAction(new EventHandler() {
 		   @Override
 			public void handle(Event event) {
-				textFieldCompanyName.setText("ACME");
-				try {
-					Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("/views/EditClient.fxml"));
-					Scene parentScene = new Scene(parent);
-					Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//					Scene oldScene = stage.getScene();
-					stage.setScene(parentScene);
-					stage.show();
-					
-					save();
-				}
-				catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			   save();
 			}
 		});		
+		btnCancel.setOnAction(new EventHandler() {
+			@Override
+			public void handle(Event event) {
+				//TODO: cancel out
+			}
+		});
+	}
+	
+	private BigDecimal decimalFromString(String input) {
+		DecimalFormat d = new DecimalFormat("'$'0.00");
+		try {
+			BigDecimal bd = new BigDecimal((double) d.parse(input));
+			return bd;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	private String stringFromBigDecimal(BigDecimal input) {
+		DecimalFormat d = new DecimalFormat("'$'0.00");
+		try {
+			String s = d.format(input.doubleValue());
+			return s;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	public void updateImpedimentStreetsList () {
+		ObservableList<Street> streets = FXCollections.observableArrayList();
+		streets.addAll(CityMap.getStreets());
+		comboBoxStreet.setItems(streets);
+	}
+	
+	public void updateImpedimentAvenuesList () {
+		ObservableList<Street> avenues = FXCollections.observableArrayList();
+		avenues.addAll(CityMap.getAvenues());
+		comboBoxAvenue.setItems(avenues);
 	}
 	
 	private boolean validate() {
+		if(textFieldCompanyName.getText().trim().isEmpty())
+			return false;
+		if(comboBoxStreet.getValue() == null)
+			return false;
+		if(comboBoxAvenue.getValue() == null)
+			return false;
 		try {
-			BigDecimal billRateBase = new BigDecimal(textFieldBillRateBase.getText());
+			Integer i = Integer.parseInt(textFieldPickupOverhead.getText().trim());
+			i = Integer.parseInt(textFieldDeliveryOverhead.getText().trim());
+			i = Integer.parseInt(textFieldBlocksPerMile.getText().trim());
+			i = Integer.parseInt(textFieldAvgCourierSpeed.getText().trim());
+			i = Integer.parseInt(textFieldOnTimeAllowableVariance.getText().trim());
+			//TODO: handle as money
+//			BigDecimal bd = decimalFromString(textFieldBillRateBase.getText().trim());//new BigDecimal(textFieldBillRateBase.getText().trim());
+//			bd = new BigDecimal(textFieldBillRatePerBlock.getText().trim());
+//			bd = new BigDecimal(textFieldOnTimeBonusAmount.getText().trim());
 		}
 		catch(Exception e) {
 			return false;
 		}
-			
+					
 		return true;
 	}
 	
-	private void save() {
-		if (validate()) {
-			DeliveryTracker companyInfo = DeliveryTracker.getDeliveryTracker();
-			companyInfo.setBillRateBase(new BigDecimal(textFieldBillRateBase.getText()));
-			System.out.println(companyInfo.getBillRateBase());
+	private boolean save() {
+		if(!validate()) {
+			Alert a = new Alert(AlertType.ERROR);
+	        a.setTitle("Error");
+	        a.setHeaderText("Missing Information");
+	        a.setContentText("Please complete all required fields and try again.");
+	        a.showAndWait();
+			return false;
 		}
-		else {
-			System.out.println("Validation Error");
-		}
+		deliveryTracker.setCompanyName(textFieldCompanyName.getText().trim());
+		deliveryTracker.setCompanyLocation(new Intersection(comboBoxStreet.getValue(), comboBoxAvenue.getValue()));
+		deliveryTracker.setPickupOverheadTime(Integer.parseInt(textFieldPickupOverhead.getText().trim()));
+		deliveryTracker.setDeliveryOverheadTime(Integer.parseInt(textFieldDeliveryOverhead.getText().trim()));
+		deliveryTracker.setBlocksToMile(Integer.parseInt(textFieldBlocksPerMile.getText().trim()));
+		//TODO: convert to money
+//		deliveryTracker.setBillRateBase(decimalFromString(textFieldBillRateBase.getText().trim()));
+//		deliveryTracker.setBillRatePerBlock(new BigDecimal(textFieldBillRatePerBlock.getText().trim()));
+		deliveryTracker.setCourierSpeed(Integer.parseInt(textFieldAvgCourierSpeed.getText().trim()));
+		//TODO: convert to money
+//		deliveryTracker.setBonusAmount(new BigDecimal(textFieldOnTimeBonusAmount.getText().trim()));
+		deliveryTracker.setBonusTimeVariance(Integer.parseInt(textFieldOnTimeAllowableVariance.getText().trim()));
+		return true;
 	}
 }

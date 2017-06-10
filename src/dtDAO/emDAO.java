@@ -10,8 +10,8 @@ public class emDAO {
 	
 	public static void initEM()
 	{
-	entityManagerFactory =  Persistence.createEntityManagerFactory("Team5DT");
-    em = entityManagerFactory.createEntityManager();
+		entityManagerFactory =  Persistence.createEntityManagerFactory("Team5DT");
+	    em = entityManagerFactory.createEntityManager();
 	}
 	
 	public static EntityManager getEM()

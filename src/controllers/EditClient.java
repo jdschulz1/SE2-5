@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,7 +17,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.util.StringConverter;
+import model.CityMap;
 import model.Client;
+import model.DeliveryTracker;
+import model.Intersection;
+import model.Street;
 
 public class EditClient implements javafx.fxml.Initializable {
 
@@ -35,10 +42,10 @@ public class EditClient implements javafx.fxml.Initializable {
     private TextField textFieldEmail;
 
     @FXML
-    private ComboBox<?> comboBoxAvenue;
+    private ComboBox<Street> comboBoxAvenue;
 
     @FXML
-    private ComboBox<?> comboBoxStreet;
+    private ComboBox<Street> comboBoxStreet;
 
     @FXML
     private Button buttonSave;
@@ -51,21 +58,21 @@ public class EditClient implements javafx.fxml.Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		System.out.println("Client Edit");
+
 		if(client != null) {
 			textFieldClientNumber.setText(Integer.toString(client.getClientNumber()));
 			textFieldClientName.setText(client.getName());
 			textFieldDeliveryInstructions.setText(client.getDeliveryDetails());
 			textFieldPhoneNumber.setText(client.getPhoneNumber());
 			textFieldEmail.setText(client.getEmail());
-			//TODO: Populate street & avenue
+			comboBoxStreet.setValue(client.getLocation().getStreet());
+			comboBoxAvenue.setValue(client.getLocation().getAvenue());
 		}
 		buttonSave.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Cancel");
                 try {
-                	if(client == null)
-                		client = new Client();
                 	if(save()) {
 	    	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectClient.fxml"));
 	    	    		BorderPane border = Main.getRoot();
@@ -89,11 +96,60 @@ public class EditClient implements javafx.fxml.Initializable {
     	    	}
             }
         });
+		
+		comboBoxStreet.setConverter(
+	            new StringConverter<Street>() {
+	                @Override
+	                public Street fromString(String s) {
+                        return null;
+	                }
+
+					@Override
+					public String toString(Street object) {
+						if (object == null) {
+	                        return "";
+	                    } else {
+	                        return object.getName();
+	                    }
+					}
+	            });
+		
+		comboBoxAvenue.setConverter(
+	            new StringConverter<Street>() {
+	                @Override
+	                public Street fromString(String s) {
+                        return null;
+	                }
+
+					@Override
+					public String toString(Street object) {
+						if (object == null) {
+	                        return "";
+	                    } else {
+	                        return object.getName();
+	                    }
+					}
+	            });
+		
+		updateImpedimentStreetsList();
+		updateImpedimentAvenuesList();
 	}
 	
 	public void setClient(Client c) {
 		this.client = c;
 		System.out.println("Setting client to " + c.getName());
+	}
+	
+	public void updateImpedimentStreetsList () {
+		ObservableList<Street> streets = FXCollections.observableArrayList();
+		streets.addAll(CityMap.getStreets());
+		comboBoxStreet.setItems(streets);
+	}
+	
+	public void updateImpedimentAvenuesList () {
+		ObservableList<Street> avenues = FXCollections.observableArrayList();
+		avenues.addAll(CityMap.getAvenues());
+		comboBoxAvenue.setItems(avenues);
 	}
 	
 	private boolean save() {
@@ -105,11 +161,17 @@ public class EditClient implements javafx.fxml.Initializable {
 	        a.showAndWait();
 			return false;
 		}
+		if(client == null) {
+    		client = new Client();
+    		DeliveryTracker deliveryTracker = DeliveryTracker.getDeliveryTracker();
+    		deliveryTracker.addClient(client);
+		}
 		client.setClientNumber(Integer.parseInt(textFieldClientNumber.getText().trim()));
 		client.setName(textFieldClientName.getText().trim());
 		client.setDeliveryDetails(textFieldDeliveryInstructions.getText().trim());
 		client.setEmail(textFieldEmail.getText().trim());
 		client.setPhoneNumber(textFieldPhoneNumber.getText().trim());
+		client.setLocation(new Intersection(comboBoxStreet.getValue(), comboBoxAvenue.getValue()));
 		return true;
 	}
 	
@@ -124,6 +186,10 @@ public class EditClient implements javafx.fxml.Initializable {
 		if(textFieldEmail.getText().trim().isEmpty())
 			return false;
 		if(textFieldPhoneNumber.getText().trim().isEmpty())
+			return false;
+		if(comboBoxStreet.getValue() == null)
+			return false;
+		if(comboBoxAvenue.getValue() == null)
 			return false;
 		return true;
 	}

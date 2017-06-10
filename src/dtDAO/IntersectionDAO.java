@@ -12,7 +12,9 @@ public class IntersectionDAO {
 		emDAO.getEM().persist(intersection);
 	}
 	public static void addIntersection(Intersection Intersection) {
+		emDAO.getEM().getTransaction().begin();
 		emDAO.getEM().persist(Intersection);
+		emDAO.getEM().getTransaction().commit();
 	}
 
 	public static List<Intersection> listIntersection()

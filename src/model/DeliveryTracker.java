@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import dtDAO.TrafficImpedimentDAO;
+
 /**
  * The object representing the system and overall company information for ACME Couriers.
  */
@@ -274,8 +276,15 @@ public class DeliveryTracker {
 	 * @param role
 	 * @param email
 	 */
-	public boolean addUser(User u, String name, String userName, String password, String role, String email){
-		return u.getRole() == "Admin" && users.add(new User(name, userName, password, role, email));
+	public boolean addUser(String name, String userName, String password, String role, String email){
+		return /* u.getRole() == "Admin" && */ users.add(new User(name, userName, password, role, email));
+		//FIX LATER NERDS
+	}
+	
+	public void addUser(User user){
+		if(this.users == null)
+			this.users = new ArrayList<User>();
+		this.users.add(user);
 	}
 	
 	/**
@@ -284,8 +293,8 @@ public class DeliveryTracker {
 	 * @param deleted
 	 * @return
 	 */
-	public boolean deleteUser(User u, User deleted){
-		return u.getRole() == "Admin" && users.remove(deleted);
+	public boolean deleteUser(User deleted){
+		return /* u.getRole() == "Admin" && */ users.remove(deleted);    //FIX LATER FOR ADMIN FUNTION
 	}
 	
 	public List<Courier> getCouriers() {
@@ -324,8 +333,8 @@ public class DeliveryTracker {
 	 * @param email
 	 * @return
 	 */
-	public boolean addClient(int clientNumber, String name, Street crossStreet1, Street crossStreet2, String deliveryDetails, String phone, String email){
-		return clients.add(new Client(clientNumber, name, crossStreet1, crossStreet2, deliveryDetails, phone, email));
+	public boolean addClient(int clientNumber, String name, Street street, Street avenue, String deliveryDetails, String phone, String email){
+		return clients.add(new Client(clientNumber, name, street, avenue, deliveryDetails, phone, email));
 	}
 	
 	/**
@@ -335,6 +344,23 @@ public class DeliveryTracker {
 	 */
 	public boolean deleteClient(Client deleted){
 		return clients.remove(deleted);
+	}
+	
+	public void addTrafficImpediment(TrafficImpediment ti){
+		if(this.trafficImpediments == null)
+			this.trafficImpediments = new ArrayList<TrafficImpediment>();
+		this.trafficImpediments.add(ti);
+		TrafficImpedimentDAO.addTrafficImpediment(ti);
+	}
+	
+	/**
+	 * Removes TrafficImpediment deleted from known TrafficImpediments on the DeliveryTracker.
+	 * @param deleted
+	 * @return
+	 */
+	public boolean deleteTrafficImpediment(TrafficImpediment deleted){
+		TrafficImpedimentDAO.removeTrafficImpediment(deleted);
+		return trafficImpediments.remove(deleted);
 	}
 
 	public boolean deleteCourier(Courier c) {

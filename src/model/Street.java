@@ -2,7 +2,11 @@ package model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -42,23 +46,35 @@ public class Street implements Serializable{
 	/**
 	 * The direction of the Road object, which may be "North", "South", "East", "West", "East-West", or "North-South".
 	 */
+	@Column(name = "direction", nullable = false)
 	private String direction;
+	
 	/**
 	 * The name identifying the Street object.
 	 */
+	@Column(name = "name", nullable = false)
 	private String name;
+	
 	/**
 	 * The source Intersection for defining the start of this Street opposite the destination Intersection's end point. ?This will be necessary when applying the relaxStreet operation while running Dijkstra's Algorithm.
 	 */
+	@JoinColumn(name = "src_intersection_id")
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Intersection source;
+	
 	/**
 	 * The destination of the Street as an Edge in a directed Graph, determined by the direction of the road.
 	 */
+	@JoinColumn(name = "dest_intersection_id")
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Intersection destination;
+	
 	/**
 	 * The weight of the Street, which will be 1 block, unless the source or destination Intersections are unavailable, in which case the weight will be Integer.MAX_VALUE.
 	 */
+	@Column(name = "weight")
 	private int weight;
+	
 	public String getDirection() {
 		return direction;
 	}

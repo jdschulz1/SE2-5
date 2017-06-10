@@ -2,7 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditTrafficImpediment">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" prefHeight="300.0" prefWidth="600.0" spacing="10.0">
          <children>
@@ -40,8 +40,8 @@
                   <Label text="Street" />
                   <Label text="Start Date" GridPane.rowIndex="2" />
                   <Label text="End Date" GridPane.rowIndex="3" />
-                  <ChoiceBox fx:id="choiceBoxTrafficImpedimentStreet" prefHeight="25.0" prefWidth="294.0" GridPane.columnIndex="1" />
-                  <ChoiceBox fx:id="choiceBoxTrafficImpedimentAvenue" prefHeight="25.0" prefWidth="281.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="comboBoxTrafficImpedimentStreet" prefHeight="25.0" prefWidth="294.0" GridPane.columnIndex="1" />
+                  <ComboBox fx:id="comboBoxTrafficImpedimentAvenue" prefHeight="25.0" prefWidth="281.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <DatePicker fx:id="datePickerTrafficImpedimentStart" prefHeight="25.0" prefWidth="283.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <DatePicker fx:id="datePickerTrafficImpedimentEnd" prefHeight="25.0" prefWidth="284.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
