@@ -1,8 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="577.0" prefWidth="665.0">
+         <children>
+            <BorderPane>
+               <center>
+                  <VBox>
+                     <children>
+                        <GridPane alignment="BOTTOM_CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Week  Starting">
+                                 <GridPane.margin>
+                                    <Insets left="70.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <ComboBox prefHeight="25.0" prefWidth="280.0" GridPane.columnIndex="1" />
+                              <Button mnemonicParsing="false" text="Preview" GridPane.columnIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="140.0" />
+                                 </GridPane.margin>
+                              </Button>
+                           </children>
+                           <padding>
+                              <Insets bottom="20.0" top="20.0" />
+                           </padding>
+                        </GridPane>
+                        <TableView prefHeight="367.0" prefWidth="665.0">
+                           <columns>
+                              <TableColumn fx:id="tableColumnInvoiceOrderDate" prefWidth="209.20001220703125" text="Order Date" />
+                              <TableColumn fx:id="tableColumnInvoicePickupClient" prefWidth="227.79998779296875" text="Pickup Client" />
+                              <TableColumn fx:id="tableColumnInvoiceDeliveryClient" prefWidth="180.60003662109375" text="Delivery Client" />
+                              <TableColumn fx:id="tableColumnInvoicePrice" prefWidth="209.20001220703125" text="Price" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </center>
+               <bottom>
+                  <HBox alignment="TOP_CENTER" prefHeight="74.0" prefWidth="665.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button fx:id="btnCreateInvoice" mnemonicParsing="false" text="Create Invoice">
+                           <HBox.margin>
+                              <Insets top="20.0" />
+                           </HBox.margin>
+                        </Button>
+                        <ImageView fitHeight="94.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button fx:id="btnCancel" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Cancel">
+                           <HBox.margin>
+                              <Insets top="20.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </bottom>
+               <top>
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="827.0" text="Invoice" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </Label>
+               </top>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>
-
