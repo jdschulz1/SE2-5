@@ -1,20 +1,25 @@
 package controllers;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
 import model.CityMap;
 import model.DeliveryTracker;
@@ -110,35 +115,48 @@ public class EditCompanyInfo implements javafx.fxml.Initializable {
 		}
 		textFieldPickupOverhead.setText(Integer.toString(deliveryTracker.getPickupOverheadTime()));
 		textFieldDeliveryOverhead.setText(Integer.toString(deliveryTracker.getDeliveryOverheadTime()));
-		//TODO: handle money
-//		textFieldBillRateBase.setText(BigDecimal.toString(deliveryTracker.getBillRateBase()));
-//		textFieldBillRatePerBlock.setText(Integer.toString(deliveryTracker.getBillRatePerBlock()));
+		textFieldBillRateBase.setText(stringFromBigDecimal(deliveryTracker.getBillRateBase()));
+		textFieldBillRatePerBlock.setText(stringFromBigDecimal(deliveryTracker.getBillRatePerBlock()));
 		textFieldBlocksPerMile.setText(Integer.toString(deliveryTracker.getBlocksToMile()));
 		textFieldAvgCourierSpeed.setText(Double.toString(deliveryTracker.getCourierSpeed()));
-		//TODO: handle money
-//		textFieldOnTimeBonusAmount.setText(Integer.toString(deliveryTracker.getBonusAmount()));
+		textFieldOnTimeBonusAmount.setText(stringFromBigDecimal(deliveryTracker.getBonusAmount()));
 		textFieldOnTimeAllowableVariance.setText(Integer.toString(deliveryTracker.getBonusTimeVariance()));
 
-		btnSave.setOnAction(new EventHandler() {
-		   @Override
-			public void handle(Event event) {
-			   save();
-			}
-		});		
-		btnCancel.setOnAction(new EventHandler() {
-			@Override
-			public void handle(Event event) {
-				//TODO: cancel out
-			}
-		});
+		btnSave.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                	if(save()) {
+	    	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/Main.fxml"));
+	    	    		BorderPane border = Main.getRoot();
+	    	    		border.setCenter(currentPane);
+                	}
+    	    	} catch(IOException e){
+    	    		e.printStackTrace();
+    	    	}
+            }
+        });		
+		btnCancel.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+    	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/Main.fxml"));
+    	    		BorderPane border = Main.getRoot();
+    	    		border.setCenter(currentPane);
+    	    	} catch(IOException e){
+    	    		e.printStackTrace();
+    	    	}
+            }
+        });
 	}
 	
 	private BigDecimal decimalFromString(String input) {
-		DecimalFormat d = new DecimalFormat("'$'0.00");
 		try {
-			BigDecimal bd = new BigDecimal((double) d.parse(input));
+			String str=input.replaceAll(Pattern.quote("$"),"");
+			BigDecimal bd=new BigDecimal(str);
 			return bd;
 		} catch (Exception e) {
+			System.out.println("Error");
 			return null;
 		}
 	}
@@ -173,15 +191,21 @@ public class EditCompanyInfo implements javafx.fxml.Initializable {
 		if(comboBoxAvenue.getValue() == null)
 			return false;
 		try {
-			Integer i = Integer.parseInt(textFieldPickupOverhead.getText().trim());
-			i = Integer.parseInt(textFieldDeliveryOverhead.getText().trim());
-			i = Integer.parseInt(textFieldBlocksPerMile.getText().trim());
-			i = Integer.parseInt(textFieldAvgCourierSpeed.getText().trim());
-			i = Integer.parseInt(textFieldOnTimeAllowableVariance.getText().trim());
-			//TODO: handle as money
-//			BigDecimal bd = decimalFromString(textFieldBillRateBase.getText().trim());//new BigDecimal(textFieldBillRateBase.getText().trim());
-//			bd = new BigDecimal(textFieldBillRatePerBlock.getText().trim());
-//			bd = new BigDecimal(textFieldOnTimeBonusAmount.getText().trim());
+			Integer.parseInt(textFieldPickupOverhead.getText().trim());
+			Integer.parseInt(textFieldDeliveryOverhead.getText().trim());
+			Integer.parseInt(textFieldBlocksPerMile.getText().trim());
+			Integer.parseInt(textFieldOnTimeAllowableVariance.getText().trim());
+			Double.parseDouble(textFieldAvgCourierSpeed.getText().trim());
+			
+			BigDecimal bd = decimalFromString(textFieldBillRateBase.getText().trim());
+			if(bd == null) 
+				return false;
+			bd = decimalFromString(textFieldBillRatePerBlock.getText().trim());
+			if(bd == null) 
+				return false;
+			bd = decimalFromString(textFieldOnTimeBonusAmount.getText().trim());
+			if(bd == null) 
+				return false;
 		}
 		catch(Exception e) {
 			return false;
@@ -204,12 +228,10 @@ public class EditCompanyInfo implements javafx.fxml.Initializable {
 		deliveryTracker.setPickupOverheadTime(Integer.parseInt(textFieldPickupOverhead.getText().trim()));
 		deliveryTracker.setDeliveryOverheadTime(Integer.parseInt(textFieldDeliveryOverhead.getText().trim()));
 		deliveryTracker.setBlocksToMile(Integer.parseInt(textFieldBlocksPerMile.getText().trim()));
-		//TODO: convert to money
-//		deliveryTracker.setBillRateBase(decimalFromString(textFieldBillRateBase.getText().trim()));
-//		deliveryTracker.setBillRatePerBlock(new BigDecimal(textFieldBillRatePerBlock.getText().trim()));
-		deliveryTracker.setCourierSpeed(Integer.parseInt(textFieldAvgCourierSpeed.getText().trim()));
-		//TODO: convert to money
-//		deliveryTracker.setBonusAmount(new BigDecimal(textFieldOnTimeBonusAmount.getText().trim()));
+		deliveryTracker.setBillRateBase(decimalFromString(textFieldBillRateBase.getText().trim()));
+		deliveryTracker.setBillRatePerBlock(decimalFromString(textFieldBillRatePerBlock.getText().trim()));
+		deliveryTracker.setCourierSpeed(Double.parseDouble(textFieldAvgCourierSpeed.getText().trim()));
+		deliveryTracker.setBonusAmount(decimalFromString(textFieldOnTimeBonusAmount.getText().trim()));
 		deliveryTracker.setBonusTimeVariance(Integer.parseInt(textFieldOnTimeAllowableVariance.getText().trim()));
 		return true;
 	}

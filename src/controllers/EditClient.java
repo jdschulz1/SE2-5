@@ -71,7 +71,6 @@ public class EditClient implements javafx.fxml.Initializable {
 		buttonSave.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Cancel");
                 try {
                 	if(save()) {
 	    	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectClient.fxml"));
@@ -86,7 +85,6 @@ public class EditClient implements javafx.fxml.Initializable {
 		buttonCancel.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Cancel");
                 try {
     	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectClient.fxml"));
     	    		BorderPane border = Main.getRoot();
