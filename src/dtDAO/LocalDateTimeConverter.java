@@ -1,22 +1,27 @@
 package dtDAO;
 
 import java.time.LocalDateTime;
-
+import java.sql.Timestamp;
 import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
 
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
+@Converter(autoApply = true)
+public class LocalDateTimeConverter implements AttributeConverter<LocalDateTime, Timestamp> {
 
-public class LocalDateTimeConverter implements AttributeConverter<LocalDateTime, DateTime> {
 
 	@Override
-	public DateTime convertToDatabaseColumn(LocalDateTime arg0) {
-		// TODO Auto-generated method stub
+	public Timestamp convertToDatabaseColumn(LocalDateTime locDateTime) {
+		if(locDateTime != null){
+			return Timestamp.valueOf(locDateTime);
+		}
 		return null;
 	}
 
 	@Override
-	public LocalDateTime convertToEntityAttribute(DateTime arg0) {
-		// TODO Auto-generated method stub
+	public LocalDateTime convertToEntityAttribute(Timestamp sqlTimestamp) {
+		if(sqlTimestamp != null){
+			return sqlTimestamp.toLocalDateTime();
+		}
 		return null;
 	}
 

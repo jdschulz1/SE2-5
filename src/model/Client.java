@@ -2,11 +2,14 @@ package model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import model.Intersection;
 import model.Street;
@@ -44,27 +47,40 @@ public class Client implements Serializable{
 	/**
 	 * An identifying number for Clients.
 	 */
+	@Column(name = "client_number")
 	private int clientNumber;
+	
 	/**
 	 * Name of the Client.
 	 */
+	@Column(name = "name")
 	private String name;
+	
 	/**
 	 * The intersection marking the location of the Client.
 	 */
+	@JoinColumn(name = "intersection_id")
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Intersection location;
+	
 	/**
 	 * Additional details about the deliver (i.e. Office Number)
 	 */
+	@Column(name = "delivery_details")
 	private String deliveryDetails;
+	
 	/**
 	 * Email address for the Client.
 	 */
+	@Column(name = "email")
 	private String email;
+	
 	/**
 	 * Phone number for the Client.
 	 */
+	@Column(name = "phone_number")
 	private String phoneNumber;
+	
 	public int getClientNumber() {
 		return clientNumber;
 	}

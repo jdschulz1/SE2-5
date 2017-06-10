@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import dtDAO.TrafficImpedimentDAO;
+
 /**
  * The object representing the system and overall company information for ACME Couriers.
  */
@@ -348,6 +350,7 @@ public class DeliveryTracker {
 		if(this.trafficImpediments == null)
 			this.trafficImpediments = new ArrayList<TrafficImpediment>();
 		this.trafficImpediments.add(ti);
+		TrafficImpedimentDAO.addTrafficImpediment(ti);
 	}
 	
 	/**
@@ -356,6 +359,7 @@ public class DeliveryTracker {
 	 * @return
 	 */
 	public boolean deleteTrafficImpediment(TrafficImpediment deleted){
+		TrafficImpedimentDAO.removeTrafficImpediment(deleted);
 		return trafficImpediments.remove(deleted);
 	}
 

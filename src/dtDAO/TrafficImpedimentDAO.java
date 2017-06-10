@@ -12,7 +12,9 @@ public class TrafficImpedimentDAO {
 		emDAO.getEM().persist(impediment);
 	}
 	public static void addTrafficImpediment(TrafficImpediment TrafficImpediment) {
+		emDAO.getEM().getTransaction().begin();
 		emDAO.getEM().persist(TrafficImpediment);
+		emDAO.getEM().getTransaction().commit();
 	}
 
 	public static List<TrafficImpediment> listTrafficImpediment()

@@ -7,11 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  * Courier is an employee that delivers packages for ACME.
@@ -44,19 +39,28 @@ public class Courier implements Serializable{
 	/**
 	 * A number identifying the courier.
 	 */
+	@Column(name = "courier_number")
 	private int courierNumber;
+	
 	/**
 	 * Phone number for the Courier.
 	 */
+	@Column(name = "phone_number")
 	private String phoneNumber;
+	
 	/**
 	 * Specifies whether the courier is currently available for the system to use.
 	 */
+	@Column(name = "is_active")
 	private boolean isActive;
+	
 	/**
 	 * The name of the courier.
 	 */
+	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "is_available")
 	private boolean isAvailable;
 
 	public boolean getIsActive() {

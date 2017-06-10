@@ -11,7 +11,9 @@ public class StreetDAO {
 		emDAO.getEM().persist(street);
 	}
 	public static void addStreet(Street Street) {
+		emDAO.getEM().getTransaction().begin();
 		emDAO.getEM().persist(Street);
+		emDAO.getEM().getTransaction().commit();
 	}
 
 	public static List<Street> listStreet()
