@@ -11,14 +11,18 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
 import model.Client;
 import model.Courier;
 import model.DeliveryTracker;
+import model.User;
 
 public class SelectCourier implements Initializable {
 	DeliveryTracker deliveryTracker;
@@ -97,8 +101,12 @@ public class SelectCourier implements Initializable {
             @Override
             public void handle(ActionEvent event) {
             	Courier c = comboBoxCourier.getValue();
-                System.out.println("Delete " + c.getName());
-                deliveryTracker.deleteCourier(c);
+                Alert a = new Alert(AlertType.CONFIRMATION);
+    	        a.setTitle("Confirm Deletion");
+    	        a.setContentText("Are you sure you want to delete " + c.getName() + "?");
+                a.showAndWait()
+                	.filter(response -> response == ButtonType.OK)
+                	.ifPresent(response -> deliveryTracker.deleteCourier(c));
                 updateCourierList();
             }
         });
