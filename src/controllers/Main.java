@@ -44,7 +44,6 @@ public class Main extends Application {
 			primaryStage.sizeToScene();
 			
 			DeliveryTracker deliveryTracker = DeliveryTracker.getDeliveryTracker();
-			
 			Street street1 = new Street();
 			Client client = new Client(1, "Bickers & Bickers", street1, street1, "2nd Floor", "(505)445-9832", "office@bickersbickers.com");
 			deliveryTracker.addClient(client);
