@@ -57,6 +57,17 @@ public class Main extends Application {
 			//setup dummy couriers
 			Courier courier = new Courier(1, "Sally Sassalot", "4055555353", true);
 			deliveryTracker.addCourier(courier);
+<<<<<<< Upstream, based on branch 'dev' of https://github.com/jdschulz1/SE2-5.git
+=======
+		
+			System.out.println(CityMap.getCityMap().getIntersections().size());
+			System.out.println(CityMap.getIntersections().size());
+			System.out.println(deliveryTracker.getMap().getIntersections().size());
+			System.out.println(deliveryTracker.getMap().getCityMap().getIntersections().size());
+			System.out.println(IntersectionDAO.listIntersection().size());
+			//dummy streets and impediments
+			deliveryTracker.addTrafficImpediment(new TrafficImpediment(CityMap.getIntersections().get(1),LocalDateTime.now(),LocalDateTime.now().plusDays(1)));
+>>>>>>> f2aa6a1 Implementing Invoices and CSV writer functionality
 			
 			primaryStage.show();
 		} catch(Exception e) {
