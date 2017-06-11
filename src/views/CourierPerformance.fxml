@@ -1,8 +1,175 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="10.0">
+         <children>
+            <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="577.0" prefWidth="665.0">
+               <children>
+                  <BorderPane>
+                     <center>
+                        <VBox>
+                           <children>
+                              <GridPane alignment="BOTTOM_CENTER">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label text="Courier">
+                                       <GridPane.margin>
+                                          <Insets left="70.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Button fx:id="btnPreview" mnemonicParsing="false" text="Preview" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                       <GridPane.margin>
+                                          <Insets left="140.0" />
+                                       </GridPane.margin>
+                                    </Button>
+                                    <Label text="Starting" GridPane.rowIndex="2">
+                                       <GridPane.margin>
+                                          <Insets left="70.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <RadioButton fx:id="radioButtonMonth" mnemonicParsing="false" text="Month" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <padding>
+                                          <Insets left="200.0" />
+                                       </padding>
+                                    </RadioButton>
+                                    <RadioButton fx:id="radioButtonWeek" mnemonicParsing="false" text="Week" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets left="20.0" />
+                                       </GridPane.margin>
+                                    </RadioButton>
+                                    <Label fx:id="labelCourierName" text="None" GridPane.rowIndex="3">
+                                       <padding>
+                                          <Insets left="150.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label fx:id="labelDate" text="None" GridPane.rowIndex="4">
+                                       <padding>
+                                          <Insets left="150.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label fx:id="labelNumberofDeliveries" text="None" GridPane.rowIndex="5">
+                                       <padding>
+                                          <Insets left="150.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label fx:id="labelOnTimeDeliveryRate" text="None" GridPane.rowIndex="6">
+                                       <padding>
+                                          <Insets left="150.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label fx:id="labelTotalBonusEarned" text="None" GridPane.rowIndex="7">
+                                       <padding>
+                                          <Insets left="150.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label text="Courier Name:" GridPane.rowIndex="3">
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label text="Date:" GridPane.rowIndex="4">
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label text="Number of Deliveries:" GridPane.rowIndex="5">
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label text="On-Time Delivery Rate:" GridPane.rowIndex="6">
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label text="Total Bonus Earned:" GridPane.rowIndex="7">
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </Label>
+                                    <ComboBox fx:id="comboBoxCourier" prefHeight="25.0" prefWidth="279.0" GridPane.columnIndex="1" />
+                                    <ComboBox fx:id="comboBoxStarting" prefHeight="25.0" prefWidth="298.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="20.0" top="20.0" />
+                                 </padding>
+                              </GridPane>
+                              <TableView prefHeight="367.0" prefWidth="665.0">
+                                 <columns>
+                                    <TableColumn fx:id="tableColumnOrderDate" prefWidth="119.20001220703125" text="Order Date" />
+                                    <TableColumn fx:id="tableColumnPickupClient" prefWidth="148.20001220703125" text="Pickup Client" />
+                                    <TableColumn fx:id="tableColumnDeliveryClient" prefWidth="155.20001220703125" text="Delivery Client" />
+                                    <TableColumn fx:id="tableColumnEstimatedDeliveryTime" prefWidth="170.60003662109375" text="Estimated Delivery Time" />
+                                    <TableColumn fx:id="tableColumnActualDeliveryTime" prefWidth="123.4000244140625" text="Actual Delivery Time" />
+                                    <TableColumn fx:id="tableColumnBonusEarned" prefWidth="123.4000244140625" text="Bonus Earned" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </VBox>
+                     </center>
+                     <bottom>
+                        <HBox alignment="TOP_CENTER" prefHeight="74.0" prefWidth="665.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button fx:id="btnCreateReport" mnemonicParsing="false" text="Create Report">
+                                 <HBox.margin>
+                                    <Insets top="20.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <ImageView fitHeight="94.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                              <Button fx:id="btnCancel" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Cancel">
+                                 <HBox.margin>
+                                    <Insets top="20.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </bottom>
+                     <top>
+                        <Label alignment="CENTER" prefHeight="27.0" prefWidth="827.0" text="Courier Performance Report" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </Label>
+                     </top>
+                  </BorderPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>
-
