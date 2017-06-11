@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.TypedQuery;
 
 import model.Intersection;
+import model.Street;
 
 public class IntersectionDAO {
 
@@ -32,5 +33,12 @@ public class IntersectionDAO {
 	public static void removeIntersection(Intersection intersection)
 	{
 		emDAO.getEM().remove(intersection);
+	}
+	
+	public static Intersection findIntersectionByStreets(Street street, Street avenue){
+		for(Intersection i : listIntersection()){
+			if(i.getStreet().getName() == street.getName() && i.getAvenue().getName() == avenue.getName()) return i;
+		}
+		return null;
 	}
 }

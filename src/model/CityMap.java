@@ -61,6 +61,10 @@ public class CityMap {
 			}
 			System.out.println("Intersections: " + intersections.size() + " Streets: " + streets.size() + " Avenues: " + avenues.size());
 		}
+		setWholeStreets(new ArrayList<Street>());
+		setWholeAvenues(new ArrayList<Street>());
+		wholeStreets.addAll(streets.subList(0, 7));
+		wholeAvenues.addAll(avenues.subList(0, 7));
 		return instance;
 	}
 	
@@ -71,7 +75,7 @@ public class CityMap {
 	/**
 	 * A Set of all of the Streets in the map.
 	 */
-	private static ArrayList<Street> streets = new ArrayList<Street>();
+	private static ArrayList<Street> streets = new ArrayList<Street>(), wholeStreets;
 	private static ArrayList<String> streetNames = new ArrayList<String>(){
 	{
 		add("A Street");
@@ -83,7 +87,7 @@ public class CityMap {
 		add("G Street"); 
 	}};
 	
-	private static ArrayList<Street> avenues = new ArrayList<Street>();
+	private static ArrayList<Street> avenues = new ArrayList<Street>(), wholeAvenues;
 	private static ArrayList<String> avenueNames = new ArrayList<String>(){
 	{
 		add("1st Ave");
@@ -252,5 +256,21 @@ public class CityMap {
 			StreetDAO.addStreet(s);
 		}
 		System.out.println(StreetDAO.listStreet().size() + " Streets added to Team5DT Database");
+	}
+
+	public static ArrayList<Street> getWholeStreets() {
+		return wholeStreets;
+	}
+
+	public static void setWholeStreets(ArrayList<Street> wholeStreets) {
+		CityMap.wholeStreets = wholeStreets;
+	}
+
+	public static ArrayList<Street> getWholeAvenues() {
+		return wholeAvenues;
+	}
+
+	public static void setWholeAvenues(ArrayList<Street> wholeAvenues) {
+		CityMap.wholeAvenues = wholeAvenues;
 	}
 }

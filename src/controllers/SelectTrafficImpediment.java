@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import dtDAO.TrafficImpedimentDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -104,6 +105,7 @@ public class SelectTrafficImpediment implements Initializable {
 			buttonTrafficImpedimentDelete.setOnAction(new EventHandler<ActionEvent>() {
 	            @Override
 	            public void handle(ActionEvent event) {
+	            	boolean success;
 	            	TrafficImpediment ti = comboBoxTrafficImpediment.getValue();
 	                System.out.println("Delete " + ti.getIntersection().getName());
 	                Alert a = new Alert(AlertType.CONFIRMATION);
@@ -111,13 +113,15 @@ public class SelectTrafficImpediment implements Initializable {
         	        a.setContentText("Are you sure you want to delete " + ti.getIntersection().getName() + "?");
 	                a.showAndWait()
 	                	.filter(response -> response == ButtonType.OK)
-	                	.ifPresent(response -> deliveryTracker.deleteTrafficImpediment(ti));
+	                	.ifPresent(response -> TrafficImpedimentDAO.removeTrafficImpediment(ti));
+	                //deliveryTracker.deleteTrafficImpediment(ti);
 	                updateTrafficImpedimentsList();
 	            }
 	        });
 	}
 	
 	private void updateTrafficImpedimentsList(){
+		System.out.println("Umm...hello?");
 		ObservableList<TrafficImpediment> trafficImpediments = FXCollections.observableArrayList();
 		trafficImpediments.addAll(deliveryTracker.getTrafficImpediments());
 		comboBoxTrafficImpediment.setItems(trafficImpediments);

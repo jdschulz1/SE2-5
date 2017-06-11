@@ -57,14 +57,6 @@ public class Main extends Application {
 			//setup dummy couriers
 			Courier courier = new Courier(1, "Sally Sassalot", "4055555353", true);
 			deliveryTracker.addCourier(courier);
-		
-			System.out.println(CityMap.getCityMap().getIntersections().size());
-			System.out.println(CityMap.getIntersections().size());
-			System.out.println(deliveryTracker.getMap().getIntersections().size());
-			System.out.println(deliveryTracker.getMap().getCityMap().getIntersections().size());
-			System.out.println(IntersectionDAO.listIntersection().size());
-			//dummy streets and impediments
-			//deliveryTracker.addTrafficImpediment(new TrafficImpediment(CityMap.getIntersections().get(1),LocalDateTime.now(),LocalDateTime.now().plusDays(1)));
 			
 			primaryStage.show();
 		} catch(Exception e) {

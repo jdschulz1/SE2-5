@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import dtDAO.IntersectionDAO;
+import dtDAO.TrafficImpedimentDAO;
 import javafx.fxml.Initializable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,7 +22,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
 import model.CityMap;
-import model.Client;
 import model.DeliveryTracker;
 import model.Intersection;
 import model.Street;
@@ -70,6 +71,7 @@ public class EditTrafficImpediment implements Initializable {
                 try {
                 	if(save()){
                 	//TODO: Save Traffic Impediment data
+                	
     	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectTrafficImpediment.fxml"));
     	    		BorderPane border = Main.getRoot();
     	    		border.setCenter(currentPane);
@@ -132,13 +134,13 @@ public class EditTrafficImpediment implements Initializable {
 	
 	public void updateImpedimentStreetsList () {
 		ObservableList<Street> trafficImpedimentStreets = FXCollections.observableArrayList();
-		trafficImpedimentStreets.addAll(citymap.getStreets());
+		trafficImpedimentStreets.addAll(citymap.getWholeStreets());
 		comboBoxTrafficImpedimentStreet.setItems(trafficImpedimentStreets);
 	}
 	
 	public void updateImpedimentAvenuesList () {
 		ObservableList<Street> trafficImpedimentAvenues = FXCollections.observableArrayList();
-		trafficImpedimentAvenues.addAll(citymap.getAvenues());
+		trafficImpedimentAvenues.addAll(citymap.getWholeAvenues());
 		comboBoxTrafficImpedimentAvenue.setItems(trafficImpedimentAvenues);
 	}
 	
@@ -166,16 +168,26 @@ public class EditTrafficImpediment implements Initializable {
 		}
 		if(trafficImpediment == null) {
 			trafficImpediment = new TrafficImpediment(null, null, null);
-    		DeliveryTracker deliveryTracker = DeliveryTracker.getDeliveryTracker();
-    		deliveryTracker.addTrafficImpediment(trafficImpediment);
+			DeliveryTracker deliveryTracker = DeliveryTracker.getDeliveryTracker();
+			Intersection newIntersection = IntersectionDAO.findIntersectionByStreets(comboBoxTrafficImpedimentStreet.getValue(), comboBoxTrafficImpedimentAvenue.getValue());
+			
+			trafficImpediment.setIntersection(newIntersection);
+			trafficImpediment.setStartDate(datePickerTrafficImpedimentStart.getValue().atStartOfDay());
+			trafficImpediment.setEndDate(datePickerTrafficImpedimentEnd.getValue().atStartOfDay());
+			deliveryTracker.addTrafficImpediment(trafficImpediment);
+			return true;
 		}
-		
-		Intersection newIntersection = new Intersection(comboBoxTrafficImpedimentStreet.getValue(), comboBoxTrafficImpedimentAvenue.getValue());
-		
-		trafficImpediment.setIntersection(newIntersection);
-		trafficImpediment.setStartDate(datePickerTrafficImpedimentStart.getValue().atStartOfDay());
-		trafficImpediment.setEndDate(datePickerTrafficImpedimentEnd.getValue().atStartOfDay());
-		return true;
+		else{
+			DeliveryTracker deliveryTracker = DeliveryTracker.getDeliveryTracker();
+			Intersection newIntersection = IntersectionDAO.findIntersectionByStreets(comboBoxTrafficImpedimentStreet.getValue(), comboBoxTrafficImpedimentAvenue.getValue());
+			
+			trafficImpediment.setIntersection(newIntersection);
+			trafficImpediment.setStartDate(datePickerTrafficImpedimentStart.getValue().atStartOfDay());
+			trafficImpediment.setEndDate(datePickerTrafficImpedimentEnd.getValue().atStartOfDay());
+
+			TrafficImpedimentDAO.saveTrafficImpediment(trafficImpediment);
+			return true;
+		}
 	}
 	
 	private boolean validate() {

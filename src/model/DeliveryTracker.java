@@ -18,13 +18,19 @@ public class DeliveryTracker {
 	}
 	
 	public static DeliveryTracker getDeliveryTracker(){
+		trafficImpediments = new ArrayList<TrafficImpediment>();
+		List<TrafficImpediment> db_impediments = TrafficImpedimentDAO.listTrafficImpediment();
+		if(!db_impediments.isEmpty()){
+			trafficImpediments.addAll(db_impediments);
+		}
+
 		return instance;
 	}
 	
 	/**
 	 * A list of couriers working for the company.
 	 */
-	private List<Courier> couriers;
+	private static List<Courier> couriers;
 	/**
 	 * The base charge for a delivery.
 	 */
@@ -60,15 +66,15 @@ public class DeliveryTracker {
 	/**
 	 * The list of Person objects that are known by the DeliveryTracker, which includes the Users and Couriers.
 	 */
-	private List<User> users;
+	private static List<User> users;
 	/**
 	 * The Clients known to the DeliveryTracker.
 	 */
-	private List<Client> clients;
+	private static List<Client> clients;
 	/**
 	 * All TrafficImpediments known to the DeliveryTracker.
 	 */
-	private List<TrafficImpediment> trafficImpediments;
+	private static List<TrafficImpediment> trafficImpediments;
 	/**
 	 * The data representing the map used for planning out the delivery routes for the Couriers.
 	 */
@@ -342,15 +348,17 @@ public class DeliveryTracker {
 	 * @param deleted
 	 * @return
 	 */
-	public boolean deleteClient(Client deleted){
+	public static boolean deleteClient(Client deleted){
 		return clients.remove(deleted);
 	}
 	
-	public void addTrafficImpediment(TrafficImpediment ti){
-		if(this.trafficImpediments == null)
-			this.trafficImpediments = new ArrayList<TrafficImpediment>();
-		this.trafficImpediments.add(ti);
-		TrafficImpedimentDAO.addTrafficImpediment(ti);
+	public static void addTrafficImpediment(TrafficImpediment ti){
+		if(trafficImpediments == null)
+			trafficImpediments = new ArrayList<TrafficImpediment>();
+		if(!trafficImpediments.contains(ti)){
+			trafficImpediments.add(ti);
+			TrafficImpedimentDAO.addTrafficImpediment(ti);
+		}
 	}
 	
 	/**
@@ -358,12 +366,11 @@ public class DeliveryTracker {
 	 * @param deleted
 	 * @return
 	 */
-	public boolean deleteTrafficImpediment(TrafficImpediment deleted){
-		TrafficImpedimentDAO.removeTrafficImpediment(deleted);
+	public static boolean deleteTrafficImpediment(TrafficImpediment deleted){
 		return trafficImpediments.remove(deleted);
 	}
 
-	public boolean deleteCourier(Courier c) {
+	public static boolean deleteCourier(Courier c) {
 		// TODO Auto-generated method stub
 		return couriers.remove(c);
 	}
