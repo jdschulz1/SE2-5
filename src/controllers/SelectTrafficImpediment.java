@@ -42,7 +42,6 @@ public class SelectTrafficImpediment implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		deliveryTracker = DeliveryTracker.getDeliveryTracker();
 		updateTrafficImpedimentsList();
 		comboBoxTrafficImpediment.setConverter(
@@ -66,10 +65,7 @@ public class SelectTrafficImpediment implements Initializable {
 			buttonTrafficImpedimentAdd.setOnAction(new EventHandler<ActionEvent>() {
 	            @Override
 	            public void handle(ActionEvent event) {
-	                System.out.println("Add");
-	                try {
-//	    	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/EditTrafficImpediment.fxml"));
-	    	    		
+	                try {	    	    		
 	                	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/EditTrafficImpediment.fxml"));
 	                	EditTrafficImpediment controller = new EditTrafficImpediment();
 	                	fxmlLoader.setController(controller);
@@ -86,7 +82,6 @@ public class SelectTrafficImpediment implements Initializable {
 	            @Override
 	            public void handle(ActionEvent event) {
 	            	TrafficImpediment ti = comboBoxTrafficImpediment.getValue();
-	                System.out.println("Update " + ti.getIntersection().getName());
 	                
 	                try {
 	                	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/EditTrafficImpediment.fxml"));
@@ -107,21 +102,18 @@ public class SelectTrafficImpediment implements Initializable {
 	            public void handle(ActionEvent event) {
 	            	boolean success;
 	            	TrafficImpediment ti = comboBoxTrafficImpediment.getValue();
-	                System.out.println("Delete " + ti.getIntersection().getName());
 	                Alert a = new Alert(AlertType.CONFIRMATION);
         	        a.setTitle("Confirm Deletion");
         	        a.setContentText("Are you sure you want to delete " + ti.getIntersection().getName() + "?");
 	                a.showAndWait()
 	                	.filter(response -> response == ButtonType.OK)
 	                	.ifPresent(response -> TrafficImpedimentDAO.removeTrafficImpediment(ti));
-	                //deliveryTracker.deleteTrafficImpediment(ti);
 	                updateTrafficImpedimentsList();
 	            }
 	        });
 	}
 	
 	private void updateTrafficImpedimentsList(){
-		System.out.println("Umm...hello?");
 		ObservableList<TrafficImpediment> trafficImpediments = FXCollections.observableArrayList();
 		trafficImpediments.addAll(deliveryTracker.getTrafficImpediments());
 		comboBoxTrafficImpediment.setItems(trafficImpediments);

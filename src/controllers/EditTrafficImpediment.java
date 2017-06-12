@@ -72,9 +72,7 @@ public class EditTrafficImpediment implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                	if(save()){
-                	//TODO: Save Traffic Impediment data
-                	
+                	if(save()){                	
     	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/SelectTrafficImpediment.fxml"));
     	    		BorderPane border = Main.getRoot();
     	    		border.setCenter(currentPane);
