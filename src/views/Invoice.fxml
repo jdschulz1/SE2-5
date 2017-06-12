@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Invoice">
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="577.0" prefWidth="665.0">
          <children>
@@ -81,7 +81,7 @@
                               <Insets bottom="20.0" top="20.0" />
                            </padding>
                         </GridPane>
-                        <TableView prefHeight="367.0" prefWidth="665.0">
+                        <TableView fx:id="tableInvoices" prefHeight="367.0" prefWidth="665.0">
                            <columns>
                               <TableColumn fx:id="tableColumnInvoiceOrderDate" prefWidth="209.20001220703125" text="Order Date" />
                               <TableColumn fx:id="tableColumnInvoicePickupClient" prefWidth="227.79998779296875" text="Pickup Client" />
