@@ -5,13 +5,17 @@ import java.util.List;
 import javax.persistence.TypedQuery;
 
 import model.DeliveryTracker;
+import model.Intersection;
 import model.Street;
 import model.TrafficImpediment;
 
 public class TrafficImpedimentDAO {
 
 	public static void saveTrafficImpediment(TrafficImpediment impediment) {
-		List<Street> affectedStreets = StreetDAO.affectedStreets(impediment.getIntersection());
+		Intersection newIntersection = impediment.getIntersection();
+		newIntersection.setAvailable(false);
+		IntersectionDAO.saveIntersection(newIntersection);
+		List<Street> affectedStreets = StreetDAO.affectedStreets(newIntersection);
 		for(Street s : affectedStreets){
 			Street updatedStreet = s;
 			s.setWeight(Integer.MAX_VALUE);
@@ -22,7 +26,10 @@ public class TrafficImpedimentDAO {
 		emDAO.getEM().getTransaction().commit();
 	}
 	public static void addTrafficImpediment(TrafficImpediment TrafficImpediment) {
-		List<Street> affectedStreets = StreetDAO.affectedStreets(TrafficImpediment.getIntersection());
+		Intersection newIntersection = TrafficImpediment.getIntersection();
+		newIntersection.setAvailable(false);
+		IntersectionDAO.saveIntersection(newIntersection);
+		List<Street> affectedStreets = StreetDAO.affectedStreets(newIntersection);
 		for(Street s : affectedStreets){
 			Street updatedStreet = s;
 			s.setWeight(Integer.MAX_VALUE);
@@ -47,7 +54,10 @@ public class TrafficImpedimentDAO {
 
 	public static boolean removeTrafficImpediment(TrafficImpediment impediment)
 	{
-		List<Street> affectedStreets = StreetDAO.affectedStreets(impediment.getIntersection());
+		Intersection oldIntersection = impediment.getIntersection();
+		oldIntersection.setAvailable(true);
+		IntersectionDAO.saveIntersection(oldIntersection);
+		List<Street> affectedStreets = StreetDAO.affectedStreets(oldIntersection);
 		for(Street s : affectedStreets){
 			Street updatedStreet = s;
 			s.setWeight(1);

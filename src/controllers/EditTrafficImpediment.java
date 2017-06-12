@@ -147,7 +147,6 @@ public class EditTrafficImpediment implements Initializable {
 	
 	public void setTrafficImpediment(TrafficImpediment ti) {
 		this.trafficImpediment = ti;
-		System.out.println("Setting traffic impediment to " + ti.getIntersection().getName());
 	}
 
 	private boolean save() {
@@ -189,6 +188,9 @@ public class EditTrafficImpediment implements Initializable {
 		else{
 			DeliveryTracker deliveryTracker = DeliveryTracker.getDeliveryTracker();
 			Intersection newIntersection = IntersectionDAO.findIntersectionByStreets(comboBoxTrafficImpedimentStreet.getValue(), comboBoxTrafficImpedimentAvenue.getValue());
+			Intersection oldIntersection = trafficImpediment.getIntersection();
+			oldIntersection.setAvailable(true);
+			IntersectionDAO.saveIntersection(oldIntersection);
 			List<Street> affectedStreets = StreetDAO.affectedStreets(trafficImpediment.getIntersection());
 			for(Street s : affectedStreets){
 				Street updatedStreet = s;
