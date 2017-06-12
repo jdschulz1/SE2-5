@@ -10,7 +10,9 @@ import model.Street;
 
 public class StreetDAO {
 	public static void saveStreet(Street street) {
+		emDAO.getEM().getTransaction().begin();
 		emDAO.getEM().persist(street);
+		emDAO.getEM().getTransaction().commit();
 	}
 	public static void addStreet(Street Street) {
 		emDAO.getEM().getTransaction().begin();

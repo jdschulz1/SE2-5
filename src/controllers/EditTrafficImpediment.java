@@ -2,9 +2,12 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import dtDAO.IntersectionDAO;
+import dtDAO.StreetDAO;
 import dtDAO.TrafficImpedimentDAO;
 import javafx.fxml.Initializable;
 import javafx.collections.FXCollections;
@@ -166,6 +169,14 @@ public class EditTrafficImpediment implements Initializable {
 	        a.showAndWait();
 			return false;
 		}
+		if(datePickerTrafficImpedimentEnd.getValue().isBefore(LocalDate.now())){
+			Alert a = new Alert(AlertType.ERROR);
+	        a.setTitle("Error");
+	        a.setHeaderText("Traffic Impediment Expired");
+	        a.setContentText("The End Date of the Traffic Impediment is before Today's Date.");
+	        a.showAndWait();
+			return false;
+		}
 		if(trafficImpediment == null) {
 			trafficImpediment = new TrafficImpediment(null, null, null);
 			DeliveryTracker deliveryTracker = DeliveryTracker.getDeliveryTracker();
@@ -180,7 +191,12 @@ public class EditTrafficImpediment implements Initializable {
 		else{
 			DeliveryTracker deliveryTracker = DeliveryTracker.getDeliveryTracker();
 			Intersection newIntersection = IntersectionDAO.findIntersectionByStreets(comboBoxTrafficImpedimentStreet.getValue(), comboBoxTrafficImpedimentAvenue.getValue());
-			
+			List<Street> affectedStreets = StreetDAO.affectedStreets(trafficImpediment.getIntersection());
+			for(Street s : affectedStreets){
+				Street updatedStreet = s;
+				s.setWeight(1);
+				StreetDAO.saveStreet(s);
+			}
 			trafficImpediment.setIntersection(newIntersection);
 			trafficImpediment.setStartDate(datePickerTrafficImpedimentStart.getValue().atStartOfDay());
 			trafficImpediment.setEndDate(datePickerTrafficImpedimentEnd.getValue().atStartOfDay());

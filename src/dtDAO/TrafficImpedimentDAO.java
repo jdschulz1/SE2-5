@@ -11,15 +11,24 @@ import model.TrafficImpediment;
 public class TrafficImpedimentDAO {
 
 	public static void saveTrafficImpediment(TrafficImpediment impediment) {
+		List<Street> affectedStreets = StreetDAO.affectedStreets(impediment.getIntersection());
+		for(Street s : affectedStreets){
+			Street updatedStreet = s;
+			s.setWeight(Integer.MAX_VALUE);
+			StreetDAO.saveStreet(s);
+		}
 		emDAO.getEM().getTransaction().begin();
 		emDAO.getEM().persist(impediment);
 		emDAO.getEM().getTransaction().commit();
 	}
 	public static void addTrafficImpediment(TrafficImpediment TrafficImpediment) {
 		List<Street> affectedStreets = StreetDAO.affectedStreets(TrafficImpediment.getIntersection());
-		
+		for(Street s : affectedStreets){
+			Street updatedStreet = s;
+			s.setWeight(Integer.MAX_VALUE);
+			StreetDAO.saveStreet(s);
+		}
 		emDAO.getEM().getTransaction().begin();
-		
 		emDAO.getEM().persist(TrafficImpediment);
 		emDAO.getEM().getTransaction().commit();
 	}
@@ -38,12 +47,17 @@ public class TrafficImpedimentDAO {
 
 	public static boolean removeTrafficImpediment(TrafficImpediment impediment)
 	{
+		List<Street> affectedStreets = StreetDAO.affectedStreets(impediment.getIntersection());
+		for(Street s : affectedStreets){
+			Street updatedStreet = s;
+			s.setWeight(1);
+			StreetDAO.saveStreet(s);
+		}
 		DeliveryTracker.deleteTrafficImpediment(impediment);
 		emDAO.getEM().getTransaction().begin();
 		int sizeOld = listTrafficImpediment().size();
 		emDAO.getEM().remove(findTrafficImpediment(impediment));
 		emDAO.getEM().getTransaction().commit();
-		System.out.println("Deleted impediment on " + impediment.getIntersection().getName() + ": " + (listTrafficImpediment().size() != sizeOld));
 		
 		return listTrafficImpediment().size() != sizeOld;
 	}
@@ -51,8 +65,6 @@ public class TrafficImpedimentDAO {
 	public static TrafficImpediment findTrafficImpediment(TrafficImpediment ti){
 		for(TrafficImpediment t : listTrafficImpediment()){
 			if(t.equals(ti)){
-				System.out.println("t is " + t.getIntersection().getName() + "(" + t.getStartDate().toLocalDate() + " - " + t.getEndDate().toLocalDate() + ")");
-				System.out.println("ti is " + ti.getIntersection().getName() + "(" + ti.getStartDate().toLocalDate() + " - " + ti.getEndDate().toLocalDate() + ")");
 				return ti;
 			}
 		}
