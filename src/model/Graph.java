@@ -28,7 +28,7 @@ public class Graph {
 	 * @param source
 	 * @param destination
 	 */
-	public static Vertex[] calculateShortestPath(Vertex source, Vertex destination) {
+	public static ArrayList<Vertex> calculateShortestPath(Vertex source, Vertex destination) {
 		// TODO - implement Graph.calculateShortestPath
 		/*
 		 * while(!pending.isEmpty()){
@@ -42,10 +42,13 @@ public class Graph {
 		 * */
 		 ArrayList<Vertex> pending = new ArrayList<Vertex>();
 		 ArrayList<Vertex> processed = new ArrayList<Vertex>();
-		 //Initialize pending vertices
-		 for(Intersection c : CityMap.getIntersections()){
+
+		 CityMap map = CityMap.getCityMap();
+		//Initialize pending vertices
+		 for(Intersection c : map.getIntersections()){
 			 Vertex v = new Vertex(c);
-			 if(v.equals(source)){
+
+			 if(v.getIntersection().equals(source.getIntersection())){
 				 v.setShortestDist(0);
 				 v.setPrevious(v);
 			 }
@@ -53,7 +56,7 @@ public class Graph {
 				 v.setShortestDist(Integer.MAX_VALUE);
 				 v.setPrevious(null);
 			 }
-			 
+
 			 pending.add(v);
 		 }
 		 
@@ -67,13 +70,21 @@ public class Graph {
 				 Intersection notV = v.getIntersection().equals(e.getSource()) ? e.getDestination() : e.getSource();
 				 for(Vertex v2 : pending){
 					 if(v2.getIntersection() == notV){
+						 System.out.println("before relax on v:" + v.getIntersection().getName() + " and v2:" + v2.getIntersection().getName());
+						 System.out.println("ShortestDist v/v2:" + v.getShortestDist() + "/" + v2.getShortestDist());
+						 System.out.println("Previous Vertex intersection v/v2: " + v.getPrevious() != null ? v.getPrevious().getIntersection().getName() : "booger" + "/" + v2.getPrevious() != null ? v2.getPrevious().getIntersection().getName() : "booger2");
 						 relaxStreet(v,v2);
+						 System.out.println("--------------------------------------------------------------------------------");
+						 System.out.println("after relax on v:" + v.getIntersection().getName() + " and v2:" + v2.getIntersection().getName());
+						 System.out.println("ShortestDist v/v2:" + v.getShortestDist() + "/" + v2.getShortestDist());
+						 System.out.println("Previous Vertex intersection v/v2: " + v.getPrevious() != null ? v.getPrevious().getIntersection().getName() : "booger" + "/" + v2.getPrevious() != null ? v2.getPrevious().getIntersection().getName() : "booger2");
+						 System.out.println(" ");
 					 }
 				 }
 			 }
 		 }
 		 
-		 return (Vertex[]) processed.toArray();
+		 return processed;
 	}
 	
 	public static Vertex getShortestFoundPath(ArrayList<Vertex> pending){
@@ -100,6 +111,11 @@ public class Graph {
 		 * }
 		 * */
 		Street s = StreetDAO.findStreetByIntersections(a.getIntersection(), b.getIntersection());
+//		System.out.println("a.getIntersection:" + a.getIntersection().getName());
+//		System.out.println("s source:" + s.getSource().getName());
+//		System.out.println("s dest:" + s.getDestination().getName());
+//		System.out.println("s.getWeight:" + s.getWeight());
+//		System.out.println("b.getIntersection:" + b.getIntersection().getName());
 		if(a.getShortestDist() + s.getWeight() < b.getShortestDist()){
 			b.setShortestDist(a.getShortestDist() + s.getWeight());
 			b.setPrevious(a);

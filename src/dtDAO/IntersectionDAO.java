@@ -26,7 +26,7 @@ public class IntersectionDAO {
 
 	public static Intersection findIntersectionById(int id)
 	{
-		Intersection intersection = emDAO.getEM().find(Intersection.class, new Integer(id));
+		Intersection intersection = emDAO.getEM().find(Intersection.class, Long.valueOf(id));
 		return intersection;
 	}
 
