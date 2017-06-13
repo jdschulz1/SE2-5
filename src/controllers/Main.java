@@ -75,18 +75,18 @@ public class Main extends Application {
 			deliveryTicket1.setOrderDateTime(LocalDateTime.now().plusDays(4));
 			
 			DeliveryTicket deliveryTicket2 = new DeliveryTicket();
-			deliveryTicket1.setPayingClient(client3);
-			deliveryTicket1.setPickupClient(client2);
-			deliveryTicket1.setDeliveryClient(client1);
-			deliveryTicket1.setPrice(new BigDecimal(10.00));
-			deliveryTicket1.setOrderDateTime(LocalDateTime.now().plusDays(2));
+			deliveryTicket2.setPayingClient(client3);
+			deliveryTicket2.setPickupClient(client2);
+			deliveryTicket2.setDeliveryClient(client1);
+			deliveryTicket2.setPrice(new BigDecimal(10.00));
+			deliveryTicket2.setOrderDateTime(LocalDateTime.now().plusDays(2));
 			
 			DeliveryTicket deliveryTicket3 = new DeliveryTicket();
-			deliveryTicket1.setPayingClient(client2);
-			deliveryTicket1.setPickupClient(client3);
-			deliveryTicket1.setDeliveryClient(client2);
-			deliveryTicket1.setPrice(new BigDecimal(20.00));
-			deliveryTicket1.setOrderDateTime(LocalDateTime.now().plusDays(30));
+			deliveryTicket3.setPayingClient(client2);
+			deliveryTicket3.setPickupClient(client3);
+			deliveryTicket3.setDeliveryClient(client2);
+			deliveryTicket3.setPrice(new BigDecimal(20.00));
+			deliveryTicket3.setOrderDateTime(LocalDateTime.now().plusDays(30));
 			
 //			emDAO.getEM().getTransaction().begin();
 //			emDAO.getEM().persist(deliveryTicket1);
