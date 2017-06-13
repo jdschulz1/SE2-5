@@ -21,6 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
 import model.Client;
 import model.DeliveryTracker;
+import dtDAO.ClientDAO;
 
 public class SelectClient implements Initializable {
  
@@ -115,7 +116,7 @@ public class SelectClient implements Initializable {
         	        a.setContentText("Are you sure you want to delete " + c.getName() + "?");
 	                a.showAndWait()
 	                	.filter(response -> response == ButtonType.OK)
-	                	.ifPresent(response -> deliveryTracker.deleteClient(c));
+	                	.ifPresent(response -> ClientDAO.removeClient(c));
 	                updateClientsList();
 	            }
 	        });

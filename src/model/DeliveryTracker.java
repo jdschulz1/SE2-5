@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import dtDAO.ClientDAO;
 import dtDAO.TrafficImpedimentDAO;
 
 /**
@@ -22,6 +23,12 @@ public class DeliveryTracker {
 		List<TrafficImpediment> db_impediments = TrafficImpedimentDAO.listTrafficImpediment();
 		if(!db_impediments.isEmpty()){
 			trafficImpediments.addAll(db_impediments);
+		}
+		
+		clients = new ArrayList<Client>();
+		List<Client> db_clients = ClientDAO.listClient();
+		if(!db_clients.isEmpty()){
+			clients.addAll(db_clients);
 		}
 
 		return instance;
