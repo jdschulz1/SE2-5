@@ -55,6 +55,34 @@ public class DeliveryTicket implements Serializable{
 	private LocalDateTime orderDateTime;
 	
 	/**
+	 * @return the estimatedDeliveryTime
+	 */
+	public LocalDateTime getEstimatedDeliveryTime() {
+		return estimatedDeliveryTime;
+	}
+
+	/**
+	 * @param estimatedDeliveryTime the estimatedDeliveryTime to set
+	 */
+	public void setEstimatedDeliveryTime(LocalDateTime estimatedDeliveryTime) {
+		this.estimatedDeliveryTime = estimatedDeliveryTime;
+	}
+
+	/**
+	 * @return the actualDeliveryTime
+	 */
+	public LocalDateTime getActualDeliveryTime() {
+		return actualDeliveryTime;
+	}
+
+	/**
+	 * @param actualDeliveryTime the actualDeliveryTime to set
+	 */
+	public void setActualDeliveryTime(LocalDateTime actualDeliveryTime) {
+		this.actualDeliveryTime = actualDeliveryTime;
+	}
+
+	/**
 	 * Order takers are the people that take phone calls and record the details of the Delivery Ticket.
 	 */
 	@JoinColumn(name = "user_id")

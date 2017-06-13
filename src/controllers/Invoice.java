@@ -157,7 +157,7 @@ public class Invoice implements Initializable {
 		btnPrevious.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) { 
-            	currentClient += 1;
+            	currentClient -= 1;
             	updatePreviewPane();
             }
         });
@@ -165,7 +165,7 @@ public class Invoice implements Initializable {
 		btnNext.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	currentClient -= 1;
+            	currentClient += 1;
             	updatePreviewPane();
             }
         });
@@ -190,7 +190,7 @@ public class Invoice implements Initializable {
                     numClients = ticketsByClient.keySet().size();
                     if(numClients > 0) {
 	                    for(Client c:ticketsByClient.keySet()) {
-	                    	String csvFile = System.getProperty("user.home") + "\\Desktop\\CSVTest-" + c.getName() + ".csv";
+	                    	String csvFile = System.getProperty("user.home") + "\\Desktop\\CSVTest-" + c.getName() + "-" + startDate.format(formatter) + ".csv";
 	                        writer = new FileWriter(csvFile);
 	                        CSVWriter.writeLine(writer,Arrays.asList("Invoice"));
 	
@@ -255,14 +255,14 @@ public class Invoice implements Initializable {
     	Map<Client, List<DeliveryTicket>> ticketsByClient = new LinkedHashMap<Client, List<DeliveryTicket>>();
     	
     	for(DeliveryTicket ticket:tickets) {
-    		//TODO: remove fake client
-    		Client c1 = new Client();
-    		c1.setName("Mike's Things");
-    		c1.setLocation(CityMap.getIntersections().iterator().next());
-    		ticket.setPayingClient(c1);
-    		ticket.setPickupClient(c1);
-    		ticket.setDeliveryClient(c1);
-    		// TODO: end of fake client
+//    		//TODO: remove fake client
+//    		Client c1 = new Client();
+//    		c1.setName("Mike's Things");
+//    		c1.setLocation(CityMap.getIntersections().iterator().next());
+//    		ticket.setPayingClient(c1);
+//    		ticket.setPickupClient(c1);
+//    		ticket.setDeliveryClient(c1);
+//    		// TODO: end of fake client
     		Client client = ticket.getPayingClient();
     		if(ticketsByClient.containsKey(client)) {
     			ticketsByClient.get(client).add(ticket);
@@ -294,6 +294,8 @@ public class Invoice implements Initializable {
 	    	Client client = clientList.get(currentClient);
 			ticketsList.addAll(ticketsByClient.get(client));
 	    	
+			System.out.println(client);
+			
 	    	labelClient.setText(client.getName());
 	    	labelAddress.setText(client.getLocation().getName());
 	    	labelDate.setText(startDate.format(formatter) + " - " + endDate.format(formatter));
