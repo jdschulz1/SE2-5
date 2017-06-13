@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import dtDAO.ClientDAO;
+import dtDAO.UserDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -116,7 +118,7 @@ public class SelectUser implements Initializable {
         	        a.setContentText("Are you sure you want to delete " + u.getName() + "?");
 	                a.showAndWait()
 	                	.filter(response -> response == ButtonType.OK)
-	                	.ifPresent(response -> deliveryTracker.deleteUser(u));
+	                	.ifPresent(response -> UserDAO.removeUser(u));
 	                updateUsersList();
 	            }
 	        });

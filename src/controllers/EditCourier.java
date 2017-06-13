@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import dtDAO.ClientDAO;
+import dtDAO.CourierDAO;
 import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -112,6 +114,7 @@ public class EditCourier implements Initializable {
 		courier.setCourierNumber(Integer.parseInt(textFieldCourierNumber.getText().trim()));
 		courier.setPhoneNumber(textFieldCourierPhoneNumber.getText().trim());
 		courier.setIsActive(checkBoxCourierIsActive.isSelected());
+		CourierDAO.saveCourier(courier);
 		return true;
 	}
 	
