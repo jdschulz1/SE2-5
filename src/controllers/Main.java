@@ -88,11 +88,11 @@ public class Main extends Application {
 			deliveryTicket1.setPrice(new BigDecimal(20.00));
 			deliveryTicket1.setOrderDateTime(LocalDateTime.now().plusDays(30));
 			
-			emDAO.getEM().getTransaction().begin();
-			emDAO.getEM().persist(deliveryTicket1);
-			emDAO.getEM().persist(deliveryTicket2);
-			emDAO.getEM().persist(deliveryTicket3);
-			emDAO.getEM().getTransaction().commit();
+//			emDAO.getEM().getTransaction().begin();
+//			emDAO.getEM().persist(deliveryTicket1);
+//			emDAO.getEM().persist(deliveryTicket2);
+//			emDAO.getEM().persist(deliveryTicket3);
+//			emDAO.getEM().getTransaction().commit();
 			
 			
 			
