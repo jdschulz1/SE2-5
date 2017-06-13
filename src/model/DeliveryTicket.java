@@ -239,6 +239,7 @@ public class DeliveryTicket implements Serializable{
 	private static DeliveryTracker deliveryTracker;
 	
 	public void calculateBonus() {
+		deliveryTracker = DeliveryTracker.getDeliveryTracker();
 		this.setBonusAmount(new BigDecimal(0));
 		if(isOnTime())
 			this.setBonusAmount(deliveryTracker.getBonusAmount());
@@ -248,8 +249,9 @@ public class DeliveryTicket implements Serializable{
 	 * Determines whether the delivery was made within the time window to be considered "on time".
 	 */
 	public boolean isOnTime() {
+		deliveryTracker = DeliveryTracker.getDeliveryTracker();
 		Duration between = Duration.between(this.estimatedDeliveryTime, this.actualDeliveryTime);
-		return (between.getSeconds() > (deliveryTracker.getBonusTimeVariance() * 60));
+		return (between.getSeconds() <= (deliveryTracker.getBonusTimeVariance() * 60));
 	}
 
 	/**

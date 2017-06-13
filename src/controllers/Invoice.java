@@ -190,7 +190,7 @@ public class Invoice implements Initializable {
                     numClients = ticketsByClient.keySet().size();
                     if(numClients > 0) {
 	                    for(Client c:ticketsByClient.keySet()) {
-	                    	String csvFile = System.getProperty("user.home") + "\\Desktop\\CSVTest-" + c.getName() + "-" + startDate.format(formatter) + ".csv";
+	                    	String csvFile = System.getProperty("user.home") + "\\Desktop\\Invoice-" + c.getName() + "-" + startDate.format(formatter) + ".csv";
 	                        writer = new FileWriter(csvFile);
 	                        CSVWriter.writeLine(writer,Arrays.asList("Invoice"));
 	

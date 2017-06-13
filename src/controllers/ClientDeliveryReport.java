@@ -27,7 +27,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -46,9 +45,6 @@ public class ClientDeliveryReport implements Initializable {
 
 	@FXML
     private Button btnPreview;
-
-    @FXML
-    private ComboBox<?> comboBoxClient;
     
     @FXML
     private DatePicker datePickerStartDate;
@@ -90,14 +86,25 @@ public class ClientDeliveryReport implements Initializable {
     private TableColumn<DeliveryTicket, String> tableColumnActualDeliveryTime;
 
     @FXML
+    private Button btnPrevious;
+
+    @FXML
+    private Button btnNext;
+    
+    @FXML
     private Button btnCreateReport;
 
     @FXML
     private Button btnCancel;
+    
+    @FXML
+    private Label labelClientCounter;
 
     DeliveryTracker deliveryTracker;
     List<DeliveryTicket> tickets;
     DateTimeFormatter formatter;
+    DateTimeFormatter timeFormatter;
+    DecimalFormat df;
     LinkedList<Client> clientList;
     Map<Client, List<DeliveryTicket>> ticketsByClient;
     int currentClient;
@@ -107,12 +114,14 @@ public class ClientDeliveryReport implements Initializable {
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
-deliveryTracker = DeliveryTracker.getDeliveryTracker();
+    	deliveryTracker = DeliveryTracker.getDeliveryTracker();
 		
 		formatter = DateTimeFormatter.ofPattern("MMM dd YYYY");
+		timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
+		df = new DecimalFormat("##.##%");
     			
-//		btnPrevious.setDisable(true);
-//		btnNext.setDisable(true);
+		btnPrevious.setDisable(true);
+		btnNext.setDisable(true);
 		
 		tableColumnOrderDate.setCellValueFactory(t -> {
     		DeliveryTicket ticket = t.getValue();
@@ -131,12 +140,12 @@ deliveryTracker = DeliveryTracker.getDeliveryTracker();
     	
     	tableColumnEstimatedDeliveryTime.setCellValueFactory(t -> {
     		DeliveryTicket ticket = t.getValue();
-            return new ReadOnlyStringWrapper(ticket.getEstimatedDeliveryTime().format(formatter));
+            return new ReadOnlyStringWrapper(ticket.getEstimatedDeliveryTime().format(timeFormatter));
         });
     	
     	tableColumnActualDeliveryTime.setCellValueFactory(t -> {
     		DeliveryTicket ticket = t.getValue();
-            return new ReadOnlyStringWrapper(ticket.getActualDeliveryTime().format(formatter));
+            return new ReadOnlyStringWrapper(ticket.getActualDeliveryTime().format(timeFormatter));
         });
 		
 		btnPreview.setOnAction(new EventHandler<ActionEvent>() {
@@ -162,21 +171,21 @@ deliveryTracker = DeliveryTracker.getDeliveryTracker();
             }
         });
 		
-//		btnPrevious.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event) { 
-//            	currentClient -= 1;
-//            	updatePreviewPane();
-//            }
-//        });
-//		
-//		btnNext.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event) {
-//            	currentClient += 1;
-//            	updatePreviewPane();
-//            }
-//        });
+		btnPrevious.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) { 
+            	currentClient -= 1;
+            	updatePreviewPane();
+            }
+        });
+		
+		btnNext.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	currentClient += 1;
+            	updatePreviewPane();
+            }
+        });
 		
 		btnCreateReport.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -198,15 +207,20 @@ deliveryTracker = DeliveryTracker.getDeliveryTracker();
                     numClients = ticketsByClient.keySet().size();
                     if(numClients > 0) {
 	                    for(Client c:ticketsByClient.keySet()) {
-	                    	String csvFile = System.getProperty("user.home") + "\\Desktop\\CSVTest-" + c.getName() + "-" + startDate.format(formatter) + ".csv";
+	                    	String csvFile = System.getProperty("user.home") + "\\Desktop\\ClientDeliveryReport-" + c.getName() + "-" + startDate.format(formatter) + ".csv";
 	                        writer = new FileWriter(csvFile);
-	                        CSVWriter.writeLine(writer,Arrays.asList("Invoice"));
+	                        CSVWriter.writeLine(writer,Arrays.asList("Client Delivery Report"));
 	
+	                        List<DeliveryTicket> ticketsList = ticketsByClient.get(c);
+	                        
 	                        CSVWriter.writeLine(writer,Arrays.asList("Client Name", c.getName()));
-	                        CSVWriter.writeLine(writer,Arrays.asList("Invoice Date", startDate.format(formatter) + " - " + endDate.format(formatter)));
-	
+	                        CSVWriter.writeLine(writer,Arrays.asList("Date", startDate.format(formatter) + " - " + endDate.format(formatter)));
+	                        CSVWriter.writeLine(writer,Arrays.asList("Number of Deliveries", ticketsList.size() + ""));
+	                        CSVWriter.writeLine(writer,Arrays.asList("On Time Delivery Rate", df.format(getOnTimeDeliveryRate(ticketsList))));
+	                        
+	                        
 	                        CSVWriter.writeLine(writer,Arrays.asList("Details"));
-	                        CSVWriter.writeLine(writer, Arrays.asList("Order Date", "Pickup Client", "Delivery Client", "Price"));
+	                        CSVWriter.writeLine(writer, Arrays.asList("Order Date", "Pickup Client", "Delivery Client", "Estimated Delivery Time", "Actual Delivery Time"));
 					
 		                    for (DeliveryTicket d : ticketsByClient.get(c)) {
 		
@@ -214,11 +228,11 @@ deliveryTracker = DeliveryTracker.getDeliveryTracker();
 		                        list.add(d.getOrderDateTime().format(formatter));
 		                        list.add(d.getPickupClient().getName().toString());
 		                        list.add(d.getDeliveryClient().getName().toString());
-		                        list.add(stringFromBigDecimal(d.getPrice()));
+		                        list.add(d.getEstimatedDeliveryTime().format(timeFormatter));
+		                        list.add(d.getActualDeliveryTime().format(timeFormatter));
 		                        CSVWriter.writeLine(writer, list);
 		    					
 		                    }
-	                        CSVWriter.writeLine(writer, Arrays.asList("Total", "", "",stringFromBigDecimal(totalTickets(ticketsByClient.get(c)))));
 	
 		                    writer.flush();
 							writer.close();
@@ -253,12 +267,14 @@ deliveryTracker = DeliveryTracker.getDeliveryTracker();
     	    	}
             }
         });
-
 	}
 
 	private Map<Client, List<DeliveryTicket>> getTickets() {
 		startDate = LocalDateTime.of(datePickerStartDate.getValue(), LocalDateTime.now().toLocalTime());
-    	endDate = startDate.plusWeeks(1);
+    	if(radioButtonMonth.isSelected())
+    		endDate = startDate.plusMonths(1);
+    	else if(radioButtonWeek.isSelected())
+    		endDate = startDate.plusWeeks(1);
     	tickets = DeliveryTicketDAO.findDeliveryTicketByDateRange(startDate, endDate);
     	
     	Map<Client, List<DeliveryTicket>> ticketsByClient = new LinkedHashMap<Client, List<DeliveryTicket>>();
@@ -280,46 +296,47 @@ deliveryTracker = DeliveryTracker.getDeliveryTracker();
 		if(numClients == 0)
 		{
 			labelClient.setText("None");
-			List <DeliveryTicket> ticketsList = ticketsByClient.get(clientList.get(currentClient));
-	    	labelNumberofDeliveries.setText(ticketsByClient.get(ticketsList.size()) + " ");
-	    	labelOnTimeDeliveries.setText(getNumOnTimeDeliveries(ticketsList) + " ");
+	    	labelNumberofDeliveries.setText("None");
+	    	labelOnTimeDeliveries.setText("None");
 	    	labelDate.setText(startDate.format(formatter) + " - " + endDate.format(formatter));
 	    	tableReport.setItems(null);
-//	    	labelClientCounter.setText("Client 0 of 0");
-//	    	
-//	    	btnPrevious.setDisable(true);
-//	    	btnNext.setDisable(true);
+	    	labelClientCounter.setText("Client 0 of 0");
+	    	
+	    	btnPrevious.setDisable(true);
+	    	btnNext.setDisable(true);
 	    	
 		}
 		else {
 			ObservableList<DeliveryTicket> ticketsList = FXCollections.observableArrayList();
-	    	Client client = clientList.get(currentClient);
+			Client client = clientList.get(currentClient);
 			ticketsList.addAll(ticketsByClient.get(client));
 
 			labelClient.setText(client.getName());
 	    	labelDate.setText(startDate.format(formatter) + " - " + endDate.format(formatter));
+	    	labelNumberofDeliveries.setText(ticketsList.size() + "");
+	    	labelOnTimeDeliveries.setText(df.format(getOnTimeDeliveryRate(ticketsList)));
 	    	tableReport.setItems(ticketsList);
-//	    	labelClientCounter.setText("Client " + (currentClient + 1) + " of " + numClients);
-//	    	
-//	    	if(currentClient == 0)
-//	    		btnPrevious.setDisable(true);
-//	    	else if(currentClient > 0 && numClients > 0)
-//	    		btnPrevious.setDisable(false);
-//	    	
-//	    	if(currentClient < (numClients-1))
-//	    		btnNext.setDisable(false);
-//	    	else 
-//	    		btnNext.setDisable(true);
+	    	labelClientCounter.setText("Client " + (currentClient + 1) + " of " + numClients);
+	    	
+	    	if(currentClient == 0)
+	    		btnPrevious.setDisable(true);
+	    	else if(currentClient > 0 && numClients > 0)
+	    		btnPrevious.setDisable(false);
+	    	
+	    	if(currentClient < (numClients-1))
+	    		btnNext.setDisable(false);
+	    	else 
+	    		btnNext.setDisable(true);
 		}
 	}
 	
-	private int getNumOnTimeDeliveries(List<DeliveryTicket> ticketsList) {
+	private double getOnTimeDeliveryRate(List<DeliveryTicket> ticketsList) {
 		int numOnTimeDeliveries = 0;
 		for(DeliveryTicket t:ticketsList) {
     		if(t.isOnTime())
     			numOnTimeDeliveries++;
     	}
-    	return numOnTimeDeliveries;
+		return (double)numOnTimeDeliveries/(double)ticketsList.size();
     }
 	
 	private String stringFromBigDecimal(BigDecimal input) {
