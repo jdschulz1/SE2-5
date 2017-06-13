@@ -24,7 +24,7 @@ public class AddSearchDeliveryTicket implements Initializable {
 		buttonNewDeliveryTicket.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Add");
+              
                 try {
     	    	   	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/DeliveryTicket.fxml"));
                 	DeliveryTicketController controller = new DeliveryTicketController();

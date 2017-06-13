@@ -104,6 +104,22 @@ public class DeliveryTicket implements Serializable{
 	@Convert(converter = LocalDateTimeConverter.class)
 	private LocalDateTime estimatedDeliveryTime;
 	
+	public LocalDateTime getEstimatedDeliveryTime() {
+		return estimatedDeliveryTime;
+	}
+
+	public void setEstimatedDeliveryTime(LocalDateTime estimatedDeliveryTime) {
+		this.estimatedDeliveryTime = estimatedDeliveryTime;
+	}
+
+	public LocalDateTime getActualDeliveryTime() {
+		return actualDeliveryTime;
+	}
+
+	public void setActualDeliveryTime(LocalDateTime actualDeliveryTime) {
+		this.actualDeliveryTime = actualDeliveryTime;
+	}
+
 	/**
 	 * The time that the system calculates the Courier will need to leave the Office in order to reach the pickup location by the requested pickup time.
 	 */
@@ -409,6 +425,11 @@ public class DeliveryTicket implements Serializable{
 
 	public void setReturnRoute(Route returnRoute) {
 		this.returnRoute = returnRoute;
+	}
+	
+	public int calculateTotalDistance(){
+		int totalDistance = this.getPickupRoute().calculateRouteDistance() +  this.getDeliveryRoute().calculateRouteDistance() + this.getReturnRoute().getRouteDistance();
+		return totalDistance;
 	}
 
 }
