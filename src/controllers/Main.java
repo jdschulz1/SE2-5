@@ -12,7 +12,10 @@ import model.CityMap;
 import model.Client;
 import model.Courier;
 import model.User;
+import model.Vertex;
 import model.DeliveryTracker;
+import model.Graph;
+import model.Intersection;
 import model.Street;
 import model.TrafficImpediment;
 import javafx.scene.control.MenuBar;
@@ -57,6 +60,14 @@ public class Main extends Application {
 			//setup dummy couriers
 			Courier courier = new Courier(1, "Sally Sassalot", "4055555353", true);
 			deliveryTracker.addCourier(courier);
+			
+			//test shortest path
+			Intersection src = IntersectionDAO.findIntersectionById(1904), dest = IntersectionDAO.findIntersectionById(1939);
+			Vertex[] shortest_path = Graph.calculateShortestPath(new Vertex(src), new Vertex(dest));
+			
+			for(Vertex v : shortest_path){
+				
+			}
 			
 			primaryStage.show();
 		} catch(Exception e) {

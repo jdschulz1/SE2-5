@@ -1,6 +1,33 @@
 package model;
 public class Vertex {
 
+	public Vertex(Intersection intersection){
+		this.intersection = intersection;
+	}
+	
+	public int getShortestDist() {
+		return shortestDist;
+	}
+	public void setShortestDist(int shortestDist) {
+		this.shortestDist = shortestDist;
+	}
+
+	public Vertex getPrevious() {
+		return previous;
+	}
+
+	public void setPrevious(Vertex previous) {
+		this.previous = previous;
+	}
+
+	public Intersection getIntersection() {
+		return intersection;
+	}
+
+	public void setIntersection(Intersection intersection) {
+		this.intersection = intersection;
+	}
+
 	/**
 	 * Used in the shortest path algorithm, shortestDist represents the shortest distance to the current Intersection from a source Intersection. shortestDist is initialized to 0 for the source Intersection and Integer.MAX_VALUE for every other Intersection and shortestDist continues to get lower as you go through Dijkstra's Algorithm.
 	 */

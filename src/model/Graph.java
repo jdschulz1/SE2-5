@@ -1,5 +1,8 @@
 package model;
+import java.util.ArrayList;
 import java.util.TreeMap;
+
+import dtDAO.StreetDAO;
 
 /**
  * A Graph for the purpose of generating the shortest path for the Courier Package.
@@ -25,18 +28,82 @@ public class Graph {
 	 * @param source
 	 * @param destination
 	 */
-	public Vertex[] calculateShortestPath(Vertex source, Vertex destination) {
+	public static Vertex[] calculateShortestPath(Vertex source, Vertex destination) {
 		// TODO - implement Graph.calculateShortestPath
-		throw new UnsupportedOperationException();
+		/*
+		 * while(!pending.isEmpty()){
+		 * 		v = pending.getShortestFoundPath() //The vertex with the smallest "d" value
+		 * 		foreach(edge e from v to another vertex){
+		 * 			if(e goes between v and another vertex in pending){
+		 * 				relax e
+		 * 			}
+		 * 		}
+		 * }
+		 * */
+		 ArrayList<Vertex> pending = new ArrayList<Vertex>();
+		 ArrayList<Vertex> processed = new ArrayList<Vertex>();
+		 //Initialize pending vertices
+		 for(Intersection c : CityMap.getIntersections()){
+			 Vertex v = new Vertex(c);
+			 if(v.equals(source)){
+				 v.setShortestDist(0);
+				 v.setPrevious(v);
+			 }
+			 else{
+				 v.setShortestDist(Integer.MAX_VALUE);
+				 v.setPrevious(null);
+			 }
+			 
+			 pending.add(v);
+		 }
+		 
+		 Vertex v;
+
+		 while(!pending.isEmpty()){
+			 v = getShortestFoundPath(pending);
+			 processed.add(v);
+			 pending.remove(v);
+			 for(Street e : StreetDAO.affectedStreets(v.getIntersection())){
+				 Intersection notV = v.getIntersection().equals(e.getSource()) ? e.getDestination() : e.getSource();
+				 for(Vertex v2 : pending){
+					 if(v2.getIntersection() == notV){
+						 relaxStreet(v,v2);
+					 }
+				 }
+			 }
+		 }
+		 
+		 return (Vertex[]) processed.toArray();
+	}
+	
+	public static Vertex getShortestFoundPath(ArrayList<Vertex> pending){
+		Vertex shortest = null;
+		
+		for(Vertex v: pending){
+			if(shortest == null || v.getShortestDist() < shortest.getShortestDist())
+				shortest = v;
+		}
+		
+		return shortest;
 	}
 
 	/**
 	 * The equivalent of relax edge in Dijkstra's shortest path algorithm. ?This algorithm helper for the main shortest path algorithm takes in a street and sets the Intersection that comes before the destination Intersection to
 	 * @param street
 	 */
-	public void relaxStreet(Street street) {
+	public static void relaxStreet(Vertex a, Vertex b) {
 		// TODO - implement Graph.relaxStreet
-		throw new UnsupportedOperationException();
+		/*
+		 * if(a.d + w < b.d) {
+		 * 		b.d = a.d + w;
+		 * 		b.previous = a;
+		 * }
+		 * */
+		Street s = StreetDAO.findStreetByIntersections(a.getIntersection(), b.getIntersection());
+		if(a.getShortestDist() + s.getWeight() < b.getShortestDist()){
+			b.setShortestDist(a.getShortestDist() + s.getWeight());
+			b.setPrevious(a);
+		}
 	}
 
 	/**

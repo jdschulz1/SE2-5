@@ -48,7 +48,7 @@ public class TrafficImpedimentDAO {
 
 	public static TrafficImpediment findTrafficImpedimentById(int id)
 	{
-		TrafficImpediment impediment = emDAO.getEM().find(TrafficImpediment.class, new Integer(id));
+		TrafficImpediment impediment = emDAO.getEM().find(TrafficImpediment.class, Long.valueOf(id));
 		return impediment;
 	}
 

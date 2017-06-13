@@ -37,6 +37,15 @@ public class StreetDAO {
 		}
 		return affected;
 	}
+	
+	public static ArrayList<Intersection> neighbors (Intersection intersection){
+		ArrayList<Intersection> neighbors = new ArrayList<Intersection>();
+		
+		for(Street s : affectedStreets(intersection)){
+			neighbors.add(s.getDestination());
+		}
+		return neighbors;
+	}
 
 	public static Street findStreetById(int id)
 	{
