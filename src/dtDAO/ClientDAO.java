@@ -5,14 +5,20 @@ import java.util.List;
 import javax.persistence.TypedQuery;
 
 import model.Client;
+import model.DeliveryTracker;
 
 public class ClientDAO {
 
 	public static void saveClient(Client client) {
+		
+		emDAO.getEM().getTransaction().begin();
 		emDAO.getEM().persist(client);
+		emDAO.getEM().getTransaction().commit();
 	}
 	public static void addClient(Client Client) {
+		emDAO.getEM().getTransaction().begin();
 		emDAO.getEM().persist(Client);
+		emDAO.getEM().getTransaction().commit();
 	}
 
 	public static List<Client> listClient()
@@ -27,8 +33,14 @@ public class ClientDAO {
 		return client;
 	}
 
-	public static void removeClient(Client client)
+	public static boolean removeClient(Client client)
 	{
+		DeliveryTracker.deleteClient(client);
+		emDAO.getEM().getTransaction().begin();
+		int sizeOld = listClient().size();
 		emDAO.getEM().remove(client);
+		emDAO.getEM().getTransaction().commit();
+		
+		return listClient().size() != sizeOld;
 	}
 }

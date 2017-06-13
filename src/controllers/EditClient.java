@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import dtDAO.ClientDAO;
+import dtDAO.TrafficImpedimentDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -170,6 +172,7 @@ public class EditClient implements javafx.fxml.Initializable {
 		client.setEmail(textFieldEmail.getText().trim());
 		client.setPhoneNumber(textFieldPhoneNumber.getText().trim());
 		client.setLocation(new Intersection(comboBoxStreet.getValue(), comboBoxAvenue.getValue()));
+		ClientDAO.saveClient(client);
 		return true;
 	}
 	

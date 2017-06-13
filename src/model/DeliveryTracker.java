@@ -4,7 +4,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import dtDAO.ClientDAO;
+import dtDAO.CourierDAO;
 import dtDAO.TrafficImpedimentDAO;
+import dtDAO.UserDAO;
 
 /**
  * The object representing the system and overall company information for ACME Couriers.
@@ -22,6 +25,24 @@ public class DeliveryTracker {
 		List<TrafficImpediment> db_impediments = TrafficImpedimentDAO.listTrafficImpediment();
 		if(!db_impediments.isEmpty()){
 			trafficImpediments.addAll(db_impediments);
+		}
+		
+		clients = new ArrayList<Client>();
+		List<Client> db_clients = ClientDAO.listClient();
+		if(!db_clients.isEmpty()){
+			clients.addAll(db_clients);
+		}
+		
+		users = new ArrayList<User>();
+		List<User> db_users = UserDAO.listUser();
+		if(!db_users.isEmpty()){
+			users.addAll(db_users);
+		}
+		
+		couriers = new ArrayList<Courier>();
+		List<Courier> db_couriers = CourierDAO.listCourier();
+		if(!db_couriers.isEmpty()){
+			couriers.addAll(db_couriers);
 		}
 
 		return instance;
@@ -299,7 +320,7 @@ public class DeliveryTracker {
 	 * @param deleted
 	 * @return
 	 */
-	public boolean deleteUser(User deleted){
+	public static boolean deleteUser(User deleted){
 		return /* u.getRole() == "Admin" && */ users.remove(deleted);    //FIX LATER FOR ADMIN FUNTION
 	}
 	

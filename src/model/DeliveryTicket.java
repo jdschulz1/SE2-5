@@ -55,6 +55,34 @@ public class DeliveryTicket implements Serializable{
 	private LocalDateTime orderDateTime;
 	
 	/**
+	 * @return the estimatedDeliveryTime
+	 */
+	public LocalDateTime getEstimatedDeliveryTime() {
+		return estimatedDeliveryTime;
+	}
+
+	/**
+	 * @param estimatedDeliveryTime the estimatedDeliveryTime to set
+	 */
+	public void setEstimatedDeliveryTime(LocalDateTime estimatedDeliveryTime) {
+		this.estimatedDeliveryTime = estimatedDeliveryTime;
+	}
+
+	/**
+	 * @return the actualDeliveryTime
+	 */
+	public LocalDateTime getActualDeliveryTime() {
+		return actualDeliveryTime;
+	}
+
+	/**
+	 * @param actualDeliveryTime the actualDeliveryTime to set
+	 */
+	public void setActualDeliveryTime(LocalDateTime actualDeliveryTime) {
+		this.actualDeliveryTime = actualDeliveryTime;
+	}
+
+	/**
 	 * Order takers are the people that take phone calls and record the details of the Delivery Ticket.
 	 */
 	@JoinColumn(name = "user_id")
@@ -104,6 +132,22 @@ public class DeliveryTicket implements Serializable{
 	@Convert(converter = LocalDateTimeConverter.class)
 	private LocalDateTime estimatedDeliveryTime;
 	
+	public LocalDateTime getEstimatedDeliveryTime() {
+		return estimatedDeliveryTime;
+	}
+
+	public void setEstimatedDeliveryTime(LocalDateTime estimatedDeliveryTime) {
+		this.estimatedDeliveryTime = estimatedDeliveryTime;
+	}
+
+	public LocalDateTime getActualDeliveryTime() {
+		return actualDeliveryTime;
+	}
+
+	public void setActualDeliveryTime(LocalDateTime actualDeliveryTime) {
+		this.actualDeliveryTime = actualDeliveryTime;
+	}
+
 	/**
 	 * The time that the system calculates the Courier will need to leave the Office in order to reach the pickup location by the requested pickup time.
 	 */
@@ -195,6 +239,7 @@ public class DeliveryTicket implements Serializable{
 	private static DeliveryTracker deliveryTracker;
 	
 	public void calculateBonus() {
+		deliveryTracker = DeliveryTracker.getDeliveryTracker();
 		this.setBonusAmount(new BigDecimal(0));
 		if(isOnTime())
 			this.setBonusAmount(deliveryTracker.getBonusAmount());
@@ -204,8 +249,9 @@ public class DeliveryTicket implements Serializable{
 	 * Determines whether the delivery was made within the time window to be considered "on time".
 	 */
 	public boolean isOnTime() {
+		deliveryTracker = DeliveryTracker.getDeliveryTracker();
 		Duration between = Duration.between(this.estimatedDeliveryTime, this.actualDeliveryTime);
-		return (between.getSeconds() > (deliveryTracker.getBonusTimeVariance() * 60));
+		return (between.getSeconds() <= (deliveryTracker.getBonusTimeVariance() * 60));
 	}
 
 	/**
@@ -409,6 +455,11 @@ public class DeliveryTicket implements Serializable{
 
 	public void setReturnRoute(Route returnRoute) {
 		this.returnRoute = returnRoute;
+	}
+	
+	public int calculateTotalDistance(){
+		int totalDistance = this.getPickupRoute().calculateRouteDistance() +  this.getDeliveryRoute().calculateRouteDistance() + this.getReturnRoute().getRouteDistance();
+		return totalDistance;
 	}
 
 }

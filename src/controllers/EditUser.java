@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import dtDAO.ClientDAO;
+import dtDAO.UserDAO;
 import javafx.fxml.Initializable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -125,6 +127,7 @@ public class EditUser implements Initializable {
 		user.setPassword(textFieldUserPassword.getText().trim());
 		user.setEmail(textFieldUserEmail.getText().trim());
 		user.setRole(comboBoxUserRole.getValue().toString());
+		UserDAO.saveUser(user);
 		return true;
 	}
 	

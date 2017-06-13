@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import dtDAO.ClientDAO;
+import dtDAO.CourierDAO;
 import javafx.fxml.Initializable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -106,7 +108,7 @@ public class SelectCourier implements Initializable {
     	        a.setContentText("Are you sure you want to delete " + c.getName() + "?");
                 a.showAndWait()
                 	.filter(response -> response == ButtonType.OK)
-                	.ifPresent(response -> deliveryTracker.deleteCourier(c));
+                	.ifPresent(response -> CourierDAO.removeCourier(c));
                 updateCourierList();
             }
         });

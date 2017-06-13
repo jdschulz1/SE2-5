@@ -33,7 +33,7 @@ public class Route {
 	 * Calculates the total distance of a route.
 	 * @param deliveryRoute
 	 */
-	public int calculateRouteDistance(Vertex[] deliveryRoute) {
+	public int calculateRouteDistance() {
 		// TODO - implement Route.calculateRouteDistance
 		throw new UnsupportedOperationException();
 	}

@@ -49,7 +49,7 @@ public class StreetDAO {
 
 	public static Street findStreetById(int id)
 	{
-		Street street = emDAO.getEM().find(Street.class, new Integer(id));
+		Street street = emDAO.getEM().find(Street.class, Long.valueOf(id));
 		return street;
 	}
 

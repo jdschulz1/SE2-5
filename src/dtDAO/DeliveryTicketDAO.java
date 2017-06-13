@@ -28,7 +28,7 @@ public class DeliveryTicketDAO {
 	
 	public static List<DeliveryTicket> findDeliveryTicketByDateRange(LocalDateTime startDate, LocalDateTime endDate)
 	{
-		TypedQuery<DeliveryTicket> query = emDAO.getEM().createQuery("SELECT ticket FROM delivery_ticket ticket WHERE ticket.orderDateTime >= :date1 AND ticket.orderDateTime <= :date2", DeliveryTicket.class);
+		TypedQuery<DeliveryTicket> query = emDAO.getEM().createQuery("SELECT ticket FROM delivery_ticket ticket WHERE ticket.orderDateTime >= :date1 AND ticket.orderDateTime < :date2", DeliveryTicket.class);
 		query.setParameter("date1", startDate);
 		query.setParameter("date2", endDate);
 		System.out.println("Results: " + query.getResultList().size());
