@@ -15,15 +15,20 @@ import model.DeliveryTracker;
 public class DeliveryTicketDAO {
 
 	public static void saveDeliveryTicket(DeliveryTicket ticket) {
+		
+		emDAO.getEM().getTransaction().begin();
 		emDAO.getEM().persist(ticket);
+		emDAO.getEM().getTransaction().commit();
 	}
 	public static void addDeliveryTicket(DeliveryTicket DeliveryTicket) {
+		emDAO.getEM().getTransaction().begin();
 		emDAO.getEM().persist(DeliveryTicket);
+		emDAO.getEM().getTransaction().commit();
 	}
 
 	public static List<DeliveryTicket> listDeliveryTicket()
 	{
-		TypedQuery<DeliveryTicket> query = emDAO.getEM().createQuery("SELECT ticket FROM ticket ticket", DeliveryTicket.class);
+		TypedQuery<DeliveryTicket> query = emDAO.getEM().createQuery("SELECT ticket FROM delivery_ticket ticket", DeliveryTicket.class);
 		return query.getResultList();
 	}
 	
@@ -42,8 +47,14 @@ public class DeliveryTicketDAO {
 		return ticket;
 	}
 
-	public static void removeDeliveryTicket(DeliveryTicket ticket)
-	{
+	public static boolean removeDeliveryTicket(DeliveryTicket ticket)
+	{	
+		DeliveryTracker.deleteDeliveryTicket(ticket);
+		emDAO.getEM().getTransaction().begin();
+		int sizeOld = listDeliveryTicket().size();
 		emDAO.getEM().remove(ticket);
+		emDAO.getEM().getTransaction().commit();
+		
+		return listDeliveryTicket().size() != sizeOld;
 	}
 }
