@@ -7,6 +7,8 @@ import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+import dtDAO.ClientDAO;
+import dtDAO.CompanyInfoDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -233,6 +235,7 @@ public class EditCompanyInfo implements javafx.fxml.Initializable {
 		deliveryTracker.setCourierSpeed(Double.parseDouble(textFieldAvgCourierSpeed.getText().trim()));
 		deliveryTracker.setBonusAmount(decimalFromString(textFieldOnTimeBonusAmount.getText().trim()));
 		deliveryTracker.setBonusTimeVariance(Integer.parseInt(textFieldOnTimeAllowableVariance.getText().trim()));
+		CompanyInfoDAO.save(deliveryTracker);
 		return true;
 	}
 }

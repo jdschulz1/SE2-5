@@ -1,18 +1,33 @@
 package model;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 import dtDAO.ClientDAO;
 import dtDAO.CourierDAO;
 import dtDAO.TrafficImpedimentDAO;
 import dtDAO.UserDAO;
+import dtDAO.CompanyInfoDAO;
+import dtDAO.DeliveryTicketDAO;
 
 /**
  * The object representing the system and overall company information for ACME Couriers.
  */
-public class DeliveryTracker {
+@Entity(name = "companyInfo")
+public class DeliveryTracker implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 
 	private static final DeliveryTracker instance = new DeliveryTracker();
 	
@@ -44,9 +59,20 @@ public class DeliveryTracker {
 		if(!db_couriers.isEmpty()){
 			couriers.addAll(db_couriers);
 		}
+		
+		deliveryTickets = new ArrayList<DeliveryTicket>();
+		List<DeliveryTicket> db_delivery_ticket = DeliveryTicketDAO.listDeliveryTicket();
+		if(!db_delivery_ticket.isEmpty()){
+			deliveryTickets.addAll(db_delivery_ticket);
+		}
 
 		return instance;
 	}
+	
+	@Id
+	@Column(name = "companyInfo_id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long companInfoId;
 	
 	/**
 	 * A list of couriers working for the company.
@@ -55,39 +81,51 @@ public class DeliveryTracker {
 	/**
 	 * The base charge for a delivery.
 	 */
+	@Column(name = "bill_rate_base")
 	private BigDecimal billRateBase;
 	/**
 	 * The bill rate for the per-block charge on the delivery.
 	 */
+	@Column(name = "bill_rate_per_block")
 	private BigDecimal billRatePerBlock;
 	/**
 	 * The speed of the Courier making the delivery.
 	 */
+	@Column(name = "courier_speed")
 	private double courierSpeed;
 	/**
 	 * The bonus amount to be applied when Couriers make on-time deliveries.
 	 */
+	@Column(name = "bonus_amount")
 	private BigDecimal bonusAmount;
 	/**
 	 * The acceptable difference in minutes between the estimated delivery time and the actual delivery time to be considered on-time.
 	 */
+	@Column(name = "bonus_time_variance")
 	private int bonusTimeVariance;
 	/**
 	 * The time in minutes that the Courier is expected to spend at the pickup Client location.
 	 */
+	@Column(name = "pickup_overhead_time")
 	private int pickupOverheadTime;
 	/**
 	 * The time in minutes that the Courier is expected to spend at the delivery Client location
 	 */
+	@Column(name = "delivery_overhead_time")
 	private int deliveryOverheadTime;
 	/**
 	 * The number of blocks in a mile.
 	 */
+	@Column(name = "blocks_to_mile")
 	private int blocksToMile;
 	/**
 	 * The list of Person objects that are known by the DeliveryTracker, which includes the Users and Couriers.
 	 */
 	private static List<User> users;
+	/**
+	 * The list of delivery ticket objects that are known by the DeliveryTracker
+	 */
+	private static List<DeliveryTicket> deliveryTickets;
 	/**
 	 * The Clients known to the DeliveryTracker.
 	 */
@@ -103,10 +141,13 @@ public class DeliveryTracker {
 	/**
 	 * The name of the Company.
 	 */
+	@Column(name = "company_name")
 	private String companyName;
 	/**
 	 * The intersection the company is located on.
 	 */
+	@JoinColumn(name = "intersection_id")
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Intersection companyLocation;
 
 	public BigDecimal getBillRateBase() {
@@ -371,6 +412,10 @@ public class DeliveryTracker {
 	 */
 	public static boolean deleteClient(Client deleted){
 		return clients.remove(deleted);
+	}
+	
+	public static boolean deleteDeliveryTicket(DeliveryTicket deleted){
+		return deliveryTickets.remove(deleted);
 	}
 	
 	public static void addTrafficImpediment(TrafficImpediment ti){

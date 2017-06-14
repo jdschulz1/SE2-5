@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.TypedQuery;
 
 import model.DeliveryTicket;
+import model.DeliveryTracker;
 
 public class DeliveryTicketDAO {
 
