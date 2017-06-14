@@ -3,6 +3,7 @@ public class Vertex {
 
 	public Vertex(Intersection intersection){
 		this.intersection = intersection;
+		this.shortestDist = intersection.getShortestDist();
 	}
 	
 	public int getShortestDist() {
@@ -10,6 +11,7 @@ public class Vertex {
 	}
 	public void setShortestDist(int shortestDist) {
 		this.shortestDist = shortestDist;
+		this.intersection.setShortestDist(shortestDist);
 	}
 
 	public Vertex getPrevious() {
@@ -18,6 +20,7 @@ public class Vertex {
 
 	public void setPrevious(Vertex previous) {
 		this.previous = previous;
+		if(previous != null) this.intersection.setPrevious(previous.getIntersection());
 	}
 
 	public Intersection getIntersection() {
@@ -26,6 +29,7 @@ public class Vertex {
 
 	public void setIntersection(Intersection intersection) {
 		this.intersection = intersection;
+		this.shortestDist = intersection.getShortestDist();
 	}
 
 	/**

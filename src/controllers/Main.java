@@ -96,10 +96,13 @@ public class Main extends Application {
 			deliveryTracker.addCourier(courier);
 		
 			//test shortest path
-//			Intersection src = IntersectionDAO.findIntersectionById(1904), dest = IntersectionDAO.findIntersectionById(1939);
+//			Intersection src = IntersectionDAO.findIntersectionById(3256), dest = IntersectionDAO.findIntersectionById(3276);
 //			ArrayList<Vertex> shortest_path = Graph.calculateShortestPath(new Vertex(src), new Vertex(dest));
 //			
-//			System.out.println(shortest_path);
+//			for(Vertex v : shortest_path){
+//				System.out.println(v.getIntersection().getName() +  " shortest dist: " + v.getShortestDist() + " prev intersection: " + v.getPrevious().getIntersection().getName());
+//			}
+//			
 //			Vertex nextv;
 //			for(Vertex v : shortest_path){
 //				System.out.println("Intersection:" + v.getIntersection().getName() + " ShortestDist:" + v.getShortestDist());

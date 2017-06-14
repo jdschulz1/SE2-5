@@ -60,7 +60,7 @@ public class StreetDAO {
 	
 	public static Street findStreetByIntersections(Intersection src, Intersection dest){
 		for(Street s : listStreet()){
-			if(s.getSource() != null && s.getSource().getName() == src.getName() && s.getDestination().getName() == dest.getName())
+			if(s.getSource() != null && s.getDestination() != null && s.getSource().getName() == src.getName() && s.getDestination().getName() == dest.getName())
 				return s;
 		}
 

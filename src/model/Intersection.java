@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 /**
  * The Intersection is described by two cross-streets and an availability that determines if a Courier can get to that Intersection.
@@ -23,7 +25,7 @@ public class Intersection implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	public Intersection(){
-		
+		this.adjSegments = new ArrayList<Street>();
 	}
 	
 	public Intersection(Street street, Street avenue){
@@ -31,6 +33,9 @@ public class Intersection implements Serializable{
 		this.street = street;
 		this.avenue = avenue;
 		this.name = street.getName() + "&" + avenue.getName();
+		this.adjSegments = new ArrayList<Street>();
+		this.setPrevious(null);
+		this.setShortestDist(Integer.MAX_VALUE);
 	}
 	
 	/**
@@ -67,6 +72,23 @@ public class Intersection implements Serializable{
 	@Column(name = "name")
 	private String name;
 	
+	@Transient
+	private ArrayList<Street> adjSegments;
+	
+	@Transient
+	private Intersection previous;
+	
+	@Transient
+	private int shortestDist;
+	
+	public ArrayList<Street> getAdjSegments() {
+		return adjSegments;
+	}
+
+	public void setAdjSegments(ArrayList<Street> adjSegments) {
+		this.adjSegments = adjSegments;
+	}
+
 	public boolean isAvailable() {
 		return availability;
 	}
@@ -90,6 +112,22 @@ public class Intersection implements Serializable{
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Intersection getPrevious() {
+		return previous;
+	}
+
+	public void setPrevious(Intersection previous) {
+		this.previous = previous;
+	}
+
+	public int getShortestDist() {
+		return shortestDist;
+	}
+
+	public void setShortestDist(int shortestDist) {
+		this.shortestDist = shortestDist;
 	}
 
 }

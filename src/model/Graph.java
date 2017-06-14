@@ -70,21 +70,31 @@ public class Graph {
 				 Intersection notV = v.getIntersection().equals(e.getSource()) ? e.getDestination() : e.getSource();
 				 for(Vertex v2 : pending){
 					 if(v2.getIntersection() == notV){
-						 System.out.println("before relax on v:" + v.getIntersection().getName() + " and v2:" + v2.getIntersection().getName());
-						 System.out.println("ShortestDist v/v2:" + v.getShortestDist() + "/" + v2.getShortestDist());
-						 System.out.println("Previous Vertex intersection v/v2: " + v.getPrevious() != null ? v.getPrevious().getIntersection().getName() : "booger" + "/" + v2.getPrevious() != null ? v2.getPrevious().getIntersection().getName() : "booger2");
-						 relaxStreet(v,v2);
-						 System.out.println("--------------------------------------------------------------------------------");
-						 System.out.println("after relax on v:" + v.getIntersection().getName() + " and v2:" + v2.getIntersection().getName());
-						 System.out.println("ShortestDist v/v2:" + v.getShortestDist() + "/" + v2.getShortestDist());
-						 System.out.println("Previous Vertex intersection v/v2: " + v.getPrevious() != null ? v.getPrevious().getIntersection().getName() : "booger" + "/" + v2.getPrevious() != null ? v2.getPrevious().getIntersection().getName() : "booger2");
-						 System.out.println(" ");
+
+						 Edge edge = new Edge(e, v, v2);
+						 
+						 relaxStreet(edge);
+//						 System.out.println("--------------------------------------------------------------------------------");
+//						 System.out.println("after relax on v:" + v.getIntersection().getName() + " and v2:" + v2.getIntersection().getName());
+//						 System.out.println("ShortestDist v/v2:" + v.getShortestDist() + "/" + v2.getShortestDist());
+//						 System.out.println(" ");
 					 }
 				 }
 			 }
 		 }
 		 
 		 return processed;
+	}
+	
+	//Potentially not needed
+	public static Street findStreetByIntersections(Intersection src, Intersection dest){
+		for(Street s : CityMap.getStreets()){
+			if(src.getAdjSegments().contains(s) && dest.getAdjSegments().contains(s) && s.getDestination() != src){
+				return s;
+			}
+		}
+
+		return null;
 	}
 	
 	public static Vertex getShortestFoundPath(ArrayList<Vertex> pending){
@@ -102,7 +112,7 @@ public class Graph {
 	 * The equivalent of relax edge in Dijkstra's shortest path algorithm. ?This algorithm helper for the main shortest path algorithm takes in a street and sets the Intersection that comes before the destination Intersection to
 	 * @param street
 	 */
-	public static void relaxStreet(Vertex a, Vertex b) {
+	public static void relaxStreet(Edge e) {
 		// TODO - implement Graph.relaxStreet
 		/*
 		 * if(a.d + w < b.d) {
@@ -110,12 +120,9 @@ public class Graph {
 		 * 		b.previous = a;
 		 * }
 		 * */
-		Street s = StreetDAO.findStreetByIntersections(a.getIntersection(), b.getIntersection());
-//		System.out.println("a.getIntersection:" + a.getIntersection().getName());
-//		System.out.println("s source:" + s.getSource().getName());
-//		System.out.println("s dest:" + s.getDestination().getName());
-//		System.out.println("s.getWeight:" + s.getWeight());
-//		System.out.println("b.getIntersection:" + b.getIntersection().getName());
+		Vertex a = e.getSource(), b = e.getDestination();
+		Street s = e.getStreet();
+
 		if(a.getShortestDist() + s.getWeight() < b.getShortestDist()){
 			b.setShortestDist(a.getShortestDist() + s.getWeight());
 			b.setPrevious(a);

@@ -23,6 +23,8 @@ public class CityMap {
 		intersections = new ArrayList<Intersection>();
 		streets = new ArrayList<Street>();
 		avenues = new ArrayList<Street>();
+		wholeStreets = new ArrayList<Street>();
+		wholeAvenues = new ArrayList<Street>();
 		
 		streetNames = new ArrayList<String>(){
 		{
@@ -51,20 +53,36 @@ public class CityMap {
 		}
 		else{
 			for(Street s : allStreets){
+				
 				if(streetNames.contains(s.getName())){
-					streets.add(s);
+					if(s.getSource() == null || s.getDestination() == null){
+						wholeStreets.add(s);
+					}
+					else {
+						System.out.println("Source: " + s.getSource().getName() + " adds adj street segment " + s.getName() + "(" + s.getDirection() + ")");
+						System.out.println("Destination: " + s.getDestination().getName() + " adds adj street segment " + s.getName());
+						System.out.println("");
+						s.getSource().getAdjSegments().add(s);
+						s.getDestination().getAdjSegments().add(s);
+						streets.add(s);
+					}
 				}
-				else avenues.add(s);
+				else {
+					if(s.getSource() == null || s.getDestination() == null){
+						wholeAvenues.add(s);
+					}
+					else {
+						s.getSource().getAdjSegments().add(s);
+						s.getDestination().getAdjSegments().add(s);
+						avenues.add(s);
+					}
+				}
 			}
 			for(Intersection i : allIntersections){
 				intersections.add(i);
 			}
-			System.out.println("Intersections: " + intersections.size() + " Streets: " + streets.size() + " Avenues: " + avenues.size());
 		}
-		setWholeStreets(new ArrayList<Street>());
-		setWholeAvenues(new ArrayList<Street>());
-		wholeStreets.addAll(streets.subList(0, 7));
-		wholeAvenues.addAll(avenues.subList(0, 7));
+
 		return instance;
 	}
 	
@@ -215,25 +233,41 @@ public class CityMap {
 		System.out.println("Adding Streets");
 		for(int i = 0; i < tempavenues.size(); i++){
 			for(int j = 0; j < tempstreets.size(); j++){
-				int currIntersection = i*j+i+j;
+				int currIntersection = i*tempavenues.size()+j;
 				if(j+1 < tempstreets.size()){
 					if(tempavenues.get(i).getDirection() == "East" || tempavenues.get(i).getDirection() == "East-West"){
 						//All street segments moving Eastward or both directions on tempavenues.get(i)
-						avenues.add(new Street(tempavenues.get(i).getName(),tempavenues.get(i).getDirection(),intersections.get(currIntersection),intersections.get(currIntersection+1),1));
+						Intersection src = intersections.get(currIntersection), dest = intersections.get(currIntersection+1);
+						Street s = new Street(tempavenues.get(i).getName(),tempavenues.get(i).getDirection(),src,dest,1);
+						s.getSource().getAdjSegments().add(s);
+						s.getDestination().getAdjSegments().add(s);
+						avenues.add(s);
 					}
 					
 					if(tempavenues.get(i).getDirection() == "West" || tempavenues.get(i).getDirection() == "East-West"){
-						avenues.add(new Street(tempavenues.get(i).getName(),tempavenues.get(i).getDirection(),intersections.get(currIntersection+1),intersections.get(currIntersection),1));
+						Intersection src = intersections.get(currIntersection+1), dest = intersections.get(currIntersection);
+						Street s = new Street(tempavenues.get(i).getName(),tempavenues.get(i).getDirection(),src,dest,1);
+						s.getSource().getAdjSegments().add(s);
+						s.getDestination().getAdjSegments().add(s);
+						avenues.add(s);
 					}
 				}
 				if(i+1 < tempavenues.size()){
 					if(tempstreets.get(j).getDirection() == "South" || tempstreets.get(j).getDirection() == "North-South"){
 						//All street segments moving Eastward or both directions on tempavenues.get(i)
-						streets.add(new Street(tempstreets.get(j).getName(),tempstreets.get(j).getDirection(),intersections.get(currIntersection),intersections.get(currIntersection+7),1));
+						Intersection src = intersections.get(currIntersection), dest = intersections.get(currIntersection+7);
+						Street s = new Street(tempstreets.get(j).getName(),tempstreets.get(j).getDirection(),src,dest,1);
+						s.getSource().getAdjSegments().add(s);
+						s.getDestination().getAdjSegments().add(s);
+						streets.add(s);
 					}
 					
 					if(tempstreets.get(j).getDirection() == "North" || tempstreets.get(j).getDirection() == "North-South"){
-						streets.add(new Street(tempstreets.get(j).getName(),tempstreets.get(j).getDirection(),intersections.get(currIntersection+7),intersections.get(currIntersection),1));
+						Intersection src = intersections.get(currIntersection+7), dest = intersections.get(currIntersection);
+						Street s = new Street(tempstreets.get(j).getName(),tempstreets.get(j).getDirection(),src,dest,1);
+						s.getSource().getAdjSegments().add(s);
+						s.getDestination().getAdjSegments().add(s);
+						streets.add(s);
 					}
 				}
 			}
