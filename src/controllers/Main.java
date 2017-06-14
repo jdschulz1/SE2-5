@@ -92,8 +92,8 @@ public class Main extends Application {
 //			deliveryTicket3.setOrderDateTime(LocalDateTime.now().plusDays(30));
 				
 			//setup dummy couriers
-			Courier courier = new Courier(1, "Sally Sassalot", "4055555353", true);
-			deliveryTracker.addCourier(courier);
+//			Courier courier = new Courier(1, "Sally Sassalot", "4055555353", true);
+//			deliveryTracker.addCourier(courier);
 		
 			//test shortest path
 //			Intersection src = IntersectionDAO.findIntersectionById(3256), dest = IntersectionDAO.findIntersectionById(3276);
