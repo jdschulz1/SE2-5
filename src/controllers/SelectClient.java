@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -20,8 +21,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
 import model.Client;
+import model.DeliveryTicket;
 import model.DeliveryTracker;
 import dtDAO.ClientDAO;
+import dtDAO.DeliveryTicketDAO;
 
 public class SelectClient implements Initializable {
  
@@ -109,15 +112,22 @@ public class SelectClient implements Initializable {
 	            @Override
 	            public void handle(ActionEvent event) {
 	            	Client c = comboBoxClient.getValue();
-	                System.out.println("Delete " + c.getName());
-	                //TODO: check deletion criteria
-	                Alert a = new Alert(AlertType.CONFIRMATION);
-        	        a.setTitle("Confirm Deletion");
-        	        a.setContentText("Are you sure you want to delete " + c.getName() + "?");
-	                a.showAndWait()
-	                	.filter(response -> response == ButtonType.OK)
-	                	.ifPresent(response -> ClientDAO.removeClient(c));
-	                updateClientsList();
+	                System.out.println("Delete " + c.getName());                
+	                List<DeliveryTicket> ticketsForClient = DeliveryTicketDAO.findDeliveryTicketsByClient(c);
+	                if(ticketsForClient.size() > 0)
+	                {
+	                	Alert a = new Alert(AlertType.ERROR);
+	        	        a.setContentText("Cannot delete " + c.getName() + " - they have existing delivery tickets.");
+		                a.showAndWait();
+	                } else {
+		                Alert a = new Alert(AlertType.CONFIRMATION);
+	        	        a.setTitle("Confirm Deletion");
+	        	        a.setContentText("Are you sure you want to delete " + c.getName() + "?");
+		                a.showAndWait()
+		                	.filter(response -> response == ButtonType.OK)
+		                	.ifPresent(response -> ClientDAO.removeClient(c));
+		                updateClientsList();
+	                }
 	            }
 	        });
 	}
@@ -126,5 +136,7 @@ public class SelectClient implements Initializable {
 		ObservableList<Client> clients = FXCollections.observableArrayList();
 		clients.addAll(deliveryTracker.getClients());
 		comboBoxClient.setItems(clients);
+		if(clients.size() > 0)
+			comboBoxClient.setValue(clients.get(0));
 	}
 }

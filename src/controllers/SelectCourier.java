@@ -2,10 +2,12 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import dtDAO.ClientDAO;
 import dtDAO.CourierDAO;
+import dtDAO.DeliveryTicketDAO;
 import javafx.fxml.Initializable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +25,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
 import model.Client;
 import model.Courier;
+import model.DeliveryTicket;
 import model.DeliveryTracker;
 import model.User;
 
@@ -103,23 +106,33 @@ public class SelectCourier implements Initializable {
             @Override
             public void handle(ActionEvent event) {
             	Courier c = comboBoxCourier.getValue();
-                Alert a = new Alert(AlertType.CONFIRMATION);
-    	        a.setTitle("Confirm Deletion");
-    	        a.setContentText("Are you sure you want to delete " + c.getName() + "?");
-                a.showAndWait()
-                	.filter(response -> response == ButtonType.OK)
-                	.ifPresent(response -> CourierDAO.removeCourier(c));
-                updateCourierList();
+            	
+            	List<DeliveryTicket> ticketsForCourier = DeliveryTicketDAO.findDeliveryTicketsByCourier(c);
+                if(ticketsForCourier.size() > 0)
+                {
+                	Alert a = new Alert(AlertType.ERROR);
+        	        a.setContentText("Cannot delete " + c.getName() + " - they have existing delivery tickets.");
+	                a.showAndWait();
+                } else {
+	                Alert a = new Alert(AlertType.CONFIRMATION);
+	    	        a.setTitle("Confirm Deletion");
+	    	        a.setContentText("Are you sure you want to delete " + c.getName() + "?");
+	                a.showAndWait()
+	                	.filter(response -> response == ButtonType.OK)
+	                	.ifPresent(response -> CourierDAO.removeCourier(c));
+	                updateCourierList();
+                }
             }
         });
 		
 	}	
 
 	private void updateCourierList() {
-		// TODO Auto-generated method stub
 		ObservableList<Courier> couriers = FXCollections.observableArrayList();
 		couriers.addAll(deliveryTracker.getCouriers());
 		comboBoxCourier.setItems(couriers);
+		if(couriers.size() > 0)
+			comboBoxCourier.setValue(couriers.get(0));
 	}
 
 }

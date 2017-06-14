@@ -8,7 +8,8 @@ import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 import dtDAO.ClientDAO;
-import dtDAO.CompanyInfoDAO;
+
+import dtDAO.DeliveryTrackerDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -70,10 +71,12 @@ public class EditCompanyInfo implements javafx.fxml.Initializable {
     private ComboBox<Street> comboBoxAvenue;
     
     DeliveryTracker deliveryTracker;
+    CityMap cityMap;
 	
 	@Override	
 	public void initialize(URL location, ResourceBundle resources) {		
 		deliveryTracker = DeliveryTracker.getDeliveryTracker();
+		cityMap = CityMap.getCityMap();
 		comboBoxStreet.setConverter(
 	            new StringConverter<Street>() {
 	                @Override
@@ -175,13 +178,13 @@ public class EditCompanyInfo implements javafx.fxml.Initializable {
 	
 	public void updateImpedimentStreetsList () {
 		ObservableList<Street> streets = FXCollections.observableArrayList();
-		streets.addAll(CityMap.getStreets());
+		streets.addAll(cityMap.getWholeStreets());
 		comboBoxStreet.setItems(streets);
 	}
 	
 	public void updateImpedimentAvenuesList () {
 		ObservableList<Street> avenues = FXCollections.observableArrayList();
-		avenues.addAll(CityMap.getAvenues());
+		avenues.addAll(cityMap.getWholeAvenues());
 		comboBoxAvenue.setItems(avenues);
 	}
 	
@@ -235,7 +238,7 @@ public class EditCompanyInfo implements javafx.fxml.Initializable {
 		deliveryTracker.setCourierSpeed(Double.parseDouble(textFieldAvgCourierSpeed.getText().trim()));
 		deliveryTracker.setBonusAmount(decimalFromString(textFieldOnTimeBonusAmount.getText().trim()));
 		deliveryTracker.setBonusTimeVariance(Integer.parseInt(textFieldOnTimeAllowableVariance.getText().trim()));
-		CompanyInfoDAO.save(deliveryTracker);
+		DeliveryTrackerDAO.save(deliveryTracker);
 		return true;
 	}
 }

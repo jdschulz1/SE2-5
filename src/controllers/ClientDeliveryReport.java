@@ -26,16 +26,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import model.CityMap;
 import model.Client;
 import model.DeliveryTicket;
 import model.DeliveryTracker;
@@ -218,7 +217,8 @@ public class ClientDeliveryReport implements Initializable {
 	                        CSVWriter.writeLine(writer,Arrays.asList("Number of Deliveries", ticketsList.size() + ""));
 	                        CSVWriter.writeLine(writer,Arrays.asList("On Time Delivery Rate", df.format(getOnTimeDeliveryRate(ticketsList))));
 	                        
-	                        
+	                        CSVWriter.writeLine(writer,Arrays.asList(""));
+
 	                        CSVWriter.writeLine(writer,Arrays.asList("Details"));
 	                        CSVWriter.writeLine(writer, Arrays.asList("Order Date", "Pickup Client", "Delivery Client", "Estimated Delivery Time", "Actual Delivery Time"));
 					

@@ -117,6 +117,8 @@ public class SelectTrafficImpediment implements Initializable {
 		ObservableList<TrafficImpediment> trafficImpediments = FXCollections.observableArrayList();
 		trafficImpediments.addAll(deliveryTracker.getTrafficImpediments());
 		comboBoxTrafficImpediment.setItems(trafficImpediments);
+		if(trafficImpediments.size() > 0)
+			comboBoxTrafficImpediment.setValue(trafficImpediments.get(0));
 	}
 
 }

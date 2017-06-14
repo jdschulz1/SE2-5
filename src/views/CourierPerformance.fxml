@@ -2,7 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CourierPerformance">
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0">
          <children>
@@ -39,27 +39,19 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Label text="Courier">
-                                       <GridPane.margin>
-                                          <Insets left="70.0" />
-                                       </GridPane.margin>
-                                    </Label>
-                                    <Button fx:id="btnPreview" mnemonicParsing="false" text="Preview" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                    <Button fx:id="btnPreview" mnemonicParsing="false" text="Preview" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets left="140.0" />
                                        </GridPane.margin>
                                     </Button>
-                                    <Label text="Starting" GridPane.rowIndex="2">
+                                    <Label text="Starting" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets left="70.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <RadioButton fx:id="radioButtonMonth" mnemonicParsing="false" text="Month" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <RadioButton fx:id="radioButtonMonth" mnemonicParsing="false" text="Month" GridPane.columnIndex="1">
                                        <padding>
                                           <Insets left="200.0" />
                                        </padding>
@@ -67,69 +59,68 @@
                                           <ToggleGroup fx:id="reportingTimeFrame" />
                                        </toggleGroup>
                                     </RadioButton>
-                                    <RadioButton fx:id="radioButtonWeek" mnemonicParsing="false" selected="true" text="Week" toggleGroup="$reportingTimeFrame" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <RadioButton fx:id="radioButtonWeek" mnemonicParsing="false" selected="true" text="Week" toggleGroup="$reportingTimeFrame" GridPane.columnIndex="1">
                                        <GridPane.margin>
                                           <Insets left="20.0" />
                                        </GridPane.margin>
                                     </RadioButton>
-                                    <Label fx:id="labelCourierName" text="None" GridPane.rowIndex="3">
+                                    <Label fx:id="labelCourierName" text="None" GridPane.rowIndex="2">
                                        <padding>
                                           <Insets left="150.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="labelDate" text="None" GridPane.rowIndex="4">
+                                    <Label fx:id="labelDate" text="None" GridPane.rowIndex="3">
                                        <padding>
                                           <Insets left="150.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="labelNumberofDeliveries" text="None" GridPane.rowIndex="5">
+                                    <Label fx:id="labelNumberofDeliveries" text="None" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <padding>
                                           <Insets left="150.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="labelOnTimeDeliveryRate" text="None" GridPane.rowIndex="6">
+                                    <Label fx:id="labelOnTimeDeliveryRate" text="None" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <padding>
                                           <Insets left="150.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="labelTotalBonusEarned" text="None" GridPane.rowIndex="7">
+                                    <Label fx:id="labelTotalBonusEarned" text="None" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                        <padding>
                                           <Insets left="150.0" />
                                        </padding>
                                     </Label>
-                                    <Label text="Courier Name:" GridPane.rowIndex="3">
+                                    <Label text="Courier Name:" GridPane.rowIndex="2">
                                        <padding>
                                           <Insets left="10.0" />
                                        </padding>
                                     </Label>
-                                    <Label text="Date:" GridPane.rowIndex="4">
+                                    <Label text="Date:" GridPane.rowIndex="3">
                                        <padding>
                                           <Insets left="10.0" />
                                        </padding>
                                     </Label>
-                                    <Label text="Number of Deliveries:" GridPane.rowIndex="5">
+                                    <Label text="Number of Deliveries:" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <padding>
                                           <Insets left="10.0" />
                                        </padding>
                                     </Label>
-                                    <Label text="On-Time Delivery Rate:" GridPane.rowIndex="6">
+                                    <Label text="On-Time Delivery Rate:" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <padding>
                                           <Insets left="10.0" />
                                        </padding>
                                     </Label>
-                                    <Label text="Total Bonus Earned:" GridPane.rowIndex="7">
+                                    <Label text="Total Bonus Earned:" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                        <padding>
                                           <Insets left="10.0" />
                                        </padding>
                                     </Label>
-                                    <ComboBox fx:id="comboBoxCourier" prefHeight="25.0" prefWidth="279.0" GridPane.columnIndex="1" />
-                                    <ComboBox fx:id="comboBoxStarting" prefHeight="25.0" prefWidth="298.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <DatePicker fx:id="datePickerStartDate" prefHeight="25.0" prefWidth="296.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                  </children>
                                  <padding>
                                     <Insets bottom="20.0" top="20.0" />
                                  </padding>
                               </GridPane>
-                              <TableView prefHeight="367.0" prefWidth="665.0">
+                              <TableView fx:id="tableReport" prefHeight="240.0" prefWidth="827.0">
                                  <columns>
                                     <TableColumn fx:id="tableColumnOrderDate" prefWidth="119.20001220703125" text="Order Date" />
                                     <TableColumn fx:id="tableColumnPickupClient" prefWidth="148.20001220703125" text="Pickup Client" />
@@ -148,6 +139,7 @@
                               <GridPane prefHeight="74.0" prefWidth="275.0">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                 </columnConstraints>
                                 <rowConstraints>
@@ -155,7 +147,7 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button fx:id="btnCancel" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <Button fx:id="btnCancel" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Cancel" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets left="45.0" />
                                        </GridPane.margin>
@@ -166,11 +158,12 @@
                                           <Insets left="13.0" />
                                        </GridPane.margin>
                                     </Button>
-                                    <Button fx:id="btnNext" mnemonicParsing="false" text="Next" GridPane.columnIndex="1">
+                                    <Button fx:id="btnNext" mnemonicParsing="false" text="Next" GridPane.columnIndex="2">
                                        <GridPane.margin>
                                           <Insets left="50.0" />
                                        </GridPane.margin>
                                     </Button>
+                                    <Label fx:id="labelCourierCounter" prefHeight="17.0" prefWidth="92.0" text="Courier 0 of 0" textAlignment="CENTER" GridPane.columnIndex="1" />
                                  </children>
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

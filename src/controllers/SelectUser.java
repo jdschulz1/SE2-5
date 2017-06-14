@@ -4,9 +4,11 @@ package controllers;
 import java.io.IOException;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import dtDAO.ClientDAO;
+import dtDAO.DeliveryTicketDAO;
 import dtDAO.UserDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,6 +26,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
 import model.User;
+import model.Courier;
+import model.DeliveryTicket;
 import model.DeliveryTracker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -113,13 +117,22 @@ public class SelectUser implements Initializable {
 	            @Override
 	            public void handle(ActionEvent event) {
 	            	User u = comboBoxUser.getValue();
-	                Alert a = new Alert(AlertType.CONFIRMATION);
-        	        a.setTitle("Confirm Deletion");
-        	        a.setContentText("Are you sure you want to delete " + u.getName() + "?");
-	                a.showAndWait()
-	                	.filter(response -> response == ButtonType.OK)
-	                	.ifPresent(response -> UserDAO.removeUser(u));
-	                updateUsersList();
+	            	
+	            	List<DeliveryTicket> ticketsForUser = DeliveryTicketDAO.findDeliveryTicketsByUser(u);
+	                if(ticketsForUser.size() > 0)
+	                {
+	                	Alert a = new Alert(AlertType.ERROR);
+	        	        a.setContentText("Cannot delete " + u.getName() + " - they have existing delivery tickets.");
+		                a.showAndWait();
+	                } else {
+		                Alert a = new Alert(AlertType.CONFIRMATION);
+	        	        a.setTitle("Confirm Deletion");
+	        	        a.setContentText("Are you sure you want to delete " + u.getName() + "?");
+		                a.showAndWait()
+		                	.filter(response -> response == ButtonType.OK)
+		                	.ifPresent(response -> UserDAO.removeUser(u));
+		                updateUsersList();
+	                }
 	            }
 	        });
 	}
@@ -128,7 +141,8 @@ public class SelectUser implements Initializable {
 		ObservableList<User> users = FXCollections.observableArrayList();
 		users.addAll(deliveryTracker.getUsers());
 		comboBoxUser.setItems(users);
-
+		if(users.size() > 0)
+			comboBoxUser.setValue(users.get(0));
 	}
 
 }

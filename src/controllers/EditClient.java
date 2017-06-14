@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import dtDAO.ClientDAO;
-import dtDAO.TrafficImpedimentDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -56,10 +55,11 @@ public class EditClient implements javafx.fxml.Initializable {
     private Button buttonCancel;
 	    
 	Client client;
+	CityMap cityMap;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		System.out.println("Client Edit");
+		cityMap = CityMap.getCityMap();
 
 		if(client != null) {
 			textFieldClientNumber.setText(Integer.toString(client.getClientNumber()));
@@ -137,18 +137,17 @@ public class EditClient implements javafx.fxml.Initializable {
 	
 	public void setClient(Client c) {
 		this.client = c;
-		System.out.println("Setting client to " + c.getName());
 	}
 	
 	public void updateImpedimentStreetsList () {
 		ObservableList<Street> streets = FXCollections.observableArrayList();
-		streets.addAll(CityMap.getStreets());
+		streets.addAll(cityMap.getWholeStreets());
 		comboBoxStreet.setItems(streets);
 	}
 	
 	public void updateImpedimentAvenuesList () {
 		ObservableList<Street> avenues = FXCollections.observableArrayList();
-		avenues.addAll(CityMap.getAvenues());
+		avenues.addAll(cityMap.getWholeAvenues());
 		comboBoxAvenue.setItems(avenues);
 	}
 	

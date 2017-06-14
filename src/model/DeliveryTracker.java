@@ -13,18 +13,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import dtDAO.ClientDAO;
 import dtDAO.CourierDAO;
 import dtDAO.TrafficImpedimentDAO;
 import dtDAO.UserDAO;
-import dtDAO.CompanyInfoDAO;
+import dtDAO.DeliveryTrackerDAO;
 import dtDAO.DeliveryTicketDAO;
 
 /**
  * The object representing the system and overall company information for ACME Couriers.
  */
-@Entity(name = "companyInfo")
+@Entity(name = "deliverytracker")
 public class DeliveryTracker implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -36,6 +37,12 @@ public class DeliveryTracker implements Serializable{
 	}
 	
 	public static DeliveryTracker getDeliveryTracker(){
+		
+		DeliveryTracker instance = DeliveryTrackerDAO.getDeliveryTracker();
+//		if(!instance.isEmpty()){
+//			trafficImpediments.addAll(db_impediments);
+//		}
+		
 		trafficImpediments = new ArrayList<TrafficImpediment>();
 		List<TrafficImpediment> db_impediments = TrafficImpedimentDAO.listTrafficImpediment();
 		if(!db_impediments.isEmpty()){
@@ -70,9 +77,9 @@ public class DeliveryTracker implements Serializable{
 	}
 	
 	@Id
-	@Column(name = "companyInfo_id", nullable = false)
+	@Column(name = "delivery_tracker_id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long companInfoId;
+	private long deliveryTrackerId;
 	
 	/**
 	 * A list of couriers working for the company.
@@ -137,6 +144,7 @@ public class DeliveryTracker implements Serializable{
 	/**
 	 * The data representing the map used for planning out the delivery routes for the Couriers.
 	 */
+	@Transient
 	private CityMap map;
 	/**
 	 * The name of the Company.
@@ -440,4 +448,5 @@ public class DeliveryTracker implements Serializable{
 		// TODO Auto-generated method stub
 		return couriers.remove(c);
 	}
+
 }
