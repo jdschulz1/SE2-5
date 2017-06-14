@@ -40,7 +40,7 @@ public class DeliveryTracker implements Serializable{
 		
 		DeliveryTracker instance = DeliveryTrackerDAO.getDeliveryTracker();
 //		if(!instance.isEmpty()){
-//			trafficImpediments.addAll(db_impediments);
+//			deliverytracker.addAll(db_impediments);
 //		}
 		
 		trafficImpediments = new ArrayList<TrafficImpediment>();

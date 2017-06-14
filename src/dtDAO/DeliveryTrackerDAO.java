@@ -17,7 +17,12 @@ public class DeliveryTrackerDAO {
 	public static DeliveryTracker getDeliveryTracker()
 	{
 		TypedQuery<DeliveryTracker> query = emDAO.getEM().createQuery("SELECT deliverytracker FROM deliverytracker deliverytracker", DeliveryTracker.class);
-		return query.getSingleResult();
+		if(query.getSingleResult() != null) {
+			return query.getSingleResult();
+		}
+		else {
+			return null;
+		}
 	}
 
 }
