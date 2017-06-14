@@ -126,5 +126,7 @@ public class SelectClient implements Initializable {
 		ObservableList<Client> clients = FXCollections.observableArrayList();
 		clients.addAll(deliveryTracker.getClients());
 		comboBoxClient.setItems(clients);
+		if(clients.size() > 0)
+			comboBoxClient.setValue(clients.get(0));
 	}
 }

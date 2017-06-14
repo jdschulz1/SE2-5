@@ -116,10 +116,11 @@ public class SelectCourier implements Initializable {
 	}	
 
 	private void updateCourierList() {
-		// TODO Auto-generated method stub
 		ObservableList<Courier> couriers = FXCollections.observableArrayList();
 		couriers.addAll(deliveryTracker.getCouriers());
 		comboBoxCourier.setItems(couriers);
+		if(couriers.size() > 0)
+			comboBoxCourier.setValue(couriers.get(0));
 	}
 
 }

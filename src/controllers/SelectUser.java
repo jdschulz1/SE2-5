@@ -128,6 +128,8 @@ public class SelectUser implements Initializable {
 		ObservableList<User> users = FXCollections.observableArrayList();
 		users.addAll(deliveryTracker.getUsers());
 		comboBoxUser.setItems(users);
+		if(users.size() > 0)
+			comboBoxUser.setValue(users.get(0));
 
 	}
 
