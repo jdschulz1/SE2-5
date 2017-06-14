@@ -56,10 +56,12 @@ public class EditClient implements javafx.fxml.Initializable {
     private Button buttonCancel;
 	    
 	Client client;
+	CityMap cityMap;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		System.out.println("Client Edit");
+		cityMap = CityMap.getCityMap();
 
 		if(client != null) {
 			textFieldClientNumber.setText(Integer.toString(client.getClientNumber()));
@@ -142,13 +144,15 @@ public class EditClient implements javafx.fxml.Initializable {
 	
 	public void updateImpedimentStreetsList () {
 		ObservableList<Street> streets = FXCollections.observableArrayList();
-		streets.addAll(CityMap.getStreets());
+		System.out.println("Streets" + cityMap.getWholeStreets().size());
+		streets.addAll(cityMap.getWholeStreets());
 		comboBoxStreet.setItems(streets);
 	}
 	
 	public void updateImpedimentAvenuesList () {
 		ObservableList<Street> avenues = FXCollections.observableArrayList();
-		avenues.addAll(CityMap.getAvenues());
+		System.out.println("Avenues" + cityMap.getWholeAvenues().size());
+		avenues.addAll(cityMap.getWholeAvenues());
 		comboBoxAvenue.setItems(avenues);
 	}
 	

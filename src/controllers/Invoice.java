@@ -196,7 +196,9 @@ public class Invoice implements Initializable {
 	
 	                        CSVWriter.writeLine(writer,Arrays.asList("Client Name", c.getName()));
 	                        CSVWriter.writeLine(writer,Arrays.asList("Invoice Date", startDate.format(formatter) + " - " + endDate.format(formatter)));
-	
+	                        
+	                        CSVWriter.writeLine(writer,Arrays.asList(""));
+
 	                        CSVWriter.writeLine(writer,Arrays.asList("Details"));
 	                        CSVWriter.writeLine(writer, Arrays.asList("Order Date", "Pickup Client", "Delivery Client", "Price"));
 					

@@ -68,10 +68,12 @@ public class EditCompanyInfo implements javafx.fxml.Initializable {
     private ComboBox<Street> comboBoxAvenue;
     
     DeliveryTracker deliveryTracker;
+    CityMap cityMap;
 	
 	@Override	
 	public void initialize(URL location, ResourceBundle resources) {		
 		deliveryTracker = DeliveryTracker.getDeliveryTracker();
+		cityMap = CityMap.getCityMap();
 		comboBoxStreet.setConverter(
 	            new StringConverter<Street>() {
 	                @Override
@@ -173,13 +175,13 @@ public class EditCompanyInfo implements javafx.fxml.Initializable {
 	
 	public void updateImpedimentStreetsList () {
 		ObservableList<Street> streets = FXCollections.observableArrayList();
-		streets.addAll(CityMap.getStreets());
+		streets.addAll(cityMap.getWholeStreets());
 		comboBoxStreet.setItems(streets);
 	}
 	
 	public void updateImpedimentAvenuesList () {
 		ObservableList<Street> avenues = FXCollections.observableArrayList();
-		avenues.addAll(CityMap.getAvenues());
+		avenues.addAll(cityMap.getWholeAvenues());
 		comboBoxAvenue.setItems(avenues);
 	}
 	

@@ -234,7 +234,10 @@ public class DeliveryTicket implements Serializable{
 	 */
 	public boolean isOnTime() {
 		deliveryTracker = DeliveryTracker.getDeliveryTracker();
-		Duration between = Duration.between(this.estimatedDeliveryTime, this.actualDeliveryTime);
+		System.out.println(this.estimatedDeliveryTime);
+		System.out.println(this.actualDeliveryTime);
+		Duration between = Duration.between(this.estimatedDeliveryTime, this.actualDeliveryTime).abs();
+		System.out.println(between.getSeconds() + " " + (deliveryTracker.getBonusTimeVariance() * 60));
 		return (between.getSeconds() <= (deliveryTracker.getBonusTimeVariance() * 60));
 	}
 
