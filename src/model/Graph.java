@@ -1,7 +1,11 @@
 package model;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.Stack;
 import java.util.TreeMap;
 
+import dtDAO.IntersectionDAO;
 import dtDAO.StreetDAO;
 
 /**
@@ -19,8 +23,16 @@ public class Graph {
 	 * @param name
 	 */
 	public Street[] getStreetsFrom(String name) {
-		// TODO - implement Graph.getStreetsFrom
-		throw new UnsupportedOperationException();
+		Street[] crossStreets = new Street[2];
+		for(Intersection i : IntersectionDAO.listIntersection()){
+			if(i.getName() == name){
+				crossStreets[0] = i.getStreet();
+				crossStreets[1] = i.getAvenue();
+				break;
+			}
+		}
+		
+		return crossStreets;
 	}
 
 	/**
@@ -42,6 +54,7 @@ public class Graph {
 		 * */
 		 ArrayList<Vertex> pending = new ArrayList<Vertex>();
 		 ArrayList<Vertex> processed = new ArrayList<Vertex>();
+		 Stack<Vertex> path = new Stack<Vertex>();
 
 		 CityMap map = CityMap.getCityMap();
 		//Initialize pending vertices
@@ -53,7 +66,7 @@ public class Graph {
 				 v.setPrevious(v);
 			 }
 			 else{
-				 v.setShortestDist(Integer.MAX_VALUE);
+				 v.setShortestDist(Integer.MAX_VALUE - 100);
 				 v.setPrevious(null);
 			 }
 
@@ -66,14 +79,16 @@ public class Graph {
 			 v = getShortestFoundPath(pending);
 			 processed.add(v);
 			 pending.remove(v);
-			 for(Street e : StreetDAO.affectedStreets(v.getIntersection())){
+			 ArrayList<Street> possibleStreets = new ArrayList<Street>();
+			 possibleStreets.addAll(StreetDAO.affectedStreets(v.getIntersection()));
+			 for(Street e : possibleStreets){
 				 Intersection notV = v.getIntersection().equals(e.getSource()) ? e.getDestination() : e.getSource();
 				 for(Vertex v2 : pending){
-					 if(v2.getIntersection() == notV){
-
-						 Edge edge = new Edge(e, v, v2);
+					 //boolean isPossible = possibleEdge(e, v, v2);
+					 if(!e.getDestination().equals(v.getIntersection()) && v2.getIntersection() == notV){
 						 
-						 relaxStreet(edge);
+						 relaxStreet(new Edge(e, v, v2));						 
+						 
 //						 System.out.println("--------------------------------------------------------------------------------");
 //						 System.out.println("after relax on v:" + v.getIntersection().getName() + " and v2:" + v2.getIntersection().getName());
 //						 System.out.println("ShortestDist v/v2:" + v.getShortestDist() + "/" + v2.getShortestDist());
@@ -83,18 +98,29 @@ public class Graph {
 			 }
 		 }
 		 
+		 pending.clear();
+		 pending.addAll(processed);
+		 processed.clear();
+		 Vertex nextV;
+		 for(Vertex vertex : pending){
+			 if(vertex != null && vertex.getIntersection().equals(destination.getIntersection())){
+				 nextV = vertex;
+				 path.push(nextV);
+				 do {
+					 nextV = nextV.getPrevious();
+					 path.push(nextV);
+				 }while(nextV.getPrevious() != nextV);
+				 
+				 break;
+			 }
+			 else continue;
+		 }
+		 
+		 while(!path.isEmpty() && path.peek() != null){
+			 processed.add(path.pop());
+		 }
+		 
 		 return processed;
-	}
-	
-	//Potentially not needed
-	public static Street findStreetByIntersections(Intersection src, Intersection dest){
-		for(Street s : CityMap.getStreets()){
-			if(src.getAdjSegments().contains(s) && dest.getAdjSegments().contains(s) && s.getDestination() != src){
-				return s;
-			}
-		}
-
-		return null;
 	}
 	
 	public static Vertex getShortestFoundPath(ArrayList<Vertex> pending){
@@ -108,6 +134,22 @@ public class Graph {
 		return shortest;
 	}
 
+	public static boolean possibleEdge(Street street, Vertex v, Vertex v2){
+		String streettostreet = CityMap.directionTraveled(v.getIntersection().getStreet(), v.getIntersection().getStreet());
+		if(streettostreet != "None"){
+			return (street.getDirection() == "East" || street.getDirection() == "East-West") ? streettostreet == "East" : streettostreet == "West"; 
+		}
+		
+		String avenuetoavenue = CityMap.directionTraveled(v.getIntersection().getStreet(), v.getIntersection().getStreet());
+		if(streettostreet != "None"){
+			return (street.getDirection() == "South" || street.getDirection() == "North-South") ? avenuetoavenue == "South" : avenuetoavenue == "North"; 
+		}
+		
+		return false;
+	}
+	
+	
+	
 	/**
 	 * The equivalent of relax edge in Dijkstra's shortest path algorithm. ?This algorithm helper for the main shortest path algorithm takes in a street and sets the Intersection that comes before the destination Intersection to
 	 * @param street
@@ -122,7 +164,10 @@ public class Graph {
 		 * */
 		Vertex a = e.getSource(), b = e.getDestination();
 		Street s = e.getStreet();
-
+		boolean isPossible = possibleEdge(s, a, b);
+		
+		//if(!isPossible)s.setWeight(Integer.MAX_VALUE - 100);
+		
 		if(a.getShortestDist() + s.getWeight() < b.getShortestDist()){
 			b.setShortestDist(a.getShortestDist() + s.getWeight());
 			b.setPrevious(a);

@@ -296,6 +296,45 @@ public class CityMap {
 		return wholeStreets;
 	}
 
+	public static String directionTraveled (Street src, Street dest){
+		Street first = null, second = null;
+		for(Street s : getWholeStreets()){
+			if(first == null && s.getName() == src.getName())first = src;
+			else if(s.getName() == src.getName())second = src;
+			
+			if(first == null && s.getName() == dest.getName())first = dest;
+			else if(s.getName() == dest.getName())second = dest;
+			
+			if(first != null && second != null){
+				if(first == src)return "East";
+				else return "West";
+			}
+			else if(first != null || second != null){
+				return "None";
+			}
+			else continue;
+		}
+		
+		for(Street s : getWholeAvenues()){
+			if(first == null && s.getName() == src.getName())first = src;
+			else if(s.getName() == src.getName())second = src;
+			
+			if(first == null && s.getName() == dest.getName())first = dest;
+			else if(s.getName() == dest.getName())second = dest;
+			
+			if(first != null && second != null){
+				if(first == src)return "South";
+				else return "North";
+			}
+			else if(first != null || second != null){
+				return "None";
+			}
+			else continue;
+		}
+		
+		return "None";
+	}
+	
 	public static void setWholeStreets(ArrayList<Street> wholeStreets) {
 		CityMap.wholeStreets = wholeStreets;
 	}

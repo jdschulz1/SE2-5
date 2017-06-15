@@ -18,7 +18,7 @@ public class TrafficImpedimentDAO {
 		List<Street> affectedStreets = StreetDAO.affectedStreets(newIntersection);
 		for(Street s : affectedStreets){
 			Street updatedStreet = s;
-			s.setWeight(Integer.MAX_VALUE);
+			s.setWeight(Integer.MAX_VALUE-100);
 			StreetDAO.saveStreet(s);
 		}
 		emDAO.getEM().getTransaction().begin();
@@ -32,7 +32,7 @@ public class TrafficImpedimentDAO {
 		List<Street> affectedStreets = StreetDAO.affectedStreets(newIntersection);
 		for(Street s : affectedStreets){
 			Street updatedStreet = s;
-			s.setWeight(Integer.MAX_VALUE);
+			s.setWeight(Integer.MAX_VALUE-100);
 			StreetDAO.saveStreet(s);
 		}
 		emDAO.getEM().getTransaction().begin();

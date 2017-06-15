@@ -41,4 +41,12 @@ public class IntersectionDAO {
 		}
 		return null;
 	}
+	
+	public static Intersection findIntersectionByStreets(String street, String avenue){
+		for(Intersection i : listIntersection()){
+			if(i.getStreet().getName().equals(street) && i.getAvenue().getName().equals(avenue)) 
+				return i;
+		}
+		return null;
+	}
 }
