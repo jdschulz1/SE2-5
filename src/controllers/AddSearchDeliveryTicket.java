@@ -103,12 +103,12 @@ public class AddSearchDeliveryTicket implements Initializable {
             }
         });
 		
-		buttonSearchDeliveryTickets.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-              
-            }
-        });
+//		buttonSearchDeliveryTickets.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//              
+//            }
+//        });
 		
 	}
 
