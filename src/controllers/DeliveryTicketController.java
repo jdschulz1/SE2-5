@@ -1,15 +1,28 @@
 package controllers;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.ResourceBundle;
 
-import com.sun.corba.se.spi.orbutil.proxy.DelegateInvocationHandlerImpl;
+import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
+import com.sun.corba.se.spi.orbutil.proxy.DelegateInvocationHandlerImpl;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
+import dtDAO.DeliveryTicketDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -18,6 +31,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
 import model.Client;
 import model.Courier;
@@ -128,8 +144,8 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		deliveryTracker = DeliveryTracker.getDeliveryTracker();
-		spinnerRequestedPickupMinute = new Spinner<Integer>(0, 60, 0, 1);
-		//spinnerRequestedPickupMinute.setValueFactory();
+		
+	
 		if(deliveryTicket != null){
 			comboBoxDeliveryClient.setValue(deliveryTicket.getDeliveryClient());
 			comboBoxPickupClient.setValue(deliveryTicket.getPickupClient());
@@ -186,13 +202,40 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 	  comboBoxActualReturnTimeAMPM.setItems(AMPMList);
 	  comboBoxRequestedPickupAMPM.setItems(AMPMList);
 	  
+	  buttonSave.setOnAction(new EventHandler<ActionEvent>() {
+	        @Override
+	        public void handle(ActionEvent event) {
+	        	
+	            	try {
+	        			if(save()) {
+	        				
+	                		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/AddSearchDeliveryTickets.fxml"));
+	        	    		BorderPane border = Main.getRoot();
+	        	    		border.setCenter(currentPane);
+	                	}
+	        		} catch(Exception e){
+	        		      	
+		    	}
+	        }
+	    });
+	  buttonCancel.setOnAction(new EventHandler<ActionEvent>() {
+	        @Override
+	        public void handle(ActionEvent event) {
+	        	
+	            	try {
+	        			
+	        				
+	                		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/AddSearchDeliveryTickets.fxml"));
+	        	    		BorderPane border = Main.getRoot();
+	        	    		border.setCenter(currentPane);
+	                
+	        		} catch(Exception e){
+	        		       	
+		    	}
+	        }
+	    });
 	}
-	private String getAMPM (LocalDateTime date){
-			if(date.getHour() < 12){
-				return "AM";
-				
-			}else return "PM";
-		}
+
 	private void updateCourierList() {
 		ObservableList<Courier> couriers = FXCollections.observableArrayList();
 		couriers.addAll(deliveryTracker.getCouriers());
@@ -301,7 +344,108 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 				}
             });	
 	}
+
+	private boolean save() {
+		if(!validate()) {
+			Alert a = new Alert(AlertType.ERROR);
+	        a.setTitle("Error");
+	        a.setHeaderText("Missing Information");
+	        a.setContentText("Please complete all required fields and try again.");
+	        a.showAndWait();
+			return false;
+		}
+		if(deliveryTicket == null){
+    		deliveryTicket = new DeliveryTicket();
+    		DeliveryTracker deliveryTracker = DeliveryTracker.getDeliveryTracker();
+    		deliveryTracker.addDeliveryTicket(deliveryTicket);
+		}
+		//save fields
+		deliveryTicket.setOrderDateTime(LocalDateTime.of(dateTimePickerOrderDate.getValue(), LocalDateTime.now().toLocalTime()));
+		deliveryTicket.setOrderTaker(comboBoxOrderTaker.getValue());
+		deliveryTicket.setPickupClient(comboBoxPickupClient.getValue());
+		deliveryTicket.setDeliveryClient(comboBoxPayingClient.getValue());
+		deliveryTicket.setPickupClient(comboBoxPayingClient.getValue());
+		
+		
+		int requestedPickupHour = spinnerRequestedPickupHour.getValueFactory().getValue();
+		int requestedPickupMin = spinnerRequestedPickupMinute.getValueFactory().getValue();
+		String AMORPM = comboBoxRequestedPickupAMPM.getValue();
+		LocalDateTime requestedPickupTime = deliveryTicket.getOrderDateTime().toLocalDate().atTime(hourCombobulator(requestedPickupHour, AMORPM), requestedPickupMin); 
+		deliveryTicket.setRequestedPickupTime(requestedPickupTime);
+		
+		deliveryTicket.setSpecialRemarks(textAreaSpecialRemarks.getText());
+
+		deliveryTicket.setCourier(comboBoxCourier.getValue());
+		
+		int actualPickupTimeHour = spinnerActualPickupTimeHour.getValueFactory().getValue();
+		int actualPickupTimeMin = spinnerActualPickupTimeMinute.getValueFactory().getValue();
+		String amOrPmActualPickup = comboBoxActualPickupTimeAMPM.getValue();
+		if(amOrPmActualPickup != null){
+			LocalDateTime actualPickupTime = deliveryTicket.getOrderDateTime().toLocalDate().atTime(hourCombobulator(actualPickupTimeHour, amOrPmActualPickup), actualPickupTimeMin);	
+			deliveryTicket.setActualPickupTime(actualPickupTime);
+		}
+		
+		
+		
+		int actualDepartureTimeHour = spinnerActualDepartureTimeHour.getValueFactory().getValue();
+		int actualDepartureTimeMin = spinnerActualDepartureTimeMinute.getValueFactory().getValue();
+		String amOrPmActualDeparture = comboBoxActualDepartureTimeAMPM.getValue();
+		if(amOrPmActualDeparture != null){
+			LocalDateTime actualDepartureTime = deliveryTicket.getOrderDateTime().toLocalDate().atTime(hourCombobulator(actualDepartureTimeHour, amOrPmActualDeparture), actualDepartureTimeMin);
+			deliveryTicket.setActualDepartureTime(actualDepartureTime);
+		}
+		
+		
+		int actualDeliveryTimeHour = spinnerActualDeliveryTimeHour.getValueFactory().getValue();
+		int actualDeliveryTimeMinute = spinnerActualDeliveryTimeMinute.getValueFactory().getValue();
+		String amOrPmActualDelivery = comboBoxActualDeliveryTimeAMPM.getValue();
+		if(amOrPmActualDelivery != null){
+			LocalDateTime actualDeliveryTime = deliveryTicket.getOrderDateTime().toLocalDate().atTime(hourCombobulator(actualDeliveryTimeHour, amOrPmActualDelivery), actualDeliveryTimeMinute);
+			deliveryTicket.setActualDeliveryTime(actualDeliveryTime);
+		}
+		
+		int actualReturnTimeHour = spinnerActualReturnTimeHour.getValueFactory().getValue();
+		int actualReturnTimeMinute = spinnerRequestedPickupMinute.getValueFactory().getValue();
+		String amOrPmActualReturn = comboBoxActualReturnTimeAMPM.getValue();
+		if(amOrPmActualReturn != null){
+			LocalDateTime actualReturnTime = deliveryTicket.getOrderDateTime().toLocalDate().atTime(hourCombobulator(actualReturnTimeHour, amOrPmActualReturn), actualReturnTimeMinute);
+			deliveryTicket.setActualReturnTime(actualReturnTime);
+			
+		}
+		
+		boolean isConfirmed = chkBoxDeliveryConfirmed.isSelected();
+		deliveryTicket.setDeliveryConfirmed(isConfirmed);
+		
+		DeliveryTicketDAO.saveDeliveryTicket(deliveryTicket);
+		return true;
+	}
 	
+	private boolean validate() {
+		try {
+			
+		} catch(Exception e) {
+				return false;
+		}
+		if(comboBoxCourier.getValue() == null) return false;
+		if(comboBoxDeliveryClient.getValue() == null) return false;
+		if(comboBoxPayingClient.getValue() == null) return false;
+		if(comboBoxPickupClient.getValue() == null) return false;
+		if (comboBoxRequestedPickupAMPM.getValue() == null)return false;
+		if (dateTimePickerOrderDate.getValue() == null) return false;
+		return true;
+	}
 	
+	private int hourCombobulator(int hour, String amOrPm){
+		if(amOrPm.equals("PM")){
+			return hour +=12;
+			
+		}else return hour;
+	}
 	
+	private String getAMPM (LocalDateTime date){
+		if(date.getHour() < 12){
+			return "AM";
+			
+		}else return "PM";
+	}
 }

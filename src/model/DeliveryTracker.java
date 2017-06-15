@@ -476,4 +476,10 @@ public class DeliveryTracker implements Serializable{
 		DeliveryTrackerDAO.save(instance);
 	}
 
+	public void addDeliveryTicket(DeliveryTicket deliveryTicket) {
+		if(this.deliveryTickets == null)
+			this.deliveryTickets = new ArrayList<DeliveryTicket>();
+		this.deliveryTickets.add(deliveryTicket);
+	}
+
 }
