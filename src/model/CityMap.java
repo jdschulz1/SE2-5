@@ -59,9 +59,9 @@ public class CityMap {
 						wholeStreets.add(s);
 					}
 					else {
-						System.out.println("Source: " + s.getSource().getName() + " adds adj street segment " + s.getName() + "(" + s.getDirection() + ")");
-						System.out.println("Destination: " + s.getDestination().getName() + " adds adj street segment " + s.getName());
-						System.out.println("");
+//						System.out.println("Source: " + s.getSource().getName() + " adds adj street segment " + s.getName() + "(" + s.getDirection() + ")");
+//						System.out.println("Destination: " + s.getDestination().getName() + " adds adj street segment " + s.getName());
+//						System.out.println("");
 						s.getSource().getAdjSegments().add(s);
 						s.getDestination().getAdjSegments().add(s);
 						streets.add(s);
@@ -229,8 +229,8 @@ public class CityMap {
 		intersections.add(new Intersection(E,seventh));
 		intersections.add(new Intersection(F,seventh));
 		intersections.add(new Intersection(G,seventh));
-		System.out.println(intersections.size() + " Intersections added (" + intersections.get(0).getName() + " through " + intersections.get(48).getName() + ")");
-		System.out.println("Adding Streets");
+//		System.out.println(intersections.size() + " Intersections added (" + intersections.get(0).getName() + " through " + intersections.get(48).getName() + ")");
+//		System.out.println("Adding Streets");
 		for(int i = 0; i < tempavenues.size(); i++){
 			for(int j = 0; j < tempstreets.size(); j++){
 				int currIntersection = i*tempavenues.size()+j;
@@ -272,24 +272,24 @@ public class CityMap {
 				}
 			}
 		}
-		System.out.println(streets.size() + " Streets added (e.g. " + streets.get(0).getName() + ")");
-		System.out.println(avenues.size() + " Avenues added (e.g. " + avenues.get(0).getName() + ")");
+//		System.out.println(streets.size() + " Streets added (e.g. " + streets.get(0).getName() + ")");
+//		System.out.println(avenues.size() + " Avenues added (e.g. " + avenues.get(0).getName() + ")");
 		
-		System.out.println("Adding " + intersections.size() + " Intersections to Team5DT Database");
+//		System.out.println("Adding " + intersections.size() + " Intersections to Team5DT Database");
 		for(Intersection i: intersections){
 			IntersectionDAO.addIntersection(i);
 		}
-		System.out.println(IntersectionDAO.listIntersection().size() + " Intersections added to Team5DT Database");
-		System.out.println("Adding " + streets.size() + " Streets to Team5DT Database");
+//		System.out.println(IntersectionDAO.listIntersection().size() + " Intersections added to Team5DT Database");
+//		System.out.println("Adding " + streets.size() + " Streets to Team5DT Database");
 		for(Street s: streets){
 			StreetDAO.addStreet(s);
 		}
-		System.out.println(StreetDAO.listStreet().size() + " Streets added to Team5DT Database");
-		System.out.println("Adding " + avenues.size() + " Avenues to Team5DT Database");
+//		System.out.println(StreetDAO.listStreet().size() + " Streets added to Team5DT Database");
+//		System.out.println("Adding " + avenues.size() + " Avenues to Team5DT Database");
 		for(Street s: avenues){
 			StreetDAO.addStreet(s);
 		}
-		System.out.println(StreetDAO.listStreet().size() + " Streets added to Team5DT Database");
+//		System.out.println(StreetDAO.listStreet().size() + " Streets added to Team5DT Database");
 	}
 
 	public static ArrayList<Street> getWholeStreets() {

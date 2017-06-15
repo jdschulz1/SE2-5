@@ -1,7 +1,5 @@
 package dtDAO;
 
-import java.util.List;
-
 import javax.persistence.TypedQuery;
 
 import model.DeliveryTracker;
@@ -17,6 +15,7 @@ public class DeliveryTrackerDAO {
 	public static DeliveryTracker getDeliveryTracker()
 	{
 		TypedQuery<DeliveryTracker> query = emDAO.getEM().createQuery("SELECT deliverytracker FROM deliverytracker deliverytracker", DeliveryTracker.class);
+		System.out.println("Text"); //+ query.getResultList().size());
 		if(query.getResultList().size() > 0) {
 			return query.getSingleResult();
 		}

@@ -20,6 +20,8 @@ import dtDAO.CourierDAO;
 import dtDAO.TrafficImpedimentDAO;
 import dtDAO.UserDAO;
 import dtDAO.DeliveryTrackerDAO;
+import dtDAO.IntersectionDAO;
+import dtDAO.StreetDAO;
 import dtDAO.DeliveryTicketDAO;
 
 /**
@@ -38,9 +40,9 @@ public class DeliveryTracker implements Serializable{
 	
 	public static DeliveryTracker getDeliveryTracker(){
 		
-		DeliveryTracker instance = DeliveryTrackerDAO.getDeliveryTracker();
-//		if(!instance.isEmpty()){
-//			deliverytracker.addAll(db_impediments);
+//		DeliveryTracker instance = DeliveryTrackerDAO.getDeliveryTracker();
+//		if(instance == null){
+//			initializeDeliveryTracker();
 //		}
 		
 		trafficImpediments = new ArrayList<TrafficImpediment>();
@@ -72,6 +74,11 @@ public class DeliveryTracker implements Serializable{
 		if(!db_delivery_ticket.isEmpty()){
 			deliveryTickets.addAll(db_delivery_ticket);
 		}
+		
+		DeliveryTracker instance = DeliveryTrackerDAO.getDeliveryTracker();
+		if(instance == null){
+			initializeDeliveryTracker();
+		}
 
 		return instance;
 	}
@@ -84,6 +91,7 @@ public class DeliveryTracker implements Serializable{
 	/**
 	 * A list of couriers working for the company.
 	 */
+	@Transient
 	private static List<Courier> couriers;
 	/**
 	 * The base charge for a delivery.
@@ -128,18 +136,22 @@ public class DeliveryTracker implements Serializable{
 	/**
 	 * The list of Person objects that are known by the DeliveryTracker, which includes the Users and Couriers.
 	 */
+	@Transient
 	private static List<User> users;
 	/**
 	 * The list of delivery ticket objects that are known by the DeliveryTracker
 	 */
+	@Transient
 	private static List<DeliveryTicket> deliveryTickets;
 	/**
 	 * The Clients known to the DeliveryTracker.
 	 */
+	@Transient
 	private static List<Client> clients;
 	/**
 	 * All TrafficImpediments known to the DeliveryTracker.
 	 */
+	@Transient
 	private static List<TrafficImpediment> trafficImpediments;
 	/**
 	 * The data representing the map used for planning out the delivery routes for the Couriers.
@@ -237,6 +249,7 @@ public class DeliveryTracker implements Serializable{
 	public void setTrafficImpediments(List<TrafficImpediment> trafficImpediments) {
 		this.trafficImpediments = trafficImpediments;
 	}
+	
 
 	public CityMap getMap() {
 		return this.map;
@@ -447,6 +460,20 @@ public class DeliveryTracker implements Serializable{
 	public static boolean deleteCourier(Courier c) {
 		// TODO Auto-generated method stub
 		return couriers.remove(c);
+	}
+	
+	private static void initializeDeliveryTracker(){
+		instance.setBillRateBase(new BigDecimal(0));
+		instance.setBillRatePerBlock(new BigDecimal(0));
+		instance.setBlocksToMile(0);
+		instance.setBonusAmount(new BigDecimal(0));
+		instance.setBonusTimeVariance(0);
+		instance.setCompanyLocation(IntersectionDAO.listIntersection().get(0));
+		instance.setCompanyName("None");
+		instance.setCourierSpeed(0.0);
+		instance.setDeliveryOverheadTime(0);
+		instance.setPickupOverheadTime(0);
+		DeliveryTrackerDAO.save(instance);
 	}
 
 }
