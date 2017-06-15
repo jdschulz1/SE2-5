@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import dtDAO.IntersectionDAO;
 import model.Intersection;
 import model.Street;
 
@@ -33,7 +34,7 @@ public class Client implements Serializable{
 	public Client(int clientNumber, String name, Street street, Street avenue, String deliveryDetails, String phone, String email){
 		this.clientNumber = clientNumber; 
 		this.name = name;
-		this.location = new Intersection(street, avenue);
+		this.location = IntersectionDAO.findIntersectionByStreets(street, avenue);
 		this.deliveryDetails = deliveryDetails;
 		this.phoneNumber = phone;
 		this.email = email;
