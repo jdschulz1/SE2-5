@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -15,8 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="578.0" prefWidth="733.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddSearchDeliveryTicket">
+<AnchorPane prefHeight="578.0" prefWidth="733.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddSearchDeliveryTicket">
    <children>
       <BorderPane prefHeight="578.0" prefWidth="733.0">
          <center>
@@ -49,11 +49,7 @@
                            </GridPane.margin>
                         </Button>
                         <ComboBox fx:id="comboBoxClient" prefHeight="25.0" prefWidth="189.0" GridPane.columnIndex="1" />
-                        <ComboBox fx:id="comboBoxDate" prefHeight="25.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <GridPane.margin>
-                              <Insets top="15.0" />
-                           </GridPane.margin>
-                        </ComboBox>
+                        <DatePicker fx:id="datePickerSearchDate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                      <padding>
                         <Insets bottom="20.0" top="20.0" />
