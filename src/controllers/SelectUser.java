@@ -55,6 +55,14 @@ public class SelectUser implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		deliveryTracker = DeliveryTracker.getDeliveryTracker();
 		updateUsersList();
+		if(deliveryTracker.getCurrentUser().getRole().equals("User")){
+			buttonUserAdd.setDisable(true);
+			buttonUserDelete.setDisable(true);
+		}
+		else {
+			buttonUserAdd.setDisable(false);
+			buttonUserDelete.setDisable(false);
+		}
 		comboBoxUser.setConverter(
 		            new StringConverter<User>() {
 		                @Override
@@ -139,7 +147,14 @@ public class SelectUser implements Initializable {
 	
 	private void updateUsersList() {
 		ObservableList<User> users = FXCollections.observableArrayList();
-		users.addAll(deliveryTracker.getUsers());
+		if(deliveryTracker.getCurrentUser().getRole().equals("User")){
+			users.addAll(deliveryTracker.getCurrentUser());
+		}
+		else {
+			users.addAll(deliveryTracker.getUsers());
+		}
+//		ObservableList<User> users = FXCollections.observableArrayList();
+//		users.addAll(deliveryTracker.getUsers());
 		comboBoxUser.setItems(users);
 		if(users.size() > 0)
 			comboBoxUser.setValue(users.get(0));

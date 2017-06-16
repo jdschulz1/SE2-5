@@ -11,8 +11,13 @@ import javafx.scene.control.MenuItem;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import model.DeliveryTracker;
 
 public class Menus implements Initializable {
+	
+	Main main;
+	DeliveryTracker deliveryTracker;
+	
 	  @FXML // ResourceBundle that was given to the FXMLLoader
 	    private ResourceBundle resources;
 
@@ -132,6 +137,8 @@ public class Menus implements Initializable {
 	    @FXML
 	    void switchToLogout(ActionEvent event) {
 	    	try {
+	    		main.getRoot().getTop().setDisable(true);
+	    		//deliveryTracker.setCurrentUser(null);
 	    		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
 	    		BorderPane border = Main.getRoot();
 	    		border.setCenter(currentPane);

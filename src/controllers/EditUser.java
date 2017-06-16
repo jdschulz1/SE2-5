@@ -50,13 +50,21 @@ public class EditUser implements Initializable {
 	    private Button btnCancel;
 	    
 	    User user;
+	    DeliveryTracker deliveryTracker;
 	    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		deliveryTracker = DeliveryTracker.getDeliveryTracker();
 		ObservableList<String> roles = FXCollections.observableArrayList();
 		roles.addAll("Admin", "User");
 		comboBoxUserRole.setItems(roles);
+		if(deliveryTracker.getCurrentUser().getRole().equals("User")){
+			comboBoxUserRole.setDisable(true);
+		}
+		else {
+			comboBoxUserRole.setDisable(false);
+		}
 		if(user != null) {
 			textFieldUserName.setText(user.getName());
 			textFieldUserUsername.setText(user.getUserName());

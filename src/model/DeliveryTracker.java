@@ -169,6 +169,11 @@ public class DeliveryTracker implements Serializable{
 	@JoinColumn(name = "intersection_id")
 	@OneToOne(cascade = CascadeType.PERSIST)
 	private Intersection companyLocation;
+	/**
+	 * The user that is currently logged in.
+	 */
+	@Transient
+	private User currentUser;
 
 	public BigDecimal getBillRateBase() {
 		return this.billRateBase;
@@ -384,6 +389,14 @@ public class DeliveryTracker implements Serializable{
 	 */
 	public static boolean deleteUser(User deleted){
 		return /* u.getRole() == "Admin" && */ users.remove(deleted);    //FIX LATER FOR ADMIN FUNTION
+	}
+	
+	public void setCurrentUser(User user){
+		this.currentUser = user;
+	}
+	
+	public User getCurrentUser(){
+		return currentUser;
 	}
 	
 	public List<Courier> getCouriers() {

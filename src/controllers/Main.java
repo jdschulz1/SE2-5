@@ -44,8 +44,9 @@ public class Main extends Application {
 		try {
 			
 			MenuBar bar = FXMLLoader.load(getClass().getResource("/views/Menus.fxml"));
-			AnchorPane paneMain = FXMLLoader.load(getClass().getResource("/views/Main.fxml"));
+			AnchorPane paneMain = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
 			root.setTop(bar);
+			bar.setDisable(true);
 			root.setCenter(paneMain);
 
 			Scene scene = new Scene(root, 1000, 900);
@@ -118,6 +119,13 @@ public class Main extends Application {
 //			}
 			
 			primaryStage.show();
+			//bar.setDisable(true);
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Login.fxml"));
+//			Login controller = new Login();
+//			fxmlLoader.setController(controller);
+        	AnchorPane currentPane = fxmlLoader.load();
+        	BorderPane border = Main.getRoot();
+    		border.setCenter(currentPane);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

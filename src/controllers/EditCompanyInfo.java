@@ -77,6 +77,12 @@ public class EditCompanyInfo implements javafx.fxml.Initializable {
 	public void initialize(URL location, ResourceBundle resources) {		
 		deliveryTracker = DeliveryTracker.getDeliveryTracker();
 		cityMap = CityMap.getCityMap();
+		if(deliveryTracker.getCurrentUser().getRole().equals("User")){
+			btnSave.setDisable(true);
+		}
+		else {
+			btnSave.setDisable(false);
+		}
 		comboBoxStreet.setConverter(
 	            new StringConverter<Street>() {
 	                @Override
