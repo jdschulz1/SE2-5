@@ -47,6 +47,7 @@ public class Main extends Application {
 			AnchorPane paneMain = FXMLLoader.load(getClass().getResource("/views/Main.fxml"));
 			root.setTop(bar);
 			root.setCenter(paneMain);
+			
 
 			Scene scene = new Scene(root, 1000, 900);
 			primaryStage.setScene(scene);
