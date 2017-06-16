@@ -224,7 +224,6 @@ public class ClientDeliveryReport implements Initializable {
 	                        CSVWriter.writeLine(writer, Arrays.asList("Order Date", "Pickup Client", "Delivery Client", "Estimated Delivery Time", "Actual Delivery Time"));
 					
 		                    for (DeliveryTicket d : ticketsByClient.get(c)) {
-		
 		                        List<String> list = new ArrayList<>();
 		                        list.add(d.getOrderDateTime().format(formatter));
 		                        list.add(d.getPickupClient().getName().toString());
@@ -232,7 +231,6 @@ public class ClientDeliveryReport implements Initializable {
 		                        list.add(d.getEstimatedDeliveryTime().format(timeFormatter));
 		                        list.add(d.getActualDeliveryTime().format(timeFormatter));
 		                        CSVWriter.writeLine(writer, list);
-		    					
 		                    }
 	
 		                    writer.flush();

@@ -123,6 +123,30 @@ public class Home implements javafx.fxml.Initializable {
 		buttonAssignCourier.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+            	try {
+        			DeliveryTicket selectedTicket = tableDeliveries.getSelectionModel().getSelectedItem();
+
+            		if(selectedTicket != null)
+            		{
+	    	    	   	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/AssignCourier.fxml"));
+	                	AssignCourier controller = new AssignCourier();
+	                	controller.setDeliveryTicket(selectedTicket);
+	                	fxmlLoader.setController(controller);
+	                	AnchorPane currentPane = fxmlLoader.load();
+	                	BorderPane border = Main.getRoot();
+	    	    		border.setCenter(currentPane);
+            		}
+            		else {
+            			Alert a = new Alert(AlertType.ERROR);
+            	        a.setTitle("Error");
+            	        a.setHeaderText("No Ticket Selected");
+            	        a.setContentText("Please select a ticket and try again.");
+            	        a.showAndWait();
+            	        return;
+            		}
+    	    	} catch(IOException e){
+    	    		e.printStackTrace();
+    	    	}
             }
         });
     	

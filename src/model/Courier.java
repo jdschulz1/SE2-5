@@ -63,6 +63,20 @@ public class Courier implements Serializable{
 	@Column(name = "is_available")
 	private boolean isAvailable;
 
+	/**
+	 * @return the isAvailable
+	 */
+	public boolean isAvailable() {
+		return isAvailable;
+	}
+
+	/**
+	 * @param isActive the isActive to set
+	 */
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+
 	public boolean getIsActive() {
 		return this.isActive;
 	}
