@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -166,7 +167,7 @@ public class CourierPerformance implements Initializable {
             @Override
             public void handle(ActionEvent event) {
             	try {
-            		LocalDateTime.of(datePickerStartDate.getValue(), LocalDateTime.now().toLocalTime());
+            		LocalDateTime.of(datePickerStartDate.getValue(), LocalTime.MIN);
             	} catch(Exception ex) {
             		Alert a = new Alert(AlertType.ERROR);
         	        a.setTitle("Error");
