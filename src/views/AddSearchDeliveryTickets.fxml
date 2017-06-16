@@ -16,11 +16,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="578.0" prefWidth="733.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddSearchDeliveryTicket">
+<AnchorPane prefHeight="578.0" prefWidth="1066.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddSearchDeliveryTicket">
    <children>
-      <BorderPane prefHeight="578.0" prefWidth="733.0">
+      <BorderPane prefHeight="578.0" prefWidth="1021.0">
          <center>
-            <VBox>
+            <VBox prefHeight="467.0" prefWidth="912.0">
                <children>
                   <GridPane alignment="BOTTOM_CENTER" prefHeight="162.0" prefWidth="733.0">
                      <columnConstraints>
@@ -43,7 +43,7 @@
                               <Insets left="300.0" top="15.0" />
                            </GridPane.margin>
                         </Label>
-                        <Button mnemonicParsing="false" text="Search" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Button fx:id="buttonSearchDeliveryTickets" mnemonicParsing="false" text="Search" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets top="30.0" />
                            </GridPane.margin>
@@ -55,12 +55,14 @@
                         <Insets bottom="20.0" top="20.0" />
                      </padding>
                   </GridPane>
-                  <TableView prefHeight="367.0" prefWidth="733.0">
+                  <TableView fx:id="tableDeliveryTickets" prefHeight="367.0" prefWidth="733.0">
                      <columns>
-                        <TableColumn fx:id="tableColumnClient" prefWidth="181.20001220703125" text="Client" />
-                        <TableColumn fx:id="tableColumnCourier" prefWidth="176.79998779296875" text="Courier" />
-                        <TableColumn fx:id="tableColumnOrderDate" prefWidth="193.0" text="Order Date" />
-                        <TableColumn fx:id="tableColumnPackageID" prefWidth="182.0" text="Package ID" />
+                        <TableColumn fx:id="tableColumnDeliveryClient" prefWidth="169.0" text="Delivery Client" />
+                        <TableColumn fx:id="tableColumnPickupClient" prefWidth="185.0" text="Pickup Client" />
+                        <TableColumn fx:id="tableColumnPayingClient" prefWidth="189.0" text="Paying Client" />
+                        <TableColumn fx:id="tableColumnCourier" prefWidth="163.0" text="Courier" />
+                        <TableColumn fx:id="tableColumnOrderDate" prefWidth="150.0" text="Order Date" />
+                        <TableColumn fx:id="tableColumnPackageID" prefWidth="163.0" text="Package ID" />
                      </columns>
                   </TableView>
                </children>

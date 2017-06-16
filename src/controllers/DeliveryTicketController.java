@@ -151,12 +151,15 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 			comboBoxPickupClient.setValue(deliveryTicket.getPickupClient());
 			comboBoxPayingClient.setValue(deliveryTicket.getPayingClient());
 			comboBoxCourier.setValue(deliveryTicket.getCourier());
+			comboBoxOrderTaker.setValue(deliveryTicket.getOrderTaker());
 			dateTimePickerOrderDate.setValue(deliveryTicket.getOrderDateTime().toLocalDate());
 			textAreaSpecialRemarks.setText(deliveryTicket.getSpecialRemarks());
 			labelCalculatedDepartureTime.setText(deliveryTicket.getCalculatedDepartureTime().toLocalTime().toString());
 			labelEstimatedDeliveryTime.setText(deliveryTicket.getEstimatedDeliveryTime().toLocalTime().toString());
 			labelPackageID.setText(Integer.toString(deliveryTicket.getPackageID()));
-			labelPrice.setText(deliveryTicket.getPrice().toString());
+			if (deliveryTicket.getPrice() != null){
+				labelPrice.setText(deliveryTicket.getPrice().toString());
+			}
 			labelTotalDistance.setText(Integer.toString(deliveryTicket.calculateTotalDistance()));
 			
 			spinnerRequestedPickupHour.getValueFactory().setValue(deliveryTicket.getRequestedPickupTime().getHour());
@@ -214,7 +217,8 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 	        	    		border.setCenter(currentPane);
 	                	}
 	        		} catch(Exception e){
-	        		      	
+	        		    System.out.println("Save Failed"); 
+	        		    e.printStackTrace();
 		    	}
 	        }
 	    });
@@ -437,9 +441,14 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 	
 	private int hourCombobulator(int hour, String amOrPm){
 		if(amOrPm.equals("PM")){
-			return hour +=12;
+			if(hour == 12){
+				hour = 0;
 			
-		}else return hour;
+			}else{
+				hour +=12;
+			}		
+		}
+		return hour;
 	}
 	
 	private String getAMPM (LocalDateTime date){

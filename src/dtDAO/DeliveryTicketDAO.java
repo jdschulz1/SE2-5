@@ -50,7 +50,14 @@ public class DeliveryTicketDAO {
 		query.setParameter("c", client);
 		return query.getResultList();
 	}
-	
+	public static List<DeliveryTicket> findDeliveryTicketsByClientByDate(Client client, LocalDateTime sdate, LocalDateTime edate)
+	{
+		TypedQuery<DeliveryTicket> query = emDAO.getEM().createQuery("SELECT ticket FROM delivery_ticket ticket WHERE (ticket.payingClient = :c OR ticket.pickupClient = :c OR ticket.deliveryClient = :c) AND (ticket.orderDateTime >= :sd AND ticket.orderDateTime < :ed)", DeliveryTicket.class);
+		query.setParameter("c", client);
+		query.setParameter("sd", sdate);
+		query.setParameter("ed", edate);
+		return query.getResultList();
+	}
 	public static List<DeliveryTicket> findDeliveryTicketsByCourier(Courier courier)
 	{
 		TypedQuery<DeliveryTicket> query = emDAO.getEM().createQuery("SELECT ticket FROM delivery_ticket ticket WHERE ticket.courier = :c", DeliveryTicket.class);

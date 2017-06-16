@@ -48,6 +48,7 @@ public class Main extends Application {
 			root.setTop(bar);
 			bar.setDisable(true);
 			root.setCenter(paneMain);
+			
 
 			Scene scene = new Scene(root, 1000, 900);
 			primaryStage.setScene(scene);
