@@ -206,7 +206,7 @@ public class CourierPerformance implements Initializable {
             @Override
             public void handle(ActionEvent event) {
             	try {
-            		LocalDateTime.of(datePickerStartDate.getValue(), LocalDateTime.now().toLocalTime());
+            		LocalDateTime.of(datePickerStartDate.getValue(), LocalTime.MIN);
             	} catch(Exception ex) {
             		Alert a = new Alert(AlertType.ERROR);
         	        a.setTitle("Error");
@@ -287,7 +287,7 @@ public class CourierPerformance implements Initializable {
 	}
 
 	private Map<Courier, List<DeliveryTicket>> getTickets() {
-		startDate = LocalDateTime.of(datePickerStartDate.getValue(), LocalDateTime.now().toLocalTime());
+		startDate = LocalDateTime.of(datePickerStartDate.getValue(), LocalTime.MIN);
     	if(radioButtonMonth.isSelected())
     		endDate = startDate.plusMonths(1);
     	else if(radioButtonWeek.isSelected())

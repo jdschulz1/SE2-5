@@ -175,7 +175,7 @@ public class Invoice implements Initializable {
             @Override
             public void handle(ActionEvent event) {
             	try {
-            		LocalDateTime.of(datePickerStartDate.getValue(), LocalDateTime.now().toLocalTime());
+            		LocalDateTime.of(datePickerStartDate.getValue(), LocalTime.MIN);
             	} catch(Exception ex) {
             		Alert a = new Alert(AlertType.ERROR);
         	        a.setTitle("Error");
@@ -251,7 +251,7 @@ public class Invoice implements Initializable {
 	}
 	
 	private Map<Client, List<DeliveryTicket>> getTickets() {
-		startDate = LocalDateTime.of(datePickerStartDate.getValue(), LocalDateTime.now().toLocalTime());
+		startDate = LocalDateTime.of(datePickerStartDate.getValue(), LocalTime.MIN);
     	endDate = startDate.plusWeeks(1);
     	tickets = DeliveryTicketDAO.findDeliveryTicketByDateRange(startDate, endDate);
     	
