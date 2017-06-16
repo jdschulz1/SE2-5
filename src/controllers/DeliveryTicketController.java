@@ -364,7 +364,7 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 		deliveryTicket.setOrderTaker(comboBoxOrderTaker.getValue());
 		deliveryTicket.setPickupClient(comboBoxPickupClient.getValue());
 		deliveryTicket.setDeliveryClient(comboBoxPayingClient.getValue());
-		deliveryTicket.setPickupClient(comboBoxPayingClient.getValue());
+		deliveryTicket.setPayingClient(comboBoxPayingClient.getValue());
 		
 		
 		int requestedPickupHour = spinnerRequestedPickupHour.getValueFactory().getValue();
