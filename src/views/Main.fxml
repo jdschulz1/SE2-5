@@ -9,27 +9,27 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="577.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="577.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Home">
    <children>
       <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView prefHeight="530.0" prefWidth="622.0">
+            <TableView fx:id="tableDeliveries" prefHeight="530.0" prefWidth="622.0">
               <columns>
-                <TableColumn prefWidth="141.0" text="Departure Time" />
-                <TableColumn prefWidth="136.0" text="Pickup Client" />
-                  <TableColumn prefWidth="153.0" text="Requested Pickup Time" />
-                  <TableColumn prefWidth="106.0" text="Delivery Client" />
-                  <TableColumn prefWidth="127.0" text="Courier" />
+                <TableColumn fx:id="tableColumnDepartureTime" prefWidth="141.0" text="Departure Time" />
+                <TableColumn fx:id="tableColumnPickupClient" prefWidth="136.0" text="Pickup Client" />
+                  <TableColumn fx:id="tableColumnRequestedPickupTime" prefWidth="153.0" text="Requested Pickup Time" />
+                  <TableColumn fx:id="tableColumnDeliveryClient" prefWidth="106.0" text="Delivery Client" />
+                  <TableColumn fx:id="tableColumnCourier" prefWidth="127.0" text="Courier" />
               </columns>
             </TableView>
             <HBox alignment="TOP_CENTER" prefHeight="74.0" prefWidth="665.0">
                <children>
-                  <Button mnemonicParsing="false" text="View Ticket">
+                  <Button fx:id="buttonViewTicket" mnemonicParsing="false" text="View Ticket">
                      <HBox.margin>
                         <Insets top="10.0" />
                      </HBox.margin></Button>
                   <ImageView fitHeight="94.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Assign Courier">
+                  <Button fx:id="buttonAssignCourier" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Assign Courier">
                      <HBox.margin>
                         <Insets top="10.0" />
                      </HBox.margin></Button>

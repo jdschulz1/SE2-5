@@ -448,4 +448,8 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 			
 		}else return "PM";
 	}
+	
+	public void setDeliveryTicket(DeliveryTicket dt) {
+		this.deliveryTicket = dt;
+	}
 }
