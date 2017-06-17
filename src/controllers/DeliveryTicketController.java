@@ -425,11 +425,7 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 	}
 	
 	private boolean validate() {
-		try {
-			
-		} catch(Exception e) {
-				return false;
-		}
+		
 		if(comboBoxCourier.getValue() == null) return false;
 		if(comboBoxDeliveryClient.getValue() == null) return false;
 		if(comboBoxPayingClient.getValue() == null) return false;

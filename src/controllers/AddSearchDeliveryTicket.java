@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import dtDAO.ClientDAO;
 import dtDAO.DeliveryTicketDAO;
 import javafx.fxml.Initializable;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -19,6 +20,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -155,25 +157,14 @@ public class AddSearchDeliveryTicket implements Initializable {
 		buttonSearchDeliveryTickets.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	try{
-            		selectedClient = comboBoxClient.getValue();
-            		selectedDateTime = LocalDateTime.of(datePickerSearchDate.getValue(), LocalDateTime.now().toLocalTime());
-            		
-            	}catch(Exception e)
-            	{
-            		
-            			Alert a = new Alert(AlertType.ERROR);
-            	        a.setTitle("Error");
-            	        a.setHeaderText("Missing Information");
-            	        a.setContentText("Please complete all required fields and try again.");
-            	        a.showAndWait();
-            			            	
+            	if(!validate()){
+            		Alert a = new Alert(AlertType.ERROR);
+        	        a.setTitle("Error");
+        	        a.setHeaderText("Missing Information");
+        	        a.setContentText("Please complete all required fields and try again.");
+        	        a.showAndWait();
             	}
-            tickets = getTickets();
-              
-            ObservableList<DeliveryTicket> ticketsList = FXCollections.observableArrayList();
-      		ticketsList.addAll(tickets);
-          	tableDeliveryTickets.setItems(ticketsList);
+            searchTickets();
             }
         });
 		
@@ -182,22 +173,53 @@ public class AddSearchDeliveryTicket implements Initializable {
             public void handle(ActionEvent event) {
             	
             	DeliveryTicket selectedTicket = tableDeliveryTickets.getSelectionModel().getSelectedItem();
-            	
-            	try {
-    	    	   	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/DeliveryTicket.fxml"));
-                	DeliveryTicketController controller = new DeliveryTicketController();
-                	controller.setDeliveryTicket(selectedTicket);
-                	
-                	fxmlLoader.setController(controller);
-                	
-                	AnchorPane currentPane = fxmlLoader.load();
-                	BorderPane border = Main.getRoot();
-    	    		border.setCenter(currentPane);
-    	    	} catch(IOException e){
-    	    		e.printStackTrace();
-    	    	}
+            	if (selectedTicket == null){
+            		Alert a = new Alert(AlertType.ERROR);
+        	        a.setTitle("Error");
+        	        a.setHeaderText("Select Ticket");
+        	        a.setContentText("Please select a ticket.");
+        	        a.showAndWait();
+            	}else{
+            		try {
+        	    	   	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/DeliveryTicket.fxml"));
+                    	DeliveryTicketController controller = new DeliveryTicketController();
+                    	controller.setDeliveryTicket(selectedTicket);
+                    	
+                    	fxmlLoader.setController(controller);
+                    	
+                    	AnchorPane currentPane = fxmlLoader.load();
+                    	BorderPane border = Main.getRoot();
+        	    		border.setCenter(currentPane);
+        	    	} catch(IOException e){
+        	    		e.printStackTrace();
+        	    	
+        	    	}
+            	}
             }
         });
+		
+		btnDeliveryTicketCancel.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	DeliveryTicket selectedTicket = tableDeliveryTickets.getSelectionModel().getSelectedItem();
+            	if (selectedTicket == null){
+            		Alert a = new Alert(AlertType.ERROR);
+        	        a.setTitle("Error");
+        	        a.setHeaderText("Select Ticket");
+        	        a.setContentText("Please select a ticket.");
+        	        a.showAndWait();
+            	}else{
+            		 Alert a = new Alert(AlertType.CONFIRMATION);
+	        	        a.setTitle("Confirm Deletion");
+	        	        a.setContentText("Are you sure you want to delete selected ticket?");
+		                a.showAndWait()
+		                	.filter(response -> response == ButtonType.OK)
+		                	.ifPresent(response -> DeliveryTicketDAO.removeDeliveryTicket(selectedTicket));
+		            //refresh table
+		             searchTickets();    
+            	}
+            }
+		});
 	}
 
 
@@ -215,8 +237,19 @@ private List<DeliveryTicket> getTickets() {
 	List<DeliveryTicket> tickets = DeliveryTicketDAO.findDeliveryTicketsByClientByDate(selectedClient, startDate, endDate); 
 	return tickets;
 }
-
+private void searchTickets(){
+	//get input
+    selectedClient = comboBoxClient.getValue();
+    selectedDateTime = LocalDateTime.of(datePickerSearchDate.getValue(), LocalDateTime.now().toLocalTime());
+    //display tickets in table            	
+    tickets = getTickets();
+    ObservableList<DeliveryTicket> ticketsList = FXCollections.observableArrayList();
+		ticketsList.addAll(tickets);
+  	tableDeliveryTickets.setItems(ticketsList);
+}
 private boolean validate(){
+	if(comboBoxClient.getValue() == null)return false;
+	if(datePickerSearchDate.getValue() == null)return false;
 	return true;
 }
 }
