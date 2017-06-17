@@ -295,7 +295,7 @@ public class CityMap {
 	public static ArrayList<Street> getWholeStreets() {
 		return wholeStreets;
 	}
-
+	
 	public static String directionTraveled (Street src, Street dest){
 		Street first = null, second = null;
 		for(Street s : getWholeStreets()){
@@ -309,9 +309,9 @@ public class CityMap {
 				if(first == src)return "East";
 				else return "West";
 			}
-			else if(first != null || second != null){
-				return "None";
-			}
+//			else if(first != null || second != null){
+//				return "None";
+//			}
 			else continue;
 		}
 		
@@ -326,9 +326,9 @@ public class CityMap {
 				if(first == src)return "South";
 				else return "North";
 			}
-			else if(first != null || second != null){
-				return "None";
-			}
+//			else if(first != null || second != null){
+//				return "None";
+//			}
 			else continue;
 		}
 		

@@ -5,6 +5,16 @@ package model;
  */
 public class Instruction {
 
+	public Instruction(int dist, Street currStreet, String currDirection, Street nextStreet, String nextDirection){
+		this.distance = dist;
+		this.currentStreet = currStreet;
+		this.currentDirection = currDirection;
+		this.nextStreet = nextStreet;
+		this.nextDirection = nextDirection;
+		
+		this.CreateInstruction();
+	}
+	
 	/**
 	 * The distance in city blocks for the current InstructionsListItem until a turn occurs toward another Intersection.
 	 */
@@ -25,13 +35,54 @@ public class Instruction {
 	 * The next direction, which the InstructionsLineItem is letting the Courier know to take down the nextStreet after traveling the appropriate distance on the currentStreet.
 	 */
 	private String nextDirection;
-
+	
 	/**
 	 * Creates a string from the attributes to form a full instruction sentence.
 	 */
 	public String CreateInstruction() {
-		// TODO - implement Instruction.CreateInstruction
-		throw new UnsupportedOperationException();
+		String turnDir = "", instruction = "";
+		if(this.currentDirection != null && this.nextDirection != null){
+			if(this.currentDirection == "North"){
+				if(this.nextDirection == "East"){
+					turnDir = "Right";
+				}
+				else if(this.nextDirection == "West"){
+					turnDir = "Left";
+				}
+			}
+			else if(this.currentDirection == "South"){
+				if(this.nextDirection == "East"){
+					turnDir = "Left";
+				}
+				else if(this.nextDirection == "West"){
+					turnDir = "Right";
+				}
+			}
+			else if(this.currentDirection == "East"){
+				if(this.nextDirection == "North"){
+					turnDir = "Left";
+				}
+				else if(this.nextDirection == "South"){
+					turnDir = "Right";
+				}
+			}
+			else if(this.currentDirection == "West"){
+				if(this.nextDirection == "North"){
+					turnDir = "Right";
+				}
+				else if(this.nextDirection == "South"){
+					turnDir = "Left";
+				}
+			}
+		}
+
+		String pluralDist = this.distance > 1 ? this.distance + " blocks " : this.distance + " block ";
+		if(this.nextDirection == null){
+			
+			instruction = "Travel " + pluralDist + this.currentDirection + " on " + this.currentStreet.getName() + " and you will have arrived at your destination.";
+		}
+		else instruction = "Travel " +  pluralDist + this.currentDirection + " on " + this.currentStreet.getName() + " and turn " + turnDir + " on " + this.nextStreet.getName() + " heading " + this.nextDirection + ".";
+		return instruction;
 	}
 
 	public int getDistance() {
