@@ -84,10 +84,8 @@ public class AssignCourier implements Initializable{
 	
 	private List<Courier> getAvailableCouriers() {
 		List<Courier> allCouriers = CourierDAO.listCourier();
-		System.out.println(allCouriers);
 		List<Courier> avaiableCouriers = new ArrayList<Courier>();
 		for(Courier courier: allCouriers) {
-			System.out.println(courier.getName());
 			if(courier.getIsActive() == true && courier.isAvailable())
 				avaiableCouriers.add(courier);
 		}

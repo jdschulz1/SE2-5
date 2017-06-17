@@ -69,7 +69,7 @@ public class AddSearchDeliveryTicket implements Initializable {
     private Button btnDeliveryTicketUpdate;
 
     @FXML
-    private Button btnDeliveryTicketCancel;
+    private Button btnDeliveryTicketDelete;
     
 
     @FXML
@@ -198,7 +198,7 @@ public class AddSearchDeliveryTicket implements Initializable {
             }
         });
 		
-		btnDeliveryTicketCancel.setOnAction(new EventHandler<ActionEvent>() {
+		btnDeliveryTicketDelete.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
             	DeliveryTicket selectedTicket = tableDeliveryTickets.getSelectionModel().getSelectedItem();
@@ -207,6 +207,12 @@ public class AddSearchDeliveryTicket implements Initializable {
         	        a.setTitle("Error");
         	        a.setHeaderText("Select Ticket");
         	        a.setContentText("Please select a ticket.");
+        	        a.showAndWait();
+            	} else if(selectedTicket.getActualDepartureTime() != null) {
+            		Alert a = new Alert(AlertType.ERROR);
+        	        a.setTitle("Error");
+        	        a.setHeaderText("Cannot Delete Ticket ");
+        	        a.setContentText("Courier has already started delivery - cannot delete ticket.");
         	        a.showAndWait();
             	}else{
             		 Alert a = new Alert(AlertType.CONFIRMATION);

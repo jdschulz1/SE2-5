@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="578.0" prefWidth="1066.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddSearchDeliveryTicket">
+<AnchorPane prefHeight="578.0" prefWidth="1066.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddSearchDeliveryTicket">
    <children>
       <BorderPane prefHeight="578.0" prefWidth="1021.0">
          <center>
@@ -81,7 +81,7 @@
                         <Insets left="100.0" top="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnDeliveryTicketCancel" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Delete">
+                  <Button fx:id="btnDeliveryTicketDelete" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Delete">
                      <HBox.margin>
                         <Insets left="100.0" top="20.0" />
                      </HBox.margin>
