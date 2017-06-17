@@ -57,7 +57,7 @@ public class Main extends Application {
 			primaryStage.sizeToScene();
 		
 			//test shortest path
-			Intersection src = IntersectionDAO.findIntersectionByStreets("B Street", "3rd Ave"), dest = IntersectionDAO.findIntersectionByStreets("E Street", "1st Ave");
+			Intersection src = IntersectionDAO.findIntersectionByStreets("F Street", "3rd Ave"), dest = IntersectionDAO.findIntersectionByStreets("G Street", "6th Ave");
 			ArrayList<Vertex> shortest_path;
 			
 			Route test = new Route(src, dest);

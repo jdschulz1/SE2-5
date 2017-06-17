@@ -92,8 +92,9 @@ public class Route {
 				cd = currentStreet.getSource().getStreet().equals(currentStreet.getDestination().getStreet()) ?
 						CityMap.directionTraveled(currentStreet.getSource().getAvenue(), currentStreet.getDestination().getAvenue()):
 						CityMap.directionTraveled(currentStreet.getSource().getStreet(), currentStreet.getDestination().getStreet());
-						
-				instructionsList.add(new Instruction(path.get(path.size()-1).getShortestDist() - last.getShortestDist(), currentStreet, cd, null, null));
+				
+				int lastDist = last != null ? last.getShortestDist() : 0;
+				instructionsList.add(new Instruction(path.get(path.size()-1).getShortestDist() - lastDist, currentStreet, cd, null, null));
 			}
 
 			
@@ -107,7 +108,7 @@ public class Route {
 	 * @param deliveryRoute
 	 */
 	private void calculateRouteDistance() {
-		if(this.path != null)this.routeDistance = this.path.get(this.path.size()-1).getShortestDist();
+		if(this.path != null && this.path.size()> 0)this.routeDistance = this.path.get(this.path.size()-1).getShortestDist();
 	}
 
 	/**

@@ -98,6 +98,13 @@ public class Graph {
 			 }
 		 }
 		 
+		 for(int i = 0; i < processed.size(); i++){
+			 if(processed.get(i).getPrevious() == null || processed.get(i).getShortestDist() < 0){
+				 processed.remove(i);
+				 i--;
+			 }
+		 }
+		 
 		 pending.clear();
 		 pending.addAll(processed);
 		 processed.clear();

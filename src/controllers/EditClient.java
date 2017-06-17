@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import dtDAO.ClientDAO;
+import dtDAO.IntersectionDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -170,7 +171,7 @@ public class EditClient implements javafx.fxml.Initializable {
 		client.setDeliveryDetails(textFieldDeliveryInstructions.getText().trim());
 		client.setEmail(textFieldEmail.getText().trim());
 		client.setPhoneNumber(textFieldPhoneNumber.getText().trim());
-		client.setLocation(new Intersection(comboBoxStreet.getValue(), comboBoxAvenue.getValue()));
+		client.setLocation(IntersectionDAO.findIntersectionByStreets(comboBoxStreet.getValue(), comboBoxAvenue.getValue()));
 		ClientDAO.saveClient(client);
 		return true;
 	}
