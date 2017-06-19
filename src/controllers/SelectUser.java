@@ -67,7 +67,6 @@ public class SelectUser implements Initializable {
 		            new StringConverter<User>() {
 		                @Override
 		                public User fromString(String s) {
-	                    	//TODO: get client by name
 	                        return null;
 		                }
 

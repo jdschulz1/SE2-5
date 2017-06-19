@@ -265,7 +265,6 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 	            new StringConverter<Client>() {
 	                @Override
 	                public Client fromString(String s) {
-                    	//TODO: get client by name
                         return null;
 	                }
 

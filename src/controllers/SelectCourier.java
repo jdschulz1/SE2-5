@@ -45,7 +45,6 @@ public class SelectCourier implements Initializable {
     private Button buttonCourierDelete;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		deliveryTracker = DeliveryTracker.getDeliveryTracker();
 		updateCourierList();
 		
@@ -58,7 +57,6 @@ public class SelectCourier implements Initializable {
 
 					@Override
 					public String toString(Courier object) {
-						// TODO Auto-generated method stub
 						if (object == null){
 							return "";
 						}else {

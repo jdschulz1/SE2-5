@@ -258,14 +258,6 @@ public class Invoice implements Initializable {
     	Map<Client, List<DeliveryTicket>> ticketsByClient = new LinkedHashMap<Client, List<DeliveryTicket>>();
     	
     	for(DeliveryTicket ticket:tickets) {
-//    		//TODO: remove fake client
-//    		Client c1 = new Client();
-//    		c1.setName("Mike's Things");
-//    		c1.setLocation(CityMap.getIntersections().iterator().next());
-//    		ticket.setPayingClient(c1);
-//    		ticket.setPickupClient(c1);
-//    		ticket.setDeliveryClient(c1);
-//    		// TODO: end of fake client
     		Client client = ticket.getPayingClient();
     		if(ticketsByClient.containsKey(client)) {
     			ticketsByClient.get(client).add(ticket);

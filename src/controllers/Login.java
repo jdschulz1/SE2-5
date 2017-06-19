@@ -50,9 +50,6 @@ public class Login implements Initializable {
 		users.addAll(deliveryTracker.getUsers());
 		
 		MenuBar bar = (MenuBar)Main.getRoot().getTop();
-//		System.out.println("Bar" + bar);
-//		bar.setDisable(true);
-		//Main.getRoot().getTop().setDisable(true);
 		
 		btnLogin.setOnAction(new EventHandler<ActionEvent>() {
             @Override
