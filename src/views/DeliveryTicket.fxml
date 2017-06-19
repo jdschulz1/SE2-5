@@ -91,7 +91,7 @@
                                                       </Spinner>
                                                    </children>
                                                 </HBox>
-                                                <ComboBox fx:id="comboBoxRequestedPickupAMPM" minWidth="15.0" prefHeight="33.0" prefWidth="250.0" promptText="AM">
+                                                <ComboBox fx:id="comboBoxRequestedPickupAMPM" minWidth="15.0" prefHeight="26.0" prefWidth="250.0" promptText="AM">
                                                    <VBox.margin>
                                                       <Insets top="5.0" />
                                                    </VBox.margin>
@@ -213,7 +213,7 @@
                                                             </Spinner>
                                                          </children>
                                                       </HBox>
-                                                      <ComboBox fx:id="comboBoxActualPickupTimeAMPM" minWidth="10.0" prefHeight="33.0" prefWidth="274.0" promptText="AM" />
+                                                      <ComboBox fx:id="comboBoxActualPickupTimeAMPM" minWidth="10.0" prefHeight="26.0" prefWidth="274.0" promptText="AM" />
                                                    </children>
                                                 </VBox>
                                                 <VBox GridPane.columnIndex="1" GridPane.rowIndex="3">
@@ -235,7 +235,7 @@
                                                             </Spinner>
                                                          </children>
                                                       </HBox>
-                                                      <ComboBox fx:id="comboBoxActualDeliveryTimeAMPM" prefHeight="33.0" prefWidth="267.0" promptText="AM" />
+                                                      <ComboBox fx:id="comboBoxActualDeliveryTimeAMPM" prefHeight="26.0" prefWidth="267.0" promptText="AM" />
                                                    </children>
                                                 </VBox>
                                                 <VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -257,7 +257,7 @@
                                                             </Spinner>
                                                          </children>
                                                       </HBox>
-                                                      <ComboBox fx:id="comboBoxActualDepartureTimeAMPM" prefHeight="33.0" prefWidth="266.0" promptText="AM" />
+                                                      <ComboBox fx:id="comboBoxActualDepartureTimeAMPM" minWidth="10.0" prefHeight="26.0" prefWidth="274.0" promptText="AM" />
                                                    </children>
                                                 </VBox>
                                                 <VBox GridPane.columnIndex="1" GridPane.rowIndex="4">
@@ -279,7 +279,7 @@
                                                             </Spinner>
                                                          </children>
                                                       </HBox>
-                                                      <ComboBox fx:id="comboBoxActualReturnTimeAMPM" prefHeight="33.0" prefWidth="275.0" promptText="AM" />
+                                                      <ComboBox fx:id="comboBoxActualReturnTimeAMPM" prefHeight="26.0" prefWidth="275.0" promptText="AM" />
                                                    </children>
                                                 </VBox>
                                                 <Button fx:id="buttonSave" mnemonicParsing="false" text="Save" GridPane.rowIndex="6">
