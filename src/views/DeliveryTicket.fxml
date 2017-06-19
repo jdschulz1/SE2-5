@@ -10,8 +10,8 @@
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -20,13 +20,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+
 <AnchorPane prefHeight="663.0" prefWidth="953.0" scaleShape="true" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TitledPane alignment="CENTER" animated="false" collapsible="false" contentDisplay="CENTER" layoutX="225.0" layoutY="183.0" pickOnBounds="false" prefHeight="663.0" prefWidth="935.0" scaleShape="false" text="Delivery Ticket" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <font>
-            <Font size="24.0" />
-         </font>
-         <content>
+      <BorderPane layoutX="1.0" layoutY="1.0">
+         <center>
             <VBox prefHeight="670.0" prefWidth="913.0" scaleShape="false">
                <children>
                   <HBox prefHeight="698.0" prefWidth="911.0">
@@ -93,7 +91,7 @@
                                                       </Spinner>
                                                    </children>
                                                 </HBox>
-                                                <ComboBox fx:id="comboBoxRequestedPickupAMPM" minWidth="15.0" prefHeight="33.0" prefWidth="250.0" promptText="AM">
+                                                <ComboBox fx:id="comboBoxRequestedPickupAMPM" minWidth="15.0" prefHeight="26.0" prefWidth="250.0" promptText="AM">
                                                    <VBox.margin>
                                                       <Insets top="5.0" />
                                                    </VBox.margin>
@@ -105,6 +103,9 @@
                                  </children>
                               </VBox>
                            </children>
+                           <HBox.margin>
+                              <Insets top="50.0" />
+                           </HBox.margin>
                         </VBox>
                         <Separator orientation="VERTICAL" prefHeight="573.0" prefWidth="28.0" />
                         <VBox prefHeight="609.0" prefWidth="485.0">
@@ -121,7 +122,7 @@
                                                 <Insets bottom="20.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <GridPane prefHeight="137.0" prefWidth="478.0">
+                                          <GridPane prefHeight="114.0" prefWidth="478.0">
                                              <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -147,6 +148,9 @@
                                              </children>
                                           </GridPane>
                                        </children>
+                                       <padding>
+                                          <Insets top="50.0" />
+                                       </padding>
                                     </VBox>
                                  </children>
                               </Pane>
@@ -163,7 +167,7 @@
                                                 <Insets bottom="20.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <GridPane prefHeight="357.0" prefWidth="465.0" vgap="10.0">
+                                          <GridPane prefHeight="349.0" prefWidth="465.0" vgap="10.0">
                                              <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -209,7 +213,7 @@
                                                             </Spinner>
                                                          </children>
                                                       </HBox>
-                                                      <ComboBox fx:id="comboBoxActualPickupTimeAMPM" minWidth="10.0" prefHeight="33.0" prefWidth="274.0" promptText="AM" />
+                                                      <ComboBox fx:id="comboBoxActualPickupTimeAMPM" minWidth="10.0" prefHeight="26.0" prefWidth="274.0" promptText="AM" />
                                                    </children>
                                                 </VBox>
                                                 <VBox GridPane.columnIndex="1" GridPane.rowIndex="3">
@@ -231,7 +235,7 @@
                                                             </Spinner>
                                                          </children>
                                                       </HBox>
-                                                      <ComboBox fx:id="comboBoxActualDeliveryTimeAMPM" prefHeight="33.0" prefWidth="267.0" promptText="AM" />
+                                                      <ComboBox fx:id="comboBoxActualDeliveryTimeAMPM" prefHeight="26.0" prefWidth="267.0" promptText="AM" />
                                                    </children>
                                                 </VBox>
                                                 <VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -253,7 +257,7 @@
                                                             </Spinner>
                                                          </children>
                                                       </HBox>
-                                                      <ComboBox fx:id="comboBoxActualDepartureTimeAMPM" prefHeight="33.0" prefWidth="266.0" promptText="AM" />
+                                                      <ComboBox fx:id="comboBoxActualDepartureTimeAMPM" minWidth="10.0" prefHeight="26.0" prefWidth="274.0" promptText="AM" />
                                                    </children>
                                                 </VBox>
                                                 <VBox GridPane.columnIndex="1" GridPane.rowIndex="4">
@@ -275,7 +279,7 @@
                                                             </Spinner>
                                                          </children>
                                                       </HBox>
-                                                      <ComboBox fx:id="comboBoxActualReturnTimeAMPM" prefHeight="33.0" prefWidth="275.0" promptText="AM" />
+                                                      <ComboBox fx:id="comboBoxActualReturnTimeAMPM" prefHeight="26.0" prefWidth="275.0" promptText="AM" />
                                                    </children>
                                                 </VBox>
                                                 <Button fx:id="buttonSave" mnemonicParsing="false" text="Save" GridPane.rowIndex="6">
@@ -313,7 +317,12 @@
                   </HBox>
                </children>
             </VBox>
-         </content>
-      </TitledPane>
+         </center>
+      </BorderPane>
+      <Label layoutX="417.0" layoutY="-8.0" text="Delivery Ticket" AnchorPane.leftAnchor="337.0" AnchorPane.topAnchor="5.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
