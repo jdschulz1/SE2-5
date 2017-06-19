@@ -33,6 +33,8 @@ import javafx.scene.layout.BorderPane;
 
 public class Main extends Application {
 	
+	DeliveryTracker deliveryTracker;
+	
 	//Static root passes to controller
 	private static BorderPane root = new BorderPane();
 	
@@ -45,6 +47,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			
+			deliveryTracker = DeliveryTracker.getDeliveryTracker();
 			MenuBar bar = FXMLLoader.load(getClass().getResource("/views/Menus.fxml"));
 			AnchorPane paneMain = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
 			root.setTop(bar);
