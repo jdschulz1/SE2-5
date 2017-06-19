@@ -104,7 +104,6 @@ public class EditTrafficImpediment implements Initializable {
 	            new StringConverter<Street>() {
 	                @Override
 	                public Street fromString(String s) {
-                    	//TODO: get client by name
                         return null;
 	                }
 

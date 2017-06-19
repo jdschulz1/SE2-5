@@ -48,7 +48,6 @@ public class SelectTrafficImpediment implements Initializable {
 		            new StringConverter<TrafficImpediment>() {
 		                @Override
 		                public TrafficImpediment fromString(String s) {
-	                    	//TODO: get client by name
 	                        return null;
 		                }
 

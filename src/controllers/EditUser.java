@@ -54,7 +54,6 @@ public class EditUser implements Initializable {
 	    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 		deliveryTracker = DeliveryTracker.getDeliveryTracker();
 		ObservableList<String> roles = FXCollections.observableArrayList();
 		roles.addAll("Admin", "User");
@@ -71,7 +70,6 @@ public class EditUser implements Initializable {
 			textFieldUserPassword.setText(user.getPassword());
 			comboBoxUserRole.setValue(user.getRole());
 			textFieldUserEmail.setText(user.getEmail());
-			//TODO: Populate fields
 		}
 		btnSave.setOnAction(new EventHandler<ActionEvent>() {
             @Override

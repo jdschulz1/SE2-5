@@ -50,7 +50,6 @@ public class SelectClient implements Initializable {
 		            new StringConverter<Client>() {
 		                @Override
 		                public Client fromString(String s) {
-	                    	//TODO: get client by name
 	                        return null;
 		                }
 
