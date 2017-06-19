@@ -463,9 +463,8 @@ public class DeliveryTicket implements Serializable{
 	}
 	
 	public int calculateTotalDistance(){
-//		int totalDistance = this.getPickupRoute().calculateRouteDistance() +  this.getDeliveryRoute().calculateRouteDistance() + this.getReturnRoute().getRouteDistance();
-		return 0;
-		//		return totalDistance;
+		int totalDistance = this.getPickupRoute().getRouteDistance() +  this.getDeliveryRoute().getRouteDistance() + this.getReturnRoute().getRouteDistance();
+		return totalDistance;
 	}
 
 }
