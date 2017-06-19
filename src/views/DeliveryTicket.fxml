@@ -137,7 +137,7 @@
                                              <children>
                                                 <Label text="Package ID" />
                                                 <Label text="Calculated Departure Time" GridPane.rowIndex="2" />
-                                                <Label text="Total Disance" GridPane.rowIndex="3" />
+                                                <Label text="Total Distance" GridPane.rowIndex="3" />
                                                 <Label text="Price" GridPane.rowIndex="4" />
                                                 <Label fx:id="labelEstimatedDeliveryTime" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                                 <Label text="Estimated Delivery Time" GridPane.rowIndex="1" />
