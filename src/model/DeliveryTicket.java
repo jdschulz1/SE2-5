@@ -252,17 +252,23 @@ public class DeliveryTicket implements Serializable{
 	 * @param deliveryOverheadTime
 	 * @param distance
 	 */
-	public void calculateDeliveryTime(LocalDateTime pickupOverheadTIme, LocalDateTime deliveryOverheadTime, int distance) {
-		// TODO - implement DeliveryTicket.calculateDeliveryTime
-		throw new UnsupportedOperationException();
-	}
+	public LocalDateTime calculateDeliveryTime(LocalDateTime pickupOverheadTIme, LocalDateTime deliveryOverheadTime, int distance) {
+		 deliveryTracker = DeliveryTracker.getDeliveryTracker();
+		 int blocksToTravel = this.deliveryRoute.getRouteDistance();
+		 double travelTimeInMinutes = (double)blocksToTravel / (double)deliveryTracker.getBlocksToMile() / deliveryTracker.getCourierSpeed() * 60;
+		 LocalDateTime deliveryTime = this.getRequestedPickupTime().plusMinutes(deliveryTracker.getPickupOverheadTime()).plusMinutes(deliveryTracker.getDeliveryOverheadTime()).plusMinutes((long)travelTimeInMinutes);
+		 return deliveryTime;
+ 	}
 
 	/**
 	 * Calculates the time the courier is required to depart from the company office in order to pick up the package at the requested pick up time. This is calculated based on distance from the company office to pick up location and the requested pick up location.
 	 */
 	public LocalDateTime calculateDepartureTime() {
-		// TODO - implement DeliveryTicket.calculateDepartureTime
-		throw new UnsupportedOperationException();
+		deliveryTracker = DeliveryTracker.getDeliveryTracker();
+		 int blocksToTravel = this.pickupRoute.getRouteDistance();
+		 double travelTimeInMinutes = (double)blocksToTravel / (double)deliveryTracker.getBlocksToMile() / deliveryTracker.getCourierSpeed() * 60;
+		 LocalDateTime departureTime = this.getRequestedPickupTime().minusMinutes(deliveryTracker.getPickupOverheadTime()).minusMinutes((long)travelTimeInMinutes);
+		 return departureTime;
 	}
 
 	/**
