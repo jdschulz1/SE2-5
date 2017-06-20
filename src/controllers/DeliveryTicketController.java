@@ -200,10 +200,15 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 	  AMPMList.add("PM");
 	  
 	  comboBoxActualDeliveryTimeAMPM.setItems(AMPMList);
+	  comboBoxActualDeliveryTimeAMPM.getSelectionModel().selectFirst();
 	  comboBoxActualDepartureTimeAMPM.setItems(AMPMList);
+	  comboBoxActualDepartureTimeAMPM.getSelectionModel().selectFirst();
 	  comboBoxActualPickupTimeAMPM.setItems(AMPMList);
+	  comboBoxActualPickupTimeAMPM.getSelectionModel().selectFirst();
 	  comboBoxActualReturnTimeAMPM.setItems(AMPMList);
+	  comboBoxActualReturnTimeAMPM.getSelectionModel().selectFirst();
 	  comboBoxRequestedPickupAMPM.setItems(AMPMList);
+	  comboBoxRequestedPickupAMPM.getSelectionModel().selectFirst();
 	  
 	  buttonSave.setOnAction(new EventHandler<ActionEvent>() {
 	        @Override
