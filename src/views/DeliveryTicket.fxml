@@ -10,6 +10,7 @@
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -20,8 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="663.0" prefWidth="953.0" scaleShape="true" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="660.0" prefWidth="950.0" scaleShape="true" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane layoutX="1.0" layoutY="1.0">
          <center>
@@ -341,10 +341,10 @@
             </VBox>
          </center>
       </BorderPane>
-      <Label layoutX="417.0" layoutY="-8.0" text="Delivery Ticket" AnchorPane.leftAnchor="337.0" AnchorPane.topAnchor="5.0">
+      <TitledPane alignment="CENTER" animated="false" collapsible="false" contentDisplay="CENTER" expanded="false" layoutX="337.0" layoutY="5.0" prefWidth="950.0" text="Delivery Ticket" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
-      </Label>
+      </TitledPane>
    </children>
 </AnchorPane>
