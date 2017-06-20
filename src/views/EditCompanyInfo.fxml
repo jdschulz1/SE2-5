@@ -5,24 +5,20 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditCompanyInfo">
+<AnchorPane prefHeight="660.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditCompanyInfo">
    <children>
-      <VBox alignment="CENTER" prefHeight="300.0" prefWidth="600.0" spacing="10.0">
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="325.0" text="Edit Company Information" textAlignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <GridPane hgap="5.0" prefHeight="220.0" prefWidth="323.0" vgap="5.0">
+      <BorderPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <center>
+            <GridPane hgap="10.0" prefHeight="220.0" prefWidth="323.0" vgap="10.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -38,38 +34,48 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Street" GridPane.rowIndex="1" />
-                  <TextField fx:id="textFieldPickupOverhead" promptText="10 minutes" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label text="Company Name" />
-                  <TextField fx:id="textFieldCompanyName" promptText="ACME Couriers" GridPane.columnIndex="1" />
-                  <Label text="Avenue" GridPane.rowIndex="2" />
-                  <Label text="Billing - Base Rate" GridPane.columnIndex="2" />
-                  <Label text="Billing: - Rate/Block" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Label text="Average Courier Speed" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <Label text="Blocks/Mile" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Label text="Pickup Overhead Time" GridPane.rowIndex="3" />
-                  <Label text="Delivery Overhead Time" GridPane.rowIndex="4" />
-                  <Label text="On Time Bonus Amount" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                  <Label text="On Time Allowable Variance" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <Label text="Street" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                  <TextField fx:id="textFieldPickupOverhead" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label text="Company Name" GridPane.halignment="RIGHT" />
+                  <TextField fx:id="textFieldCompanyName" GridPane.columnIndex="1" />
+                  <Label text="Avenue" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                  <Label text="Billing - Base Rate" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
+                  <Label text="Billing - Rate/Block" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                  <Label text="Average Courier Speed" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                  <Label text="Blocks/Mile" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                  <Label text="Pickup Overhead Time" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+                  <Label text="Delivery Overhead Time" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+                  <Label text="On Time Bonus Amount" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+                  <Label text="On Time Allowable Variance" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
                   <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField fx:id="textFieldDeliveryOverhead" promptText="10 minutes" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField fx:id="textFieldBillRateBase" promptText="10" GridPane.columnIndex="3" />
-                  <TextField fx:id="textFieldBillRatePerBlock" promptText="2" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <TextField fx:id="textFieldBlocksPerMile" promptText="10" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                  <TextField fx:id="textFieldAvgCourierSpeed" promptText="5" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                  <TextField fx:id="textFieldOnTimeBonusAmount" promptText="\$2.00" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                  <TextField fx:id="textFieldOnTimeAllowableVariance" promptText="15" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                  <ComboBox fx:id="comboBoxStreet" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ComboBox fx:id="comboBoxAvenue" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="textFieldDeliveryOverhead" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="textFieldBillRateBase" GridPane.columnIndex="3" />
+                  <TextField fx:id="textFieldBillRatePerBlock" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <TextField fx:id="textFieldBlocksPerMile" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <TextField fx:id="textFieldAvgCourierSpeed" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <TextField fx:id="textFieldOnTimeBonusAmount" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                  <TextField fx:id="textFieldOnTimeAllowableVariance" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                  <ComboBox fx:id="comboBoxStreet" prefHeight="25.0" prefWidth="234.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="comboBoxAvenue" prefHeight="25.0" prefWidth="245.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label text="Company Address" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
             </GridPane>
-            <HBox alignment="CENTER" spacing="10.0">
+         </center>
+         <top>
+            <TitledPane alignment="CENTER" animated="false" collapsible="false" contentDisplay="CENTER" expanded="false" text="Edit Company Information" textAlignment="CENTER" BorderPane.alignment="CENTER">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </TitledPane>
+         </top>
+         <bottom>
+            <HBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="btnSave" mnemonicParsing="false" text="Save">
                      <opaqueInsets>
@@ -85,10 +91,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </HBox>
-         </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </VBox>
+         </bottom>
+      </BorderPane>
    </children>
 </AnchorPane>

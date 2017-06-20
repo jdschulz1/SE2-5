@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -16,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="578.0" prefWidth="1066.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddSearchDeliveryTicket">
+<AnchorPane prefHeight="660.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddSearchDeliveryTicket">
    <children>
       <BorderPane prefHeight="578.0" prefWidth="1021.0">
          <center>
@@ -90,14 +91,11 @@
             </HBox>
          </bottom>
          <top>
-            <Label alignment="CENTER" prefHeight="27.0" prefWidth="827.0" text="Select Delivery Ticket" textAlignment="CENTER">
+            <TitledPane alignment="CENTER" animated="false" collapsible="false" expanded="false" text="Select Delivery Ticket">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
-               <padding>
-                  <Insets top="10.0" />
-               </padding>
-            </Label>
+            </TitledPane>
          </top>
       </BorderPane>
    </children>

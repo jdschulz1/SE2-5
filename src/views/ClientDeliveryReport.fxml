@@ -7,6 +7,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -17,9 +18,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ClientDeliveryReport">
+<AnchorPane prefHeight="660.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ClientDeliveryReport">
    <children>
-      <AnchorPane layoutX="10.0" layoutY="10.0">
+      <AnchorPane layoutX="10.0" layoutY="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane layoutX="10.0" layoutY="10.0">
                <children>
@@ -113,18 +114,18 @@
                                     </GridPane>
                                     <TableView fx:id="tableReport" prefHeight="219.0" prefWidth="827.0">
                                        <columns>
-                                          <TableColumn fx:id="tableColumnOrderDate" prefWidth="139.60000610351562" text="Order Date" />
-                                          <TableColumn fx:id="tableColumnPickupClient" prefWidth="154.39999389648438" text="Pickup Client" />
-                                          <TableColumn fx:id="tableColumnDeliveryClient" prefWidth="201.60003662109375" text="Delivery Client" />
-                                          <TableColumn fx:id="tableColumnEstimatedDeliveryTime" prefWidth="182.79998779296875" text="Estimated Delivery Time" />
-                                          <TableColumn fx:id="tableColumnActualDeliveryTime" prefWidth="149.20001220703125" text="Actual Delivery Time" />
+                                          <TableColumn fx:id="tableColumnOrderDate" prefWidth="167.5999755859375" text="Order Date" />
+                                          <TableColumn fx:id="tableColumnPickupClient" prefWidth="186.4000244140625" text="Pickup Client" />
+                                          <TableColumn fx:id="tableColumnDeliveryClient" prefWidth="185.39996337890625" text="Delivery Client" />
+                                          <TableColumn fx:id="tableColumnEstimatedDeliveryTime" prefWidth="200.199951171875" text="Estimated Delivery Time" />
+                                          <TableColumn fx:id="tableColumnActualDeliveryTime" prefWidth="214.4000244140625" text="Actual Delivery Time" />
                                        </columns>
                                     </TableView>
                                  </children>
                               </VBox>
                            </center>
                            <bottom>
-                              <HBox alignment="TOP_CENTER" prefHeight="74.0" prefWidth="665.0" BorderPane.alignment="CENTER">
+                              <HBox alignment="TOP_CENTER" prefHeight="74.0" prefWidth="950.0" BorderPane.alignment="CENTER">
                                  <children>
                                     <GridPane prefHeight="74.0" prefWidth="346.0">
                                        <columnConstraints>
@@ -162,16 +163,6 @@
                                  </children>
                               </HBox>
                            </bottom>
-                           <top>
-                              <Label alignment="CENTER" prefHeight="27.0" prefWidth="827.0" text="Client Delivery Report" textAlignment="CENTER">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets top="10.0" />
-                                 </padding>
-                              </Label>
-                           </top>
                         </BorderPane>
                      </children>
                   </AnchorPane>
@@ -179,5 +170,10 @@
             </AnchorPane>
          </children>
       </AnchorPane>
+      <TitledPane alignment="CENTER" animated="false" collapsible="false" expanded="false" prefWidth="950.0" text="Client Delivery Report" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </TitledPane>
    </children>
 </AnchorPane>
