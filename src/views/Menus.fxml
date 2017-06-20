@@ -4,7 +4,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 
-<MenuBar xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Menus">
+<MenuBar xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Menus">
   <menus>
     <Menu mnemonicParsing="false" text="Delivery Tracker">
       <items>
@@ -14,8 +14,8 @@
     </Menu>
     <Menu mnemonicParsing="false" text="Reports">
       <items>
-        <MenuItem fx:id="displayCourierPerformance" mnemonicParsing="false" onAction="#switchToCourierPerformance" text="Courier Performance" />
             <MenuItem fx:id="displayInvoice" mnemonicParsing="false" onAction="#switchToInvoice" text="Invoices" />
+        <MenuItem fx:id="displayCourierPerformance" mnemonicParsing="false" onAction="#switchToCourierPerformance" text="Courier Performance" />
             <MenuItem fx:id="displayClientDeliveries" mnemonicParsing="false" onAction="#switchToClientDeliveries" text="Client Deliveries" />
       </items>
     </Menu>
