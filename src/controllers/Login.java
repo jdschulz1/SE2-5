@@ -18,6 +18,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -37,6 +39,11 @@ public class Login implements Initializable {
 
     @FXML
     private TextField textFieldPassword;
+    
+//    @FXML
+//    public void onEnter(ActionEvent ae){
+//       //System.out.println("test") ;
+//    }
 
     User user;
     DeliveryTracker deliveryTracker;
@@ -89,7 +96,72 @@ public class Login implements Initializable {
             }
         });
 		
-
+		textFieldUsername.setOnKeyPressed(new EventHandler<KeyEvent>() {
+		    @Override
+		    public void handle(KeyEvent keyEvent) {
+		        if (keyEvent.getCode() == KeyCode.ENTER)  {
+		        	try {
+	                	boolean userCheck = false;
+	                	for(int i = 0; i < users.size(); i++) {
+	                		user = users.get(i);
+		                	if(textFieldUsername.getText().equals(user.getUserName())  && textFieldPassword.getText().equals(user.getPassword())) {
+		                		//set current user
+		                		deliveryTracker.setCurrentUser(user);
+		                		Main.getRoot().getTop().setDisable(false);
+		                		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/Main.fxml"));
+		        	    		BorderPane border = Main.getRoot();
+		        	    		border.setCenter(currentPane);
+		        	    		userCheck = true;
+	                		}
+	                	}
+	                	if(userCheck == false) {
+	                		Alert no = new Alert(AlertType.ERROR);
+	            	        no.setTitle("Incorrect Username/Password");
+	            	        no.setHeaderText("The Username or Password do not match a current user");
+	            	        no.setContentText("Please re-input the username and password and try again.");
+	            	        no.showAndWait();
+	                	}
+	                	
+	    	    	} catch(IOException e){
+	    	    		e.printStackTrace();
+	    	    	}
+		        }
+		    }
+		});
+		
+		textFieldPassword.setOnKeyPressed(new EventHandler<KeyEvent>() {
+		    @Override
+		    public void handle(KeyEvent keyEvent) {
+		        if (keyEvent.getCode() == KeyCode.ENTER)  {
+		        	try {
+	                	boolean userCheck = false;
+	                	for(int i = 0; i < users.size(); i++) {
+	                		user = users.get(i);
+		                	if(textFieldUsername.getText().equals(user.getUserName())  && textFieldPassword.getText().equals(user.getPassword())) {
+		                		//set current user
+		                		deliveryTracker.setCurrentUser(user);
+		                		Main.getRoot().getTop().setDisable(false);
+		                		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/Main.fxml"));
+		        	    		BorderPane border = Main.getRoot();
+		        	    		border.setCenter(currentPane);
+		        	    		userCheck = true;
+	                		}
+	                	}
+	                	if(userCheck == false) {
+	                		Alert no = new Alert(AlertType.ERROR);
+	            	        no.setTitle("Incorrect Username/Password");
+	            	        no.setHeaderText("The Username or Password do not match a current user");
+	            	        no.setContentText("Please re-input the username and password and try again.");
+	            	        no.showAndWait();
+	                	}
+	                	
+	    	    	} catch(IOException e){
+	    	    		e.printStackTrace();
+	    	    	}
+		        }
+		    }
+		});
+		
 	}
 
 }
