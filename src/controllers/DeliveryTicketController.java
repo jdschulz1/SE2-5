@@ -416,6 +416,13 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 			
 		}
 		
+		if (deliveryTicket.getCourier() != null) {
+			if(deliveryTicket.getActualDepartureTime() != null && deliveryTicket.getActualReturnTime() == null)
+				deliveryTicket.getCourier().setAvailable(false);
+			else 
+				deliveryTicket.getCourier().setAvailable(true);
+		}
+		
 		boolean isConfirmed = chkBoxDeliveryConfirmed.isSelected();
 		deliveryTicket.setDeliveryConfirmed(isConfirmed);
 		

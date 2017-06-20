@@ -50,7 +50,6 @@ public class EditCourier implements Initializable {
 	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 		if(courier != null){
 			textFieldCourierName.setText(courier.getName());
 			textFieldCourierNumber.setText(Integer.toString(courier.getCourierNumber()));
@@ -107,6 +106,7 @@ public class EditCourier implements Initializable {
 		}
 		if(courier == null){
     		courier = new Courier();
+    		courier.setAvailable(true);
     		DeliveryTracker deliveryTracker = DeliveryTracker.getDeliveryTracker();
     		deliveryTracker.addCourier(courier);
 		}
