@@ -20,6 +20,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.util.StringConverter;
+import model.Client;
 import model.Courier;
 import model.DeliveryTicket;
 
@@ -41,6 +43,23 @@ public class AssignCourier implements Initializable{
 		ObservableList<Courier> courierList = FXCollections.observableArrayList();
 		courierList.addAll(getAvailableCouriers());
 		comboBoxAssignCourier.setItems(courierList);
+		
+		comboBoxAssignCourier.setConverter(
+	            new StringConverter<Courier>() {
+	                @Override
+	                public Courier fromString(String s) {
+                        return null;
+	                }
+
+					@Override
+					public String toString(Courier object) {
+						if (object == null) {
+	                        return "";
+	                    } else {
+	                        return object.getName();
+	                    }
+					}
+	            });
 		
 		btnSave.setOnAction(new EventHandler<ActionEvent>() {
             @Override

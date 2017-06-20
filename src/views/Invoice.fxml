@@ -4,8 +4,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -15,153 +17,169 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Invoice">
+<AnchorPane prefHeight="660.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Invoice">
    <children>
-      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="577.0" prefWidth="665.0">
-         <children>
-            <BorderPane>
-               <center>
-                  <VBox>
+      <BorderPane layoutX="10.0" layoutY="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <VBox>
+               <children>
+                  <GridPane alignment="BOTTOM_CENTER" hgap="10.0" prefHeight="37.0" prefWidth="950.0" vgap="10.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
                      <children>
-                        <GridPane alignment="BOTTOM_CENTER">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Label text="Week  Starting">
-                                 <GridPane.margin>
-                                    <Insets left="70.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Button fx:id="btnPreview" mnemonicParsing="false" text="Preview" GridPane.columnIndex="2">
-                                 <GridPane.margin>
-                                    <Insets left="140.0" />
-                                 </GridPane.margin>
-                              </Button>
-                              <DatePicker fx:id="datePickerStartDate" prefHeight="25.0" prefWidth="311.0" GridPane.columnIndex="1" />
-                              <Label fx:id="labelClient" text="None" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets left="150.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label fx:id="labelAddress" text="None" GridPane.rowIndex="2">
-                                 <GridPane.margin>
-                                    <Insets left="150.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label fx:id="labelDate" text="None" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                                 <GridPane.margin>
-                                    <Insets left="100.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="Client:" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets left="20.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="Address:" GridPane.rowIndex="2">
-                                 <GridPane.margin>
-                                    <Insets left="20.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="Date:" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                                 <GridPane.margin>
-                                    <Insets left="20.0" />
-                                 </GridPane.margin>
-                              </Label>
-                           </children>
-                           <padding>
-                              <Insets bottom="20.0" top="20.0" />
-                           </padding>
-                        </GridPane>
-                        <TableView fx:id="tableInvoices" prefHeight="367.0" prefWidth="665.0">
-                           <columns>
-                              <TableColumn fx:id="tableColumnInvoiceOrderDate" prefWidth="209.20001220703125" text="Order Date" />
-                              <TableColumn fx:id="tableColumnInvoicePickupClient" prefWidth="227.79998779296875" text="Pickup Client" />
-                              <TableColumn fx:id="tableColumnInvoiceDeliveryClient" prefWidth="180.60003662109375" text="Delivery Client" />
-                              <TableColumn fx:id="tableColumnInvoicePrice" prefWidth="209.20001220703125" text="Price" />
-                           </columns>
-                        </TableView>
+                        <Label text="Week  Starting" GridPane.halignment="RIGHT">
+                           <GridPane.margin>
+                              <Insets left="70.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Button fx:id="btnPreview" mnemonicParsing="false" text="Preview" GridPane.columnIndex="2" GridPane.halignment="LEFT">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Button>
+                        <DatePicker fx:id="datePickerStartDate" prefHeight="25.0" prefWidth="311.0" GridPane.columnIndex="1" />
                      </children>
-                  </VBox>
-               </center>
-               <bottom>
-                  <HBox alignment="TOP_CENTER" prefHeight="74.0" prefWidth="665.0" BorderPane.alignment="CENTER">
+                     <padding>
+                        <Insets bottom="20.0" top="20.0" />
+                     </padding>
+                  </GridPane>
+                  <GridPane hgap="10.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="466.199951171875" minWidth="10.0" prefWidth="93.39996337890625" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="861.8000183105469" minWidth="10.0" prefWidth="856.6000366210938" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
                      <children>
-                        <GridPane alignment="CENTER" prefHeight="72.0" prefWidth="632.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Button fx:id="btnCancel" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Cancel" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets left="24.0" />
-                                 </GridPane.margin>
-                              </Button>
-                              <Button fx:id="btnCreateInvoice" mnemonicParsing="false" text="Create Invoice" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets left="10.0" />
-                                 </GridPane.margin>
-                              </Button>
-                              <Button fx:id="btnPrevious" mnemonicParsing="false" text="Previous">
-                                 <GridPane.margin>
-                                    <Insets left="32.0" />
-                                 </GridPane.margin>
-                              </Button>
-                              <Button fx:id="btnNext" mnemonicParsing="false" text="Next" GridPane.columnIndex="2">
-                                 <GridPane.margin>
-                                    <Insets left="30.0" />
-                                 </GridPane.margin>
-                              </Button>
-                              <Label fx:id="labelTotal" text="\$0.00" GridPane.columnIndex="4">
-                                 <GridPane.margin>
-                                    <Insets left="60.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="Total:" GridPane.columnIndex="4" />
-                              <Label fx:id="labelClientCounter" alignment="CENTER" text="Client 1 of 1" GridPane.columnIndex="1">
-                                 <GridPane.margin>
-                                    <Insets left="20.0" />
-                                 </GridPane.margin>
-                              </Label>
-                           </children>
-                           <HBox.margin>
-                              <Insets left="275.0" />
-                           </HBox.margin>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </GridPane>
+                        <Label alignment="CENTER_RIGHT" text="Client:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelClient" text="None" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" text="Address:" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelAddress" text="None" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" text="Date:" textAlignment="RIGHT" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelDate" text="None" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Label>
+                        <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" />
+                     </children>
+                  </GridPane>
+                  <TableView fx:id="tableInvoices" prefHeight="367.0" prefWidth="665.0">
+                     <columns>
+                        <TableColumn fx:id="tableColumnInvoiceOrderDate" prefWidth="209.20001220703125" text="Order Date" />
+                        <TableColumn fx:id="tableColumnInvoicePickupClient" prefWidth="227.79998779296875" text="Pickup Client" />
+                        <TableColumn fx:id="tableColumnInvoiceDeliveryClient" prefWidth="180.60003662109375" text="Delivery Client" />
+                        <TableColumn fx:id="tableColumnInvoicePrice" prefWidth="209.20001220703125" text="Price" />
+                     </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </center>
+         <bottom>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="950.0">
+               <children>
+                  <GridPane alignment="CENTER" hgap="10.0" prefHeight="20.0" prefWidth="950.0" vgap="10.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="568.6000366210938" minWidth="10.0" prefWidth="349.60003662109375" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="603.0000305175781" minWidth="10.0" prefWidth="102.60003662109375" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="501.0" minWidth="10.0" prefWidth="303.39996337890625" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="338.39996337890625" minWidth="0.0" prefWidth="35.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.800048828125" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button fx:id="btnPrevious" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Previous" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                           <GridPane.margin>
+                              <Insets left="32.0" />
+                           </GridPane.margin>
+                        </Button>
+                        <Button fx:id="btnNext" mnemonicParsing="false" prefWidth="100.0" text="Next" GridPane.columnIndex="2" GridPane.halignment="LEFT">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Button>
+                        <Label fx:id="labelTotal" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="46.0" text="\$0.00" textAlignment="RIGHT" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
+                           <GridPane.margin>
+                              <Insets left="60.0" />
+                           </GridPane.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="71.0" text="Total:" GridPane.columnIndex="3">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelClientCounter" alignment="CENTER" GridPane.halignment="LEFT">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Label>
+                        <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </GridPane>
+                  <HBox alignment="CENTER" prefHeight="45.0" prefWidth="950.0" spacing="10.0">
+                     <children>
+                        <Button fx:id="btnCreateInvoice" mnemonicParsing="false" prefWidth="100.0" text="Create Invoice" />
+                        <Button fx:id="btnCancel" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="100.0" text="Cancel" />
                      </children>
                   </HBox>
-               </bottom>
-               <top>
-                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="827.0" text="Invoice" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                     <padding>
-                        <Insets top="10.0" />
-                     </padding>
-                  </Label>
-               </top>
-            </BorderPane>
-         </children>
-      </AnchorPane>
+               </children>
+            </VBox>
+         </bottom>
+         <top>
+            <TitledPane alignment="CENTER" animated="false" collapsible="false" expanded="false" text="Invoice" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </TitledPane>
+         </top>
+      </BorderPane>
    </children>
 </AnchorPane>
