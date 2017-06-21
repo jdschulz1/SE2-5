@@ -160,7 +160,11 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 			if (deliveryTicket.getPrice() != null){
 				labelPrice.setText(deliveryTicket.getPrice().toString());
 			}
-			labelTotalDistance.setText(Integer.toString(deliveryTicket.calculateTotalDistance()));
+			
+			if(deliveryTicket.getPickupRoute() != null && deliveryTicket.getDeliveryRoute() != null && deliveryTicket.getReturnRoute() != null ){
+				labelTotalDistance.setText(Integer.toString(deliveryTicket.calculateTotalDistance()));
+			}
+			
 			
 			spinnerRequestedPickupHour.getValueFactory().setValue(deliveryTicket.getRequestedPickupTime().getHour());
 			spinnerRequestedPickupMinute.getValueFactory().setValue(deliveryTicket.getRequestedPickupTime().getMinute());
@@ -243,6 +247,42 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 		    	}
 	        }
 	    });
+	  
+	  buttonGenerateQuote.setOnAction(new EventHandler<ActionEvent>() {
+
+		@Override
+		public void handle(ActionEvent arg0) {
+			//save ticket
+			try{
+				if(save()){
+					//get package id
+					deliveryTicket.setPackageID((int) deliveryTicket.getTicketId());
+					labelPackageID.setText(Integer.toString(deliveryTicket.getPackageID()));
+					
+					//calculate and set price
+					deliveryTicket.setPrice(deliveryTicket.calculatePrice());
+					
+					//Estimated Delivery Time
+					LocalDateTime estDeliveryTime = deliveryTicket.calculateDeliveryTime();
+					deliveryTicket.setEstimatedDeliveryTime(estDeliveryTime);
+					labelEstimatedDeliveryTime.setText(deliveryTicket.getEstimatedDeliveryTime().toString());
+					//Total Distance
+					int totalDistance = deliveryTicket.calculateTotalDistance();
+					labelTotalDistance.setText(Integer.toString(totalDistance));
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			//calculate price
+			
+			//estimated delivery time
+			
+			//calculated departure time
+			
+		}
+		  
+	  });
 	}
 
 	private void updateCourierList() {
@@ -371,7 +411,7 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 		deliveryTicket.setOrderDateTime(LocalDateTime.of(dateTimePickerOrderDate.getValue(), LocalDateTime.now().toLocalTime()));
 		deliveryTicket.setOrderTaker(comboBoxOrderTaker.getValue());
 		deliveryTicket.setPickupClient(comboBoxPickupClient.getValue());
-		deliveryTicket.setDeliveryClient(comboBoxPayingClient.getValue());
+		deliveryTicket.setDeliveryClient(comboBoxDeliveryClient.getValue());
 		deliveryTicket.setPayingClient(comboBoxPayingClient.getValue());
 		
 		

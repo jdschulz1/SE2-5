@@ -304,7 +304,7 @@ public class DeliveryTicket implements Serializable{
 	 * @param deliveryOverheadTime
 	 * @param distance
 	 */
-	public LocalDateTime calculateDeliveryTime(LocalDateTime pickupOverheadTIme, LocalDateTime deliveryOverheadTime, int distance) {
+	public LocalDateTime calculateDeliveryTime() {
 		 deliveryTracker = DeliveryTracker.getDeliveryTracker();
 		 int blocksToTravel = this.deliveryRoute.getRouteDistance();
 		 double travelTimeInMinutes = (double)blocksToTravel / (double)deliveryTracker.getBlocksToMile() / deliveryTracker.getCourierSpeed() * 60;
