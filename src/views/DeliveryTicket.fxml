@@ -126,7 +126,7 @@
                                                 <Insets bottom="20.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <GridPane prefHeight="114.0" prefWidth="478.0">
+                                          <GridPane hgap="10.0" prefHeight="114.0" prefWidth="478.0">
                                              <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -139,12 +139,12 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <Label text="Package ID" />
-                                                <Label text="Calculated Departure Time" GridPane.rowIndex="2" />
-                                                <Label text="Total Distance" GridPane.rowIndex="3" />
-                                                <Label text="Price" GridPane.rowIndex="4" />
+                                                <Label text="Package ID:" GridPane.halignment="RIGHT" />
+                                                <Label text="Calculated Departure Time:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                                                <Label text="Total Distance:" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                                                <Label text="Price:" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
                                                 <Label fx:id="labelEstimatedDeliveryTime" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="Estimated Delivery Time" GridPane.rowIndex="1" />
+                                                <Label text="Estimated Delivery Time:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                                                 <Label fx:id="labelPackageID" GridPane.columnIndex="1" />
                                                 <Label fx:id="labelCalculatedDepartureTime" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                                 <Label fx:id="labelTotalDistance" GridPane.columnIndex="1" GridPane.rowIndex="3" />
