@@ -47,7 +47,7 @@
                   <Label text="Delivery Overhead Time" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
                   <Label text="On Time Bonus Amount" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
                   <Label text="On Time Allowable Variance" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="textFieldPickupOverhead" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <TextField fx:id="textFieldDeliveryOverhead" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <TextField fx:id="textFieldBillRateBase" GridPane.columnIndex="3" />
                   <TextField fx:id="textFieldBillRatePerBlock" GridPane.columnIndex="3" GridPane.rowIndex="1" />
