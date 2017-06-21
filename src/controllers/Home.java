@@ -60,7 +60,6 @@ public class Home implements javafx.fxml.Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 	
 		tickets = getTickets();
-		System.out.println(tickets.size() + " tickets");
 		
 		formatter = DateTimeFormatter.ofPattern("MMM dd YYYY");
 		timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");

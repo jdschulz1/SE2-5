@@ -55,7 +55,6 @@ public class EditTrafficImpediment implements Initializable {
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		System.out.println("Traffic Impediment Edit");
 		citymap = CityMap.getCityMap();
 		
 		if(trafficImpediment != null) {
