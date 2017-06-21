@@ -32,7 +32,7 @@ public class Intersection implements Serializable{
 		this.availability = true;
 		this.street = street;
 		this.avenue = avenue;
-		this.name = street.getName() + "&" + avenue.getName();
+		this.name = street.getName() + " & " + avenue.getName();
 		this.adjSegments = new ArrayList<Street>();
 		this.setPrevious(null);
 		this.setShortestDist(Integer.MAX_VALUE);
