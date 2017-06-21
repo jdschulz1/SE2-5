@@ -45,7 +45,7 @@ public class SelectTrafficImpediment implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		deliveryTracker = DeliveryTracker.getDeliveryTracker();
-		formatter = DateTimeFormatter.ofPattern("MMM dd YYYY hh:mm:ssa");
+		formatter = DateTimeFormatter.ofPattern("MMM dd YYYY");
 		updateTrafficImpedimentsList();
 		comboBoxTrafficImpediment.setConverter(
 		            new StringConverter<TrafficImpediment>() {
