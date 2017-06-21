@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import dtDAO.ClientDAO;
 
 import dtDAO.DeliveryTrackerDAO;
+import dtDAO.IntersectionDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -235,7 +236,7 @@ public class EditCompanyInfo implements javafx.fxml.Initializable {
 			return false;
 		}
 		deliveryTracker.setCompanyName(textFieldCompanyName.getText().trim());
-		deliveryTracker.setCompanyLocation(new Intersection(comboBoxStreet.getValue(), comboBoxAvenue.getValue()));
+		deliveryTracker.setCompanyLocation(IntersectionDAO.findIntersectionByStreets(comboBoxStreet.getValue(), comboBoxAvenue.getValue()));
 		deliveryTracker.setPickupOverheadTime(Integer.parseInt(textFieldPickupOverhead.getText().trim()));
 		deliveryTracker.setDeliveryOverheadTime(Integer.parseInt(textFieldDeliveryOverhead.getText().trim()));
 		deliveryTracker.setBlocksToMile(Integer.parseInt(textFieldBlocksPerMile.getText().trim()));
