@@ -298,13 +298,15 @@ public class CourierPerformance implements Initializable {
     	
     	for(DeliveryTicket ticket:tickets) {
     		Courier courier = ticket.getCourier();
-    		ticket.calculateBonus();
-    		if(ticketsByCourier.containsKey(courier)) {
-    			ticketsByCourier.get(courier).add(ticket);
-    		} else {
-    			List<DeliveryTicket> ticketList = new ArrayList<DeliveryTicket>();
-    			ticketList.add(ticket);
-    			ticketsByCourier.put(courier, ticketList);
+    		if(courier != null) {
+	    		ticket.calculateBonus();
+	    		if(ticketsByCourier.containsKey(courier)) {
+	    			ticketsByCourier.get(courier).add(ticket);
+	    		} else {
+	    			List<DeliveryTicket> ticketList = new ArrayList<DeliveryTicket>();
+	    			ticketList.add(ticket);
+	    			ticketsByCourier.put(courier, ticketList);
+	    		}
     		}
     	}
     	return ticketsByCourier;

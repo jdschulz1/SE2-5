@@ -86,7 +86,10 @@ public class Home implements javafx.fxml.Initializable {
     	
     	tableColumnCourier.setCellValueFactory(t -> {
     		DeliveryTicket ticket = t.getValue();
-            return new ReadOnlyStringWrapper(ticket.getCourier().getName());
+    		if(ticket.getCourier() != null)
+    			return new ReadOnlyStringWrapper(ticket.getCourier().getName());
+    		else 
+    			return new ReadOnlyStringWrapper("");
         });
     	
     	buttonViewTicket.setOnAction(new EventHandler<ActionEvent>() {

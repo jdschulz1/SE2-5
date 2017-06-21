@@ -108,7 +108,10 @@ public class AddSearchDeliveryTicket implements Initializable {
 		});
 		tableColumnCourier.setCellValueFactory(t -> {
 			DeliveryTicket ticket = t.getValue();
-			return new ReadOnlyStringWrapper(ticket.getCourier().getName());
+			if(ticket.getCourier() != null)
+    			return new ReadOnlyStringWrapper(ticket.getCourier().getName());
+    		else 
+    			return new ReadOnlyStringWrapper("");		
 		});
 		tableColumnOrderDate.setCellValueFactory(t -> {
 			DeliveryTicket ticket = t.getValue();
