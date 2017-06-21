@@ -180,7 +180,7 @@ public class EditTrafficImpediment implements Initializable {
 			
 			trafficImpediment.setIntersection(newIntersection);
 			trafficImpediment.setStartDate(datePickerTrafficImpedimentStart.getValue().atStartOfDay());
-			trafficImpediment.setEndDate(datePickerTrafficImpedimentEnd.getValue().atStartOfDay());
+			trafficImpediment.setEndDate(datePickerTrafficImpedimentEnd.getValue().atTime(23, 59));
 			deliveryTracker.addTrafficImpediment(trafficImpediment);
 			return true;
 		}
@@ -198,7 +198,7 @@ public class EditTrafficImpediment implements Initializable {
 			}
 			trafficImpediment.setIntersection(newIntersection);
 			trafficImpediment.setStartDate(datePickerTrafficImpedimentStart.getValue().atStartOfDay());
-			trafficImpediment.setEndDate(datePickerTrafficImpedimentEnd.getValue().atStartOfDay());
+			trafficImpediment.setEndDate(datePickerTrafficImpedimentEnd.getValue().atTime(23,59));
 
 			TrafficImpedimentDAO.saveTrafficImpediment(trafficImpediment);
 			return true;

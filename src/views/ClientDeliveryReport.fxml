@@ -113,7 +113,7 @@
                         <Label fx:id="labelOnTimeDeliveries" text="None" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
-                  <TableView fx:id="tableReport" prefHeight="358.0" prefWidth="950.0">
+                  <TableView fx:id="tableReport" prefHeight="350.0" prefWidth="950.0">
                      <columns>
                         <TableColumn fx:id="tableColumnOrderDate" prefWidth="167.5999755859375" text="Order Date" />
                         <TableColumn fx:id="tableColumnPickupClient" prefWidth="186.4000244140625" text="Pickup Client" />
@@ -140,22 +140,28 @@
                <children>
                   <Button fx:id="btnPrevious" mnemonicParsing="false" prefWidth="100.0" text="Previous" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                      <GridPane.margin>
-                        <Insets />
+                        <Insets top="20.0" />
                      </GridPane.margin>
                   </Button>
                   <Button fx:id="btnNext" mnemonicParsing="false" prefWidth="100.0" text="Next" GridPane.columnIndex="2" GridPane.halignment="LEFT">
                      <GridPane.margin>
-                        <Insets />
+                        <Insets top="20.0" />
                      </GridPane.margin>
                   </Button>
                   <Button fx:id="btnCancel" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="100.0" text="Cancel" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
                      <GridPane.margin>
-                        <Insets />
+                        <Insets top="20.0" />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="btnCreateReport" mnemonicParsing="false" prefWidth="100.0" text="Create Report" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                  <Button fx:id="btnCreateReport" mnemonicParsing="false" prefWidth="100.0" text="Create Report" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets top="20.0" />
+                     </GridPane.margin></Button>
                   <Label fx:id="labelClientCounter" />
-                  <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
+                  <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets top="20.0" />
+                     </GridPane.margin></Separator>
                </children>
                <BorderPane.margin>
                   <Insets />
