@@ -258,52 +258,53 @@ public class DeliveryTicket implements Serializable{
 			this.pickupRoute = new Route(DeliveryTracker.getDeliveryTracker().getCompanyLocation(), this.pickupClient.getLocation());
 			this.deliveryRoute = new Route(this.pickupClient.getLocation(), this.deliveryClient.getLocation());
 			this.returnRoute = new Route(this.deliveryClient.getLocation(), DeliveryTracker.getDeliveryTracker().getCompanyLocation());
-			if(this.pickupRoute == null || this.deliveryRoute == null || this.returnRoute == null){
-				Alert a = new Alert(AlertType.ERROR);
-		        a.setTitle("Error");
-		        a.setHeaderText("Pickup Route Not Possible");
-		        a.setContentText("The Pickup Route failed to generate with the existing Traffic Impediments.");
-		        a.showAndWait();
-		        this.price = new BigDecimal(0);
-			}
 		}
-    	
-    	FileWriter writer;
-        try {
-        	String csvFile = System.getProperty("user.home") + "\\Desktop\\CourierPackage-" + this.getPackageID() + ".csv";
-            writer = new FileWriter(csvFile);
-            
-            CSVWriter.writeLine(writer,Arrays.asList("Courier Package"));
-            CSVWriter.writeLine(writer,Arrays.asList("Package Details", "", "Delivery Details"));
-            CSVWriter.writeLine(writer,Arrays.asList("Order Date", this.orderDateTime.format(formatter), "Calculated Departure Time", this.calculatedDepartureTime.format(timeFormatter)));
-            CSVWriter.writeLine(writer,Arrays.asList("Package ID", Integer.valueOf(this.packageID).toString(), "Requested Pickup Time", this.requestedPickupTime.format(timeFormatter)));
-            CSVWriter.writeLine(writer,Arrays.asList("Courier", this.courier.getName(), "Estimated Delivery Time", this.estimatedDeliveryTime.format(timeFormatter)));
-            CSVWriter.writeLine(writer,Arrays.asList("Pickup Client", this.pickupClient.getName(), "Total Distance", Integer.toString(this.calculateTotalDistance())+ " blocks"));
-            CSVWriter.writeLine(writer,Arrays.asList("Delivery Client", this.deliveryClient.getName(), "Special Remarks", this.specialRemarks));
-            CSVWriter.writeLine(writer,Arrays.asList(""));
-            CSVWriter.writeLine(writer,Arrays.asList("Delivery Instructions"));
-            CSVWriter.writeLine(writer,Arrays.asList("Pick Up the Package:"));
-            for(Instruction i : this.pickupRoute.getInstructionsList()) {
-                CSVWriter.writeLine(writer,Arrays.asList(i.CreateInstruction()));
-            }
-            CSVWriter.writeLine(writer,Arrays.asList("Deliver the Package:"));
-            for(Instruction i : this.deliveryRoute.getInstructionsList()) {
-                CSVWriter.writeLine(writer,Arrays.asList(i.CreateInstruction()));
-            }
-            CSVWriter.writeLine(writer,Arrays.asList("Return to " + DeliveryTracker.getDeliveryTracker().getCompanyName() + ":"));
-            for(Instruction i : this.returnRoute.getInstructionsList()) {
-                CSVWriter.writeLine(writer,Arrays.asList(i.CreateInstruction()));
-            }
-            
-            writer.flush();
-			writer.close();
-            Alert a = new Alert(AlertType.INFORMATION);
-	        a.setTitle("File Saved");
-	        a.setContentText("Your Courier Package has been saved to " + System.getProperty("user.home") + "\\Desktop");
-            a.showAndWait();
-        
-        } catch (IOException e) {
-			e.printStackTrace();
+		if(this.pickupRoute.getPath().isEmpty() || this.deliveryRoute.getPath().isEmpty() || this.returnRoute.getPath().isEmpty()){
+			Alert a = new Alert(AlertType.ERROR);
+	        a.setTitle("Error");
+	        a.setHeaderText("Pickup Route Not Possible");
+	        a.setContentText("The Pickup Route failed to generate with the existing Traffic Impediments.");
+	        a.showAndWait();
+	        this.price = new BigDecimal(0);
+		}
+		else{
+	    	FileWriter writer;
+	        try {
+	        	String csvFile = System.getProperty("user.home") + "\\Desktop\\CourierPackage-" + this.getPackageID() + ".csv";
+	            writer = new FileWriter(csvFile);
+	            
+	            CSVWriter.writeLine(writer,Arrays.asList("Courier Package"));
+	            CSVWriter.writeLine(writer,Arrays.asList("Package Details", "", "Delivery Details"));
+	            CSVWriter.writeLine(writer,Arrays.asList("Order Date", this.orderDateTime.format(formatter), "Calculated Departure Time", this.calculatedDepartureTime.format(timeFormatter)));
+	            CSVWriter.writeLine(writer,Arrays.asList("Package ID", Integer.valueOf(this.packageID).toString(), "Requested Pickup Time", this.requestedPickupTime.format(timeFormatter)));
+	            CSVWriter.writeLine(writer,Arrays.asList("Courier", this.courier.getName(), "Estimated Delivery Time", this.estimatedDeliveryTime.format(timeFormatter)));
+	            CSVWriter.writeLine(writer,Arrays.asList("Pickup Client", this.pickupClient.getName(), "Total Distance", Integer.toString(this.calculateTotalDistance())+ " blocks"));
+	            CSVWriter.writeLine(writer,Arrays.asList("Delivery Client", this.deliveryClient.getName(), "Special Remarks", this.specialRemarks));
+	            CSVWriter.writeLine(writer,Arrays.asList(""));
+	            CSVWriter.writeLine(writer,Arrays.asList("Delivery Instructions"));
+	            CSVWriter.writeLine(writer,Arrays.asList("Pick Up the Package:"));
+	            for(Instruction i : this.pickupRoute.getInstructionsList()) {
+	                CSVWriter.writeLine(writer,Arrays.asList(i.CreateInstruction()));
+	            }
+	            CSVWriter.writeLine(writer,Arrays.asList("Deliver the Package:"));
+	            for(Instruction i : this.deliveryRoute.getInstructionsList()) {
+	                CSVWriter.writeLine(writer,Arrays.asList(i.CreateInstruction()));
+	            }
+	            CSVWriter.writeLine(writer,Arrays.asList("Return to " + DeliveryTracker.getDeliveryTracker().getCompanyName() + ":"));
+	            for(Instruction i : this.returnRoute.getInstructionsList()) {
+	                CSVWriter.writeLine(writer,Arrays.asList(i.CreateInstruction()));
+	            }
+	            
+	            writer.flush();
+				writer.close();
+	            Alert a = new Alert(AlertType.INFORMATION);
+		        a.setTitle("File Saved");
+		        a.setContentText("Your Courier Package has been saved to " + System.getProperty("user.home") + "\\Desktop");
+	            a.showAndWait();
+	        
+	        } catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -348,19 +349,20 @@ public class DeliveryTicket implements Serializable{
 			this.pickupRoute = new Route(DeliveryTracker.getDeliveryTracker().getCompanyLocation(), this.pickupClient.getLocation());
 			this.deliveryRoute = new Route(this.pickupClient.getLocation(), this.deliveryClient.getLocation());
 			this.returnRoute = new Route(this.deliveryClient.getLocation(), DeliveryTracker.getDeliveryTracker().getCompanyLocation());
-			if(this.pickupRoute == null || this.deliveryRoute == null || this.returnRoute == null){
-				Alert a = new Alert(AlertType.ERROR);
-		        a.setTitle("Error");
-		        a.setHeaderText("Pickup Route Not Possible");
-		        a.setContentText("The Pickup Route failed to generate with the existing Traffic Impediments.");
-		        a.showAndWait();
-		        return new BigDecimal(0);
-			}
 		}
-		
-		BigDecimal distanceToTravel = BigDecimal.valueOf(this.pickupRoute.getRouteDistance() + this.deliveryRoute.getRouteDistance() + this.returnRoute.getRouteDistance());
-		
-		return DeliveryTracker.getDeliveryTracker().getBillRateBase().add(DeliveryTracker.getDeliveryTracker().getBillRatePerBlock().multiply(distanceToTravel));
+		if(this.pickupRoute.getPath().isEmpty() || this.deliveryRoute.getPath().isEmpty() || this.returnRoute.getPath().isEmpty()){
+			Alert a = new Alert(AlertType.ERROR);
+	        a.setTitle("Error");
+	        a.setHeaderText("Pickup Route Not Possible");
+	        a.setContentText("The Pickup Route failed to generate with the existing Traffic Impediments.");
+	        a.showAndWait();
+	        return new BigDecimal(0);
+		}
+		else{
+			BigDecimal distanceToTravel = BigDecimal.valueOf(this.pickupRoute.getRouteDistance() + this.deliveryRoute.getRouteDistance() + this.returnRoute.getRouteDistance());
+			
+			return DeliveryTracker.getDeliveryTracker().getBillRateBase().add(DeliveryTracker.getDeliveryTracker().getBillRatePerBlock().multiply(distanceToTravel));
+		}
 	}
 
 	public Courier getCourier() {
