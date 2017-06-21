@@ -18,7 +18,7 @@
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="950.0" spacing="10.0">
          <children>
-            <GridPane hgap="5.0" prefHeight="220.0" prefWidth="323.0" vgap="5.0">
+            <GridPane hgap="10.0" prefHeight="220.0" prefWidth="323.0" vgap="5.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -32,19 +32,19 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label text="Avenue" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                  <Label text="Avenue" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="300.0" />
                      </GridPane.margin></Label>
-                  <Label text="Street" GridPane.halignment="LEFT">
+                  <Label text="Street" GridPane.halignment="RIGHT">
                      <GridPane.margin>
                         <Insets left="300.0" />
                      </GridPane.margin></Label>
-                  <Label text="Start Date" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+                  <Label text="Start Date" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="300.0" />
                      </GridPane.margin></Label>
-                  <Label text="End Date" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+                  <Label text="End Date" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="300.0" />
                      </GridPane.margin></Label>
