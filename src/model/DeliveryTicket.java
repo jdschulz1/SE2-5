@@ -256,7 +256,7 @@ public class DeliveryTicket implements Serializable{
 		else if(this.pickupRoute == null){
 			this.pickupRoute = new Route(DeliveryTracker.getDeliveryTracker().getCompanyLocation(), this.pickupClient.getLocation());
 			this.deliveryRoute = new Route(this.pickupClient.getLocation(), this.deliveryClient.getLocation());
-			this.pickupRoute = new Route(this.deliveryClient.getLocation(), DeliveryTracker.getDeliveryTracker().getCompanyLocation());
+			this.returnRoute = new Route(this.deliveryClient.getLocation(), DeliveryTracker.getDeliveryTracker().getCompanyLocation());
 		}
     	
     	FileWriter writer;
@@ -304,7 +304,7 @@ public class DeliveryTicket implements Serializable{
 	 * @param deliveryOverheadTime
 	 * @param distance
 	 */
-	public LocalDateTime calculateDeliveryTime(LocalDateTime pickupOverheadTIme, LocalDateTime deliveryOverheadTime, int distance) {
+	public LocalDateTime calculateDeliveryTime() {
 		 deliveryTracker = DeliveryTracker.getDeliveryTracker();
 		 int blocksToTravel = this.deliveryRoute.getRouteDistance();
 		 double travelTimeInMinutes = (double)blocksToTravel / (double)deliveryTracker.getBlocksToMile() / deliveryTracker.getCourierSpeed() * 60;
@@ -338,7 +338,7 @@ public class DeliveryTicket implements Serializable{
 		if(this.pickupRoute == null){
 			this.pickupRoute = new Route(DeliveryTracker.getDeliveryTracker().getCompanyLocation(), this.pickupClient.getLocation());
 			this.deliveryRoute = new Route(this.pickupClient.getLocation(), this.deliveryClient.getLocation());
-			this.pickupRoute = new Route(this.deliveryClient.getLocation(), DeliveryTracker.getDeliveryTracker().getCompanyLocation());
+			this.returnRoute = new Route(this.deliveryClient.getLocation(), DeliveryTracker.getDeliveryTracker().getCompanyLocation());
 		}
 		
 		BigDecimal distanceToTravel = BigDecimal.valueOf(this.pickupRoute.getRouteDistance() + this.deliveryRoute.getRouteDistance() + this.returnRoute.getRouteDistance());
