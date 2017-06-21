@@ -1,5 +1,6 @@
 package controllers;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -139,12 +140,15 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
     
     
     DeliveryTicket deliveryTicket;
+    DateTimeFormatter formatter;
+    DateTimeFormatter timeFormatter;
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		deliveryTracker = DeliveryTracker.getDeliveryTracker();
-		
+		formatter = DateTimeFormatter.ofPattern("MMM dd YYYY");
+		timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
 	
 		if(deliveryTicket != null){
 			comboBoxDeliveryClient.setValue(deliveryTicket.getDeliveryClient());
@@ -260,25 +264,27 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 					labelPackageID.setText(Integer.toString(deliveryTicket.getPackageID()));
 					
 					//calculate and set price
-					deliveryTicket.setPrice(deliveryTicket.calculatePrice());
-					
+					BigDecimal price = deliveryTicket.calculatePrice();
+					deliveryTicket.setPrice(price);
+					labelPrice.setText(deliveryTicket.getPrice().toString());
 					//Estimated Delivery Time
 					LocalDateTime estDeliveryTime = deliveryTicket.calculateDeliveryTime();
 					deliveryTicket.setEstimatedDeliveryTime(estDeliveryTime);
-					labelEstimatedDeliveryTime.setText(deliveryTicket.getEstimatedDeliveryTime().toString());
+					labelEstimatedDeliveryTime.setText(deliveryTicket.getEstimatedDeliveryTime().format(timeFormatter));
+					
+					//Estimated Departure Time
+					LocalDateTime estDepartTime = deliveryTicket.calculateDepartureTime();
+					deliveryTicket.setCalculatedDepartureTime(estDepartTime);
+					labelCalculatedDepartureTime.setText(estDepartTime.format(timeFormatter));
 					//Total Distance
 					int totalDistance = deliveryTicket.calculateTotalDistance();
 					labelTotalDistance.setText(Integer.toString(totalDistance));
+	
+					DeliveryTicketDAO.saveDeliveryTicket(deliveryTicket);
 				}
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-			
-			//calculate price
-			
-			//estimated delivery time
-			
-			//calculated departure time
 			
 		}
 		  
