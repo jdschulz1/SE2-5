@@ -253,7 +253,7 @@ public class DeliveryTicket implements Serializable{
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd YYYY");
 		DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
 		
-		if(this.price == null)this.calculatePrice();
+		if(this.price == null)this.price = this.calculatePrice();
 		else if(this.pickupRoute == null){
 			this.pickupRoute = new Route(DeliveryTracker.getDeliveryTracker().getCompanyLocation(), this.pickupClient.getLocation());
 			this.deliveryRoute = new Route(this.pickupClient.getLocation(), this.deliveryClient.getLocation());
@@ -264,6 +264,7 @@ public class DeliveryTicket implements Serializable{
 		        a.setHeaderText("Pickup Route Not Possible");
 		        a.setContentText("The Pickup Route failed to generate with the existing Traffic Impediments.");
 		        a.showAndWait();
+		        this.price = new BigDecimal(0);
 			}
 		}
     	

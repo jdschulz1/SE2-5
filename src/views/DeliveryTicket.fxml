@@ -317,7 +317,7 @@
                                                       <Insets left="-40.0" />
                                                    </GridPane.margin>
                                                 </Button>
-                                                <Button mnemonicParsing="false" text="Generate Courier Package" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                <Button fx:id="buttonGenerateCourierPackage" mnemonicParsing="false" text="Generate Courier Package" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                                    <GridPane.margin>
                                                       <Insets left="95.0" />
                                                    </GridPane.margin>

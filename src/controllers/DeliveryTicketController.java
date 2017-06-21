@@ -138,6 +138,8 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
     @FXML
     private Button buttonGenerateQuote;
     
+    @FXML
+    private Button buttonGenerateCourierPackage;
     
     DeliveryTicket deliveryTicket;
     DateTimeFormatter formatter;
@@ -289,6 +291,23 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 		}
 		  
 	  });
+	  
+	  buttonGenerateCourierPackage.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				try{
+					if(save()){
+						//generate courier package and set price if not set
+						deliveryTicket.generateCourierPackage();
+		
+						DeliveryTicketDAO.saveDeliveryTicket(deliveryTicket);
+					}
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+		  });
 	}
 
 	private void updateCourierList() {
