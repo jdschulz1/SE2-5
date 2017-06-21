@@ -298,6 +298,8 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 			public void handle(ActionEvent arg0) {
 				try{
 					if(save()){
+						DeliveryTicketDAO.saveDeliveryTicket(deliveryTicket);
+						
 						//generate courier package and set price if not set
 						deliveryTicket.generateCourierPackage();
 		
