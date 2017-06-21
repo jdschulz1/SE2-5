@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import dtDAO.TrafficImpedimentDAO;
@@ -39,10 +40,12 @@ public class SelectTrafficImpediment implements Initializable {
     @FXML
     private Button buttonTrafficImpedimentDelete;
 	
+	DateTimeFormatter formatter;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		deliveryTracker = DeliveryTracker.getDeliveryTracker();
+		formatter = DateTimeFormatter.ofPattern("MMM dd YYYY hh:mm:ssa");
 		updateTrafficImpedimentsList();
 		comboBoxTrafficImpediment.setConverter(
 		            new StringConverter<TrafficImpediment>() {
@@ -56,7 +59,7 @@ public class SelectTrafficImpediment implements Initializable {
 							if (object == null) {
 		                        return "";
 		                    } else {
-		                        return object.getIntersection().getName() + " (" + object.getStartDate() + "-" + object.getEndDate() + ")";
+		                        return object.getIntersection().getName() + " (" + object.getStartDate().format(formatter) + " - " + object.getEndDate().format(formatter) + ")";
 		                    }
 						}
 		            });
