@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import dtDAO.CourierDAO;
+import dtDAO.DeliveryTicketDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -68,6 +69,7 @@ public class AssignCourier implements Initializable{
 	            		if(comboBoxAssignCourier.getValue() != null)
 	            		{
 		            		deliveryTicket.setCourier(comboBoxAssignCourier.getValue());
+		            		DeliveryTicketDAO.saveDeliveryTicket(deliveryTicket);
 		            		AnchorPane currentPane;
 							currentPane = FXMLLoader.load(getClass().getResource("/views/Main.fxml"));
 		    	    		BorderPane border = Main.getRoot();
