@@ -424,8 +424,15 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 		if(!validate()) {
 			Alert a = new Alert(AlertType.ERROR);
 	        a.setTitle("Error");
-	        a.setHeaderText("Missing Information");
-	        a.setContentText("Please complete all required fields and try again.");
+	        if(comboBoxPickupClient.getValue() == comboBoxDeliveryClient.getValue()){
+	        	a.setHeaderText("Duplicate Client");
+		        a.setContentText("Pickup and Delivery Clients are the same.");
+	        }
+	        else{
+	        	a.setHeaderText("Missing Information");
+		        a.setContentText("Please complete all required fields and try again.");
+	        }
+	        
 	        a.showAndWait();
 			return false;
 		}
@@ -503,11 +510,10 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 	}
 	
 	private boolean validate() {
-		
-		if(comboBoxCourier.getValue() == null) return false;
 		if(comboBoxDeliveryClient.getValue() == null) return false;
 		if(comboBoxPayingClient.getValue() == null) return false;
 		if(comboBoxPickupClient.getValue() == null) return false;
+		if(comboBoxPickupClient.getValue() == comboBoxDeliveryClient.getValue()) return false;
 		if (comboBoxRequestedPickupAMPM.getValue() == null)return false;
 		if (dateTimePickerOrderDate.getValue() == null) return false;
 		return true;
