@@ -5,8 +5,10 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -17,175 +19,166 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CourierPerformance">
+<AnchorPane prefHeight="60.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CourierPerformance">
    <children>
-      <AnchorPane layoutX="10.0" layoutY="10.0">
-         <children>
-            <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="577.0" prefWidth="665.0">
+      <BorderPane layoutX="20.0" layoutY="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <VBox>
                <children>
-                  <BorderPane>
-                     <center>
-                        <VBox>
-                           <children>
-                              <GridPane alignment="BOTTOM_CENTER">
-                                 <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                 </columnConstraints>
-                                 <rowConstraints>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                 </rowConstraints>
-                                 <children>
-                                    <Button fx:id="btnPreview" mnemonicParsing="false" text="Preview" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                       <GridPane.margin>
-                                          <Insets left="140.0" />
-                                       </GridPane.margin>
-                                    </Button>
-                                    <Label text="Starting" GridPane.rowIndex="1">
-                                       <GridPane.margin>
-                                          <Insets left="70.0" />
-                                       </GridPane.margin>
-                                    </Label>
-                                    <RadioButton fx:id="radioButtonMonth" mnemonicParsing="false" text="Month" GridPane.columnIndex="1">
-                                       <padding>
-                                          <Insets left="200.0" />
-                                       </padding>
-                                       <toggleGroup>
-                                          <ToggleGroup fx:id="reportingTimeFrame" />
-                                       </toggleGroup>
-                                    </RadioButton>
-                                    <RadioButton fx:id="radioButtonWeek" mnemonicParsing="false" selected="true" text="Week" toggleGroup="$reportingTimeFrame" GridPane.columnIndex="1">
-                                       <GridPane.margin>
-                                          <Insets left="20.0" />
-                                       </GridPane.margin>
-                                    </RadioButton>
-                                    <Label fx:id="labelCourierName" text="None" GridPane.rowIndex="2">
-                                       <padding>
-                                          <Insets left="150.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label fx:id="labelDate" text="None" GridPane.rowIndex="3">
-                                       <padding>
-                                          <Insets left="150.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label fx:id="labelNumberofDeliveries" text="None" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                       <padding>
-                                          <Insets left="150.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label fx:id="labelOnTimeDeliveryRate" text="None" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                       <padding>
-                                          <Insets left="150.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label fx:id="labelTotalBonusEarned" text="None" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                       <padding>
-                                          <Insets left="150.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label text="Courier Name:" GridPane.rowIndex="2">
-                                       <padding>
-                                          <Insets left="10.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label text="Date:" GridPane.rowIndex="3">
-                                       <padding>
-                                          <Insets left="10.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label text="Number of Deliveries:" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                       <padding>
-                                          <Insets left="10.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label text="On-Time Delivery Rate:" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                       <padding>
-                                          <Insets left="10.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label text="Total Bonus Earned:" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                       <padding>
-                                          <Insets left="10.0" />
-                                       </padding>
-                                    </Label>
-                                    <DatePicker fx:id="datePickerStartDate" prefHeight="25.0" prefWidth="296.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="20.0" top="20.0" />
-                                 </padding>
-                              </GridPane>
-                              <TableView fx:id="tableReport" prefHeight="240.0" prefWidth="827.0">
-                                 <columns>
-                                    <TableColumn fx:id="tableColumnOrderDate" prefWidth="119.20001220703125" text="Order Date" />
-                                    <TableColumn fx:id="tableColumnPickupClient" prefWidth="148.20001220703125" text="Pickup Client" />
-                                    <TableColumn fx:id="tableColumnDeliveryClient" prefWidth="155.20001220703125" text="Delivery Client" />
-                                    <TableColumn fx:id="tableColumnEstimatedDeliveryTime" prefWidth="170.60003662109375" text="Estimated Delivery Time" />
-                                    <TableColumn fx:id="tableColumnActualDeliveryTime" prefWidth="123.4000244140625" text="Actual Delivery Time" />
-                                    <TableColumn fx:id="tableColumnBonusEarned" prefWidth="123.4000244140625" text="Bonus Earned" />
-                                 </columns>
-                              </TableView>
-                           </children>
-                        </VBox>
-                     </center>
-                     <bottom>
-                        <HBox alignment="TOP_CENTER" prefHeight="74.0" prefWidth="665.0" BorderPane.alignment="CENTER">
-                           <children>
-                              <GridPane prefHeight="74.0" prefWidth="275.0">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Button fx:id="btnCancel" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Cancel" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                       <GridPane.margin>
-                                          <Insets left="45.0" />
-                                       </GridPane.margin>
-                                    </Button>
-                                    <Button fx:id="btnCreateReport" mnemonicParsing="false" text="Create Report" GridPane.rowIndex="1" />
-                                    <Button fx:id="btnPrevious" mnemonicParsing="false" text="Previous">
-                                       <GridPane.margin>
-                                          <Insets left="13.0" />
-                                       </GridPane.margin>
-                                    </Button>
-                                    <Button fx:id="btnNext" mnemonicParsing="false" text="Next" GridPane.columnIndex="2">
-                                       <GridPane.margin>
-                                          <Insets left="50.0" />
-                                       </GridPane.margin>
-                                    </Button>
-                                    <Label fx:id="labelCourierCounter" prefHeight="17.0" prefWidth="92.0" text="Courier 0 of 0" textAlignment="CENTER" GridPane.columnIndex="1" />
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                              </GridPane>
-                           </children>
-                        </HBox>
-                     </bottom>
-                     <top>
-                        <Label alignment="CENTER" prefHeight="27.0" prefWidth="827.0" text="Courier Performance Report" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                           <padding>
-                              <Insets top="10.0" />
-                           </padding>
+                  <GridPane alignment="BOTTOM_CENTER" hgap="10.0" prefHeight="70.0" prefWidth="950.0" vgap="10.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="385.20001220703125" minWidth="10.0" prefWidth="385.20001220703125" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="304.79998779296875" minWidth="10.0" prefWidth="203.79998779296875" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="340.20001220703125" minWidth="10.0" prefWidth="340.20001220703125" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Button fx:id="btnPreview" mnemonicParsing="false" text="Preview" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Button>
+                        <Label text="Starting" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="70.0" />
+                           </GridPane.margin>
                         </Label>
-                     </top>
-                  </BorderPane>
+                        <RadioButton fx:id="radioButtonMonth" mnemonicParsing="false" text="Month" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="reportingTimeFrame" />
+                           </toggleGroup>
+                           <GridPane.margin>
+                              <Insets right="20.0" />
+                           </GridPane.margin>
+                        </RadioButton>
+                        <RadioButton fx:id="radioButtonWeek" mnemonicParsing="false" selected="true" text="Week" toggleGroup="$reportingTimeFrame" GridPane.columnIndex="1">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </RadioButton>
+                        <DatePicker fx:id="datePickerStartDate" prefHeight="25.0" prefWidth="296.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+                  <GridPane hgap="10.0" prefHeight="67.0" prefWidth="950.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="340.39996337890625" minWidth="10.0" prefWidth="281.4000244140625" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="223.60003662109375" minWidth="10.0" prefWidth="175.39999389648438" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="349.4000244140625" minWidth="10.0" prefWidth="175.60000610351562" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="310.4000244140625" minWidth="10.0" prefWidth="278.79998779296875" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Courier Name:" GridPane.halignment="RIGHT">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelCourierName" text="None" GridPane.columnIndex="1" />
+                        <Label text="Date:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelDate" text="None" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Number of Deliveries:" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="On-Time Delivery Rate:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="Total Bonus Earned:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelNumberofDeliveries" text="None" GridPane.columnIndex="3" />
+                        <Label fx:id="labelOnTimeDeliveryRate" text="None" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <Label fx:id="labelTotalBonusEarned" text="None" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+                  <TableView fx:id="tableReport" prefHeight="240.0" prefWidth="827.0">
+                     <columns>
+                        <TableColumn fx:id="tableColumnOrderDate" prefWidth="119.20001220703125" text="Order Date" />
+                        <TableColumn fx:id="tableColumnPickupClient" prefWidth="148.20001220703125" text="Pickup Client" />
+                        <TableColumn fx:id="tableColumnDeliveryClient" prefWidth="155.20001220703125" text="Delivery Client" />
+                        <TableColumn fx:id="tableColumnEstimatedDeliveryTime" prefWidth="170.60003662109375" text="Estimated Delivery Time" />
+                        <TableColumn fx:id="tableColumnActualDeliveryTime" prefWidth="123.4000244140625" text="Actual Delivery Time" />
+                        <TableColumn fx:id="tableColumnBonusEarned" prefWidth="123.4000244140625" text="Bonus Earned" />
+                     </columns>
+                  </TableView>
                </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </VBox>
+         </center>
+         <bottom>
+            <HBox alignment="TOP_CENTER" prefHeight="74.0" prefWidth="665.0" BorderPane.alignment="CENTER">
+               <children>
+                  <GridPane hgap="10.0" prefHeight="74.0" prefWidth="987.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.39996337890625" minWidth="10.0" prefWidth="114.39999389648438" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="505.6000061035156" minWidth="10.0" prefWidth="272.4000244140625" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="536.3999938964844" minWidth="10.0" prefWidth="427.5999755859375" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button fx:id="btnCancel" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="100.0" text="Cancel" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Button>
+                        <Button fx:id="btnCreateReport" mnemonicParsing="false" prefWidth="100.0" text="Create Report" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                        <Button fx:id="btnPrevious" mnemonicParsing="false" prefWidth="100.0" text="Previous" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Button>
+                        <Button fx:id="btnNext" mnemonicParsing="false" prefWidth="100.0" text="Next" GridPane.columnIndex="2">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Button>
+                        <Label fx:id="labelCourierCounter" prefHeight="17.0" prefWidth="150.0" textAlignment="CENTER" />
+                        <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </GridPane>
+               </children>
+            </HBox>
+         </bottom>
+         <top>
+            <TitledPane alignment="CENTER" animated="false" collapsible="false" contentDisplay="CENTER" expanded="false" text="Courier Performance Report" textAlignment="CENTER" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </TitledPane>
+         </top>
+      </BorderPane>
    </children>
 </AnchorPane>

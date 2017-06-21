@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -13,15 +14,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="660.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="CENTER" prefHeight="300.0" prefWidth="600.0" spacing="10.0">
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="950.0" spacing="10.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="325.0" text="Edit Traffic Impediment" textAlignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
             <GridPane hgap="5.0" prefHeight="220.0" prefWidth="323.0" vgap="5.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -36,14 +32,26 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label text="Avenue" GridPane.rowIndex="1" />
-                  <Label text="Street" />
-                  <Label text="Start Date" GridPane.rowIndex="2" />
-                  <Label text="End Date" GridPane.rowIndex="3" />
+                  <Label text="Avenue" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="300.0" />
+                     </GridPane.margin></Label>
+                  <Label text="Street" GridPane.halignment="LEFT">
+                     <GridPane.margin>
+                        <Insets left="300.0" />
+                     </GridPane.margin></Label>
+                  <Label text="Start Date" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="300.0" />
+                     </GridPane.margin></Label>
+                  <Label text="End Date" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets left="300.0" />
+                     </GridPane.margin></Label>
                   <ComboBox fx:id="comboBoxTrafficImpedimentStreet" prefHeight="25.0" prefWidth="294.0" GridPane.columnIndex="1" />
-                  <ComboBox fx:id="comboBoxTrafficImpedimentAvenue" prefHeight="25.0" prefWidth="281.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <DatePicker fx:id="datePickerTrafficImpedimentStart" prefHeight="25.0" prefWidth="283.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <DatePicker fx:id="datePickerTrafficImpedimentEnd" prefHeight="25.0" prefWidth="284.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <ComboBox fx:id="comboBoxTrafficImpedimentAvenue" prefHeight="25.0" prefWidth="294.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <DatePicker fx:id="datePickerTrafficImpedimentStart" prefHeight="25.0" prefWidth="295.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <DatePicker fx:id="datePickerTrafficImpedimentEnd" prefHeight="25.0" prefWidth="295.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -73,5 +81,10 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </VBox>
+      <TitledPane alignment="CENTER" animated="false" collapsible="false" expanded="false" text="Edit Traffic Impediment" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </TitledPane>
    </children>
 </AnchorPane>
