@@ -53,7 +53,6 @@
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
@@ -62,16 +61,14 @@
                                           <ComboBox fx:id="comboBoxPickupClient" minWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                           <ComboBox fx:id="comboBoxDeliveryClient" layoutX="164.0" layoutY="69.0" minWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                           <ComboBox fx:id="comboBoxPayingClient" layoutX="164.0" layoutY="99.0" minWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                          <ComboBox fx:id="comboBoxCourier" layoutX="164.0" layoutY="159.0" minWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                                           <Label text="Order Taker" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                                           <Label layoutX="10.0" layoutY="77.0" text="Delivery Client" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
                                           <Label layoutX="10.0" layoutY="107.0" text="Paying Client" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
                                           <Label layoutX="10.0" layoutY="137.0" text="Requested Pickup Time" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-                                          <Label layoutX="10.0" layoutY="167.0" text="Courier" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-                                          <Label layoutX="10.0" layoutY="197.0" text="Special Remarks" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
+                                          <Label layoutX="10.0" layoutY="197.0" text="Special Remarks" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
                                           <DatePicker id="dateTimePickerOrderDate" fx:id="dateTimePickerOrderDate" minWidth="249.0" prefHeight="34.0" prefWidth="249.0" GridPane.columnIndex="1" />
                                           <Label text="Pickup Client" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-                                          <TextArea fx:id="textAreaSpecialRemarks" minWidth="239.0" prefHeight="56.0" prefWidth="239.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                          <TextArea fx:id="textAreaSpecialRemarks" minWidth="239.0" prefHeight="56.0" prefWidth="239.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                                           <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                              <children>
                                                 <HBox>
@@ -173,11 +170,12 @@
                                           </Label>
                                           <GridPane hgap="10.0" prefHeight="349.0" prefWidth="465.0" vgap="10.0">
                                              <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="10.0" />
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                              </columnConstraints>
                                              <rowConstraints>
                                                 <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+                                                <RowConstraints maxHeight="68.0" minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES" />
                                                 <RowConstraints maxHeight="68.0" minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES" />
                                                 <RowConstraints maxHeight="78.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
                                                 <RowConstraints maxHeight="71.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
@@ -186,11 +184,11 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <Label text="Actual Departure Time" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                                                <Label text="Actual Pickup Time" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-                                                <Label text="Actual Return Time" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
-                                                <Label text="Actual Delivery Time" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-                                                <CheckBox fx:id="chkBoxDeliveryConfirmed" mnemonicParsing="false" prefHeight="25.0" text="Delivery Confirmed" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                <Label text="Actual Departure Time" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                                                <Label text="Actual Pickup Time" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                                                <Label text="Actual Return Time" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+                                                <Label text="Actual Delivery Time" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+                                                <CheckBox fx:id="chkBoxDeliveryConfirmed" mnemonicParsing="false" prefHeight="25.0" text="Delivery Confirmed" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                                    <padding>
                                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                    </padding>
@@ -198,7 +196,7 @@
                                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                    </GridPane.margin>
                                                 </CheckBox>
-                                                <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                                    <children>
                                                       <HBox>
                                                          <children>
@@ -224,7 +222,7 @@
                                                       </HBox>
                                                    </children>
                                                 </VBox>
-                                                <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                                    <children>
                                                       <HBox>
                                                          <children>
@@ -250,7 +248,7 @@
                                                       </HBox>
                                                    </children>
                                                 </VBox>
-                                                <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                                    <children>
                                                       <HBox>
                                                          <children>
@@ -276,7 +274,7 @@
                                                       </HBox>
                                                    </children>
                                                 </VBox>
-                                                <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                                    <children>
                                                       <HBox>
                                                          <children>
@@ -302,26 +300,32 @@
                                                       </HBox>
                                                    </children>
                                                 </VBox>
-                                                <Button fx:id="buttonSave" mnemonicParsing="false" text="Save" GridPane.rowIndex="6">
+                                                <Button fx:id="buttonSave" mnemonicParsing="false" text="Save" GridPane.rowIndex="7">
                                                    <GridPane.margin>
                                                       <Insets />
                                                    </GridPane.margin>
                                                 </Button>
-                                                <Button fx:id="buttonCancel" mnemonicParsing="false" text="Cancel" GridPane.rowIndex="6">
+                                                <Button fx:id="buttonCancel" mnemonicParsing="false" text="Cancel" GridPane.rowIndex="7">
                                                    <GridPane.margin>
                                                       <Insets left="75.0" />
                                                    </GridPane.margin>
                                                 </Button>
-                                                <Button fx:id="buttonGenerateQuote" mnemonicParsing="false" text="Calculate Quote" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                <Button fx:id="buttonGenerateQuote" mnemonicParsing="false" text="Calculate Quote" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                                    <GridPane.margin>
                                                       <Insets left="-40.0" />
                                                    </GridPane.margin>
                                                 </Button>
-                                                <Button fx:id="buttonGenerateCourierPackage" mnemonicParsing="false" text="Generate Courier Package" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                <Button fx:id="buttonGenerateCourierPackage" mnemonicParsing="false" text="Generate Courier Package" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                                    <GridPane.margin>
                                                       <Insets left="95.0" />
                                                    </GridPane.margin>
                                                 </Button>
+                                                <Label text="Courier" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                                                <ComboBox fx:id="comboBoxCourier" minWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <CheckBox fx:id="checkBoxActualDepartureTime" mnemonicParsing="false" GridPane.rowIndex="2" />
+                                                <CheckBox fx:id="checkBoxActualPickupTime" mnemonicParsing="false" GridPane.rowIndex="3" />
+                                                <CheckBox fx:id="checkBoxActualDeliveryTime" mnemonicParsing="false" GridPane.rowIndex="4" />
+                                                <CheckBox fx:id="checkBoxActualReturnTime" mnemonicParsing="false" GridPane.rowIndex="5" />
                                              </children>
                                              <VBox.margin>
                                                 <Insets />
