@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -257,6 +258,13 @@ public class DeliveryTicket implements Serializable{
 			this.pickupRoute = new Route(DeliveryTracker.getDeliveryTracker().getCompanyLocation(), this.pickupClient.getLocation());
 			this.deliveryRoute = new Route(this.pickupClient.getLocation(), this.deliveryClient.getLocation());
 			this.returnRoute = new Route(this.deliveryClient.getLocation(), DeliveryTracker.getDeliveryTracker().getCompanyLocation());
+			if(this.pickupRoute == null || this.deliveryRoute == null || this.returnRoute == null){
+				Alert a = new Alert(AlertType.ERROR);
+		        a.setTitle("Error");
+		        a.setHeaderText("Pickup Route Not Possible");
+		        a.setContentText("The Pickup Route failed to generate with the existing Traffic Impediments.");
+		        a.showAndWait();
+			}
 		}
     	
     	FileWriter writer;
@@ -339,6 +347,14 @@ public class DeliveryTicket implements Serializable{
 			this.pickupRoute = new Route(DeliveryTracker.getDeliveryTracker().getCompanyLocation(), this.pickupClient.getLocation());
 			this.deliveryRoute = new Route(this.pickupClient.getLocation(), this.deliveryClient.getLocation());
 			this.returnRoute = new Route(this.deliveryClient.getLocation(), DeliveryTracker.getDeliveryTracker().getCompanyLocation());
+			if(this.pickupRoute == null || this.deliveryRoute == null || this.returnRoute == null){
+				Alert a = new Alert(AlertType.ERROR);
+		        a.setTitle("Error");
+		        a.setHeaderText("Pickup Route Not Possible");
+		        a.setContentText("The Pickup Route failed to generate with the existing Traffic Impediments.");
+		        a.showAndWait();
+		        return new BigDecimal(0);
+			}
 		}
 		
 		BigDecimal distanceToTravel = BigDecimal.valueOf(this.pickupRoute.getRouteDistance() + this.deliveryRoute.getRouteDistance() + this.returnRoute.getRouteDistance());
