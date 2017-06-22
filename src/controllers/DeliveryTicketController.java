@@ -360,7 +360,8 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 					//Total Distance
 					int totalDistance = deliveryTicket.calculateTotalDistance();
 					labelTotalDistance.setText(Integer.toString(totalDistance) + " blocks");
-	
+					deliveryTicket.setTotalRouteDist(totalDistance);
+					
 					DeliveryTicketDAO.saveDeliveryTicket(deliveryTicket);
 				}
 			}catch(Exception e){

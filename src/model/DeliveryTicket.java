@@ -206,6 +206,18 @@ public class DeliveryTicket implements Serializable{
 	
 	@Column(name = "price")
 	private BigDecimal price;
+	
+	@Column(name = "total_distance")
+	private int totalRouteDist;
+	
+	public int getTotalRouteDist() {
+		return totalRouteDist;
+	}
+
+	public void setTotalRouteDist(int totalRouteDist) {
+		this.totalRouteDist = totalRouteDist;
+	}
+
 	/**
 	 * The route from pickup location to delivery location.
 	 */
