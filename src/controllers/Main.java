@@ -67,6 +67,7 @@ public class Main extends Application {
 //			shortest_path = test.getPath();
 //			System.out.println("route length =" + test.getRouteDistance());
 			
+<<<<<<< Upstream, based on origin/dev
 //			for(Vertex v : shortest_path){
 //				System.out.print(v.getIntersection().getName() +  " shortest dist: ");
 //				System.out.print(v.getShortestDist() + " prev intersection: ");
@@ -74,6 +75,19 @@ public class Main extends Application {
 //				if(v.getIntersection() == dest)break;
 //			}
 //			
+=======
+			Route test = new Route(src, dest);
+			shortest_path = test.getPath();
+//			System.out.println("route length =" + test.getRouteDistance());
+			
+//			for(Vertex v : shortest_path){
+//				System.out.print(v.getIntersection().getName() +  " shortest dist: ");
+//				System.out.print(v.getShortestDist() + " prev intersection: ");
+//				System.out.println(v.getPrevious().getIntersection().getName());
+//				if(v.getIntersection() == dest)break;
+//			}
+			
+>>>>>>> 745232a Merging
 //			for(Instruction i : test.getInstructionsList()){
 //				System.out.println(i.CreateInstruction());
 //			}
