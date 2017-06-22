@@ -8,6 +8,7 @@ import javax.persistence.TypedQuery;
 
 import dtDAO.IntersectionDAO;
 import dtDAO.StreetDAO;
+import dtDAO.UserDAO;
 import dtDAO.emDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -48,6 +49,9 @@ public class Main extends Application {
 		try {
 			CityMap.getCityMap();
 			deliveryTracker = DeliveryTracker.getDeliveryTracker();
+			if(UserDAO.listUser().isEmpty()){
+				UserDAO.addUser(new User("admin", "admin", "password", "Admin", "email@email.com"));
+			}
 			MenuBar bar = FXMLLoader.load(getClass().getResource("/views/Menus.fxml"));
 			AnchorPane paneMain = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
 			root.setTop(bar);
