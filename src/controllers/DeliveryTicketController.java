@@ -142,6 +142,19 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
     @FXML
     private Button buttonGenerateCourierPackage;
     
+
+    @FXML
+    private CheckBox checkBoxActualDepartureTime;
+
+    @FXML
+    private CheckBox checkBoxActualPickupTime;
+
+    @FXML
+    private CheckBox checkBoxActualDeliveryTime;
+
+    @FXML
+    private CheckBox checkBoxActualReturnTime;
+    
     DeliveryTicket deliveryTicket;
     DateTimeFormatter formatter;
     DateTimeFormatter timeFormatter;
@@ -161,14 +174,19 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 			comboBoxOrderTaker.setValue(deliveryTicket.getOrderTaker());
 			dateTimePickerOrderDate.setValue(deliveryTicket.getOrderDateTime().toLocalDate());
 			textAreaSpecialRemarks.setText(deliveryTicket.getSpecialRemarks());
-			labelCalculatedDepartureTime.setText(deliveryTicket.getCalculatedDepartureTime().format(timeFormatter));
-			labelEstimatedDeliveryTime.setText(deliveryTicket.getEstimatedDeliveryTime().format(timeFormatter));
+			if (deliveryTicket.getCalculatedDepartureTime() != null){
+				labelCalculatedDepartureTime.setText(deliveryTicket.getCalculatedDepartureTime().format(timeFormatter));
+			}
+			if (deliveryTicket.getEstimatedDeliveryTime() != null){
+				labelEstimatedDeliveryTime.setText(deliveryTicket.getEstimatedDeliveryTime().format(timeFormatter));
+			}
+			
 			labelPackageID.setText(Integer.toString(deliveryTicket.getPackageID()));
 			if (deliveryTicket.getPrice() != null){
 				labelPrice.setText(stringFromBigDecimal(deliveryTicket.getPrice()));
 			}
 			
-			if(deliveryTicket.calculateTotalDistance() > 0) {
+			if(deliveryTicket.getDeliveryRoute() != null && deliveryTicket.getPickupRoute() != null && deliveryTicket.getReturnRoute() != null) {
 				labelTotalDistance.setText(deliveryTicket.calculateTotalDistance() + " blocks");
 			}
 			
@@ -181,27 +199,72 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 			spinnerRequestedPickupHour.getValueFactory().setValue(deliveryTicket.getRequestedPickupTime().getHour());
 			spinnerRequestedPickupMinute.getValueFactory().setValue(deliveryTicket.getRequestedPickupTime().getMinute());
 			comboBoxRequestedPickupAMPM.setValue(getAMPM(deliveryTicket.getRequestedPickupTime()));
-									
-			spinnerActualPickupTimeHour.getValueFactory().setValue(deliveryTicket.getActualPickupTime().getHour());
-			spinnerActualPickupTimeMinute.getValueFactory().setValue(deliveryTicket.getActualPickupTime().getMinute());
-			comboBoxActualPickupTimeAMPM.setValue(getAMPM(deliveryTicket.getActualPickupTime()));
 			
-			spinnerActualDepartureTimeHour.getValueFactory().setValue(deliveryTicket.getActualDepartureTime().getHour());
-			spinnerActualDepartureTimeMinute.getValueFactory().setValue(deliveryTicket.getActualDepartureTime().getMinute());
-			comboBoxActualDepartureTimeAMPM.setValue(getAMPM(deliveryTicket.getActualDepartureTime()));
+			//Actual Values
+		    if (deliveryTicket.getActualPickupTime() == null){ 
+		    	checkBoxActualPickupTime.setSelected(false);
+		    	spinnerActualPickupTimeHour.setDisable(true);
+		    	spinnerActualPickupTimeMinute.setDisable(true);
+		    	comboBoxActualPickupTimeAMPM.setDisable(true);
+		    }else{
+		    	checkBoxActualDeliveryTime.setSelected(true);
+		    	spinnerActualPickupTimeHour.getValueFactory().setValue(deliveryTicket.getActualPickupTime().getHour());
+				spinnerActualPickupTimeMinute.getValueFactory().setValue(deliveryTicket.getActualPickupTime().getMinute());
+				comboBoxActualPickupTimeAMPM.setValue(getAMPM(deliveryTicket.getActualPickupTime()));
+		    }
 			
-			spinnerActualDeliveryTimeHour.getValueFactory().setValue(deliveryTicket.getActualDeliveryTime().getHour());
-			spinnerActualDeliveryTimeMinute.getValueFactory().setValue(deliveryTicket.getActualDeliveryTime().getMinute());
-			comboBoxActualDeliveryTimeAMPM.setValue(getAMPM(deliveryTicket.getActualDeliveryTime()));
+		    if (deliveryTicket.getActualDepartureTime() == null){
+		    	checkBoxActualDepartureTime.setSelected(false);
+		    	spinnerActualDepartureTimeHour.setDisable(true);
+		    	spinnerActualDepartureTimeMinute.setDisable(true);
+		    	comboBoxActualDepartureTimeAMPM.setDisable(true);
+		    }else{
+		    	checkBoxActualDepartureTime.setSelected(true);
+		    	spinnerActualDepartureTimeHour.getValueFactory().setValue(deliveryTicket.getActualDepartureTime().getHour());
+				spinnerActualDepartureTimeMinute.getValueFactory().setValue(deliveryTicket.getActualDepartureTime().getMinute());
+				comboBoxActualDepartureTimeAMPM.setValue(getAMPM(deliveryTicket.getActualDepartureTime()));
+		    }
+		    
+		    if (deliveryTicket.getActualDeliveryTime() == null){
+		    	checkBoxActualDeliveryTime.setSelected(false);
+		    	spinnerActualDeliveryTimeHour.setDisable(true);
+		    	spinnerActualDeliveryTimeMinute.setDisable(true);
+		    	comboBoxActualDeliveryTimeAMPM.setDisable(true);
+		    }else{
+		    	checkBoxActualDeliveryTime.setSelected(true);
+		    	spinnerActualDeliveryTimeHour.getValueFactory().setValue(deliveryTicket.getActualDeliveryTime().getHour());
+				spinnerActualDeliveryTimeMinute.getValueFactory().setValue(deliveryTicket.getActualDeliveryTime().getMinute());
+				comboBoxActualDeliveryTimeAMPM.setValue(getAMPM(deliveryTicket.getActualDeliveryTime()));
+		    }
 			
-			spinnerActualReturnTimeHour.getValueFactory().setValue(deliveryTicket.getActualReturnTime().getHour());
-			spinnerActualReturnTimeMinute.getValueFactory().setValue(deliveryTicket.getActualReturnTime().getMinute());
-			comboBoxActualReturnTimeAMPM.setValue(getAMPM(deliveryTicket.getActualReturnTime()));
-	
+		    if (deliveryTicket.getActualDeliveryTime() == null){
+		    	checkBoxActualReturnTime.setSelected(false);
+		    	spinnerActualReturnTimeHour.setDisable(true);
+		    	spinnerActualReturnTimeMinute.setDisable(true);
+		    	comboBoxActualReturnTimeAMPM.setDisable(true);
+		    }else{
+		    	checkBoxActualReturnTime.setSelected(true);
+		    	spinnerActualReturnTimeHour.getValueFactory().setValue(deliveryTicket.getActualReturnTime().getHour());
+				spinnerActualReturnTimeMinute.getValueFactory().setValue(deliveryTicket.getActualReturnTime().getMinute());
+				comboBoxActualReturnTimeAMPM.setValue(getAMPM(deliveryTicket.getActualReturnTime()));
+		    }
+
 			chkBoxDeliveryConfirmed.setSelected(deliveryTicket.isDeliveryConfirmed());
 		}
 		else {
 			this.buttonGenerateCourierPackage.setDisable(true);
+			spinnerActualPickupTimeHour.setDisable(true);
+	    	spinnerActualPickupTimeMinute.setDisable(true);
+	    	comboBoxActualPickupTimeAMPM.setDisable(true);
+			spinnerActualDepartureTimeHour.setDisable(true);
+	    	spinnerActualDepartureTimeMinute.setDisable(true);
+	    	comboBoxActualDepartureTimeAMPM.setDisable(true);
+			spinnerActualDeliveryTimeHour.setDisable(true);
+	    	spinnerActualDeliveryTimeMinute.setDisable(true);
+	    	comboBoxActualDeliveryTimeAMPM.setDisable(true);
+			spinnerActualReturnTimeHour.setDisable(true);
+	    	spinnerActualReturnTimeMinute.setDisable(true);
+	    	comboBoxActualReturnTimeAMPM.setDisable(true);
 		}
 			
 	  //client Lists
@@ -317,6 +380,67 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 				}
 			}
 		  });
+	  
+	  checkBoxActualDeliveryTime.setOnAction(new EventHandler<ActionEvent>() {
+
+		@Override
+		public void handle(ActionEvent arg0) {
+		if(checkBoxActualDeliveryTime.isSelected()){
+			spinnerActualDeliveryTimeHour.setDisable(false);
+			spinnerActualDeliveryTimeMinute.setDisable(false);
+	    	comboBoxActualDeliveryTimeAMPM.setDisable(false);
+		}else{
+			spinnerActualDeliveryTimeHour.setDisable(true);
+			spinnerActualDeliveryTimeMinute.setDisable(true);
+	    	comboBoxActualDeliveryTimeAMPM.setDisable(true);
+		}			
+		}});
+	  
+	  checkBoxActualDepartureTime.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+			if(checkBoxActualDepartureTime.isSelected()){
+				spinnerActualDepartureTimeHour.setDisable(false);
+				spinnerActualDepartureTimeMinute.setDisable(false);
+		    	comboBoxActualDepartureTimeAMPM.setDisable(false);
+			}else{
+				spinnerActualDepartureTimeHour.setDisable(true);
+				spinnerActualDepartureTimeMinute.setDisable(true);
+		    	comboBoxActualDepartureTimeAMPM.setDisable(true);
+			}			
+			}});
+	  
+	  checkBoxActualPickupTime.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+			if(checkBoxActualPickupTime.isSelected()){
+				spinnerActualPickupTimeHour.setDisable(false);
+				spinnerActualPickupTimeMinute.setDisable(false);
+		    	comboBoxActualPickupTimeAMPM.setDisable(false);
+			}else{
+				spinnerActualPickupTimeHour.setDisable(true);
+				spinnerActualPickupTimeMinute.setDisable(true);
+		    	comboBoxActualPickupTimeAMPM.setDisable(true);
+			}			
+			}});
+	  checkBoxActualReturnTime.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				
+			if(checkBoxActualReturnTime.isSelected()){
+				spinnerActualReturnTimeHour.setDisable(false);
+				spinnerActualReturnTimeMinute.setDisable(false);
+		    	comboBoxActualReturnTimeAMPM.setDisable(false);
+			}else{
+				spinnerActualReturnTimeHour.setDisable(true);
+				spinnerActualReturnTimeMinute.setDisable(true);
+		    	comboBoxActualReturnTimeAMPM.setDisable(true);			
+			}
+			
+			}});
 	}
 
 	private void updateCourierList() {
@@ -465,43 +589,57 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 		deliveryTicket.setSpecialRemarks(textAreaSpecialRemarks.getText());
 
 		deliveryTicket.setCourier(comboBoxCourier.getValue());
-		
-		int actualPickupTimeHour = spinnerActualPickupTimeHour.getValueFactory().getValue();
-		int actualPickupTimeMin = spinnerActualPickupTimeMinute.getValueFactory().getValue();
-		String amOrPmActualPickup = comboBoxActualPickupTimeAMPM.getValue();
-		if(amOrPmActualPickup != null){
-			LocalDateTime actualPickupTime = deliveryTicket.getOrderDateTime().toLocalDate().atTime(hourCombobulator(actualPickupTimeHour, amOrPmActualPickup), actualPickupTimeMin);	
-			deliveryTicket.setActualPickupTime(actualPickupTime);
-		}
-		
-		
-		
-		int actualDepartureTimeHour = spinnerActualDepartureTimeHour.getValueFactory().getValue();
-		int actualDepartureTimeMin = spinnerActualDepartureTimeMinute.getValueFactory().getValue();
-		String amOrPmActualDeparture = comboBoxActualDepartureTimeAMPM.getValue();
-		if(amOrPmActualDeparture != null){
-			LocalDateTime actualDepartureTime = deliveryTicket.getOrderDateTime().toLocalDate().atTime(hourCombobulator(actualDepartureTimeHour, amOrPmActualDeparture), actualDepartureTimeMin);
-			deliveryTicket.setActualDepartureTime(actualDepartureTime);
-		}
-		
-		
-		int actualDeliveryTimeHour = spinnerActualDeliveryTimeHour.getValueFactory().getValue();
-		int actualDeliveryTimeMinute = spinnerActualDeliveryTimeMinute.getValueFactory().getValue();
-		String amOrPmActualDelivery = comboBoxActualDeliveryTimeAMPM.getValue();
-		if(amOrPmActualDelivery != null){
-			LocalDateTime actualDeliveryTime = deliveryTicket.getOrderDateTime().toLocalDate().atTime(hourCombobulator(actualDeliveryTimeHour, amOrPmActualDelivery), actualDeliveryTimeMinute);
-			deliveryTicket.setActualDeliveryTime(actualDeliveryTime);
-		}
-		
-		int actualReturnTimeHour = spinnerActualReturnTimeHour.getValueFactory().getValue();
-		int actualReturnTimeMinute = spinnerRequestedPickupMinute.getValueFactory().getValue();
-		String amOrPmActualReturn = comboBoxActualReturnTimeAMPM.getValue();
-		if(amOrPmActualReturn != null){
-			LocalDateTime actualReturnTime = deliveryTicket.getOrderDateTime().toLocalDate().atTime(hourCombobulator(actualReturnTimeHour, amOrPmActualReturn), actualReturnTimeMinute);
-			deliveryTicket.setActualReturnTime(actualReturnTime);
+		if (checkBoxActualPickupTime.isSelected()){
+			int actualPickupTimeHour = spinnerActualPickupTimeHour.getValueFactory().getValue();
+			int actualPickupTimeMin = spinnerActualPickupTimeMinute.getValueFactory().getValue();
+			String amOrPmActualPickup = comboBoxActualPickupTimeAMPM.getValue();
+			if(amOrPmActualPickup != null){
+				LocalDateTime actualPickupTime = deliveryTicket.getOrderDateTime().toLocalDate().atTime(hourCombobulator(actualPickupTimeHour, amOrPmActualPickup), actualPickupTimeMin);	
+				deliveryTicket.setActualPickupTime(actualPickupTime);
+			}
+		}else{
+			
+			deliveryTicket.setActualPickupTime(null);
 			
 		}
 		
+		if(checkBoxActualDepartureTime.isSelected()){
+			int actualDepartureTimeHour = spinnerActualDepartureTimeHour.getValueFactory().getValue();
+			int actualDepartureTimeMin = spinnerActualDepartureTimeMinute.getValueFactory().getValue();
+			String amOrPmActualDeparture = comboBoxActualDepartureTimeAMPM.getValue();
+			if(amOrPmActualDeparture != null){
+				LocalDateTime actualDepartureTime = deliveryTicket.getOrderDateTime().toLocalDate().atTime(hourCombobulator(actualDepartureTimeHour, amOrPmActualDeparture), actualDepartureTimeMin);
+				deliveryTicket.setActualDepartureTime(actualDepartureTime);
+			}
+		}else{
+			deliveryTicket.setActualDepartureTime(null);
+		}
+		
+		if(checkBoxActualDeliveryTime.isSelected()){
+			int actualDeliveryTimeHour = spinnerActualDeliveryTimeHour.getValueFactory().getValue();
+			int actualDeliveryTimeMinute = spinnerActualDeliveryTimeMinute.getValueFactory().getValue();
+			String amOrPmActualDelivery = comboBoxActualDeliveryTimeAMPM.getValue();
+			if(amOrPmActualDelivery != null){
+				LocalDateTime actualDeliveryTime = deliveryTicket.getOrderDateTime().toLocalDate().atTime(hourCombobulator(actualDeliveryTimeHour, amOrPmActualDelivery), actualDeliveryTimeMinute);
+				deliveryTicket.setActualDeliveryTime(actualDeliveryTime);
+			}
+		}else{
+			deliveryTicket.setActualDeliveryTime(null);
+		}
+		
+		if(checkBoxActualReturnTime.isSelected()){
+			int actualReturnTimeHour = spinnerActualReturnTimeHour.getValueFactory().getValue();
+			int actualReturnTimeMinute = spinnerRequestedPickupMinute.getValueFactory().getValue();
+			String amOrPmActualReturn = comboBoxActualReturnTimeAMPM.getValue();
+			if(amOrPmActualReturn != null){
+				LocalDateTime actualReturnTime = deliveryTicket.getOrderDateTime().toLocalDate().atTime(hourCombobulator(actualReturnTimeHour, amOrPmActualReturn), actualReturnTimeMinute);
+				deliveryTicket.setActualReturnTime(actualReturnTime);
+				
+			}
+		}else{
+			deliveryTicket.setActualReturnTime(null);
+		}
+			
 		if (deliveryTicket.getCourier() != null) {
 			if(deliveryTicket.getActualDepartureTime() != null && deliveryTicket.getActualReturnTime() == null)
 				deliveryTicket.getCourier().setAvailable(false);
