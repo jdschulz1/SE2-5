@@ -152,7 +152,7 @@ public class DeliveryTicket implements Serializable{
 	 * The actual time that the Courier departs on the delivery circuit.
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "actual_departure_time", columnDefinition = "TIMESTAMP default NULL")
+	@Column(name = "actual_departure_time", nullable=true, columnDefinition = "TIMESTAMP default NULL")
 	@Convert(converter = LocalDateTimeConverter.class)
 	private LocalDateTime actualDepartureTime;
 	
@@ -160,7 +160,7 @@ public class DeliveryTicket implements Serializable{
 	 * The actual time that the Courier picks the package up from the pickup Client.
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "actual_pickup_time", columnDefinition = "TIMESTAMP default NULL")
+	@Column(name = "actual_pickup_time", nullable=true, columnDefinition = "TIMESTAMP default NULL")
 	@Convert(converter = LocalDateTimeConverter.class)
 	private LocalDateTime actualPickupTime;
 	
@@ -168,7 +168,7 @@ public class DeliveryTicket implements Serializable{
 	 * The actual time that the package is delivered by the Courier to the delivery Client.
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "actual_delivery_time", columnDefinition = "TIMESTAMP default NULL")
+	@Column(name = "actual_delivery_time", nullable=true, columnDefinition = "TIMESTAMP default NULL")
 	@Convert(converter = LocalDateTimeConverter.class)
 	private LocalDateTime actualDeliveryTime;
 	
@@ -176,7 +176,7 @@ public class DeliveryTicket implements Serializable{
 	 * The actual time that the Courier returns from the delivery.
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "actual_return_time", columnDefinition = "TIMESTAMP default NULL")
+	@Column(name = "actual_return_time", nullable=true, columnDefinition = "TIMESTAMP default NULL")
 	@Convert(converter = LocalDateTimeConverter.class)
 	private LocalDateTime actualReturnTime;
 	
