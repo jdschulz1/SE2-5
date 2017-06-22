@@ -282,17 +282,15 @@ public class DeliveryTicket implements Serializable{
 	            CSVWriter.writeLine(writer,Arrays.asList("Delivery Client", this.deliveryClient.getName(), "Special Remarks", this.specialRemarks));
 	            CSVWriter.writeLine(writer,Arrays.asList(""));
 	            CSVWriter.writeLine(writer,Arrays.asList("Delivery Instructions"));
-	            CSVWriter.writeLine(writer,Arrays.asList("Pick Up the Package (" + this.pickupClient.getLocation().getName() + "):"));
+	            CSVWriter.writeLine(writer,Arrays.asList("Pick Up the Package:"));
 	            for(Instruction i : this.pickupRoute.getInstructionsList()) {
 	                CSVWriter.writeLine(writer,Arrays.asList(i.CreateInstruction()));
 	            }
-	            CSVWriter.writeLine(writer,Arrays.asList(""));
-	            CSVWriter.writeLine(writer,Arrays.asList("Deliver the Package (" + this.deliveryClient.getLocation().getName() + "):"));
+	            CSVWriter.writeLine(writer,Arrays.asList("Deliver the Package:"));
 	            for(Instruction i : this.deliveryRoute.getInstructionsList()) {
 	                CSVWriter.writeLine(writer,Arrays.asList(i.CreateInstruction()));
-	            }	            
-	            CSVWriter.writeLine(writer,Arrays.asList(""));
-	            CSVWriter.writeLine(writer,Arrays.asList("Return to " + DeliveryTracker.getDeliveryTracker().getCompanyName() + " (" + DeliveryTracker.getDeliveryTracker().getCompanyLocation().getName() + "):"));
+	            }
+	            CSVWriter.writeLine(writer,Arrays.asList("Return to " + DeliveryTracker.getDeliveryTracker().getCompanyName() + ":"));
 	            for(Instruction i : this.returnRoute.getInstructionsList()) {
 	                CSVWriter.writeLine(writer,Arrays.asList(i.CreateInstruction()));
 	            }
@@ -536,9 +534,7 @@ public class DeliveryTicket implements Serializable{
 	}
 	
 	public int calculateTotalDistance(){
-		int totalDistance = 0;
-		if(this.getPickupRoute() != null && this.getDeliveryRoute() != null && this.getReturnRoute() != null)
-			totalDistance = this.getPickupRoute().getRouteDistance() +  this.getDeliveryRoute().getRouteDistance() + this.getReturnRoute().getRouteDistance();
+		int totalDistance = this.getPickupRoute().getRouteDistance() +  this.getDeliveryRoute().getRouteDistance() + this.getReturnRoute().getRouteDistance();
 		return totalDistance;
 	}
 
