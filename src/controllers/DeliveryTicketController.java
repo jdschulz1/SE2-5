@@ -209,7 +209,7 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 		    	spinnerActualPickupTimeMinute.setDisable(true);
 		    	comboBoxActualPickupTimeAMPM.setDisable(true);
 		    }else{
-		    	checkBoxActualDeliveryTime.setSelected(true);
+		    	checkBoxActualPickupTime.setSelected(true);
 		    	spinnerActualPickupTimeHour.getValueFactory().setValue(deliveryTicket.getActualPickupTime().getHour());
 				spinnerActualPickupTimeMinute.getValueFactory().setValue(deliveryTicket.getActualPickupTime().getMinute());
 				comboBoxActualPickupTimeAMPM.setValue(getAMPM(deliveryTicket.getActualPickupTime()));
@@ -239,7 +239,7 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 				comboBoxActualDeliveryTimeAMPM.setValue(getAMPM(deliveryTicket.getActualDeliveryTime()));
 		    }
 			
-		    if (deliveryTicket.getActualDeliveryTime() == null){
+		    if (deliveryTicket.getActualReturnTime() == null){
 		    	checkBoxActualReturnTime.setSelected(false);
 		    	spinnerActualReturnTimeHour.setDisable(true);
 		    	spinnerActualReturnTimeMinute.setDisable(true);
