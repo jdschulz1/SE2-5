@@ -59,7 +59,7 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
     private ComboBox<Client> comboBoxPayingClient;
 
     @FXML
-    private ComboBox<Courier> comboBoxCourier;
+    private Label labelCourierName;
 
     @FXML
     private DatePicker dateTimePickerOrderDate;
@@ -157,7 +157,9 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 			comboBoxDeliveryClient.setValue(deliveryTicket.getDeliveryClient());
 			comboBoxPickupClient.setValue(deliveryTicket.getPickupClient());
 			comboBoxPayingClient.setValue(deliveryTicket.getPayingClient());
-			comboBoxCourier.setValue(deliveryTicket.getCourier());
+			if(deliveryTicket.getCourier() != null){
+				labelCourierName.setText(deliveryTicket.getCourier().getName());
+			}
 			comboBoxOrderTaker.setValue(deliveryTicket.getOrderTaker());
 			dateTimePickerOrderDate.setValue(deliveryTicket.getOrderDateTime().toLocalDate());
 			textAreaSpecialRemarks.setText(deliveryTicket.getSpecialRemarks());
@@ -208,8 +210,6 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 	  updateClientsList();
 	  //User Lists
 	  updateUserList();
-	  //CourierLists
-	  updateCourierList();
 	  //set comboBox Converters
 	  setComboBoxConverters(); 
 	  ObservableList<String> AMPMList = FXCollections.observableArrayList();
@@ -232,7 +232,16 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 	        public void handle(ActionEvent event) {
 	        	
 	            	try {
-	        			if(save()) {
+	            		if(deliveryTicket == null || deliveryTicket.getPrice() == null) 
+	            		{
+	            			Alert a = new Alert(AlertType.ERROR);
+	            	        a.setTitle("Error");
+	            	        a.setHeaderText("Please Calculate Quote");
+	            		    a.setContentText("Cannot save until a quote has been generated. Please Calculate Quote and try again.");
+	            	        a.showAndWait();
+	            			return;
+	            		}
+	            		else if(save()) {
 	        				
 	                		AnchorPane currentPane = FXMLLoader.load(getClass().getResource("/views/AddSearchDeliveryTickets.fxml"));
 	        	    		BorderPane border = Main.getRoot();
@@ -319,11 +328,6 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 		  });
 	}
 
-	private void updateCourierList() {
-		ObservableList<Courier> couriers = FXCollections.observableArrayList();
-		couriers.addAll(deliveryTracker.getCouriers());
-		comboBoxCourier.setItems(couriers);
-	}
 	private void updateClientsList() {
 		
 		ObservableList<Client> clients = FXCollections.observableArrayList();
@@ -408,23 +412,6 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 				}
             });
 	
-		comboBoxCourier.setConverter(
-			new StringConverter<Courier>() {
-                @Override
-                public Courier fromString(String s) {
-                	//TODO: get client by name
-                    return null;
-                }
-
-				@Override
-				public String toString(Courier object) {
-					if (object == null) {
-                        return "";
-                    } else {
-                        return object.getName();
-                    }
-				}
-            });	
 	}
 
 	private boolean save() {
@@ -463,8 +450,6 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 		deliveryTicket.setRequestedPickupTime(requestedPickupTime);
 		
 		deliveryTicket.setSpecialRemarks(textAreaSpecialRemarks.getText());
-
-		deliveryTicket.setCourier(comboBoxCourier.getValue());
 		
 		int actualPickupTimeHour = spinnerActualPickupTimeHour.getValueFactory().getValue();
 		int actualPickupTimeMin = spinnerActualPickupTimeMinute.getValueFactory().getValue();

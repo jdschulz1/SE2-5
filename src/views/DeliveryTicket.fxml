@@ -312,20 +312,20 @@
                                                 </Button>
                                                 <Button fx:id="buttonGenerateQuote" mnemonicParsing="false" text="Calculate Quote" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                                    <GridPane.margin>
-                                                      <Insets left="-40.0" />
+                                                      <Insets left="-30.0" />
                                                    </GridPane.margin>
                                                 </Button>
                                                 <Button fx:id="buttonGenerateCourierPackage" mnemonicParsing="false" text="Generate Courier Package" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                                    <GridPane.margin>
-                                                      <Insets left="95.0" />
+                                                      <Insets left="105.0" />
                                                    </GridPane.margin>
                                                 </Button>
-                                                <Label text="Courier" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                                                <ComboBox fx:id="comboBoxCourier" minWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label text="Courier:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                                                 <CheckBox fx:id="checkBoxActualDepartureTime" mnemonicParsing="false" GridPane.rowIndex="2" />
                                                 <CheckBox fx:id="checkBoxActualPickupTime" mnemonicParsing="false" GridPane.rowIndex="3" />
                                                 <CheckBox fx:id="checkBoxActualDeliveryTime" mnemonicParsing="false" GridPane.rowIndex="4" />
                                                 <CheckBox fx:id="checkBoxActualReturnTime" mnemonicParsing="false" GridPane.rowIndex="5" />
+                                                <Label fx:id="labelCourierName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                              </children>
                                              <VBox.margin>
                                                 <Insets />
