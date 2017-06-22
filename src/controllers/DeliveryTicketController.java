@@ -198,7 +198,7 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 			
 			this.buttonGenerateCourierPackage.setDisable(this.deliveryTicket.getCourier() == null);
 			
-			spinnerRequestedPickupHour.getValueFactory().setValue(deliveryTicket.getRequestedPickupTime().getHour());
+			spinnerRequestedPickupHour.getValueFactory().setValue(militaryTo12Hour(deliveryTicket.getRequestedPickupTime().getHour()));
 			spinnerRequestedPickupMinute.getValueFactory().setValue(deliveryTicket.getRequestedPickupTime().getMinute());
 			comboBoxRequestedPickupAMPM.setValue(getAMPM(deliveryTicket.getRequestedPickupTime()));
 			
@@ -653,16 +653,26 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 	
 	private int hourCombobulator(int hour, String amOrPm){
 		if(amOrPm.equals("PM")){
-			if(hour == 12){
-				hour = 0;
-			
-			}else{
+			if(hour < 12){
 				hour +=12;
 			}		
+		}else{
+			if(hour == 12){
+				hour = 0;
+			}
 		}
 		return hour;
 	}
 	
+	private int militaryTo12Hour(int hour){
+		
+		if (hour == 0){
+			hour = 12;
+		}else if(hour > 12){
+			hour -= 12;
+		}
+		return hour;
+	}
 	private String getAMPM (LocalDateTime date){
 		if(date.getHour() < 12){
 			return "AM";
