@@ -2,6 +2,7 @@ package controllers;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -160,17 +161,22 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 			comboBoxOrderTaker.setValue(deliveryTicket.getOrderTaker());
 			dateTimePickerOrderDate.setValue(deliveryTicket.getOrderDateTime().toLocalDate());
 			textAreaSpecialRemarks.setText(deliveryTicket.getSpecialRemarks());
-			labelCalculatedDepartureTime.setText(deliveryTicket.getCalculatedDepartureTime().toLocalTime().toString());
-			labelEstimatedDeliveryTime.setText(deliveryTicket.getEstimatedDeliveryTime().toLocalTime().toString());
+			labelCalculatedDepartureTime.setText(deliveryTicket.getCalculatedDepartureTime().format(timeFormatter));
+			labelEstimatedDeliveryTime.setText(deliveryTicket.getEstimatedDeliveryTime().format(timeFormatter));
 			labelPackageID.setText(Integer.toString(deliveryTicket.getPackageID()));
 			if (deliveryTicket.getPrice() != null){
-				labelPrice.setText(deliveryTicket.getPrice().toString());
+				labelPrice.setText(stringFromBigDecimal(deliveryTicket.getPrice()));
+			}
+			
+			if(deliveryTicket.calculateTotalDistance() > 0) {
+				labelTotalDistance.setText(deliveryTicket.calculateTotalDistance() + " blocks");
 			}
 			
 			if(deliveryTicket.getPickupRoute() != null && deliveryTicket.getDeliveryRoute() != null && deliveryTicket.getReturnRoute() != null ){
 				labelTotalDistance.setText(Integer.toString(deliveryTicket.calculateTotalDistance()));
 			}
 			
+			this.buttonGenerateCourierPackage.setDisable(this.deliveryTicket.getCourier() == null);
 			
 			spinnerRequestedPickupHour.getValueFactory().setValue(deliveryTicket.getRequestedPickupTime().getHour());
 			spinnerRequestedPickupMinute.getValueFactory().setValue(deliveryTicket.getRequestedPickupTime().getMinute());
@@ -193,8 +199,9 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 			comboBoxActualReturnTimeAMPM.setValue(getAMPM(deliveryTicket.getActualReturnTime()));
 	
 			chkBoxDeliveryConfirmed.setSelected(deliveryTicket.isDeliveryConfirmed());
-			
-			
+		}
+		else {
+			this.buttonGenerateCourierPackage.setDisable(true);
 		}
 			
 	  //client Lists
@@ -268,7 +275,7 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 					//calculate and set price
 					BigDecimal price = deliveryTicket.calculatePrice();
 					deliveryTicket.setPrice(price);
-					labelPrice.setText(deliveryTicket.getPrice().toString());
+					labelPrice.setText(stringFromBigDecimal(deliveryTicket.getPrice()));
 					//Estimated Delivery Time
 					LocalDateTime estDeliveryTime = deliveryTicket.calculateDeliveryTime();
 					deliveryTicket.setEstimatedDeliveryTime(estDeliveryTime);
@@ -280,7 +287,7 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 					labelCalculatedDepartureTime.setText(estDepartTime.format(timeFormatter));
 					//Total Distance
 					int totalDistance = deliveryTicket.calculateTotalDistance();
-					labelTotalDistance.setText(Integer.toString(totalDistance));
+					labelTotalDistance.setText(Integer.toString(totalDistance) + " blocks");
 	
 					DeliveryTicketDAO.saveDeliveryTicket(deliveryTicket);
 				}
@@ -540,5 +547,15 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 	
 	public void setDeliveryTicket(DeliveryTicket dt) {
 		this.deliveryTicket = dt;
+	}
+	
+	private String stringFromBigDecimal(BigDecimal input) {
+		DecimalFormat d = new DecimalFormat("'$'0.00");
+		try {
+			String s = d.format(input.doubleValue());
+			return s;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }

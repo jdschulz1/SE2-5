@@ -46,6 +46,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			CityMap.getCityMap();
 			
 			deliveryTracker = DeliveryTracker.getDeliveryTracker();
 			MenuBar bar = FXMLLoader.load(getClass().getResource("/views/Menus.fxml"));
@@ -53,43 +54,38 @@ public class Main extends Application {
 			root.setTop(bar);
 			bar.setDisable(true);
 			root.setCenter(paneMain);
-			
 
 			Scene scene = new Scene(root, 1000, 900);
 			primaryStage.setScene(scene);
 			primaryStage.sizeToScene();
-		
+			
 			//test shortest path
-			Intersection src = IntersectionDAO.findIntersectionByStreets("F Street", "3rd Ave"), dest = IntersectionDAO.findIntersectionByStreets("G Street", "6th Ave");
-			ArrayList<Vertex> shortest_path;
+//			Intersection src = IntersectionDAO.findIntersectionByStreets("F Street", "3rd Ave"), dest = IntersectionDAO.findIntersectionByStreets("G Street", "6th Ave");
+//			ArrayList<Vertex> shortest_path;
+//			
+//			Route test = new Route(src, dest);
+//			shortest_path = test.getPath();
+//			System.out.println("route length =" + test.getRouteDistance());
 			
-			Route test = new Route(src, dest);
-			shortest_path = test.getPath();
-			System.out.println("route length =" + test.getRouteDistance());
-			
-			for(Vertex v : shortest_path){
-				System.out.print(v.getIntersection().getName() +  " shortest dist: ");
-				System.out.print(v.getShortestDist() + " prev intersection: ");
-				System.out.println(v.getPrevious().getIntersection().getName());
-				if(v.getIntersection() == dest)break;
-			}
-			
-			for(Instruction i : test.getInstructionsList()){
-				System.out.println(i.CreateInstruction());
-			}
+//			for(Vertex v : shortest_path){
+//				System.out.print(v.getIntersection().getName() +  " shortest dist: ");
+//				System.out.print(v.getShortestDist() + " prev intersection: ");
+//				System.out.println(v.getPrevious().getIntersection().getName());
+//				if(v.getIntersection() == dest)break;
+//			}
+//			
+//			for(Instruction i : test.getInstructionsList()){
+//				System.out.println(i.CreateInstruction());
+//			}
 			
 			primaryStage.show();
-			//bar.setDisable(true);
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Login.fxml"));
-//			Login controller = new Login();
-//			fxmlLoader.setController(controller);
         	AnchorPane currentPane = fxmlLoader.load();
         	BorderPane border = Main.getRoot();
     		border.setCenter(currentPane);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public static void main(String[] args) {
