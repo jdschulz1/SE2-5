@@ -46,7 +46,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			
+			CityMap.getCityMap();
 			deliveryTracker = DeliveryTracker.getDeliveryTracker();
 			MenuBar bar = FXMLLoader.load(getClass().getResource("/views/Menus.fxml"));
 			AnchorPane paneMain = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
