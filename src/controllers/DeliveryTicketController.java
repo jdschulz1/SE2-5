@@ -200,7 +200,7 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 			}
 			
 			
-			
+			this.buttonGenerateQuote.setDisable(this.deliveryTicket.getPrice().doubleValue() > 0);
 			this.buttonGenerateCourierPackage.setDisable(this.deliveryTicket.getCourier() == null);
 			
 			spinnerRequestedPickupHour.getValueFactory().setValue(militaryTo12Hour(deliveryTicket.getRequestedPickupTime().getHour()));
@@ -349,6 +349,8 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 					deliveryTicket.setTotalRouteDist(totalDistance);
 					
 					DeliveryTicketDAO.saveDeliveryTicket(deliveryTicket);
+					
+					buttonGenerateQuote.setDisable(true);
 				}
 			}catch(Exception e){
 				e.printStackTrace();
