@@ -165,7 +165,26 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 		deliveryTracker = DeliveryTracker.getDeliveryTracker();
 		formatter = DateTimeFormatter.ofPattern("MMM dd YYYY");
 		timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
-	
+		  //client Lists
+		  updateClientsList();
+		  //User Lists
+		  updateUserList();
+		  //set comboBox Converters
+		  setComboBoxConverters(); 
+		  ObservableList<String> AMPMList = FXCollections.observableArrayList();
+		  AMPMList.add("AM");
+		  AMPMList.add("PM");
+		  
+		  comboBoxActualDeliveryTimeAMPM.setItems(AMPMList);
+		  comboBoxActualDeliveryTimeAMPM.getSelectionModel().selectFirst();
+		  comboBoxActualDepartureTimeAMPM.setItems(AMPMList);
+		  comboBoxActualDepartureTimeAMPM.getSelectionModel().selectFirst();
+		  comboBoxActualPickupTimeAMPM.setItems(AMPMList);
+		  comboBoxActualPickupTimeAMPM.getSelectionModel().selectFirst();
+		  comboBoxActualReturnTimeAMPM.setItems(AMPMList);
+		  comboBoxActualReturnTimeAMPM.getSelectionModel().selectFirst();
+		  comboBoxRequestedPickupAMPM.setItems(AMPMList);
+		  comboBoxRequestedPickupAMPM.getSelectionModel().selectFirst();
 		if(deliveryTicket != null){
 			comboBoxDeliveryClient.setValue(deliveryTicket.getDeliveryClient());
 			comboBoxPickupClient.setValue(deliveryTicket.getPickupClient());
@@ -188,13 +207,11 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 				labelPrice.setText(stringFromBigDecimal(deliveryTicket.getPrice()));
 			}
 			
-			if(deliveryTicket.getDeliveryRoute() != null && deliveryTicket.getPickupRoute() != null && deliveryTicket.getReturnRoute() != null) {
-				labelTotalDistance.setText(deliveryTicket.calculateTotalDistance() + " blocks");
+			if(deliveryTicket.getTotalRouteDist() > 0) {
+				labelTotalDistance.setText(deliveryTicket.getTotalRouteDist() + " blocks");
 			}
 			
-			if(deliveryTicket.getPickupRoute() != null && deliveryTicket.getDeliveryRoute() != null && deliveryTicket.getReturnRoute() != null ){
-				labelTotalDistance.setText(Integer.toString(deliveryTicket.calculateTotalDistance()));
-			}
+			
 			
 			this.buttonGenerateCourierPackage.setDisable(this.deliveryTicket.getCourier() == null);
 			
@@ -210,7 +227,7 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 		    	comboBoxActualPickupTimeAMPM.setDisable(true);
 		    }else{
 		    	checkBoxActualPickupTime.setSelected(true);
-		    	spinnerActualPickupTimeHour.getValueFactory().setValue(deliveryTicket.getActualPickupTime().getHour());
+		    	spinnerActualPickupTimeHour.getValueFactory().setValue(militaryTo12Hour(deliveryTicket.getActualPickupTime().getHour()));
 				spinnerActualPickupTimeMinute.getValueFactory().setValue(deliveryTicket.getActualPickupTime().getMinute());
 				comboBoxActualPickupTimeAMPM.setValue(getAMPM(deliveryTicket.getActualPickupTime()));
 		    }
@@ -222,7 +239,7 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 		    	comboBoxActualDepartureTimeAMPM.setDisable(true);
 		    }else{
 		    	checkBoxActualDepartureTime.setSelected(true);
-		    	spinnerActualDepartureTimeHour.getValueFactory().setValue(deliveryTicket.getActualDepartureTime().getHour());
+		    	spinnerActualDepartureTimeHour.getValueFactory().setValue(militaryTo12Hour(deliveryTicket.getActualDepartureTime().getHour()));
 				spinnerActualDepartureTimeMinute.getValueFactory().setValue(deliveryTicket.getActualDepartureTime().getMinute());
 				comboBoxActualDepartureTimeAMPM.setValue(getAMPM(deliveryTicket.getActualDepartureTime()));
 		    }
@@ -234,7 +251,7 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 		    	comboBoxActualDeliveryTimeAMPM.setDisable(true);
 		    }else{
 		    	checkBoxActualDeliveryTime.setSelected(true);
-		    	spinnerActualDeliveryTimeHour.getValueFactory().setValue(deliveryTicket.getActualDeliveryTime().getHour());
+		    	spinnerActualDeliveryTimeHour.getValueFactory().setValue(militaryTo12Hour(deliveryTicket.getActualDeliveryTime().getHour()));
 				spinnerActualDeliveryTimeMinute.getValueFactory().setValue(deliveryTicket.getActualDeliveryTime().getMinute());
 				comboBoxActualDeliveryTimeAMPM.setValue(getAMPM(deliveryTicket.getActualDeliveryTime()));
 		    }
@@ -246,7 +263,7 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 		    	comboBoxActualReturnTimeAMPM.setDisable(true);
 		    }else{
 		    	checkBoxActualReturnTime.setSelected(true);
-		    	spinnerActualReturnTimeHour.getValueFactory().setValue(deliveryTicket.getActualReturnTime().getHour());
+		    	spinnerActualReturnTimeHour.getValueFactory().setValue(militaryTo12Hour(deliveryTicket.getActualReturnTime().getHour()));
 				spinnerActualReturnTimeMinute.getValueFactory().setValue(deliveryTicket.getActualReturnTime().getMinute());
 				comboBoxActualReturnTimeAMPM.setValue(getAMPM(deliveryTicket.getActualReturnTime()));
 		    }
@@ -269,26 +286,7 @@ public class DeliveryTicketController implements javafx.fxml.Initializable {
 	    	comboBoxActualReturnTimeAMPM.setDisable(true);
 		}
 			
-	  //client Lists
-	  updateClientsList();
-	  //User Lists
-	  updateUserList();
-	  //set comboBox Converters
-	  setComboBoxConverters(); 
-	  ObservableList<String> AMPMList = FXCollections.observableArrayList();
-	  AMPMList.add("AM");
-	  AMPMList.add("PM");
-	  
-	  comboBoxActualDeliveryTimeAMPM.setItems(AMPMList);
-	  comboBoxActualDeliveryTimeAMPM.getSelectionModel().selectFirst();
-	  comboBoxActualDepartureTimeAMPM.setItems(AMPMList);
-	  comboBoxActualDepartureTimeAMPM.getSelectionModel().selectFirst();
-	  comboBoxActualPickupTimeAMPM.setItems(AMPMList);
-	  comboBoxActualPickupTimeAMPM.getSelectionModel().selectFirst();
-	  comboBoxActualReturnTimeAMPM.setItems(AMPMList);
-	  comboBoxActualReturnTimeAMPM.getSelectionModel().selectFirst();
-	  comboBoxRequestedPickupAMPM.setItems(AMPMList);
-	  comboBoxRequestedPickupAMPM.getSelectionModel().selectFirst();
+	
 	  
 	  buttonSave.setOnAction(new EventHandler<ActionEvent>() {
 	        @Override
