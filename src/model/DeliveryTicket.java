@@ -266,11 +266,11 @@ public class DeliveryTicket implements Serializable{
 		DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
 		
 		if(this.price == null)this.price = this.calculatePrice();
-		else if(this.pickupRoute == null){
-			this.pickupRoute = new Route(DeliveryTracker.getDeliveryTracker().getCompanyLocation(), this.pickupClient.getLocation());
-			this.deliveryRoute = new Route(this.pickupClient.getLocation(), this.deliveryClient.getLocation());
-			this.returnRoute = new Route(this.deliveryClient.getLocation(), DeliveryTracker.getDeliveryTracker().getCompanyLocation());
-		}
+		
+		this.pickupRoute = new Route(DeliveryTracker.getDeliveryTracker().getCompanyLocation(), this.pickupClient.getLocation());
+		this.deliveryRoute = new Route(this.pickupClient.getLocation(), this.deliveryClient.getLocation());
+		this.returnRoute = new Route(this.deliveryClient.getLocation(), DeliveryTracker.getDeliveryTracker().getCompanyLocation());
+		
 		if(this.pickupRoute.getPath().isEmpty() || this.deliveryRoute.getPath().isEmpty() || this.returnRoute.getPath().isEmpty()){
 			Alert a = new Alert(AlertType.ERROR);
 	        a.setTitle("Error");
