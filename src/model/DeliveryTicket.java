@@ -264,6 +264,7 @@ public class DeliveryTicket implements Serializable{
 	public void generateCourierPackage() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd YYYY");
 		DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
+		deliveryTracker = DeliveryTracker.getDeliveryTracker();
 		
 		if(this.price == null)this.price = this.calculatePrice();
 		
