@@ -304,7 +304,7 @@ public class DeliveryTicket implements Serializable{
 	                CSVWriter.writeLine(writer,Arrays.asList(i.CreateInstruction()));
 	            }
 	            CSVWriter.writeLine(writer,Arrays.asList(""));
-	            CSVWriter.writeLine(writer,Arrays.asList("Return to " + DeliveryTracker.getDeliveryTracker().getCompanyName() + " (" + this.pickupClient.getLocation().getName() + "):"));
+	            CSVWriter.writeLine(writer,Arrays.asList("Return to " + DeliveryTracker.getDeliveryTracker().getCompanyName() + " (" + deliveryTracker.getCompanyLocation().getName() + "):"));
 	            for(Instruction i : this.returnRoute.getInstructionsList()) {
 	                CSVWriter.writeLine(writer,Arrays.asList(i.CreateInstruction()));
 	            }
