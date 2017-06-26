@@ -5,6 +5,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TitledPane?>
@@ -13,167 +14,167 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="660.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ClientDeliveryReport">
    <children>
-      <AnchorPane layoutX="10.0" layoutY="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <AnchorPane layoutX="10.0" layoutY="10.0">
+      <BorderPane layoutX="20.0" layoutY="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <VBox>
                <children>
-                  <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="577.0" prefWidth="665.0">
+                  <GridPane alignment="BOTTOM_CENTER" hgap="10.0" prefHeight="123.0" prefWidth="950.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="412.60003662109375" minWidth="10.0" prefWidth="379.800048828125" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="312.199951171875" minWidth="10.0" prefWidth="163.4000244140625" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="396.79998779296875" minWidth="10.0" prefWidth="381.5999755859375" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
                      <children>
-                        <BorderPane>
-                           <center>
-                              <VBox>
-                                 <children>
-                                    <GridPane alignment="BOTTOM_CENTER">
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                       <children>
-                                          <Button fx:id="btnPreview" mnemonicParsing="false" text="Preview" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                             <GridPane.margin>
-                                                <Insets left="140.0" />
-                                             </GridPane.margin>
-                                          </Button>
-                                          <Label text="Starting" GridPane.rowIndex="1">
-                                             <GridPane.margin>
-                                                <Insets left="70.0" />
-                                             </GridPane.margin>
-                                          </Label>
-                                          <RadioButton fx:id="radioButtonMonth" mnemonicParsing="false" text="Month" GridPane.columnIndex="1">
-                                             <padding>
-                                                <Insets left="200.0" />
-                                             </padding>
-                                             <toggleGroup>
-                                                <ToggleGroup fx:id="reportingTimeFrame" />
-                                             </toggleGroup>
-                                          </RadioButton>
-                                          <RadioButton fx:id="radioButtonWeek" mnemonicParsing="false" selected="true" text="Week" toggleGroup="$reportingTimeFrame" GridPane.columnIndex="1">
-                                             <GridPane.margin>
-                                                <Insets left="20.0" />
-                                             </GridPane.margin>
-                                          </RadioButton>
-                                          <Label fx:id="labelClient" text="None" GridPane.rowIndex="2">
-                                             <padding>
-                                                <Insets left="150.0" />
-                                             </padding>
-                                          </Label>
-                                          <Label fx:id="labelDate" text="None" GridPane.rowIndex="3">
-                                             <padding>
-                                                <Insets left="150.0" />
-                                             </padding>
-                                          </Label>
-                                          <Label fx:id="labelNumberofDeliveries" text="None" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                             <padding>
-                                                <Insets left="150.0" />
-                                             </padding>
-                                          </Label>
-                                          <Label fx:id="labelOnTimeDeliveries" text="None" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                             <padding>
-                                                <Insets left="150.0" />
-                                             </padding>
-                                          </Label>
-                                          <Label text="Client Name:" GridPane.rowIndex="2">
-                                             <padding>
-                                                <Insets left="10.0" />
-                                             </padding>
-                                          </Label>
-                                          <Label text="Date:" GridPane.rowIndex="3">
-                                             <GridPane.margin>
-                                                <Insets left="10.0" />
-                                             </GridPane.margin>
-                                          </Label>
-                                          <Label text="Number of Deliveries:" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                             <GridPane.margin>
-                                                <Insets left="10.0" />
-                                             </GridPane.margin>
-                                          </Label>
-                                          <Label text="On-Time Delivery Rate:" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                             <GridPane.margin>
-                                                <Insets left="10.0" />
-                                             </GridPane.margin>
-                                          </Label>
-                                          <DatePicker fx:id="datePickerStartDate" prefHeight="25.0" prefWidth="286.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                       </children>
-                                       <padding>
-                                          <Insets bottom="20.0" top="20.0" />
-                                       </padding>
-                                    </GridPane>
-                                    <TableView fx:id="tableReport" prefHeight="219.0" prefWidth="827.0">
-                                       <columns>
-                                          <TableColumn fx:id="tableColumnOrderDate" prefWidth="167.5999755859375" text="Order Date" />
-                                          <TableColumn fx:id="tableColumnPickupClient" prefWidth="186.4000244140625" text="Pickup Client" />
-                                          <TableColumn fx:id="tableColumnDeliveryClient" prefWidth="185.39996337890625" text="Delivery Client" />
-                                          <TableColumn fx:id="tableColumnEstimatedDeliveryTime" prefWidth="200.199951171875" text="Estimated Delivery Time" />
-                                          <TableColumn fx:id="tableColumnActualDeliveryTime" prefWidth="214.4000244140625" text="Actual Delivery Time" />
-                                       </columns>
-                                    </TableView>
-                                 </children>
-                              </VBox>
-                           </center>
-                           <bottom>
-                              <HBox alignment="TOP_CENTER" prefHeight="74.0" prefWidth="950.0" BorderPane.alignment="CENTER">
-                                 <children>
-                                    <GridPane prefHeight="74.0" prefWidth="346.0">
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.199951171875" minWidth="10.0" prefWidth="94.5999755859375" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.5999755859375" minWidth="10.0" prefWidth="110.4000244140625" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                       <children>
-                                          <Button fx:id="btnPrevious" mnemonicParsing="false" text="Previous">
-                                             <GridPane.margin>
-                                                <Insets left="13.0" />
-                                             </GridPane.margin>
-                                          </Button>
-                                          <Button fx:id="btnNext" mnemonicParsing="false" text="Next" GridPane.columnIndex="2">
-                                             <GridPane.margin>
-                                                <Insets left="50.0" />
-                                             </GridPane.margin>
-                                          </Button>
-                                          <Button fx:id="btnCancel" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Cancel" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                             <GridPane.margin>
-                                                <Insets left="45.0" />
-                                             </GridPane.margin>
-                                          </Button>
-                                          <Button fx:id="btnCreateReport" mnemonicParsing="false" text="Create Report" GridPane.rowIndex="1" />
-                                          <Label fx:id="labelClientCounter" text="Client 1 of 1" GridPane.columnIndex="1" />
-                                       </children>
-                                       <padding>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </padding>
-                                    </GridPane>
-                                 </children>
-                              </HBox>
-                           </bottom>
-                        </BorderPane>
+                        <Button fx:id="btnPreview" mnemonicParsing="false" text="Preview" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Button>
+                        <Label text="Starting" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Label>
+                        <RadioButton fx:id="radioButtonMonth" mnemonicParsing="false" text="Month" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="reportingTimeFrame" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="radioButtonWeek" mnemonicParsing="false" selected="true" text="Week" toggleGroup="$reportingTimeFrame" GridPane.columnIndex="1" GridPane.halignment="LEFT">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </RadioButton>
+                        <DatePicker fx:id="datePickerStartDate" prefHeight="25.0" prefWidth="330.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
                      </children>
-                  </AnchorPane>
+                  </GridPane>
+                  <GridPane hgap="10.0" prefHeight="77.0" prefWidth="950.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="467.0" minWidth="10.0" prefWidth="212.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="770.8000183105469" minWidth="10.0" prefWidth="738.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Client Name:" GridPane.halignment="RIGHT">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="Date:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelClient" text="None" GridPane.columnIndex="1" />
+                        <Label fx:id="labelDate" text="None" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Number of Deliveries:" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelNumberofDeliveries" text="None" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="On-Time Delivery Rate:" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelOnTimeDeliveries" text="None" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                     </children>
+                  </GridPane>
+                  <TableView fx:id="tableReport" prefHeight="350.0" prefWidth="950.0">
+                     <columns>
+                        <TableColumn fx:id="tableColumnOrderDate" prefWidth="167.5999755859375" text="Order Date" />
+                        <TableColumn fx:id="tableColumnPickupClient" prefWidth="186.4000244140625" text="Pickup Client" />
+                        <TableColumn fx:id="tableColumnDeliveryClient" prefWidth="185.39996337890625" text="Delivery Client" />
+                        <TableColumn fx:id="tableColumnEstimatedDeliveryTime" prefWidth="200.199951171875" text="Estimated Delivery Time" />
+                        <TableColumn fx:id="tableColumnActualDeliveryTime" prefWidth="214.4000244140625" text="Actual Delivery Time" />
+                     </columns>
+                  </TableView>
                </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
-      <TitledPane alignment="CENTER" animated="false" collapsible="false" expanded="false" prefWidth="950.0" text="Client Delivery Report" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </TitledPane>
+            </VBox>
+         </center>
+         <bottom>
+            <GridPane hgap="10.0" prefHeight="51.0" prefWidth="950.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="666.2000122070312" minWidth="10.0" prefWidth="111.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="694.1999816894531" minWidth="10.0" prefWidth="349.3999938964844" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="484.20001220703125" minWidth="10.0" prefWidth="462.6000061035156" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button fx:id="btnPrevious" mnemonicParsing="false" prefWidth="100.0" text="Previous" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                     <GridPane.margin>
+                        <Insets top="20.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="btnNext" mnemonicParsing="false" prefWidth="100.0" text="Next" GridPane.columnIndex="2" GridPane.halignment="LEFT">
+                     <GridPane.margin>
+                        <Insets top="20.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="btnCancel" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="100.0" text="Cancel" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets top="20.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="btnCreateReport" mnemonicParsing="false" prefWidth="100.0" text="Create Report" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets top="20.0" />
+                     </GridPane.margin></Button>
+                  <Label fx:id="labelClientCounter" />
+                  <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets top="20.0" />
+                     </GridPane.margin></Separator>
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </GridPane>
+         </bottom>
+         <top>
+            <TitledPane alignment="CENTER" animated="false" collapsible="false" expanded="false" prefWidth="950.0" text="Client Delivery Report" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </TitledPane>
+         </top>
+      </BorderPane>
    </children>
 </AnchorPane>

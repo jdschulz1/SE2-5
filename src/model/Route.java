@@ -1,7 +1,10 @@
 package model;
+import java.math.BigDecimal;
 import java.util.*;
 
 import dtDAO.StreetDAO;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 /**
  * Directions are the set of instructions given to the Courier in the Courier Package that tell the Courier turn-by-turn directions from ACME headquarters to pickup location to delivery location.and back to the ACME headquarters.
@@ -14,8 +17,10 @@ public class Route {
 	
 	public Route(Intersection src, Intersection dest){
 		instructionsList = new ArrayList<Instruction>();
-		this.generatePath(src, dest);
-		this.generateRouteFromPath();
+		if(!src.equals(dest)){
+			this.generatePath(src, dest);
+			this.generateRouteFromPath();
+		}
 	}
 	
 	/**

@@ -8,6 +8,7 @@ import javax.persistence.TypedQuery;
 
 import dtDAO.IntersectionDAO;
 import dtDAO.StreetDAO;
+import dtDAO.UserDAO;
 import dtDAO.emDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -46,8 +47,11 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			
+			CityMap.getCityMap();
 			deliveryTracker = DeliveryTracker.getDeliveryTracker();
+			if(UserDAO.listUser().isEmpty()){
+				UserDAO.addUser(new User("admin", "admin", "password", "Admin", "email@email.com"));
+			}
 			MenuBar bar = FXMLLoader.load(getClass().getResource("/views/Menus.fxml"));
 			AnchorPane paneMain = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
 			root.setTop(bar);
@@ -65,18 +69,18 @@ public class Main extends Application {
 			
 			Route test = new Route(src, dest);
 			shortest_path = test.getPath();
-			System.out.println("route length =" + test.getRouteDistance());
+//			System.out.println("route length =" + test.getRouteDistance());
 			
-			for(Vertex v : shortest_path){
-				System.out.print(v.getIntersection().getName() +  " shortest dist: ");
-				System.out.print(v.getShortestDist() + " prev intersection: ");
-				System.out.println(v.getPrevious().getIntersection().getName());
-				if(v.getIntersection() == dest)break;
-			}
+//			for(Vertex v : shortest_path){
+//				System.out.print(v.getIntersection().getName() +  " shortest dist: ");
+//				System.out.print(v.getShortestDist() + " prev intersection: ");
+//				System.out.println(v.getPrevious().getIntersection().getName());
+//				if(v.getIntersection() == dest)break;
+//			}
 			
-			for(Instruction i : test.getInstructionsList()){
-				System.out.println(i.CreateInstruction());
-			}
+//			for(Instruction i : test.getInstructionsList()){
+//				System.out.println(i.CreateInstruction());
+//			}
 			
 			primaryStage.show();
 			//bar.setDisable(true);

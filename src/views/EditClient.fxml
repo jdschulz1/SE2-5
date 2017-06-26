@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -13,19 +14,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="660.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="CENTER" prefHeight="325.0" prefWidth="480.0">
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="950.0">
          <children>
-            <Label text="Edit Client" textAlignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </VBox.margin>
-            </Label>
             <VBox>
                <children>
                   <GridPane alignment="CENTER" hgap="10.0" prefHeight="209.0" prefWidth="460.0" vgap="5.0">
@@ -43,17 +35,17 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField fx:id="textFieldClientNumber" promptText="101" GridPane.columnIndex="1" />
-                        <TextField fx:id="textFieldClientName" promptText="Bickers &amp; Bickers" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField fx:id="textFieldDeliveryInstructions" promptText="2nd Office on the Right" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label text="Client Number" />
-                        <Label text="Name" GridPane.rowIndex="1" />
-                        <Label text="Street" GridPane.rowIndex="2" />
-                        <Label text="Avenue" GridPane.rowIndex="3" />
-                        <Label text="Delivery Instructions" GridPane.rowIndex="4" />
-                        <Label text="Phone Number" GridPane.rowIndex="5" />
-                        <TextField fx:id="textFieldPhoneNumber" promptText="(555) 555-5555" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label text="Email" GridPane.rowIndex="6" />
+                        <TextField fx:id="textFieldClientNumber" GridPane.columnIndex="1" />
+                        <TextField fx:id="textFieldClientName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="textFieldDeliveryInstructions" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="Client Number" GridPane.halignment="RIGHT" />
+                        <Label text="Name" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                        <Label text="Street" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                        <Label text="Avenue" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                        <Label text="Delivery Instructions" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+                        <Label text="Phone Number" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+                        <TextField fx:id="textFieldPhoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label text="Email" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
                         <TextField fx:id="textFieldEmail" prefHeight="61.0" prefWidth="269.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <ComboBox fx:id="comboBoxAvenue" prefHeight="25.0" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <ComboBox fx:id="comboBoxStreet" prefHeight="25.0" prefWidth="255.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -83,5 +75,10 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </VBox>
+      <TitledPane alignment="CENTER" animated="false" collapsible="false" expanded="false" text="Edit Client" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </TitledPane>
    </children>
 </AnchorPane>

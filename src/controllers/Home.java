@@ -60,7 +60,6 @@ public class Home implements javafx.fxml.Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 	
 		tickets = getTickets();
-		System.out.println(tickets.size() + " tickets");
 		
 		formatter = DateTimeFormatter.ofPattern("MMM dd YYYY");
 		timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
@@ -87,7 +86,10 @@ public class Home implements javafx.fxml.Initializable {
     	
     	tableColumnCourier.setCellValueFactory(t -> {
     		DeliveryTicket ticket = t.getValue();
-            return new ReadOnlyStringWrapper(ticket.getCourier().getName());
+    		if(ticket.getCourier() != null)
+    			return new ReadOnlyStringWrapper(ticket.getCourier().getName());
+    		else 
+    			return new ReadOnlyStringWrapper("");
         });
     	
     	buttonViewTicket.setOnAction(new EventHandler<ActionEvent>() {

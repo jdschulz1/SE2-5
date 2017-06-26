@@ -223,7 +223,7 @@ public class CourierPerformance implements Initializable {
                     if(numCouriers > 0) {
 	                    for(Courier c:ticketsByCourier.keySet()) {
 	                    	String csvFile = System.getProperty("user.home") + "\\Desktop\\CourierPerformanceReport-" + c.getName() + "-" + startDate.format(formatter) + ".csv";
-	                        writer = new FileWriter(csvFile);
+	                        writer = new FileWriter(csvFile, false);
 	                        CSVWriter.writeLine(writer,Arrays.asList("Courier Performance Report"));
 	
 	                        List<DeliveryTicket> ticketsList = ticketsByCourier.get(c);
@@ -298,13 +298,15 @@ public class CourierPerformance implements Initializable {
     	
     	for(DeliveryTicket ticket:tickets) {
     		Courier courier = ticket.getCourier();
-    		ticket.calculateBonus();
-    		if(ticketsByCourier.containsKey(courier)) {
-    			ticketsByCourier.get(courier).add(ticket);
-    		} else {
-    			List<DeliveryTicket> ticketList = new ArrayList<DeliveryTicket>();
-    			ticketList.add(ticket);
-    			ticketsByCourier.put(courier, ticketList);
+    		if(courier != null) {
+	    		ticket.calculateBonus();
+	    		if(ticketsByCourier.containsKey(courier)) {
+	    			ticketsByCourier.get(courier).add(ticket);
+	    		} else {
+	    			List<DeliveryTicket> ticketList = new ArrayList<DeliveryTicket>();
+	    			ticketList.add(ticket);
+	    			ticketsByCourier.put(courier, ticketList);
+	    		}
     		}
     	}
     	return ticketsByCourier;

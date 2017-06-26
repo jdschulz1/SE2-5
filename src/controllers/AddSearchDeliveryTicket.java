@@ -108,7 +108,10 @@ public class AddSearchDeliveryTicket implements Initializable {
 		});
 		tableColumnCourier.setCellValueFactory(t -> {
 			DeliveryTicket ticket = t.getValue();
-			return new ReadOnlyStringWrapper(ticket.getCourier().getName());
+			if(ticket.getCourier() != null)
+    			return new ReadOnlyStringWrapper(ticket.getCourier().getName());
+    		else 
+    			return new ReadOnlyStringWrapper("");		
 		});
 		tableColumnOrderDate.setCellValueFactory(t -> {
 			DeliveryTicket ticket = t.getValue();
@@ -156,13 +159,7 @@ public class AddSearchDeliveryTicket implements Initializable {
 		buttonSearchDeliveryTickets.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	if(!validate()){
-            		Alert a = new Alert(AlertType.ERROR);
-        	        a.setTitle("Error");
-        	        a.setHeaderText("Missing Information");
-        	        a.setContentText("Please complete all required fields and try again.");
-        	        a.showAndWait();
-            	}
+            	
             searchTickets();
             }
         });
@@ -236,16 +233,36 @@ private void updateClientsList() {
 	comboBoxClient.setItems(clients);
 	}
 private List<DeliveryTicket> getTickets() {
+	List<DeliveryTicket> tickets = null;
+	if (selectedClient == null && selectedDateTime == null){
+		//find all delivery tickets
+		tickets = DeliveryTicketDAO.listDeliveryTicket();
+	}else if(selectedClient != null && selectedDateTime == null  ){
+		//search by client
+		tickets = DeliveryTicketDAO.findDeliveryTicketsByClient(selectedClient);
+		
+	}else if(selectedClient == null && selectedDateTime != null){
+		//search by date
+		LocalDateTime startDate = LocalDateTime.of(selectedDateTime.toLocalDate(), LocalTime.MIN);
+		LocalDateTime endDate = LocalDateTime.of(selectedDateTime.toLocalDate(), LocalTime.MAX);
+		tickets = DeliveryTicketDAO.findDeliveryTicketByDateRange(startDate, endDate);
+	}else if(selectedClient != null && selectedDateTime != null){
+		//search by client by date
+		LocalDateTime startDate = LocalDateTime.of(selectedDateTime.toLocalDate(), LocalTime.MIN);
+		LocalDateTime endDate = LocalDateTime.of(selectedDateTime.toLocalDate(), LocalTime.MAX);
+		tickets = DeliveryTicketDAO.findDeliveryTicketsByClientByDate(selectedClient, startDate, endDate);
+	}
 	
-	LocalDateTime startDate = LocalDateTime.of(selectedDateTime.toLocalDate(), LocalTime.MIN);
-	LocalDateTime endDate = LocalDateTime.of(selectedDateTime.toLocalDate(), LocalTime.MAX);
-	List<DeliveryTicket> tickets = DeliveryTicketDAO.findDeliveryTicketsByClientByDate(selectedClient, startDate, endDate); 
+	 
 	return tickets;
 }
 private void searchTickets(){
 	//get input
     selectedClient = comboBoxClient.getValue();
-    selectedDateTime = LocalDateTime.of(datePickerSearchDate.getValue(), LocalDateTime.now().toLocalTime());
+    if (datePickerSearchDate.getValue() != null){
+    	selectedDateTime = LocalDateTime.of(datePickerSearchDate.getValue(), LocalDateTime.now().toLocalTime());
+    }
+        
     //display tickets in table            	
     tickets = getTickets();
     ObservableList<DeliveryTicket> ticketsList = FXCollections.observableArrayList();

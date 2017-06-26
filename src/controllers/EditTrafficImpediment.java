@@ -55,7 +55,6 @@ public class EditTrafficImpediment implements Initializable {
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		System.out.println("Traffic Impediment Edit");
 		citymap = CityMap.getCityMap();
 		
 		if(trafficImpediment != null) {
@@ -180,7 +179,7 @@ public class EditTrafficImpediment implements Initializable {
 			
 			trafficImpediment.setIntersection(newIntersection);
 			trafficImpediment.setStartDate(datePickerTrafficImpedimentStart.getValue().atStartOfDay());
-			trafficImpediment.setEndDate(datePickerTrafficImpedimentEnd.getValue().atStartOfDay());
+			trafficImpediment.setEndDate(datePickerTrafficImpedimentEnd.getValue().atTime(23, 59));
 			deliveryTracker.addTrafficImpediment(trafficImpediment);
 			return true;
 		}
@@ -198,7 +197,7 @@ public class EditTrafficImpediment implements Initializable {
 			}
 			trafficImpediment.setIntersection(newIntersection);
 			trafficImpediment.setStartDate(datePickerTrafficImpedimentStart.getValue().atStartOfDay());
-			trafficImpediment.setEndDate(datePickerTrafficImpedimentEnd.getValue().atStartOfDay());
+			trafficImpediment.setEndDate(datePickerTrafficImpedimentEnd.getValue().atTime(23,59));
 
 			TrafficImpedimentDAO.saveTrafficImpediment(trafficImpediment);
 			return true;

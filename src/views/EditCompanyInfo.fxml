@@ -34,34 +34,36 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Street" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                  <Label text="Company Street" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                   <TextField fx:id="textFieldPickupOverhead" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Label text="Company Name" GridPane.halignment="RIGHT" />
                   <TextField fx:id="textFieldCompanyName" GridPane.columnIndex="1" />
-                  <Label text="Avenue" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                  <Label text="Company Avenue" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
                   <Label text="Billing - Base Rate" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
                   <Label text="Billing - Rate/Block" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                   <Label text="Average Courier Speed" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
                   <Label text="Blocks/Mile" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-                  <Label text="Pickup Overhead Time" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
-                  <Label text="Delivery Overhead Time" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+                  <Label text="Pickup Overhead Time" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                  <Label text="Delivery Overhead Time" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
                   <Label text="On Time Bonus Amount" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
                   <Label text="On Time Allowable Variance" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField fx:id="textFieldDeliveryOverhead" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="textFieldPickupOverhead" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="textFieldDeliveryOverhead" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <TextField fx:id="textFieldBillRateBase" GridPane.columnIndex="3" />
                   <TextField fx:id="textFieldBillRatePerBlock" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                   <TextField fx:id="textFieldBlocksPerMile" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                   <TextField fx:id="textFieldAvgCourierSpeed" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                   <TextField fx:id="textFieldOnTimeBonusAmount" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                   <TextField fx:id="textFieldOnTimeAllowableVariance" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                  <ComboBox fx:id="comboBoxStreet" prefHeight="25.0" prefWidth="234.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <ComboBox fx:id="comboBoxAvenue" prefHeight="25.0" prefWidth="245.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label text="Company Address" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="comboBoxStreet" prefHeight="25.0" prefWidth="234.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="comboBoxAvenue" prefHeight="25.0" prefWidth="245.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
+               <BorderPane.margin>
+                  <Insets top="30.0" />
+               </BorderPane.margin>
             </GridPane>
          </center>
          <top>
