@@ -223,7 +223,7 @@ public class CourierPerformance implements Initializable {
                     if(numCouriers > 0) {
 	                    for(Courier c:ticketsByCourier.keySet()) {
 	                    	String csvFile = System.getProperty("user.home") + "\\Desktop\\CourierPerformanceReport-" + c.getName() + "-" + startDate.format(formatter) + ".csv";
-	                        writer = new FileWriter(csvFile);
+	                        writer = new FileWriter(csvFile, false);
 	                        CSVWriter.writeLine(writer,Arrays.asList("Courier Performance Report"));
 	
 	                        List<DeliveryTicket> ticketsList = ticketsByCourier.get(c);
