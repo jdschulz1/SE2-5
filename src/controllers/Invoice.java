@@ -291,9 +291,7 @@ public class Invoice implements Initializable {
 			ObservableList<DeliveryTicket> ticketsList = FXCollections.observableArrayList();
 	    	Client client = clientList.get(currentClient);
 			ticketsList.addAll(ticketsByClient.get(client));
-	    	
-			System.out.println(client);
-			
+	    				
 	    	labelClient.setText(client.getName());
 	    	labelAddress.setText(client.getLocation().getName());
 	    	labelDate.setText(startDate.format(formatter) + " - " + endDate.format(formatter));

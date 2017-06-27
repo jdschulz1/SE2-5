@@ -297,15 +297,17 @@ public class CourierPerformance implements Initializable {
     	Map<Courier, List<DeliveryTicket>> ticketsByCourier = new LinkedHashMap<Courier, List<DeliveryTicket>>();
     	
     	for(DeliveryTicket ticket:tickets) {
-    		Courier courier = ticket.getCourier();
-    		if(courier != null) {
-	    		ticket.calculateBonus();
-	    		if(ticketsByCourier.containsKey(courier)) {
-	    			ticketsByCourier.get(courier).add(ticket);
-	    		} else {
-	    			List<DeliveryTicket> ticketList = new ArrayList<DeliveryTicket>();
-	    			ticketList.add(ticket);
-	    			ticketsByCourier.put(courier, ticketList);
+    		if(ticket.getActualDeliveryTime() != null) {
+	    		Courier courier = ticket.getCourier();
+	    		if(courier != null) {
+		    		ticket.calculateBonus();
+		    		if(ticketsByCourier.containsKey(courier)) {
+		    			ticketsByCourier.get(courier).add(ticket);
+		    		} else {
+		    			List<DeliveryTicket> ticketList = new ArrayList<DeliveryTicket>();
+		    			ticketList.add(ticket);
+		    			ticketsByCourier.put(courier, ticketList);
+		    		}
 	    		}
     		}
     	}
