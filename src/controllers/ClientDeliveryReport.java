@@ -279,13 +279,15 @@ public class ClientDeliveryReport implements Initializable {
     	Map<Client, List<DeliveryTicket>> ticketsByClient = new LinkedHashMap<Client, List<DeliveryTicket>>();
     	
     	for(DeliveryTicket ticket:tickets) {
-    		Client client = ticket.getPayingClient();
-    		if(ticketsByClient.containsKey(client)) {
-    			ticketsByClient.get(client).add(ticket);
-    		} else {
-    			List<DeliveryTicket> ticketList = new ArrayList<DeliveryTicket>();
-    			ticketList.add(ticket);
-    			ticketsByClient.put(client, ticketList);
+    		if(ticket.getActualDeliveryTime() != null) {
+	    		Client client = ticket.getPayingClient();
+	    		if(ticketsByClient.containsKey(client)) {
+	    			ticketsByClient.get(client).add(ticket);
+	    		} else {
+	    			List<DeliveryTicket> ticketList = new ArrayList<DeliveryTicket>();
+	    			ticketList.add(ticket);
+	    			ticketsByClient.put(client, ticketList);
+	    		}
     		}
     	}
     	return ticketsByClient;
